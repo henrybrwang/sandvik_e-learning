@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Prompt Engineering to AI Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="scorm.js"></script>
+<style>
+  :root {
+    --turquoise: #0CCCCC;
+    --turquoise-dark: #0A9999;
+    --pink: #DF668A;
+    --pink-dark: #B8456A;
+    --beige: #EEE8E4;
+    --beige-light: #F5F1EE;
+    --blue: #426DA9;
+    --yellow: #EFBD47;
+    --grey: #404040;
+    --grey-light: #6B6B6B;
+    --white: #FFFFFF;
+    --success: #2A8F5D;
+    --error: #C0392B;
+    --radius: 24px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Work Sans', 'Segoe UI', system-ui, sans-serif;
+    background: var(--white);
+    color: var(--grey);
+    font-size: 15px;
+    line-height: 155%;
+    min-height: 100vh;
+  }
+
+  /* B3 Zebra stripe header */
+  .zebra-header {
+    height: 8px;
+    background: var(--turquoise);
+  }
+
+  .app { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+
+  /* Progress */
+  .progress-header {
+    font-size: 0.8rem;
+    color: var(--grey-light);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+  }
+  .progress-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .progress-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 2rem;
+  }
+  .progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--beige);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .progress-dot:hover {
+    transform: scale(1.3);
+  }
+  .progress-dot.active {
+    background: var(--turquoise);
+  }
+  .progress-dot.visited {
+    background: rgba(12, 204, 204, 0.4);
+  }
+  .nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--grey-light);
+    font-weight: 500;
+  }
+  .btn-save {
+    background: none;
+    border: none;
+    color: var(--turquoise-dark);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+  .btn-save:hover {
+    color: var(--turquoise);
+    text-decoration: underline;
+  }
+
+  /* Pages */
+  .page { display: none; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Typography (B3): left-aligned, never italic, never uppercase */
+  .module-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--turquoise-dark);
+    background: rgba(12, 204, 204, 0.1);
+    padding: 0.3rem 0.75rem;
+    border-radius: 99px;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    color: var(--grey);
+    text-align: left;
+  }
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--grey);
+    text-align: left;
+  }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--grey);
+  }
+  p {
+    line-height: 155%;
+    color: var(--grey);
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  ul, ol {
+    margin: 0.5rem 0 1rem 1.5rem;
+    line-height: 155%;
+    color: var(--grey);
+  }
+  li { margin-bottom: 0.35rem; }
+  strong { color: var(--grey); font-weight: 600; }
+
+  code {
+    background: rgba(12, 204, 204, 0.1);
+    color: var(--turquoise-dark);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+  }
+  pre {
+    background: var(--grey);
+    border-radius: 12px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: var(--beige-light);
+  }
+
+  /* Card */
+  .card {
+    background: var(--beige-light);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlight-box {
+    background: rgba(12, 204, 204, 0.08);
+    border-left: 3px solid var(--turquoise);
+    padding: 1rem 1.25rem;
+    border-radius: 0 12px 12px 0;
+    margin: 1rem 0;
+  }
+
+  /* Concept cards */
+  .concepts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .concept {
+    background: var(--white);
+    border: 1px solid var(--beige);
+    border-radius: 16px;
+    padding: 1.25rem;
+  }
+  .concept h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .concept p { font-size: 0.9rem; margin: 0; }
+
+  /* Terminal mockup */
+  .terminal {
+    background: #1a1a2e;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+  .terminal-header {
+    background: #2d2d44;
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-dot.r { background: #f56565; }
+  .terminal-dot.y { background: #ecc94b; }
+  .terminal-dot.g { background: #48bb78; }
+  .terminal-body {
+    padding: 1rem;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+  }
+  .terminal-body .prompt { color: var(--turquoise); }
+  .terminal-body .output { color: #94a3b8; }
+  .terminal-body .highlight { color: #48bb78; }
+
+  /* Click to reveal */
+  .reveal-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(12, 204, 204, 0.1);
+    border: 1px solid var(--turquoise);
+    border-radius: 12px;
+    color: var(--turquoise-dark);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    transition: all 0.2s;
+  }
+  .reveal-btn:hover { background: rgba(12, 204, 204, 0.2); }
+  .reveal-content {
+    display: none;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--beige);
+    animation: fadeIn 0.3s ease;
+  }
+  .reveal-content.visible { display: block; }
+
+  /* Quiz */
+  .quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    margin: 0.5rem 0;
+    background: var(--white);
+    border: 2px solid var(--beige);
+    border-radius: 16px;
+    color: var(--grey);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--turquoise);
+    background: rgba(12, 204, 204, 0.05);
+  }
+  .quiz-option:disabled { cursor: default; opacity: 0.7; }
+  .quiz-option.correct {
+    border-color: var(--success);
+    background: rgba(42, 143, 93, 0.1);
+    opacity: 1;
+  }
+  .quiz-option.wrong {
+    border-color: var(--error);
+    background: rgba(192, 57, 43, 0.08);
+  }
+  .quiz-feedback {
+    margin-top: 0.75rem;
+    padding: 1rem;
+    border-radius: 12px;
+    display: none;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Scenario box */
+  .scenario-box {
+    background: rgba(223, 102, 138, 0.08);
+    border-left: 3px solid var(--pink);
+    padding: 1rem 1.25rem;
+    border-radius: 0 12px 12px 0;
+    margin: 1rem 0;
+  }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  .btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 16px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--turquoise);
+    color: var(--white);
+  }
+  .btn-primary:hover {
+    background: var(--turquoise-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(12, 204, 204, 0.3);
+  }
+  .btn-secondary {
+    background: var(--white);
+    border: 1px solid var(--beige);
+    color: var(--grey);
+  }
+  .btn-secondary:hover { border-color: var(--turquoise); }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
+  .btn-finish {
+    display: inline-block;
+    margin-top: 2rem;
+  }
+  .btn-finish:hover {
+    background: var(--turquoise-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(12, 204, 204, 0.3);
+  }
+
+  /* Results */
+  .results-score {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--turquoise);
+    text-align: center;
+    margin: 1rem 0;
+  }
+  .results-bar {
+    display: flex;
+    gap: 4px;
+    margin: 1.5rem 0;
+  }
+  .results-bar span {
+    flex: 1;
+    height: 8px;
+    border-radius: 99px;
+  }
+  .results-bar span.ok { background: var(--success); }
+  .results-bar span.fail { background: var(--error); }
+
+  @media (max-width: 600px) {
+    .concepts { grid-template-columns: 1fr; }
+    h1 { font-size: 1.4rem; }
+    .card { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="zebra-header"></div>
+<div class="app">
+  <div class="progress-header">
+    <span id="moduleLabel"></span>
+    <div class="progress-actions">
+      <span id="pageNum"></span>
+      <button class="btn-save" onclick="saveLater()">Fortsätt senare</button>
+    </div>
+  </div>
+  <div class="progress-dots" id="progressDots"></div>
+
+  
+  <div class="page active" id="page0">
+    <div class="card">
+      <span class="module-tag">Course Overview</span>
+      <h1>Course Overview</h1>
+      
+<p>This course builds practical skills for using AI in your professional work. Across four short modules you will learn how to think of AI as a colleague, provide it with the right context, write clear and testable instructions, and connect everything back to your real business goal.</p>
+
+<h2>The Three Pillars of This Course</h2>
+<table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--beige);">
+      <th style="text-align:left; padding: 0.75rem; font-weight: 600;">Pillar</th>
+      <th style="text-align:left; padding: 0.75rem; font-weight: 600;">Core Question</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;">Prompt engineering</td>
+      <td style="padding: 0.75rem;">Do I understand the fundamentals of LLMs?</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;">Context Handling</td>
+      <td style="padding: 0.75rem;">What information does the AI need to do great work?</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;">Specification & Logic</td>
+      <td style="padding: 0.75rem;">Have I defined clear, testable requirements?</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>B3 and AI - Why This Matters</h2>
+<p>B3 Consulting Group is an IT and management consultancy focused on digital transformation. Generative AI is at the heart of where we and our clients are heading.</p>
+<p>This is not a side interest. AI is becoming a core part of how we deliver value: in our own operations and in every client engagement. The consultants who learn to work effectively with AI will deliver faster, sharper, and more creative work. The ones who don't will be working harder for the same result.</p>
+<p>This course gives every person at B3 (regardless of role or technical background) a practical framework for getting dramatically better results from AI, starting today.</p>
+
+<h2>Data and Confidentiality</h2>
+<div class="highlight-box">
+<p style="margin-bottom: 0;">Always follow B3 and client confidentiality rules when using AI tools. Do not paste sensitive, confidential, or client-identifying information into tools or environments that are not approved for that data.</p>
+</div>
+
+<h2>Verify AI models</h2>
+<p>LLMs can hallucinate: they generate confident-sounding content that is factually wrong, internally inconsistent, or subtly off-target. This is a permanent feature, not a temporary bug. Always verify important AI outputs against the original source material, or ask AI where it got the results from.</p>
+
+<p style="font-size: 0.9rem; color: var(--grey-light);">Course is written by Henry Wang. Feel free to contact me at henry.wang@b3.se for any questions or reflections.</p>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page1">
+    <div class="card">
+      <span class="module-tag">Module 1: The New Way of Working with AI</span>
+      <h1>Prompt engineering is a skill developed over time.</h1>
+      
+<p>If you had asked someone what prompt engineering meant in 2025, they might have described it as knowing the right "magic words." Phrases like <em>"act as an expert Python coder"</em> or <em>"respond like a thoughtful project manager."</em> Some would recommend rigid templates with tone, personality, and formatting instructions. Others even suggested trying to "trick" the model with rewards, punishments, or other prompt hacks.</p>
+
+<p>But that way of thinking is already outdated.</p>
+
+<p>What used to be called <em>prompt engineering</em> was often treated like a shortcut: follow a formula, use the right phrases, and get a better result. Today, that is no longer where the real value lies. Modern AI models are far better at understanding intent, tone, and structure on their own. Many of the techniques that once seemed advanced are now either unnecessary or built directly into the models themselves.</p>
+
+<h2>What changed?</h2>
+<ul>
+  <li>A year ago, people spent time carefully wording prompts to squeeze better performance out of weaker models. Persona prompts, fragile templates, and "magic phrase" lists were everywhere.</li>
+  <li>Today's leading models from OpenAI, Anthropic, Google, and others are much better at interpreting what you mean without that kind of prompting.</li>
+  <li>The real challenge is no longer finding the perfect phrasing. It is knowing what to ask, what context matters, how specific to be, and how to judge whether the response is actually useful.</li>
+</ul>
+
+<p>That is why working well with AI is not about memorizing a manual or copying a template. It is a skill that develops over time. The more you work with AI, the better you become at giving relevant context, defining the task clearly, spotting weak outputs, and guiding the conversation toward something genuinely useful.</p>
+
+<p>In other words, the skill is not in "prompt tricks."</p>
+<p>It is in your ability to think clearly, communicate intent, and lead the interaction.</p>
+
+<div class="highlight-box">
+<p style="margin-bottom: 0;"><strong>Prompt engineering alone is not enough. What matters now is the ability to contextualize, specify, evaluate, and guide</strong> - and that is a skill learned through practice.</p>
+</div>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page2">
+    <div class="card">
+      <span class="module-tag">Module 1: The New Way of Working with AI</span>
+      <h1>Think of AI as a Colleague, Not a Tool</h1>
+      
+<p>Think about the tools you use every day: a spreadsheet, a project management app, a CRM. You operate them. You click buttons and follow predefined workflows. The tool does exactly what it is designed to do, nothing more.</p>
+
+<p><strong>AI does not work like that.</strong></p>
+
+<p>AI is closer to a colleague than a tool. Specifically, a super-smart colleague who starts as a complete blank slate every single time you talk to them.</p>
+
+<p>Imagine this: you have a brilliant new team member. They are incredibly fast, they have read more than any person alive, and they are eager to help. But every morning they wake up with total amnesia. They do not remember yesterday's conversation, your client's name, your project history, or what you agreed on last week. Every interaction starts from zero.</p>
+
+<p>This colleague:</p>
+<ul>
+  <li><strong>Is incredibly fast</strong> - they can draft, analyze, summarize, and brainstorm at a speed no human can match</li>
+  <li><strong>Has broad knowledge</strong> - they know something about virtually every domain</li>
+  <li><strong>Is eager to help</strong> - they will always produce something, even when they should not</li>
+  <li><strong>Has no memory</strong> - every conversation starts fresh, with no recollection of anything before</li>
+  <li><strong>Lacks judgment</strong> - they do not know your client, your organization's values, or what "good" looks like in your specific context</li>
+  <li><strong>Will (usually) not push back</strong> - unlike a seasoned colleague, they rarely say "I think you are asking the wrong question"</li>
+</ul>
+
+<div class="highlight-box">
+<p><strong>The good news?</strong> You can give them their memory back. That is exactly what context handling is - you provide the background, the history, and the constraints that this brilliant-but-amnesiac colleague needs to do great work. Every time.</p>
+</div>
+
+<p>This means your job shifts. You move from being an <strong>operator</strong> to being a <strong>leader</strong>. And leading AI requires the same core skills as leading people:</p>
+
+<ol>
+  <li><strong>Setting clear expectations</strong> - What does a great outcome look like?</li>
+  <li><strong>Providing the right context</strong> - What background does this colleague need right now?</li>
+  <li><strong>Breaking down complex work</strong> - How do we split a big task into manageable pieces?</li>
+  <li><strong>Reviewing the output</strong> - How do we quality-check the work before it goes out the door?</li>
+</ol>
+
+<p><strong>Think back to the last time you onboarded a new team member.</strong> You did not just hand them a task and walk away. You gave them background, explained the client, set expectations, and reviewed their first deliverables carefully. That is exactly how you should work with AI - except you need to do it every single time, because the memory resets.</p>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page3">
+    <div class="card">
+      <span class="module-tag">Module 1: The New Way of Working with AI</span>
+      <h1>Key Takeaways</h1>
+      
+<ul>
+  <li>The old prompt tricks have been absorbed by the models themselves - they are no longer your edge.</li>
+  <li>AI is a super-smart colleague with amnesia. Every conversation starts from zero.</li>
+  <li><strong>You</strong> supply the memory through context. That is the single most important skill.</li>
+  <li>Your role is to lead with clarity, not to search for magic words.</li>
+</ul>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page4">
+    <div class="card" data-quiz-container="0">
+      <span class="module-tag">Module 1: Knowledge Check</span>
+      <h1>Knowledge Check</h1>
+      <p>"Traditional prompt engineering" is in this course defined as using specific phrases as hacks or clever tricks in order to steer the model to give better results. Why is "traditional prompt engineering" becoming less relevant?</p>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(0, this)">Because AI models are getting worse at understanding language</button>
+      <button class="quiz-option" data-correct="true" onclick="checkQuiz(0, this)">Because modern AI models understand intent automatically, making word-level tricks unnecessary</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(0, this)">Because companies consider "traditional prompt engineering" a security risk</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(0, this)">Because prompt engineering has been replaced by coding</button>
+      <div class="quiz-feedback" id="feedback0"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page5">
+    <div class="card" data-quiz-container="1">
+      <span class="module-tag">Module 1: Knowledge Check</span>
+      <h1>Knowledge Check</h1>
+      <p>This course compares AI to which of the following?</p>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(1, this)">A search engine with better results</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(1, this)">A self-driving car that requires no input</button>
+      <button class="quiz-option" data-correct="true" onclick="checkQuiz(1, this)">A super-smart colleague who starts with a blank slate every time you talk to them</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(1, this)">A senior consultant with 20 years of experience</button>
+      <div class="quiz-feedback" id="feedback1"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page6">
+    <div class="card">
+      <span class="module-tag">Module 2: Context Handling - Give AI What It Needs</span>
+      <h1>Context Is Your Superpower</h1>
+      
+<p>Remember: your AI colleague wakes up with a blank slate every time. The quality of what comes out is directly shaped by the quality of what goes in. If you give it nothing, you get a generic answer. If you give it the right background, you get something genuinely useful.</p>
+
+<h2>The Rules Have Changed</h2>
+<p>Not long ago, AI could only process a few pages of text at a time. Users had to carefully pick tiny snippets, hoping they chose the right ones.</p>
+
+<p><strong>That era is over.</strong></p>
+
+<p>Today's AI models can process enormous amounts of context: often tens to hundreds of pages in a single interaction. This means:</p>
+<ul>
+  <li>You <strong>can</strong> include a full 100-page report. The model will handle it (but please make sure to double check).</li>
+  <li>You <strong>can</strong> attach entire policy documents, guidelines, and reference materials.</li>
+  <li>You <strong>can</strong> provide rich, multi-layered background without hitting a wall.</li>
+</ul>
+
+<p>The old advice of "only give the AI the bare minimum" is outdated. Modern models are far better at ignoring irrelevant information than they are at guessing missing information.</p>
+
+<div class="highlight-box">
+<p style="margin-bottom: 0;"><strong>But volume alone is not a strategy.</strong> The shift is from <em>accidental</em> context to <em>intentional</em> context. You would not onboard a new team member by dumping every file from your shared drive on their desk. You would give them the right documents, but organized with purpose.</p>
+</div>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page7">
+    <div class="card">
+      <span class="module-tag">Module 2: Context Handling - Give AI What It Needs</span>
+      <h1>A practical framework</h1>
+      
+<p><strong>Use this framework when you interact with AI:</strong></p>
+
+<h2>1. Background Materials - Go Big</h2>
+<p>Include everything the AI might need: full documents, reports, data sets, company guidelines, previous versions, meeting notes, email threads. Do not be afraid of volume.</p>
+
+<h2>2. Framing Instructions - Be Specific</h2>
+<p>Tell the AI how to interpret the context:</p>
+<ul>
+  <li><em>"The attached document is our Q3 strategy report. Focus especially on sections 2 and 4."</em></li>
+  <li><em>"These are internal guidelines - treat them as hard constraints, not suggestions."</em></li>
+  <li><em>"The email thread shows the history of this discussion. The client's latest concern is in the final message."</em></li>
+</ul>
+
+<h2>3. Role and Constraints</h2>
+<p>Define the boundaries:</p>
+<ul>
+  <li><em>"You are helping me prepare a client-facing summary - no internal jargon."</em></li>
+  <li><em>"Use only the information provided. Do not supplement with outside knowledge."</em></li>
+</ul>
+
+<h2>4. Desired Output</h2>
+<p>Specify what success looks like:</p>
+<ul>
+  <li><em>"Produce a 1-page executive summary with bullet points."</em></li>
+  <li><em>"Draft three response options ranked by diplomatic tone."</em></li>
+  <li><em>"Create a comparison table of the two proposals."</em></li>
+</ul>
+
+<h2>Pro Tips</h2>
+<div class="highlight-box">
+<ul style="margin-bottom: 0;">
+  <li><strong>When in doubt, include more context, not less.</strong> The AI is better at ignoring irrelevant information than at guessing missing information.</li>
+  <li><strong>Label your context.</strong> Use clear headers like "BACKGROUND:", "REFERENCE DOCUMENT:", "CONSTRAINTS:" to help the AI parse your input.</li>
+  <li><strong>Layer context over time.</strong> In a conversation, you can add new documents and information as the task evolves - the AI keeps track within that session.</li>
+</ul>
+</div>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page8">
+    <div class="card">
+      <span class="module-tag">Module 2: Context Handling - Give AI What It Needs</span>
+      <h1>Example of context to include</h1>
+      
+<h2>This is a bad prompt:</h2>
+<div class="scenario-box">
+<p style="margin-bottom: 0; font-size: 1.1rem;"><em>"How should we handle this client situation?"</em></p>
+</div>
+
+<p>This gives the AI almost nothing to work with. It does not know which client you mean, what happened, who is involved, what is at stake, or what constraints you need to work within. The result will usually be generic because the input is generic.</p>
+
+<h2>What to provide instead</h2>
+<p>A useful prompt does not just ask the question. It gives the model the right context to make a sound judgment.</p>
+<p>That can include:</p>
+<ul>
+  <li>what happened</li>
+  <li>who is involved</li>
+  <li>what outcome you want</li>
+  <li>what risks or constraints matter</li>
+  <li>what kind of response you need</li>
+  <li>any relevant background on the client or stakeholder</li>
+  <li>examples of your usual tone of voice</li>
+  <li>source material connected to the issue, such as email threads, meeting notes, or the document that caused the problem</li>
+</ul>
+
+<h2>Better example of a prompt</h2>
+<button class="reveal-btn" data-label="Show better prompt" onclick="toggleReveal(this)">Show better prompt</button>
+<div class="reveal-content">
+<p>"We need help handling a sensitive client situation.</p>
+
+<p><strong>Background</strong></p>
+<ul>
+  <li>The client is a long-term enterprise partner in the healthcare sector</li>
+  <li>The issue concerns a delivery that is now two weeks delayed</li>
+  <li>Part of the delay is due to missing input from the client side, but we also should have communicated the risk earlier</li>
+  <li>The main stakeholder on their side is Head of Operations, who is detail-oriented and expects proactive communication</li>
+  <li>This matters because we are in the middle of a renewal discussion, so trust is especially important right now</li>
+</ul>
+
+<p><strong>Attached context</strong></p>
+<ul>
+  <li>the recent email thread with the client</li>
+  <li>the project timeline showing where the delay occurred</li>
+  <li>the file or deliverable that triggered the issue</li>
+  <li>notes from our internal meeting about the situation</li>
+  <li>two previous examples of client emails we have written in similar situations, so you can match our tone</li>
+</ul>
+
+<p><strong>Task</strong></p>
+<p>Help me prepare a response for our account lead."</p>
+</div>
+
+<h2>The sweet spot</h2>
+<p>The goal is not to give as little context as possible.</p>
+<p>The goal is not to dump everything in without explanation either.</p>
+<p>The sweet spot is:</p>
+<ul>
+  <li><strong>Volume</strong>: relevant background to understand the task</li>
+  <li><strong>Structure</strong>: information that is organized and readable</li>
+</ul>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page9">
+    <div class="card">
+      <span class="module-tag">Module 2: Context Handling - Give AI What It Needs</span>
+      <h1>Key takeaways</h1>
+      
+<ul>
+  <li>AI starts every conversation with zero memory - you supply what it needs.</li>
+  <li>Modern models handle massive amounts of context. Use this to your advantage.</li>
+  <li>More context is almost always better - but it should be intentional, not random.</li>
+  <li>Always pair context with clear direction: what to read, how to interpret it, and what to produce.</li>
+</ul>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page10">
+    <div class="card" data-quiz-container="2">
+      <span class="module-tag">Module 2: Knowledge Check</span>
+      <h1>Knowledge Check</h1>
+      <p>You need AI to help you write a client proposal. You have a 30-page project brief, a 10-page company template, and a 5-page client background document. What should you do?</p>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(2, this)">Only include the most important 2-3 pages to avoid overwhelming the AI</button>
+      <button class="quiz-option" data-correct="true" onclick="checkQuiz(2, this)">Include all three documents and add framing instructions explaining what each one is and what you want the AI to do</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(2, this)">Include all three documents with no additional instructions - the AI will figure it out</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(2, this)">Summarize each document yourself first, then give the AI your summaries</button>
+      <div class="quiz-feedback" id="feedback2"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page11">
+    <div class="card" data-quiz-container="3">
+      <span class="module-tag">Module 2: Knowledge Check</span>
+      <h1>Knowledge Check</h1>
+      <p>What is the main risk of providing context without framing instructions?</p>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(3, this)">The AI will crash or produce an error</button>
+      <button class="quiz-option" data-correct="true" onclick="checkQuiz(3, this)">The AI will produce a result, but it may miss what matters most to you</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(3, this)">The AI will refuse to process the information</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(3, this)">The context window will overflow</button>
+      <div class="quiz-feedback" id="feedback3"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page12">
+    <div class="card">
+      <span class="module-tag">Module 3: Specification & Logic - The Art of Clear Requirements</span>
+      <h1>From "Vibe" to "Specification"</h1>
+      
+<p>Most people interact with AI the way they might send a rushed Slack message:</p>
+<ul>
+  <li><em>"Reply to this email"</em></li>
+  <li><em>"Write a strategy document"</em></li>
+  <li><em>"Create a gym app"</em></li>
+</ul>
+
+<p>These are <strong>vibe prompts:</strong> they communicate a general feeling of what you want, but leave almost everything up to interpretation. AI can produce something from these, but the result is unpredictable.</p>
+
+<h2>Think of the difference between:</h2>
+<div class="concepts">
+  <div class="concept">
+    <h3>Vibe</h3>
+    <p>A customer saying: <em>"I want a nice house"</em></p>
+  </div>
+  <div class="concept">
+    <h3>Specification</h3>
+    <p>An architect receiving: <em>"A 120 sqm, two-story home with 3 bedrooms, open-plan kitchen, south-facing garden, energy class A, budget max 3.5M SEK"</em></p>
+  </div>
+</div>
+
+<p>Both communicate a desire for a house. Only one leads to a predictable, high-quality outcome.</p>
+
+<div class="highlight-box">
+<p style="margin-bottom: 0;"><strong>Your goal: move from vibe to specification every time you interact with AI.</strong> This does not mean every prompt needs to be a full page. It means you should be intentional about what you include and why.</p>
+</div>
+
+<p><strong>Pro tip:</strong> After the AI generates output, ask it: <em>"Review your response against my original requirements. Did you miss anything? Are there any claims you are uncertain about?"</em> This simple step catches many errors.</p>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page13">
+    <div class="card">
+      <span class="module-tag">Module 3: Specification & Logic - The Art of Clear Requirements</span>
+      <h1>Breaking down the problem</h1>
+      
+<p>Complex tasks are where AI most often produces mediocre results. Not because the model lacks capability, but because the task has not been defined clearly enough. When too many things are left implicit, the AI tries to solve everything at once and usually makes compromises in the wrong places.</p>
+
+<h2>Breaking complex tasks into parts</h2>
+<p>A useful way to work with complex tasks is to break them into components before asking for the final output. That helps the model understand not just what to produce, but how to make the right choices along the way.</p>
+
+<p>One way to do that is by thinking in layers such as:</p>
+
+<table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+  <thead>
+    <tr style="border-bottom: 2px solid var(--beige);">
+      <th style="text-align:left; padding: 0.75rem; font-weight: 600;">Layer</th>
+      <th style="text-align:left; padding: 0.75rem; font-weight: 600;">What to define</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;"><strong>Infrastructure</strong></td>
+      <td style="padding: 0.75rem;">Format (email, report, table?), word count, technical constraints</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;"><strong>Audience & Tone</strong></td>
+      <td style="padding: 0.75rem;">Who reads this? What level of expertise? Formal or conversational?</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;"><strong>Content</strong></td>
+      <td style="padding: 0.75rem;">The 3-5 non-negotiable points. What must NOT be included</td>
+    </tr>
+    <tr style="border-bottom: 1px solid var(--beige);">
+      <td style="padding: 0.75rem;"><strong>Success Criteria</strong></td>
+      <td style="padding: 0.75rem;">What does "done" look like? What would a bad output look like?</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These layers are <strong>not exhaustive</strong>. They are simply an example of the kinds of things that are often useful to define. Depending on the task, you may also need to include things like source material, stakeholder context, legal or brand constraints, examples to imitate, or specific risks to avoid.</p>
+
+<p>The point is not to follow a rigid template.</p>
+<p>The point is to think through the task before asking the model to execute it.</p>
+
+<hr style="border: none; border-top: 1px solid var(--beige); margin: 2rem 0;">
+
+<h2>Example of a vague prompt</h2>
+<div class="scenario-box">
+<p style="margin-bottom: 0; font-size: 1.1rem;"><em>"Write a proposal for a client about digital transformation."</em></p>
+</div>
+
+<p>This leaves too much open. The model has to guess the format, the audience, the level of detail, the angle, and what success should look like.</p>
+
+<h2>Better prompt</h2>
+<button class="reveal-btn" data-label="Show better prompt" onclick="toggleReveal(this)">Show better prompt</button>
+<div class="reveal-content">
+<p>"Write a 2-page executive summary for a proposal to a mid-sized retail company with around 200 employees.</p>
+<p>The audience is the CEO and CFO. They are non-technical, so use clear business language and avoid jargon. The tone should be confident, practical, and professional without sounding overly sales-driven.</p>
+<p>Include:</p>
+<ul>
+  <li>a brief diagnosis of common retail challenges</li>
+  <li>three areas where digital transformation could create measurable business value</li>
+  <li>a recommended next step: a 2 week discovery workshop</li>
+</ul>
+<p>Do not include pricing, technical architecture, or detailed implementation timelines.</p>
+<p>Structure the output with clear headings and short paragraphs. The result should help the reader quickly understand why change is needed, where the business value is, and why the proposed next step makes sense."</p>
+</div>
+
+<div class="highlight-box">
+<p style="margin-bottom: 0;"><strong>Pro tip:</strong> A good way to approach complex work is not to jump straight into the final task. Instead, use the model to help you define the task first. For example, before asking it to write the proposal, you could ask: <em>"I need to write a proposal for a client about digital transformation. Help me identify what information I should define before drafting it. Think in terms of audience, format, content, constraints, and success criteria. Ask me the most important clarifying questions one by one."</em></p>
+</div>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page14">
+    <div class="card">
+      <span class="module-tag">Module 3: Specification & Logic - The Art of Clear Requirements</span>
+      <h1>Conditional Logic - If-Then Thinking</h1>
+      
+<p>One of the most powerful and underused techniques is conditional logic. Instead of treating a prompt as a single open question, treat it as a flow with branches.</p>
+
+<p><strong>Why this matters:</strong> Many real-world tasks have variations. Without conditional logic, you need a separate prompt for each scenario. With it, you create one robust prompt that handles multiple cases.</p>
+
+<h2>Example:</h2>
+<div class="terminal">
+  <div class="terminal-header">
+    <span class="terminal-dot r"></span>
+    <span class="terminal-dot y"></span>
+    <span class="terminal-dot g"></span>
+  </div>
+  <div class="terminal-body">
+    <span class="prompt">"Analyze the incoming support ticket</span><br><br>
+    <span class="output">- If the issue is a technical bug -> categorize as 'Engineering'<br>
+    &nbsp;&nbsp;and draft a response acknowledging the bug with a timeline estimate.</span><br><br>
+    <span class="output">- If the issue is a billing question -> categorize as 'Finance'<br>
+    &nbsp;&nbsp;and draft a response with a link to our billing FAQ.</span><br><br>
+    <span class="output">- If the issue is unclear -> categorize as 'Needs Triage'<br>
+    &nbsp;&nbsp;and draft a polite response asking for more details."</span>
+  </div>
+</div>
+
+<h2>Key principles:</h2>
+<ul>
+  <li><strong>Be explicit</strong> - do not assume the AI will "figure out" the right branch</li>
+  <li><strong>Cover edge cases</strong> - always include a default ("If none of the above apply...")</li>
+</ul>
+
+<p>Test each branch to make sure it works.</p>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page15">
+    <div class="card">
+      <span class="module-tag">Module 3: Specification & Logic - The Art of Clear Requirements</span>
+      <h1>Specification is your competitive advantage</h1>
+      
+<p>The hardest part of working with AI is not choosing the best model.</p>
+<p>It is translating business knowledge into instructions the model can actually use.</p>
+
+<p>That means being clear about:</p>
+<ul style="list-style: none; padding-left: 0;">
+  <li>what matters</li>
+  <li>what good looks like</li>
+  <li>what should be included</li>
+  <li>what should be avoided</li>
+  <li>how decisions should be made</li>
+</ul>
+
+<p>This is why building AI capability in an organization is, to a large extent, about learning to be specific.</p>
+
+<p>AI know-how is not just about using the tools. It is about making implicit expertise explicit.</p>
+
+<h2>Examples from B3s internal platform Sales Flow:</h2>
+<p>In our internal platform Sales Flow, we score how well a consultant matches a consultant request.</p>
+<p>That may sound straightforward, but it is not. The real challenge is defining the logic behind the score in a way the model can apply consistently.</p>
+<p>Our prompts are not "perfect," and that is exactly the point. They evolve over time. Not because prompting is complicated for its own sake, but because it takes time to translate business logic into precise instructions. The specification improves as we get clearer about what we actually want the AI to evaluate, what evidence should count, and where the boundaries should be.</p>
+<p>The excerpt below reflects almost a year of refinement and input from different managers. It would have been almost impossible to define this level of specificity on day one.</p>
+
+<div class="terminal">
+  <div class="terminal-header">
+    <span class="terminal-dot r"></span>
+    <span class="terminal-dot y"></span>
+    <span class="terminal-dot g"></span>
+    <span style="color: #94a3b8; font-size: 0.8rem; margin-left: 0.5rem;">Sales Flow Scoring Prompt (excerpt)</span>
+  </div>
+  <div class="terminal-body">
+    <span class="highlight">## Scoring Framework</span><br><br>
+    <span class="highlight">### Overclaiming Prevention Rules</span><br>
+    <span class="output">- Only claim exact matches when the same wording or skill<br>
+    &nbsp;&nbsp;explicitly appears in both Request and Profile.</span><br>
+    <span class="output">- Related/transferable skills may be noted in reasoning<br>
+    &nbsp;&nbsp;(e.g., "Azure cloud knowledge is partially transferable to GCP")</span><br>
+    <span class="output">- When the special case of Swedish Public Sector applies,<br>
+    &nbsp;&nbsp;related skills cannot satisfy Ska-krav.</span><br>
+    <span class="output">- Do not use superlatives ("expert," "world-class," "strong<br>
+    &nbsp;&nbsp;experience") unless the Profile provides explicit evidence.</span><br>
+    <span class="output">- Do not infer experience levels or qualifications<br>
+    &nbsp;&nbsp;beyond what is written.</span><br>
+    <span class="output">- Domain match requires explicit evidence of projects<br>
+    &nbsp;&nbsp;in that industry.</span><br><br>
+    <span class="highlight">### Define Swedish Public Sector Requirements (special case)</span><br>
+    <span class="output">Set value "has_mandatory_requirements"=true only if BOTH:</span><br>
+    <span class="output">1. Public procurement context detected (any of: upphandling,<br>
+    &nbsp;&nbsp;LOU, ramavtal, anbud, tilldelning, public entity like<br>
+    &nbsp;&nbsp;kommun/region/myndighet, or formal tender structure).</span><br>
+    <span class="output">2. Formal mandatory/desirable markers exist (any of:<br>
+    &nbsp;&nbsp;Ska-krav/Skallkrav/Obligatoriska/Maste-krav;<br>
+    &nbsp;&nbsp;desirable: Bor-krav).</span><br><br>
+    <span class="highlight">## Output Structure and instructions</span><br>
+    <span class="output">- Ensure all output is in Swedish.</span><br>
+    <span class="output">Return ONLY a JSON object with this exact structure:<br>
+    &nbsp;&nbsp;<span class="prompt">{JSONDATA}</span></span>
+  </div>
+</div>
+
+<div class="highlight-box">
+<p style="margin-bottom: 0;">This is what real-world specification looks like. It is not about being clever with words. It is about encoding business logic precisely enough that AI can follow it consistently.</p>
+</div>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page16">
+    <div class="card">
+      <span class="module-tag">Module 3: Specification & Logic - The Art of Clear Requirements</span>
+      <h1>Key takeaways</h1>
+      
+<ul>
+  <li>Move from vibe to specification - be intentional about every element</li>
+  <li>Decompose your task into smaller problems</li>
+  <li>Use conditional logic (if-then) to handle variations in a single prompt</li>
+</ul>
+      
+    </div>
+  </div>
+
+  <div class="page" id="page17">
+    <div class="card" data-quiz-container="4">
+      <span class="module-tag">Module 3: Knowledge Check</span>
+      <h1>Knowledge Check</h1>
+      <p>According to this course, what is the hardest part of working effectively with AI?</p>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(4, this)">Picking the most advanced model</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(4, this)">Writing very long prompts</button>
+      <button class="quiz-option" data-correct="true" onclick="checkQuiz(4, this)">Translating business knowledge into precise instructions</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(4, this)">Using as many AI tools as possible</button>
+      <div class="quiz-feedback" id="feedback4"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page18">
+    <div class="card" data-quiz-container="5">
+      <span class="module-tag">Module 3: Knowledge Check</span>
+      <h1>Knowledge Check</h1>
+      <p>What is the single most important mindset shift from this course?</p>
+      <button class="quiz-option" data-correct="true" onclick="checkQuiz(5, this)">AI is a super-smart colleague with amnesia that you lead with structure, clarity, and purpose</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(5, this)">AI is a tool you command with the right words</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(5, this)">AI will replace the need for human judgment</button>
+      <button class="quiz-option" data-correct="false" onclick="checkQuiz(5, this)">The shorter prompts you write, the better the results</button>
+      <div class="quiz-feedback" id="feedback5"></div>
+    </div>
+  </div>
+
+  <div class="page" id="page19">
+    <div class="card" style="text-align: center;">
+      <span class="module-tag">Results</span>
+      <h1>Your Results</h1>
+      <div class="results-score" id="finalScore">0%</div>
+      <div class="results-bar" id="resultsBar"></div>
+      <p id="resultText"></p>
+      <div style="text-align: left; margin-top: 2rem;">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li>The old prompt tricks have been absorbed by the models themselves. Lead with clarity, not magic words.</li>
+          <li>AI is a super-smart colleague with amnesia. You supply the memory through context.</li>
+          <li>More context is almost always better, but pair it with clear framing instructions.</li>
+          <li>Move from vibe to specification. Break complex tasks into layers and define success criteria.</li>
+          <li>Use conditional logic (if-then) to handle real-world variation in a single prompt.</li>
+          <li>Specification is a competitive advantage. It improves over time as you learn to make implicit expertise explicit.</li>
+        </ul>
+      </div>
+      <button class="btn btn-primary btn-finish" onclick="finishCourse()" style="margin-top: 2rem; padding: 1rem 2.5rem; font-size: 1.1rem;">Finish course</button>
+    </div>
+  </div>
+
+
+  <div class="nav">
+    <button class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)" disabled>Tillbaka</button>
+    <div class="nav-center">
+      <span id="pageNumBottom"></span>
+      <button class="btn-save" onclick="saveLater()">Fortsätt senare</button>
+    </div>
+    <button class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Nästa</button>
+  </div>
+</div>
+
+<script>
+var courseData = {"courseId":"06-prompt-engineering-to-ai-leadership","totalPages":20,"quizCount":6,"quizFeedback":[["Correct! Modern models understand intent automatically, so word-level tricks are no longer where the real value lies.","Not quite. The key insight is that modern AI models have gotten much better at understanding what you mean, making word-level tricks unnecessary."],["Correct! AI is like a brilliant colleague who starts fresh every time you talk to them. Your job is to provide the context they need.","Not quite. The course describes AI as a super-smart colleague with amnesia - brilliant but starting from a blank slate every conversation."],["Correct! Modern models can handle all that context. The key is to include framing instructions so the AI knows what each document is and what to do with it.","Not quite. Modern models handle large amounts of context well, but they need framing instructions to know what each document is and how to use it."],["Correct! Without framing, the AI may produce something plausible but miss the parts that actually matter to you.","Not quite. The AI will still produce output, but without framing instructions it may focus on the wrong parts and miss what matters most."],["Correct! The real challenge is making your implicit expertise explicit - turning what you know into instructions the model can follow.","Not quite. The course argues that the hardest part is translating what you know about your business into precise instructions the AI can actually use."],["Correct! The core message: AI is a brilliant colleague with amnesia. Your job is to lead it with structure, clarity, and purpose.","Not quite. The key shift is seeing AI as a colleague with amnesia that you lead with structure, clarity, and purpose - not a tool you command with the right words."]],"moduleMap":["Course Overview","Module 1 of 3","Module 1 of 3","Module 1 of 3","Module 1 of 3","Module 1 of 3","Module 2 of 3","Module 2 of 3","Module 2 of 3","Module 2 of 3","Module 2 of 3","Module 2 of 3","Module 3 of 3","Module 3 of 3","Module 3 of 3","Module 3 of 3","Module 3 of 3","Module 3 of 3","Module 3 of 3","Results"],"ui":{"lang":"en","save":"Save for later","back":"Back","next":"Next","seeResults":"See results","page":"Page","savedTitle":"Your progress has been saved","savedMsg":"Next time you open the course you will continue from page","savedNote":"Your progress is saved in this browser on this device.","perfect":"Perfect score! You have a solid grasp of all the material.","good":"Well done! You have a good understanding. Review what you missed.","needsWork":"There is more to learn. Go back and review the modules.","finishedTitle":"Course completed","finishedMsg":"You can now close this window."}};
+var ui = courseData.ui || {};
+var currentPage = 0;
+var totalPages = courseData.totalPages;
+var quizCount = courseData.quizCount;
+var quizResults = [];
+var quizSelections = [];
+for (var i = 0; i < quizCount; i++) { quizResults.push(null); quizSelections.push(-1); }
+var quizFeedback = courseData.quizFeedback;
+var moduleMap = courseData.moduleMap;
+var storageKey = 'scorm_progress_' + courseData.courseId;
+var maxVisited = 0;
+var savedAndFinished = false;
+
+function saveLocal() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify({
+      q: quizResults, s: quizSelections, v: maxVisited, p: currentPage
+    }));
+  } catch(e) {}
+}
+
+function loadLocal() {
+  try {
+    var raw = localStorage.getItem(storageKey);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+}
+
+window.onload = function() {
+  // Apply UI locale overrides if provided
+  if (ui.save) {
+    var saveBtns = document.querySelectorAll('.btn-save');
+    for (var b = 0; b < saveBtns.length; b++) saveBtns[b].textContent = ui.save;
+  }
+  if (ui.back) document.getElementById('prevBtn').textContent = ui.back;
+  if (ui.next) document.getElementById('nextBtn').textContent = ui.next;
+
+  SCORM.init();
+
+  // Try SCORM first, then localStorage
+  var suspended = SCORM.getSuspendData();
+  if (!suspended || !suspended.q) suspended = loadLocal();
+
+  if (suspended && suspended.q) {
+    for (var i = 0; i < suspended.q.length && i < quizCount; i++) {
+      quizResults[i] = suspended.q[i];
+      quizSelections[i] = suspended.s ? suspended.s[i] : -1;
+    }
+    restoreQuizUI();
+  }
+  if (suspended && suspended.v != null) maxVisited = suspended.v;
+  if (suspended && suspended.p != null && suspended.p > 0 && suspended.p < totalPages) {
+    currentPage = suspended.p;
+  }
+  showPage();
+};
+
+function restoreQuizUI() {
+  for (var qi = 0; qi < quizCount; qi++) {
+    if (quizResults[qi] === null) continue;
+    var container = document.querySelector('[data-quiz-container="' + qi + '"]');
+    if (!container) continue;
+    var options = container.querySelectorAll('.quiz-option');
+    for (var oi = 0; oi < options.length; oi++) {
+      options[oi].disabled = true;
+      if (oi === quizSelections[qi]) {
+        options[oi].classList.add(quizResults[qi] ? 'correct' : 'wrong');
+      }
+    }
+    if (!quizResults[qi]) {
+      for (var oj = 0; oj < options.length; oj++) {
+        if (options[oj].getAttribute('data-correct') === 'true') {
+          options[oj].classList.add('correct');
+        }
+      }
+    }
+    var fb = document.getElementById('feedback' + qi);
+    if (fb) {
+      fb.style.display = 'block';
+      fb.style.background = quizResults[qi] ? 'rgba(42,143,93,0.1)' : 'rgba(192,57,43,0.08)';
+      fb.style.color = quizResults[qi] ? '#2A8F5D' : '#C0392B';
+      fb.textContent = quizResults[qi] ? quizFeedback[qi][0] : quizFeedback[qi][1];
+    }
+  }
+}
+
+function showPage() {
+  for (var i = 0; i < totalPages; i++) {
+    var el = document.getElementById('page' + i);
+    if (el) el.classList.remove('active');
+  }
+  var current = document.getElementById('page' + currentPage);
+  if (current) current.classList.add('active');
+
+  document.getElementById('prevBtn').disabled = (currentPage === 0);
+  var nextBtn = document.getElementById('nextBtn');
+  if (currentPage === totalPages - 1) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = '';
+    nextBtn.textContent = (currentPage === totalPages - 2) ? (ui.seeResults || 'Se resultat') : (ui.next || 'Nästa');
+  }
+
+  maxVisited = Math.max(maxVisited, currentPage);
+  var pageText = (currentPage + 1) + ' / ' + totalPages;
+  document.getElementById('pageNum').textContent = pageText;
+  document.getElementById('pageNumBottom').textContent = pageText;
+  document.getElementById('moduleLabel').textContent = moduleMap[currentPage] || '';
+
+  var dotsHtml = '';
+  for (var i = 0; i < totalPages; i++) {
+    var cls = 'progress-dot';
+    if (i === currentPage) cls += ' active';
+    else if (i <= maxVisited) cls += ' visited';
+    dotsHtml += '<span class="' + cls + '" onclick="goToPage(' + i + ')" title="' + (ui.page || 'Sida') + ' ' + (i + 1) + '"></span>';
+  }
+  document.getElementById('progressDots').innerHTML = dotsHtml;
+
+  SCORM.setPage(currentPage);
+  SCORM.saveSuspendData({ q: quizResults, s: quizSelections, v: maxVisited, p: currentPage });
+  saveLocal();
+}
+
+function goToPage(n) {
+  if (n < 0 || n >= totalPages) return;
+  currentPage = n;
+  showPage();
+  window.scrollTo(0, 0);
+  if (currentPage === totalPages - 1) showResults();
+}
+
+function saveLater() {
+  SCORM.setPage(currentPage);
+  SCORM.saveSuspendData({ q: quizResults, s: quizSelections, v: maxVisited, p: currentPage });
+  SCORM.finish();
+  savedAndFinished = true;
+  document.querySelector('.app').innerHTML =
+    '<div class="card" style="text-align:center; margin-top: 3rem;">' +
+    '<h1>' + (ui.savedTitle || 'Din progress är sparad') + '</h1>' +
+    '<p>' + (ui.savedMsg || 'Nästa gång du öppnar kursen fortsätter du från sida') + ' ' + (currentPage + 1) + '.</p>' +
+    '<p style="font-size:0.85rem; color:var(--grey-light); margin-top:0.5rem;">' + (ui.savedNote || 'Din progress är sparad i denna webbläsare på denna enhet.') + '</p></div>';
+}
+
+function navigate(dir) {
+  var next = currentPage + dir;
+  if (next < 0 || next >= totalPages) return;
+  currentPage = next;
+  showPage();
+  window.scrollTo(0, 0);
+  if (currentPage === totalPages - 1) showResults();
+}
+
+function checkQuiz(qIndex, el) {
+  if (quizResults[qIndex] !== null) return;
+  var correct = el.getAttribute('data-correct') === 'true';
+  quizResults[qIndex] = correct;
+
+  var container = el.closest('[data-quiz-container]');
+  var options = container.querySelectorAll('.quiz-option');
+  for (var i = 0; i < options.length; i++) {
+    options[i].disabled = true;
+    if (options[i] === el) quizSelections[qIndex] = i;
+  }
+
+  if (correct) {
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    for (var j = 0; j < options.length; j++) {
+      if (options[j].getAttribute('data-correct') === 'true') {
+        options[j].classList.add('correct');
+      }
+    }
+  }
+
+  var fb = document.getElementById('feedback' + qIndex);
+  fb.style.display = 'block';
+  fb.style.background = correct ? 'rgba(42,143,93,0.1)' : 'rgba(192,57,43,0.08)';
+  fb.style.color = correct ? '#2A8F5D' : '#C0392B';
+  fb.textContent = correct ? quizFeedback[qIndex][0] : quizFeedback[qIndex][1];
+
+  SCORM.saveSuspendData({ q: quizResults, s: quizSelections, v: maxVisited, p: currentPage });
+}
+
+function showResults() {
+  var correctCount = 0;
+  var html = '';
+  for (var i = 0; i < quizCount; i++) {
+    if (quizResults[i] === true) correctCount++;
+    html += '<span class="' + (quizResults[i] ? 'ok' : 'fail') + '"></span>';
+  }
+  var score = Math.round((correctCount / quizCount) * 100);
+
+  document.getElementById('finalScore').textContent = score + '%';
+  document.getElementById('resultsBar').innerHTML = html;
+
+  var text = '';
+  if (score === 100) text = ui.perfect || 'Perfekt resultat! Du har full koll på innehållet.';
+  else if (score >= 60) text = ui.good || 'Bra jobbat! Du har goda kunskaper. Repetera gärna det du missade.';
+  else text = ui.needsWork || 'Det finns mer att lära. Gå gärna tillbaka och repetera modulerna.';
+  document.getElementById('resultText').textContent = text;
+
+  SCORM.complete(score);
+}
+
+function toggleReveal(btn) {
+  var content = btn.nextElementSibling;
+  var isVisible = content.classList.toggle('visible');
+  btn.textContent = isVisible ? 'Dölj' : btn.getAttribute('data-label');
+}
+
+function finishCourse() {
+  SCORM.finish();
+  if (window.parent && window.parent !== window) {
+    try { window.parent.postMessage('scorm-course-complete', '*'); } catch(e) {}
+  }
+  try { window.close(); } catch(e) {}
+  document.querySelector('.app').innerHTML =
+    '<div class="card" style="text-align:center; margin-top: 3rem;">' +
+    '<h1>' + (ui.finishedTitle || 'Utbildningen avslutad') + '</h1>' +
+    '<p>' + (ui.finishedMsg || 'Du kan nu stänga detta fönster.') + '</p></div>';
+}
+
+window.onbeforeunload = function() { if (!savedAndFinished) SCORM.finish(); };
+</script>
+</body>
+</html>

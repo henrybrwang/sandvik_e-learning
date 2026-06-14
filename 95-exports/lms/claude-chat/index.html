@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Chat</title>
+<script src="scorm.js"></script>
+<style>
+  :root {
+    --page: #f5f7f8;
+    --surface: #ffffff;
+    --surface-muted: #eef2f4;
+    --ink: #1f2933;
+    --muted: #5f6f7a;
+    --line: #d8e0e5;
+    --accent: #1f6f78;
+    --accent-strong: #155760;
+    --accent-soft: #e2f1f2;
+    --warning: #8a5a00;
+    --warning-soft: #fff5d9;
+    --success: #237a4b;
+    --success-soft: #e2f3ea;
+    --error: #aa2f2f;
+    --error-soft: #f7e1e1;
+    --focus: #0f67ff;
+    --radius: 8px;
+    --shadow: 0 18px 48px rgba(31, 41, 51, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .brand-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 2px 0 0;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .status-pill {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .app {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 20px 36px;
+  }
+
+  .progress-wrap {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .progress-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .progress-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    cursor: default;
+  }
+
+  .progress-dot.visited {
+    background: #a9c7cc;
+    border-color: #a9c7cc;
+    cursor: pointer;
+  }
+
+  .progress-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .course-shell {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .page {
+    min-height: 540px;
+    padding: 34px;
+  }
+
+  .page-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid #cae4e7;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: 0;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 28px 0 10px;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  ul,
+  ol {
+    margin: 10px 0 18px 22px;
+    padding: 0;
+  }
+
+  li {
+    margin: 6px 0;
+  }
+
+  code {
+    background: var(--surface-muted);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.92em;
+  }
+
+  pre {
+    margin: 16px 0;
+    padding: 16px;
+    overflow-x: auto;
+    border-radius: var(--radius);
+    background: #17212b;
+    color: #e8eef2;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .lede {
+    max-width: 760px;
+    color: #35444f;
+    font-size: 1.08rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+  }
+
+  .grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fbfcfd;
+    padding: 16px;
+  }
+
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 16px;
+    margin: 18px 0;
+  }
+
+  .callout.warning {
+    border-left-color: var(--warning);
+    background: var(--warning-soft);
+  }
+
+  .callout p:last-child,
+  .panel p:last-child {
+    margin-bottom: 0;
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+
+  .flow-step {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: #fbfcfd;
+  }
+
+  .flow-step strong {
+    display: block;
+    color: var(--accent-strong);
+    margin-bottom: 4px;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+
+  .comparison th,
+  .comparison td {
+    border: 1px solid var(--line);
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .comparison th {
+    background: var(--surface-muted);
+  }
+
+  .nav {
+    border-top: 1px solid var(--line);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #fbfcfd;
+  }
+
+  .nav-center {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    min-height: 42px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .btn:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn.primary:hover:not(:disabled) {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+
+  .btn.ghost {
+    color: var(--accent-strong);
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .quiz-option {
+    width: 100%;
+    min-height: 54px;
+    text-align: left;
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 13px 14px;
+    cursor: pointer;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #f5fbfc;
+  }
+
+  .quiz-option.correct {
+    border-color: var(--success);
+    background: var(--success-soft);
+  }
+
+  .quiz-option.wrong {
+    border-color: var(--error);
+    background: var(--error-soft);
+  }
+
+  .quiz-option:disabled {
+    cursor: default;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+  }
+
+  .feedback.show {
+    display: block;
+  }
+
+  .feedback.correct {
+    background: var(--success-soft);
+    color: #164f31;
+    border: 1px solid #bde4cc;
+  }
+
+  .feedback.wrong {
+    background: var(--error-soft);
+    color: #7b2020;
+    border: 1px solid #ecc4c4;
+  }
+
+  .score {
+    font-size: 3.5rem;
+    line-height: 1;
+    font-weight: 800;
+    margin: 18px 0 8px;
+    color: var(--accent);
+  }
+
+  .score-bar {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin: 20px 0;
+  }
+
+  .score-segment {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--line);
+  }
+
+  .score-segment.ok {
+    background: var(--success);
+  }
+
+  .score-segment.fail {
+    background: var(--error);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 820px) {
+    .topbar-inner,
+    .progress-row,
+    .nav {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .top-actions {
+      justify-content: flex-start;
+    }
+
+    .page {
+      padding: 24px 18px;
+    }
+
+    h1 {
+      font-size: 1.55rem;
+    }
+
+    .grid,
+    .grid.three,
+    .flow {
+      grid-template-columns: 1fr;
+    }
+
+    .nav {
+      gap: 10px;
+    }
+
+    .nav .btn {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">C</div>
+      <div>
+        <p class="brand-title">Claude Chat</p>
+        <p class="brand-meta">Interactive learning module</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="status-pill" id="moduleStatus">Not completed</span>
+      <button class="btn ghost" type="button" id="saveBtnTop">Save for later</button>
+    </div>
+  </div>
+</header>
+
+<main class="app">
+  <div class="progress-wrap" aria-label="Course progress">
+    <div class="progress-row">
+      <span id="sectionLabel">Claude Chat</span>
+      <span id="pageLabel">Page 1 / 1</span>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <section class="course-shell" aria-live="polite">
+    <div class="page" id="pageRoot"></div>
+    <div class="nav">
+      <button class="btn" type="button" id="prevBtn">Back</button>
+      <span class="nav-center" id="navHint"></span>
+      <button class="btn primary" type="button" id="nextBtn">Next</button>
+    </div>
+  </section>
+</main>
+
+<script>
+var COURSE = {
+  id: "claude-chat",
+  title: "Claude Chat",
+  passingScore: 80,
+  questionsToServe: 10,
+  pages: [
+    {
+      tag: "Overview",
+      section: "Start",
+      title: "Claude Chat: practical basics",
+      body: [
+        '<p class="lede">This module introduces Claude Chat as a day-to-day work partner for asking questions, drafting, summarizing, analyzing, translating, comparing options, and creating reusable outputs.</p>',
+        '<div class="callout"><p><strong>Your responsibility stays the same.</strong> Claude can help accelerate work, but users remain responsible for what they enter, approve, share, and publish.</p></div>',
+        '<div class="grid three"><div class="panel"><h3>Duration</h3><p>35-45 minutes.</p></div><div class="panel"><h3>Completion</h3><p>Scored quiz with an 80% passing score.</p></div><div class="panel"><h3>Audience</h3><p>Sandvik users ordering Claude Chat.</p></div></div>'
+      ]
+    },
+    {
+      tag: "Learning Objectives",
+      section: "Start",
+      title: "What you should be able to do",
+      body: [
+        '<ul><li>Decide when Claude Chat is the right product for a task.</li><li>Explain why context is what makes Claude useful for a specific work problem.</li><li>Explain what people usually mean by agentic AI and tool use.</li><li>Understand five-hour session limits, weekly limits, and the Sandvik path for requesting more usage.</li><li>Use files, projects, memory, connectors, skills, and artifacts responsibly where approved.</li><li>Review Claude outputs before using them in decisions or communication.</li></ul>'
+      ]
+    },
+    {
+      tag: "Product Fit",
+      section: "Concepts",
+      title: "When to use Claude Chat",
+      body: [
+        '<div class="grid"><div class="panel"><h3>Use Claude Chat when</h3><ul><li>You want an interactive thought partner.</li><li>You need a draft, summary, translation, checklist, or structured analysis.</li><li>The task is small enough to steer through conversation.</li><li>You want text or an artifact you can inspect, edit, and reuse.</li></ul></div><div class="panel"><h3>Consider another product when</h3><ul><li>Cowork: many files, tools, browser steps, or desktop actions.</li><li>Code: repository inspection, code edits, tests, or development tools.</li><li>Design: visual concepts, prototypes, slides, or design directions.</li></ul></div></div>'
+      ]
+    },
+    {
+      tag: "Context",
+      section: "Concepts",
+      title: "Context is what makes Claude useful",
+      body: [
+        '<p class="lede">Claude Chat is different from a normal search engine because it can work with your context.</p>',
+        '<p>A search engine helps you find general information. Claude can use the background you provide to apply information to your specific problem, audience, constraints, documents, and desired output.</p>',
+        '<div class="grid"><div class="panel"><h3>Context can include</h3><ul><li>What you are trying to achieve.</li><li>Who the output is for.</li><li>The background, decision, document, or process Claude needs to understand.</li><li>Uploaded files or selected excerpts.</li><li>Project knowledge and project instructions.</li><li>Memory, chat history, or approved connector results when enabled.</li></ul></div><div class="panel"><h3>Good habits</h3><ul><li>Provide the relevant background.</li><li>Tell Claude which sources to use.</li><li>Tell Claude when not to use outside knowledge.</li><li>Ask Claude to separate facts from assumptions.</li><li>Ask for missing information before high-impact outputs.</li></ul></div></div>',
+        '<div class="callout"><p>This is why context comes before tool use. Without the right context, Claude may still produce a fluent answer, but it may answer the wrong question or miss what matters to the specific situation.</p></div>'
+      ]
+    },
+    {
+      tag: "Agentic AI",
+      section: "Concepts",
+      title: "What people mean by agentic AI",
+      body: [
+        '<p class="lede">Agentic AI is a common phrase, and people use it in different ways. In practice, they usually mean the AI does more than answer in one step.</p>',
+        '<p>It may follow a flow, take multiple turns, use tools, retrieve information, or adapt based on what it finds.</p>',
+        '<p>The connection to context is important: agentic AI is useful when Claude can gather or use the right context during the flow. Claude can start with your request, notice that more information is needed, use an approved tool, and bring the result back into the conversation.</p>',
+        '<div class="flow"><div class="flow-step"><strong>1. Ask</strong><span>User asks for recent news.</span></div><div class="flow-step"><strong>2. Notice</strong><span>Claude sees that recent facts may be outside training data.</span></div><div class="flow-step"><strong>3. Search</strong><span>Claude uses an approved web search tool.</span></div><div class="flow-step"><strong>4. Return</strong><span>Search results become new context.</span></div><div class="flow-step"><strong>5. Answer</strong><span>Claude responds using that context.</span></div></div>',
+        '<p>The easiest place to see tool use in Claude Chat is connectors. Connectors are how Claude can bring in approved work context from apps and services through permission-scoped access.</p>',
+        '<div class="callout"><p>The important point is control. Claude may use tools when enabled and relevant, but the user remains responsible for context, approved access, and final review.</p></div>'
+      ]
+    },
+    {
+      tag: "Connectors",
+      section: "Concepts",
+      title: "Connectors bring approved systems into the flow",
+      body: [
+        '<p>Connectors let Claude connect to approved apps and services. A connector may retrieve data, search a system, or in some cases take actions in that service.</p>',
+        '<p>The practical idea is that connectors bring extra context into Claude Chat without you manually copying everything. Claude uses the connected service through the user\'s own login and permissions. This is permission-scoped access, not a replacement for Sandvik policy.</p>',
+        '<ul><li>Use only Sandvik-approved connectors.</li><li>Review what Claude is trying to access or do.</li><li>Prefer narrow access and specific prompts.</li><li>Pause before Claude creates, sends, updates, deletes, or changes anything.</li><li>Watch for prompt injection in retrieved content.</li></ul>',
+        '<div class="callout warning"><p><strong>Pending Sandvik confirmation:</strong> approved connectors, read/write restrictions, and what users should do when permissions are requested.</p></div>'
+      ]
+    },
+    {
+      tag: "Files",
+      section: "Practical Basics",
+      title: "Files are source material",
+      body: [
+        '<p>Files let Claude summarize, compare, extract, rewrite, and answer questions about material you provide.</p>',
+        '<div class="panel"><h3>Before adding a file, ask:</h3><ul><li>Is this file approved for use in Claude?</li><li>Does it contain personal data, confidential information, secrets, credentials, export-controlled content, or regulated information?</li><li>Is the whole file needed, or can I use a smaller approved excerpt?</li><li>Am I asking Claude to use the file as source material, or to follow instructions found inside it?</li></ul></div>',
+        '<div class="callout"><p>Treat files as data. Content inside a document should not override Sandvik policy or your actual goal.</p></div>'
+      ]
+    },
+    {
+      tag: "Projects",
+      section: "Practical Basics",
+      title: "Projects keep related work together",
+      body: [
+        '<p>Projects are focused Claude workspaces with their own chats, project knowledge, and project instructions.</p>',
+        '<div class="grid"><div class="panel"><h3>Projects are useful for</h3><ul><li>Keeping related chats together.</li><li>Giving Claude reusable context.</li><li>Adding approved project knowledge once.</li><li>Setting stable tone, format, or terminology.</li></ul></div><div class="panel"><h3>Before sharing, check</h3><ul><li>Who can access the project?</li><li>Do they have the right to see the knowledge and chat context?</li><li>Are instructions still accurate?</li><li>Should outdated files be removed?</li></ul></div></div>',
+        '<div class="callout warning"><p><strong>Pending Sandvik confirmation:</strong> project visibility, sharing, retention, project knowledge, and memory settings.</p></div>'
+      ]
+    },
+    {
+      tag: "Skills",
+      section: "Practical Basics",
+      title: "Skills are reusable task capabilities",
+      body: [
+        '<p>Skills are not just saved prompts. Claude skills are reusable packages of instructions, scripts, and resources that Claude can load when relevant to a task.</p>',
+        '<div class="grid"><div class="panel"><h3>Skills can support</h3><ul><li>Approved writing or document guidance.</li><li>Standard meeting-note or report formats.</li><li>Team-specific analysis methods.</li><li>Known templates and workflows.</li></ul></div><div class="panel"><h3>Good habits</h3><ul><li>Use approved organization skills for Sandvik work.</li><li>Check whether a skill is relevant.</li><li>Remember that a skill does not make output automatically correct or approved.</li></ul></div></div>',
+        '<div class="callout warning"><p><strong>Pending Sandvik confirmation:</strong> enabled skills, custom skill rules, and mandatory organization skills.</p></div>'
+      ]
+    },
+    {
+      tag: "Memory And Artifacts",
+      section: "Practical Basics",
+      title: "Memory and artifacts need review",
+      body: [
+        '<div class="grid"><div class="panel"><h3>Memory and chat history</h3><p>Memory and chat history can help Claude build on prior context when enabled. Do not assume Claude remembers a policy, file, or prior decision unless it is visible or confirmed.</p></div><div class="panel"><h3>Artifacts</h3><p>Artifacts are standalone outputs such as documents, diagrams, visualizations, code snippets, simple web pages, or interactive components. Treat them as drafts until reviewed.</p></div></div>',
+        '<ul><li>Confirm whether memory is enabled for Sandvik users.</li><li>Provide necessary context again for important work.</li><li>Check whether sharing an artifact exposes sensitive content.</li><li>Review generated code, calculations, diagrams, and visuals before use.</li></ul>'
+      ]
+    },
+    {
+      tag: "Usage Limits",
+      section: "Practical Basics",
+      title: "Usage limits and practical habits",
+      body: [
+        '<p>Claude usage is limited by plan and seat type. For relevant paid and seat-based plans, Claude shows both a five-hour session limit and weekly limits in Settings &gt; Usage.</p>',
+        '<p>Usage is affected by more than message count. Long conversations, large files, project materials, artifacts, model or effort settings, web search, research, connectors, and other tools can all use more capacity.</p>',
+        '<div class="grid"><div class="panel"><h3>Reduce repeated setup</h3><ul><li>Start a new focused chat when the topic changes.</li><li>Use projects for approved materials you reference repeatedly.</li><li>Use project instructions for stable tone, terminology, or output structure.</li><li>Use approved skills for recurring workflows, artifact formats, visualizations, or document patterns.</li></ul></div><div class="panel"><h3>Avoid unnecessary work</h3><ul><li>Reuse and edit an existing artifact when possible instead of regenerating a similar output from scratch.</li><li>Turn off web search, research, or connectors when they are not needed.</li><li>Use simpler model, effort, or thinking settings where available and appropriate for routine work.</li></ul></div></div>',
+        '<div class="callout"><p>These habits can save setup time and reduce unnecessary context, but they do not remove usage limits or the need to review outputs.</p></div>',
+        '<div class="callout warning"><p><strong>Pending Sandvik confirmation:</strong> the exact limit behavior, request path, approval owner, and expected response time must be confirmed before publishing.</p></div>',
+        '<ul><li>Check Settings &gt; Usage if available.</li><li>Wait for the relevant reset when the work can wait.</li><li>Use the approved Sandvik ordering or support path once confirmed.</li><li>Do not move Sandvik work to private accounts or unapproved tools to avoid limits.</li></ul>'
+      ]
+    },
+    {
+      tag: "Verification",
+      section: "Practical Basics",
+      title: "Verify before relying on outputs",
+      body: [
+        '<p>Claude can make mistakes. It may misunderstand the task, miss details, use outdated assumptions, or invent plausible-sounding information.</p>',
+        '<ul><li>Compare summaries against the original source.</li><li>Check numbers, dates, names, and legal or technical claims.</li><li>Ask Claude to list assumptions and uncertainties.</li><li>Use subject matter experts for high-impact decisions.</li><li>Keep accountability with the human owner, not the tool.</li></ul>'
+      ]
+    },
+    {
+      tag: "Policy Placeholders",
+      section: "Policy",
+      title: "What still needs Sandvik confirmation",
+      body: [
+        '<p>The following items must be finalized before publishing:</p>',
+        '<ul><li>Data classifications allowed in Claude Chat.</li><li>Personal data rules for employee, customer, supplier, and other personal data.</li><li>Five-hour and weekly limit behavior, request path, manager approval, and response time.</li><li>Approved connectors, permissions, read/write restrictions, and tool access settings.</li><li>Enabled skills and custom skill rules.</li><li>Project visibility, sharing, knowledge, memory, chat history, and retention settings.</li><li>Sharing rules for chats, artifacts, downloads, and external material.</li><li>Incident reporting path.</li></ul>',
+        '<div class="callout warning"><p>Default until approved: do not enter secrets, credentials, export-controlled information, or sensitive personal data into Claude Chat.</p></div>'
+      ]
+    },
+    {
+      tag: "Prompt Examples",
+      section: "Practice",
+      title: "Practical examples",
+      body: [
+        '<h2>Recent information with web search</h2><pre>Find recent public news about [topic].\nUse web search if needed.\nSummarize the main developments and include links to the sources you used.\nSeparate confirmed facts from interpretation.</pre>',
+        '<h2>Summarizing a long document</h2><pre>Summarize the attached document for a non-technical Sandvik manager.\nUse only the document.\nReturn:\n1. Five key points\n2. Decisions needed\n3. Risks or assumptions\n4. Questions for the document owner</pre>',
+        '<h2>Using an approved connector</h2><pre>Using only the approved [connector name] connector, find the latest status information I can access about [topic].\nSummarize what you found and name the source location.\nDo not create, send, update, or delete anything.</pre>'
+      ]
+    },
+    {
+      tag: "Prompt Examples",
+      section: "Practice",
+      title: "More practical examples",
+      body: [
+        '<h2>Working in a project</h2><pre>Use this project\'s approved knowledge base and instructions.\nDraft a one-page update for the project steering group.\nInclude progress, risks, decisions needed, and open questions.\nIf the project knowledge does not answer something, say so.</pre>',
+        '<h2>Drafting a message</h2><pre>Draft a concise email to a project team.\nGoal: Explain that the deadline has moved from Friday to next Wednesday.\nTone: Clear, calm, and professional.\nInclude: reason, new deadline, what each person should do next.\nDo not blame any individual.</pre>',
+        '<h2>Comparing options</h2><pre>Compare the three options below for a global operations team.\nUse a table with columns: Option, Benefits, Risks, Implementation effort, Open questions.\nIf information is missing, say so instead of guessing.</pre>'
+      ]
+    },
+    {
+      tag: "Recap",
+      section: "Wrap Up",
+      title: "Common mistakes and recap",
+      body: [
+        '<div class="grid"><div class="panel"><h3>Common mistakes</h3><ul><li>Pasting more information than Claude needs.</li><li>Treating a fluent answer as verified fact.</li><li>Using a connector just because it appears.</li><li>Assuming projects make sensitive information safe.</li><li>Treating skills as automatic approval.</li><li>Using private accounts to avoid usage limits.</li></ul></div><div class="panel"><h3>Recap</h3><p>Claude Chat is best when you want to think, write, analyze, and iterate with Claude. It can follow multi-step flows and use approved tools, but it still needs clear context, careful data choices, and human review.</p></div></div>',
+        '<div class="callout"><p>Next: answer 10 knowledge-check questions. You need 80% to pass.</p></div>'
+      ]
+    }
+  ],
+  quizBank: [
+    { id: "chat-q01", prompt: "Which task is the best fit for Claude Chat?", options: { A: "Autonomously editing many files across your desktop while you are away.", B: "Discussing a problem, drafting text, and iterating turn by turn.", C: "Deploying code to production without human review.", D: "Publishing external Sandvik-branded design assets without approval." }, answer: "B", correct: "Correct. Chat is best for interactive, turn-by-turn work.", incorrect: "Review when Chat is appropriate versus Cowork, Code, or Design." },
+    { id: "chat-q02", prompt: "In this module, what does agentic AI usually mean in practical terms?", options: { A: "Claude is always fully autonomous and no longer needs user review.", B: "Claude may follow a multi-step flow, sometimes using tools and returned context.", C: "Claude only answers from its original training data.", D: "Claude can ignore Sandvik policy if a tool is available." }, answer: "B", correct: "Correct. Agentic flows can involve multiple steps, tools, and returned context.", incorrect: "Agentic does not remove user control, policy, or review." },
+    { id: "chat-q03", prompt: "What makes a Claude Chat prompt stronger?", options: { A: "It only says make this better.", B: "It includes goal, context, constraints, output format, and checks.", C: "It asks Claude to decide all policies on its own.", D: "It hides the audience and purpose." }, answer: "B", correct: "Correct. Clear prompts reduce rework and uncertainty.", incorrect: "A strong prompt includes goal, context, constraints, output format, and checks." },
+    { id: "chat-q04", prompt: "Where can relevant paid or seat-based Claude users usually check five-hour session and weekly usage progress?", options: { A: "Settings > Usage, if available for their plan and organization.", B: "Only by asking Claude to guess the remaining limit.", C: "In every generated artifact.", D: "In the source document being summarized." }, answer: "A", correct: "Correct. Usage visibility depends on plan and organization settings.", incorrect: "Use the available usage settings rather than guessing." },
+    { id: "chat-q05", prompt: "What should a Sandvik user do if they hit a Claude usage limit during business work?", options: { A: "Move the work to a private account to continue immediately.", B: "Wait for the reset or use the approved Sandvik path to request more capacity.", C: "Paste less accurate information so the task uses fewer tokens.", D: "Ask a colleague to use their account for the same work." }, answer: "B", correct: "Correct. Follow the approved Sandvik path or wait for the reset.", incorrect: "Do not work around limits using private accounts or unapproved access." },
+    { id: "chat-q06", prompt: "Which activity can use more of a Claude usage limit?", options: { A: "Long conversations, large files, tool use, connectors, or higher effort settings.", B: "Only clicking the Send button.", C: "Only messages that include more than one question mark.", D: "Only chats that mention Sandvik." }, answer: "A", correct: "Correct. More context, tools, and effort can consume more usage.", incorrect: "Usage is affected by more than just the number of messages." },
+    { id: "chat-q07", prompt: "How should users treat connectors in Claude Chat?", options: { A: "Use any connector if it appears in the interface.", B: "Use only approved connectors and review what Claude can access or do.", C: "Turn on all connectors to improve every answer.", D: "Assume connector permissions replace Sandvik policy." }, answer: "B", correct: "Correct. Connectors require approval and careful access review.", incorrect: "Connector availability does not override Sandvik policy." },
+    { id: "chat-q08", prompt: "What does it mean that a connector uses the user's permissions?", options: { A: "Claude should only access what the connected user can already access in that service.", B: "Claude gets administrator access to all company systems.", C: "Sensitive data rules no longer apply.", D: "Every colleague can see the same connector results." }, answer: "A", correct: "Correct. Connector access is scoped to the connected user's permissions.", incorrect: "Per-user permissions do not grant universal or policy-free access." },
+    { id: "chat-q09", prompt: "What is a Claude skill?", options: { A: "A reusable package of instructions, scripts, and resources Claude can load for a task.", B: "A guarantee that Claude's output is approved and correct.", C: "Only a saved one-line prompt.", D: "A way to bypass project and connector permissions." }, answer: "A", correct: "Correct. Skills help Claude apply repeatable workflows.", incorrect: "A skill is more than a saved prompt and does not guarantee correctness." },
+    { id: "chat-q10", prompt: "What is a Claude project useful for?", options: { A: "Creating a focused workspace with related chats, knowledge, and instructions.", B: "Making any uploaded information safe automatically.", C: "Removing the need to verify outputs.", D: "Giving every Sandvik user access to the same files." }, answer: "A", correct: "Correct. Projects organize related work and context.", incorrect: "Projects do not make sensitive information automatically safe." },
+    { id: "chat-q11", prompt: "You want to upload a file that may contain sensitive personal data. What should you do first?", options: { A: "Upload it and ask Claude whether it was sensitive.", B: "Remove the names only and continue.", C: "Check Sandvik policy and use only approved, minimized information.", D: "Move it into a project so it becomes safe." }, answer: "C", correct: "Correct. Check policy and minimize data before using Claude.", incorrect: "Sensitive data requires policy review and minimization before use." },
+    { id: "chat-q12", prompt: "If you ask Claude to summarize a document, which instruction reduces invented content?", options: { A: "Use only the document and label assumptions or missing information.", B: "Add helpful market context from memory.", C: "Fill gaps with likely answers.", D: "Make it sound complete even if information is missing." }, answer: "A", correct: "Correct. This limits invented content.", incorrect: "Ask Claude to use the source and label uncertainty." },
+    { id: "chat-q13", prompt: "What is a key risk when sharing a Claude artifact?", options: { A: "Artifacts can never be edited.", B: "The artifact or related context may expose information that needs review.", C: "Artifacts are automatically approved by Brand.", D: "Artifacts cannot contain code or diagrams." }, answer: "B", correct: "Correct. Shared outputs can expose content that needs review.", incorrect: "Artifacts are drafts and may contain sensitive or unapproved information." },
+    { id: "chat-q14", prompt: "When should a user consider Claude Code instead of Claude Chat?", options: { A: "When the task requires repository inspection, code edits, tests, or development tooling.", B: "When the task is a short email draft.", C: "When the task is brainstorming meeting topics.", D: "When the task is translating a paragraph." }, answer: "A", correct: "Correct. Codebase work belongs in Claude Code.", incorrect: "Claude Code is for repository and development workflows." },
+    { id: "chat-q15", prompt: "What should you do if Claude's output seems useful but possibly incomplete?", options: { A: "Ask for assumptions, missing facts, and what should be verified.", B: "Treat it as final because it saved time.", C: "Publish it and fix issues later.", D: "Ask Claude to make it sound more confident." }, answer: "A", correct: "Correct. Ask for assumptions, gaps, and verification needs.", incorrect: "Useful output still needs review when context may be incomplete." }
+  ]
+};
+
+var storageKey = "lms_progress_" + COURSE.id;
+var contentCount = COURSE.pages.length;
+var resultsOffset = contentCount + COURSE.questionsToServe;
+var state = {
+  page: 0,
+  maxVisited: 0,
+  selectedQuestionIds: null,
+  quizAnswers: {},
+  completed: false
+};
+var savedAndFinished = false;
+
+var pageRoot = document.getElementById("pageRoot");
+var prevBtn = document.getElementById("prevBtn");
+var nextBtn = document.getElementById("nextBtn");
+var saveBtnTop = document.getElementById("saveBtnTop");
+var pageLabel = document.getElementById("pageLabel");
+var sectionLabel = document.getElementById("sectionLabel");
+var navHint = document.getElementById("navHint");
+var progressDots = document.getElementById("progressDots");
+var moduleStatus = document.getElementById("moduleStatus");
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function shuffle(items) {
+  var copy = items.slice();
+  for (var i = copy.length - 1; i > 0; i -= 1) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+  return copy;
+}
+
+function selectQuestions() {
+  return shuffle(COURSE.quizBank.map(function(question) { return question.id; })).slice(0, COURSE.questionsToServe);
+}
+
+function getQuestionById(id) {
+  for (var i = 0; i < COURSE.quizBank.length; i += 1) {
+    if (COURSE.quizBank[i].id === id) return COURSE.quizBank[i];
+  }
+  return null;
+}
+
+function loadLocal() {
+  try {
+    var raw = localStorage.getItem(storageKey);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveLocal() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch (error) {}
+}
+
+function restoreState(saved) {
+  if (!saved) return;
+  if (typeof saved.page === "number") state.page = saved.page;
+  if (typeof saved.maxVisited === "number") state.maxVisited = saved.maxVisited;
+  if (Array.isArray(saved.selectedQuestionIds)) state.selectedQuestionIds = saved.selectedQuestionIds;
+  if (saved.quizAnswers && typeof saved.quizAnswers === "object") state.quizAnswers = saved.quizAnswers;
+  if (typeof saved.completed === "boolean") state.completed = saved.completed;
+}
+
+function persist() {
+  SCORM.setPage(state.page);
+  SCORM.saveSuspendData(state);
+  saveLocal();
+}
+
+function ensureQuestions() {
+  if (!Array.isArray(state.selectedQuestionIds) || state.selectedQuestionIds.length !== COURSE.questionsToServe) {
+    state.selectedQuestionIds = selectQuestions();
+    state.quizAnswers = {};
+  }
+}
+
+function getTotalPages() {
+  return contentCount + COURSE.questionsToServe + 1;
+}
+
+function getCurrentQuestionIndex() {
+  return state.page - contentCount;
+}
+
+function isQuizPage() {
+  return state.page >= contentCount && state.page < resultsOffset;
+}
+
+function isResultsPage() {
+  return state.page === resultsOffset;
+}
+
+function allQuizAnswered() {
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    if (!state.quizAnswers[state.selectedQuestionIds[i]]) return false;
+  }
+  return true;
+}
+
+function answeredCurrentQuestion() {
+  if (!isQuizPage()) return true;
+  var questionId = state.selectedQuestionIds[getCurrentQuestionIndex()];
+  return Boolean(state.quizAnswers[questionId]);
+}
+
+function escapeText(text) {
+  var span = document.createElement("span");
+  span.textContent = text;
+  return span.innerHTML;
+}
+
+function renderContentPage(page) {
+  var html = '<span class="page-tag">' + escapeText(page.tag) + '</span>';
+  html += '<h1>' + escapeText(page.title) + '</h1>';
+  html += page.body.join("");
+  pageRoot.innerHTML = html;
+}
+
+function renderQuizPage(questionIndex) {
+  var questionId = state.selectedQuestionIds[questionIndex];
+  var question = getQuestionById(questionId);
+  var saved = state.quizAnswers[questionId];
+  var optionKeys = ["A", "B", "C", "D"];
+  var html = '<span class="page-tag">Knowledge Check ' + (questionIndex + 1) + ' of ' + COURSE.questionsToServe + '</span>';
+  html += '<h1>' + escapeText(question.prompt) + '</h1>';
+  html += '<p class="lede">Choose the best answer. Feedback appears immediately after your selection.</p>';
+  html += '<div class="quiz-options" role="group" aria-label="Answer options">';
+  optionKeys.forEach(function(key) {
+    var classes = "quiz-option";
+    if (saved) {
+      if (key === question.answer) classes += " correct";
+      else if (key === saved.selected) classes += " wrong";
+    }
+    html += '<button class="' + classes + '" type="button" data-option="' + key + '"' + (saved ? " disabled" : "") + '><strong>' + key + '.</strong> ' + escapeText(question.options[key]) + '</button>';
+  });
+  html += '</div>';
+  html += '<div class="feedback' + (saved ? " show " + (saved.correct ? "correct" : "wrong") : "") + '" id="feedbackBox">' + (saved ? escapeText(saved.correct ? question.correct : question.incorrect) : "") + '</div>';
+  pageRoot.innerHTML = html;
+
+  var buttons = pageRoot.querySelectorAll(".quiz-option");
+  for (var i = 0; i < buttons.length; i += 1) {
+    buttons[i].addEventListener("click", function(event) {
+      answerQuestion(question, event.currentTarget.getAttribute("data-option"));
+    });
+  }
+}
+
+function calculateScore() {
+  var correctCount = 0;
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    var answer = state.quizAnswers[state.selectedQuestionIds[i]];
+    if (answer && answer.correct) correctCount += 1;
+  }
+  return Math.round((correctCount / COURSE.questionsToServe) * 100);
+}
+
+function renderResultsPage() {
+  var score = calculateScore();
+  var passed = score >= COURSE.passingScore;
+  state.completed = passed;
+  var html = '<span class="page-tag">Results</span>';
+  html += '<h1>Your results</h1>';
+  html += '<div class="score">' + score + '%</div>';
+  html += '<p class="lede">' + (passed ? "Passed. You have met the 80% requirement for this module." : "Not yet passed. Review the module and retake the quiz when ready.") + '</p>';
+  html += '<div class="score-bar" aria-label="Quiz result by question">';
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    var answer = state.quizAnswers[state.selectedQuestionIds[i]];
+    html += '<span class="score-segment ' + (answer && answer.correct ? "ok" : "fail") + '"></span>';
+  }
+  html += '</div>';
+  html += '<div class="grid"><div class="panel"><h3>What to remember</h3><ul><li>Claude Chat is for interactive, turn-by-turn work.</li><li>Use approved projects, connectors, skills, files, and artifacts carefully.</li><li>Usage limits are practical operating limits, not a reason to use unapproved tools.</li><li>Verify important outputs before relying on them.</li></ul></div><div class="panel"><h3>Next action</h3><p>If this course is running in an LMS, your score is sent when you view this page.</p><button class="btn" type="button" id="retryBtn">Retake quiz</button></div></div>';
+  pageRoot.innerHTML = html;
+  document.getElementById("retryBtn").addEventListener("click", retakeQuiz);
+  SCORM.complete(score, passed);
+  persist();
+}
+
+function renderProgress() {
+  var totalPages = getTotalPages();
+  var html = "";
+  for (var i = 0; i < totalPages; i += 1) {
+    var label = "Page " + (i + 1);
+    var classes = "progress-dot";
+    if (i === state.page) classes += " active";
+    else if (i <= state.maxVisited) classes += " visited";
+    html += '<button class="' + classes + '" type="button" data-page="' + i + '" aria-label="' + label + '"' + (i <= state.maxVisited ? "" : " disabled") + '><span class="sr-only">' + label + '</span></button>';
+  }
+  progressDots.innerHTML = html;
+  var dots = progressDots.querySelectorAll(".progress-dot");
+  for (var d = 0; d < dots.length; d += 1) {
+    dots[d].addEventListener("click", function(event) {
+      var page = parseInt(event.currentTarget.getAttribute("data-page"), 10);
+      if (page <= state.maxVisited) goToPage(page);
+    });
+  }
+}
+
+function render() {
+  ensureQuestions();
+  var totalPages = getTotalPages();
+  if (state.page < 0) state.page = 0;
+  if (state.page >= totalPages) state.page = totalPages - 1;
+  state.maxVisited = Math.max(state.maxVisited, state.page);
+
+  if (state.page < contentCount) {
+    renderContentPage(COURSE.pages[state.page]);
+    sectionLabel.textContent = COURSE.pages[state.page].section;
+  } else if (isQuizPage()) {
+    renderQuizPage(getCurrentQuestionIndex());
+    sectionLabel.textContent = "Knowledge Check";
+  } else {
+    renderResultsPage();
+    sectionLabel.textContent = "Results";
+  }
+
+  pageLabel.textContent = "Page " + (state.page + 1) + " / " + totalPages;
+  navHint.textContent = isQuizPage() && !answeredCurrentQuestion() ? "Answer this question to continue." : "";
+  prevBtn.disabled = state.page === 0;
+  nextBtn.style.display = isResultsPage() ? "none" : "";
+  nextBtn.textContent = state.page === totalPages - 2 ? "See results" : "Next";
+  nextBtn.disabled = isQuizPage() && !answeredCurrentQuestion();
+  moduleStatus.textContent = state.completed ? "Passed" : "Not completed";
+  renderProgress();
+  persist();
+}
+
+function goToPage(page) {
+  state.page = page;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function navigate(direction) {
+  var nextPage = state.page + direction;
+  if (nextPage < 0 || nextPage >= getTotalPages()) return;
+  if (direction > 0 && isQuizPage() && !answeredCurrentQuestion()) return;
+  if (nextPage === resultsOffset && !allQuizAnswered()) return;
+  goToPage(nextPage);
+}
+
+function answerQuestion(question, selected) {
+  if (state.quizAnswers[question.id]) return;
+  var correct = selected === question.answer;
+  state.quizAnswers[question.id] = { selected: selected, correct: correct };
+  renderQuizPage(getCurrentQuestionIndex());
+  nextBtn.disabled = false;
+  navHint.textContent = "";
+  persist();
+}
+
+function saveLater() {
+  persist();
+  SCORM.finish();
+  savedAndFinished = true;
+  pageRoot.innerHTML = '<span class="page-tag">Saved</span><h1>Your progress has been saved</h1><p class="lede">Next time you open this course in the same LMS or browser, you should continue from page ' + (state.page + 1) + '.</p>';
+  prevBtn.style.display = "none";
+  nextBtn.style.display = "none";
+  navHint.textContent = "You can close this window.";
+}
+
+function retakeQuiz() {
+  state.selectedQuestionIds = selectQuestions();
+  state.quizAnswers = {};
+  state.completed = false;
+  state.page = contentCount;
+  state.maxVisited = contentCount;
+  render();
+}
+
+prevBtn.addEventListener("click", function() { navigate(-1); });
+nextBtn.addEventListener("click", function() { navigate(1); });
+saveBtnTop.addEventListener("click", saveLater);
+
+window.addEventListener("beforeunload", function() {
+  if (!savedAndFinished) SCORM.finish();
+});
+
+var scormBookmark = SCORM.init();
+var suspended = SCORM.getSuspendData();
+restoreState(suspended || loadLocal());
+if (!suspended && scormBookmark && !state.page) state.page = scormBookmark;
+ensureQuestions();
+render();
+</script>
+</body>
+</html>
