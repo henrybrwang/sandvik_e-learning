@@ -4,7 +4,7 @@ version: "0.2"
 language: "en"
 recommended_duration_minutes: 45
 passing_score: 80
-question_bank_size: 15
+question_bank_size: 18
 questions_to_serve: 10
 retakes: "unlimited"
 randomize_questions: true
@@ -48,10 +48,10 @@ questions:
         text: "It hides the audience and purpose."
   - id: "chat-q04"
     type: "multiple_choice"
-    prompt: "Where can relevant paid or seat-based Claude users usually check five-hour session and weekly usage progress?"
+    prompt: "Where can Sandvik users usually check Claude usage progress and their monthly spending limit?"
     options:
       - key: "A"
-        text: "Settings > Usage, if available for their plan and organization."
+        text: "In their Claude account usage area, if available for their plan and organization."
       - key: "B"
         text: "Only by asking Claude to guess the remaining limit."
       - key: "C"
@@ -65,7 +65,7 @@ questions:
       - key: "A"
         text: "Move the work to a private account to continue immediately."
       - key: "B"
-        text: "Wait for the reset or use the approved Sandvik path to request more capacity."
+        text: "Wait for the reset or use the intranet form to request a higher monthly spending limit with cost-approver approval."
       - key: "C"
         text: "Paste less accurate information so the task uses fewer tokens."
       - key: "D"
@@ -190,6 +190,42 @@ questions:
         text: "Publish it and fix issues later."
       - key: "D"
         text: "Ask Claude to make it sound more confident."
+  - id: "chat-q16"
+    type: "multiple_choice"
+    prompt: "What is the main risk of giving Claude a large set of documents without framing instructions?"
+    options:
+      - key: "A"
+        text: "Claude may focus on the wrong material or treat background as instructions."
+      - key: "B"
+        text: "Claude will always refuse to read the documents."
+      - key: "C"
+        text: "The documents become approved for all future use."
+      - key: "D"
+        text: "The output is automatically more accurate because there is more text."
+  - id: "chat-q17"
+    type: "multiple_choice"
+    prompt: "Which prompt is closest to a useful specification?"
+    options:
+      - key: "A"
+        text: "Write an update."
+      - key: "B"
+        text: "Make this sound better."
+      - key: "C"
+        text: "Write a one-page steering group update using only the attached notes; include status, decisions, risks, assumptions, and mark missing facts as [CHECK REQUIRED]."
+      - key: "D"
+        text: "Create something impressive from all available context."
+  - id: "chat-q18"
+    type: "multiple_choice"
+    prompt: "When is conditional logic useful in a Claude Chat prompt?"
+    options:
+      - key: "A"
+        text: "When the task has different possible cases and Claude should handle each case differently."
+      - key: "B"
+        text: "Only when writing software code."
+      - key: "C"
+        text: "When you want Claude to ignore source boundaries."
+      - key: "D"
+        text: "When you want to avoid human review."
 answers:
   chat-q01: "B"
   chat-q02: "B"
@@ -206,6 +242,9 @@ answers:
   chat-q13: "B"
   chat-q14: "A"
   chat-q15: "A"
+  chat-q16: "A"
+  chat-q17: "C"
+  chat-q18: "A"
 feedback:
   chat-q01:
     correct: "Correct. Chat is best for interactive, turn-by-turn work."
@@ -217,10 +256,10 @@ feedback:
     correct: "Correct. Clear prompts reduce rework and uncertainty."
     incorrect: "A strong prompt includes goal, context, constraints, output format, and checks."
   chat-q04:
-    correct: "Correct. Usage visibility depends on plan and organization settings."
+    correct: "Correct. Usage and monthly spending-limit visibility depend on plan and organization settings."
     incorrect: "Use the available usage settings rather than guessing."
   chat-q05:
-    correct: "Correct. Follow the approved Sandvik path or wait for the reset."
+    correct: "Correct. Follow the approved intranet path or wait for the reset."
     incorrect: "Do not work around limits using private accounts or unapproved access."
   chat-q06:
     correct: "Correct. More context, tools, and effort can consume more usage."
@@ -252,3 +291,12 @@ feedback:
   chat-q15:
     correct: "Correct. Ask for assumptions, gaps, and verification needs."
     incorrect: "Useful output still needs review when context may be incomplete."
+  chat-q16:
+    correct: "Correct. Large context still needs labels and instructions."
+    incorrect: "More context helps only when Claude knows how to interpret it."
+  chat-q17:
+    correct: "Correct. A useful specification defines source boundaries, output, required content, and checks."
+    incorrect: "Move from a vague request to a clear specification."
+  chat-q18:
+    correct: "Correct. If/then instructions help Claude handle real-world variation."
+    incorrect: "Conditional logic is useful beyond code when tasks have branches."

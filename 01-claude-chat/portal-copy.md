@@ -2,11 +2,11 @@
 
 ## Short Description
 
-Learn when to use Claude Chat, why context matters, how agentic tool use works, and how to work with connectors, projects, skills, artifacts, usage limits, and output review.
+Learn when to use Claude Chat, why context matters, how to turn vague requests into useful specifications, and how to work with connectors, projects, skills, artifacts, usage limits, and output review.
 
 ## Long Description
 
-This module prepares Sandvik users to use Claude Chat as a practical work partner. It starts with when Chat is the right product, explains context as the key difference from ordinary search, then connects agentic AI, connectors, files, projects, skills, artifacts, five-hour and weekly usage limits, and when another Claude product is a better fit.
+This module prepares Sandvik users to use Claude Chat as a practical work partner. It starts with when Chat is the right product, then teaches intentional context, framing instructions, practical specification, conditional logic, agentic AI, connectors, files, projects, skills, artifacts, five-hour and weekly usage limits, monthly spending-limit approval, and when another Claude product is a better fit.
 
 ## Completion Rule
 

@@ -80,18 +80,32 @@ Default training assumption until approved:
 
 [POLICY DECISION REQUIRED]
 
-Confirm rules for:
+Known Sandvik context from the 2026-06-16 intranet post:
+
+- Claude Enterprise is planned for launch on 2026-06-30, with pre-ordering open before launch.
+- Pre-ordering reserves a license but does not grant access before launch.
+- One Claude Enterprise license can cover Claude Chat, Claude Code, Claude Cowork, and Claude Design at the same base cost.
+- The base fee is 350 SEK per user/month.
+- Usage costs are charged on top, depending on how much the service is used.
+- The full cost is charged to the user's cost center with no markup.
+- Users have normal plan usage limits, including five-hour session limits and weekly limits.
+- Further usage is pay as you go.
+- Users who need a higher usage or spending limit must use the intranet form and get cost-approver approval.
+- The spending limit is monthly and should be visible in the user's Claude account.
+
+Confirm remaining rules for:
 
 - Product eligibility.
 - Ordering approvals.
-- Usage budgets and spend limits.
-- Chargeback or cost center behavior.
+- Final intranet form link for raising monthly usage or spending limits.
+- Expected approval and provisioning response time.
 - When to request Cowork, Code, or Design instead of only Chat.
 
 Default training assumption until approved:
 
 - Users should choose the smallest Claude product that fits the work.
 - Long-running, tool-heavy, or repeated tasks may create higher usage and should be monitored.
+- Users should not use private accounts or unapproved tools to work around usage limits.
 
 ## Engineering
 

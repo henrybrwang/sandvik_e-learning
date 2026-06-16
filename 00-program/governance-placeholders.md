@@ -25,14 +25,30 @@ Use these labels consistently:
 | Browser actions | Rules for logged-in browser use, form filling, and approvals. | IT Security / Legal |
 | Code repositories | Which repositories and branches Claude Code may access. | Engineering / IT Security |
 | External sharing | Whether generated artifacts, designs, documents, or code may be shared externally. | Legal / Brand |
-| Cost controls | Usage limits, spend monitoring, and escalation paths. | Procurement / Platform owner |
+| Cost controls | Confirm final intranet form link, approval workflow, response time, reporting, and any manager guidance beyond the known cost-approver approval model. | Procurement / Platform owner |
 | Incident handling | How to report suspected data exposure, unsafe output, or tool misuse. | IT Security |
+
+## Known Sandvik Context
+
+The 2026-06-16 Sandvik intranet post confirms the current launch and cost-management baseline:
+
+- Planned Claude Enterprise launch: 2026-06-30.
+- Pre-ordering before launch reserves a license but does not grant early access.
+- One license can cover Claude Chat, Claude Code, Claude Cowork, and Claude Design at the same base cost.
+- Base fee: 350 SEK per user/month.
+- Usage costs are charged on top, depending on use.
+- Full cost is charged to the user's cost center with no markup.
+- Users have normal plan limits, including five-hour session limits and weekly limits.
+- Further usage is pay as you go.
+- Higher monthly usage or spending limits require an intranet form and cost-approver approval.
+- The monthly spending limit should be visible in the user's Claude account.
 
 ## Approval Log
 
 | Date | Area | Decision | Owner | Status |
 | --- | --- | --- | --- | --- |
 | 2026-06-09 | Initial structure | Placeholders created for review. | Program owner | Draft |
+| 2026-06-16 | Cost controls | Added intranet-confirmed launch, pricing, cost-center, pay-as-you-go, monthly spending-limit, and cost-approver context. Final form link and workflow details still pending. | Program owner | Partially confirmed |
 
 ## Publishing Rule
 

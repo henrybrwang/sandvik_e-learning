@@ -2,6 +2,7 @@
 
 Status: working notes  
 Created: 2026-06-14  
+Updated: 2026-06-16
 Purpose: capture the initial content direction before drafting or revising modules.
 
 ## Training Purpose
@@ -22,7 +23,28 @@ The manager's requested content areas, translated into working points:
 - Include bonus material on what can be done through the M365 connector and the GitHub connector.
 - Make room for additional connectors later as Sandvik adds more approved integrations.
 - Note that the connector setup is not fully implemented yet, so connector details need source checks and Sandvik implementation confirmation.
-- Explain usage caps and the escalation path: users should know they can order more usage through the portal, with manager approval.
+- Explain usage caps and the escalation path: users should know they can request a higher monthly spending limit through the intranet form, with cost-approver approval.
+
+## Sandvik Intranet Context From 2026-06-16
+
+Sandvik published an intranet post titled "Introducing Claude Enterprise" on 2026-06-16. Treat this as current Sandvik context for ordering, launch timing, and cost model until a newer internal source replaces it.
+
+Key points to carry into the training:
+
+- Claude Enterprise is planned for launch on 2026-06-30, but the launch date may be delayed.
+- A pre-order form is available before launch; submitting a request reserves a license but does not grant access before 2026-06-30.
+- Claude Enterprise is Sandvik approved for writing, research, analysis, and coding.
+- It complements GitHub Copilot and Microsoft 365 Copilot.
+- Primary audience: developers and heavy users who need more advanced coding, automation, complex analysis, large-dataset, desktop automation, or file-manipulation capabilities.
+- One license can cover Claude Chat, Claude Code, Claude Cowork, and Claude Design at the same base cost, regardless of how many of the four tools the user selects.
+- Claude Cowork is described as an early preview.
+- A future direction is one AI assistant license per user per use case, such as Microsoft 365 Copilot versus Claude Chat for office use, or GitHub Copilot versus Claude Code for development. This is not enforced yet.
+- Pricing is consumption-based: 350 SEK per user/month as the base fee, plus usage costs depending on use.
+- Full cost is charged to the user's cost center with no markup.
+- Users have the normal plan usage limits, including five-hour session limits and weekly limits.
+- Further usage is pay as you go.
+- Users who want to raise their usage or spending limit must use an intranet form and receive cost-approver approval.
+- The spending limit is monthly and should be visible in the user's Claude account.
 
 ## Content That Needs Sandvik Confirmation
 
@@ -37,7 +59,7 @@ These items should not be treated as final policy or final product behavior unti
 - Whether the M365 connector is enabled, which M365 sources it can access, and how permissions are inherited.
 - Whether the GitHub connector is enabled, which repositories it can access, and what actions are allowed.
 - Whether memory, projects, artifacts, file uploads, sharing, and external links are enabled or restricted.
-- Exact usage cap behavior, ordering flow for more usage, approval owner, and expected response time.
+- Exact intranet form link for raising monthly usage or spending limits, cost-approver workflow details, and expected response time.
 - Completion rules in the Sandvik portal or LMS.
 
 ## Notes From Old Assets
@@ -132,7 +154,7 @@ This is not yet a final module outline. It is a starting backbone for the Claude
 5. Claude product features such as chat, files, projects, artifacts, memory, connectors, and skills where approved.
 6. Choosing the right model or product surface: match task type, complexity, speed, cost/usage, and risk.
 7. Responsible use and policy: sensitive information, PII, confidential data, secrets, source material, and review obligations.
-8. Usage caps: what a usage cap means, how to request more usage through the portal, and when manager approval is needed.
+8. Usage caps: what a usage cap means, how to request a higher monthly spending limit through the intranet form, and when cost-approver approval is needed.
 9. Knowledge check: practical scenarios that test safe and effective decisions.
 
 ## Draft Learning Outcomes
@@ -146,7 +168,7 @@ After the training, a user should be able to:
 - Recognize when connector access changes the data and permission risk.
 - Use M365 and GitHub connector concepts responsibly if those connectors are approved.
 - Verify Claude outputs before using them in communication, decisions, documents, or code.
-- Explain how usage caps work and where to request more usage.
+- Explain how normal plan usage limits, pay-as-you-go usage, and monthly spending-limit approval work.
 
 ## Tone And Design Notes
 

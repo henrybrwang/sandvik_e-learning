@@ -4,7 +4,7 @@ version: "0.1"
 language: "en"
 recommended_duration_minutes: 30
 passing_score: 80
-question_bank_size: 12
+question_bank_size: 15
 questions_to_serve: 8
 retakes: "unlimited"
 randomize_questions: true
@@ -29,7 +29,7 @@ questions:
       - key: "A"
         text: "Only the phrase handle this."
       - key: "B"
-        text: "Goal, inputs, constraints, definition of done, and review points."
+        text: "Goal, context folder, allowed sources, boundaries, output, pause points, and definition of done."
       - key: "C"
         text: "Permission to use all local folders."
       - key: "D"
@@ -75,7 +75,7 @@ questions:
     prompt: "Why does cost and usage awareness matter for Cowork?"
     options:
       - key: "A"
-        text: "Cowork tasks may be longer, tool-heavy, or repeated."
+        text: "Cowork tasks may be longer, tool-heavy, repeated, and may create pay-as-you-go usage."
       - key: "B"
         text: "Cowork cannot use any tokens."
       - key: "C"
@@ -154,6 +154,42 @@ questions:
         text: "It prevents any file access."
       - key: "D"
         text: "It automatically improves security."
+  - id: "cowork-q13"
+    type: "multiple_choice"
+    prompt: "What belongs in a good Cowork context folder?"
+    options:
+      - key: "A"
+        text: "Approved source files, templates, instructions, and a clear output location."
+      - key: "B"
+        text: "Every related folder the user can access."
+      - key: "C"
+        text: "Unrelated personal files to give Claude more background."
+      - key: "D"
+        text: "Credentials so Claude can log in without asking."
+  - id: "cowork-q14"
+    type: "multiple_choice"
+    prompt: "What is the safest way to handle work you repeat, before scheduled Cowork tasks are approved?"
+    options:
+      - key: "A"
+        text: "Create a reusable manual brief and start each run yourself."
+      - key: "B"
+        text: "Ask Cowork to run automatically whenever it wants."
+      - key: "C"
+        text: "Remove all review points so the work is faster."
+      - key: "D"
+        text: "Use the broadest folder so the brief never needs updating."
+  - id: "cowork-q15"
+    type: "multiple_choice"
+    prompt: "Which instruction best fits a one-off background Cowork task?"
+    options:
+      - key: "A"
+        text: "Work on this approved folder, save the draft in the output folder, and pause before using browser or connector access."
+      - key: "B"
+        text: "Schedule this forever, even if Sandvik has not enabled recurring work."
+      - key: "C"
+        text: "Change any source files you find without showing a plan."
+      - key: "D"
+        text: "Use any local folder or system that might help."
 answers:
   cowork-q01: "B"
   cowork-q02: "B"
@@ -167,13 +203,16 @@ answers:
   cowork-q10: "B"
   cowork-q11: "A"
   cowork-q12: "A"
+  cowork-q13: "A"
+  cowork-q14: "A"
+  cowork-q15: "A"
 feedback:
   cowork-q01:
     correct: "Correct. Cowork is for clear multi-step deliverables."
     incorrect: "Cowork is best when the work spans files, tools, browser, or desktop actions."
   cowork-q02:
-    correct: "Correct. Delegation needs a definition of done and review points."
-    incorrect: "Cowork needs clear scope, inputs, constraints, and approval expectations."
+    correct: "Correct. Cowork needs a clear brief, not just a loose request."
+    incorrect: "Use a complete brief: goal, context, allowed sources, boundaries, output, pause points, and definition of done."
   cowork-q03:
     correct: "Correct. Narrow access reduces risk."
     incorrect: "Use the smallest approved folder, not broad local access."
@@ -184,8 +223,8 @@ feedback:
     correct: "Correct. Users should stay in control."
     incorrect: "Interrupt or redirect when the task is no longer aligned."
   cowork-q06:
-    correct: "Correct. Scope affects usage."
-    incorrect: "Long or repeated tool-heavy tasks require cost awareness."
+    correct: "Correct. Scope affects usage and can affect cost."
+    incorrect: "Long or repeated tool-heavy tasks require usage and cost awareness."
   cowork-q07:
     correct: "Correct. Scheduled work requires explicit approval."
     incorrect: "Recurring tasks must follow Sandvik policy and settings."
@@ -204,3 +243,12 @@ feedback:
   cowork-q12:
     correct: "Correct. Vague delegation increases risk and rework."
     incorrect: "A clear goal and constraints are essential for Cowork."
+  cowork-q13:
+    correct: "Correct. A context folder should be narrow, approved, and organized around the task."
+    incorrect: "Use approved task-relevant sources, templates, instructions, and output expectations, not unrelated files or credentials."
+  cowork-q14:
+    correct: "Correct. A reusable manual brief is safer until scheduled work is approved."
+    incorrect: "Repeated work still needs human control unless Sandvik has approved scheduled or recurring tasks."
+  cowork-q15:
+    correct: "Correct. One-off background work still needs narrow access, output expectations, and pause points."
+    incorrect: "Background work is not permission to schedule, broaden access, or make consequential changes without review."

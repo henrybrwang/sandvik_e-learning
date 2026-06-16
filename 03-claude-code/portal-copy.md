@@ -2,11 +2,11 @@
 
 ## Short Description
 
-Learn how to use Claude Code safely for repository work, code changes, tests, Git workflow, and technical review.
+Learn how to use Claude Code with clear intent, specifications, safe repository access, tests, Git workflow, and review loops.
 
 ## Long Description
 
-This module prepares Sandvik developers and technical builders to use Claude Code with clear scope, safe repository access, command control, secret protection, tests, code review, and human approval before release.
+This module prepares Sandvik developers and technical builders to use Claude Code responsibly across desktop, terminal, and IDE workflows. It covers when fast prototype work is acceptable, when normal engineering procedure is required, how to use plan mode and repository instructions, how to protect secrets and production data, how to treat AI-written tests, and how to use review loops before shared or production-bound code is released.
 
 ## Completion Rule
 
@@ -14,7 +14,7 @@ Users must pass the scored quiz with at least 80%. Retakes are unlimited.
 
 ## Estimated Time
 
-25-35 minutes.
+35-45 minutes.
 
 ## Audience
 

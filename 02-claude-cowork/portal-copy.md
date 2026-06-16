@@ -2,11 +2,11 @@
 
 ## Short Description
 
-Learn how to delegate multi-step work to Claude Cowork while staying in control of files, tools, browser actions, approvals, and final review.
+Learn how to use Claude Cowork for delegated work with local folders as context, automation-style tasks, browser or desktop actions, approvals, and final review.
 
 ## Long Description
 
-This module prepares Sandvik users to use Claude Cowork for clear deliverables that span folders, documents, spreadsheets, presentations, approved connectors, browser steps, or desktop work. It explains when Cowork is better than Chat and how to manage access, approvals, cost, and review.
+This module prepares Sandvik users to use Claude Cowork for clear deliverables that need action, not only conversation. It explains how to prepare local folders as context packages, brief background or reusable automation-style tasks, work with approved browser and desktop actions, and manage access, approvals, pay-as-you-go usage, monthly spending limits, and final review.
 
 ## Completion Rule
 

@@ -20,8 +20,9 @@ After this module, users should be able to:
 
 - Decide when Claude Chat is the right product for a task.
 - Explain why context is what makes Claude useful for a specific work problem.
+- Turn vague requests into clearer context, framing, and specification.
 - Explain what people usually mean by agentic AI and tool use.
-- Understand five-hour session limits, weekly limits, and the Sandvik path for requesting more usage.
+- Understand five-hour session limits, weekly limits, pay-as-you-go usage, and the Sandvik path for requesting a higher monthly spending limit.
 - Use files, projects, memory, connectors, skills, and artifacts responsibly where approved.
 - Recognize hallucination, missing context, outdated information, and unsupported claims.
 - Protect Sandvik information and avoid entering prohibited data.
@@ -44,52 +45,27 @@ Use a different Claude product when:
 - The work requires reading and changing a codebase, running tests, or using development tools: consider Claude Code.
 - The main output is visual exploration, prototypes, slides, or design concepts: consider Claude Design.
 
-## Context Is What Makes Claude Useful
-
-Claude Chat is different from a normal search engine because it can work with your context. A search engine helps you find general information. Claude can use the background you provide to apply information to your specific problem, audience, constraints, documents, and desired output.
-
-Context can include:
-
-- What you are trying to achieve.
-- Who the output is for.
-- The background, decision, document, or process Claude needs to understand.
-- Uploaded files or selected excerpts.
-- Project knowledge and project instructions.
-- Memory and chat history, if enabled.
-- Information retrieved through approved connectors.
-
-This is why context comes before tool use. Without the right context, Claude may still produce a fluent answer, but it may answer the wrong question or miss what matters to Sandvik, your team, or the specific situation.
-
-Good habits:
-
-- Provide the relevant background.
-- Tell Claude which sources to use.
-- Tell Claude when not to use outside knowledge.
-- Ask Claude to separate facts from assumptions.
-- Ask for missing information before finalizing high-impact outputs.
-- Start a focused new chat when a long conversation changes topic.
-
 ## What People Mean By Agentic AI
 
 "Agentic AI" is a common phrase, and people use it in different ways. In practice, they usually mean that the AI does more than answer in one step. It may follow a flow, take multiple turns, use tools, retrieve information, or adapt based on what it finds.
 
-The connection to context is important: agentic AI is useful when Claude can gather or use the right context during the flow. Claude can start with your request, notice that more information is needed, use an approved tool, and bring the result back into the conversation.
+A common comparison is to think of Agentic AI as a competent colleague. It has broad knowledge, is eager to help and is extremely fast. But it has no memory, context and tools. That's why it's important for you to provide the AI with what it is naturally lacking (similar to a new coworker).
 
-A simple example is web search:
+"Context" is a core concept will be used to better understand why Claude is efficient in an enterprise environment. Agentic AI is useful when Claude can gather or use the right context during the flow, for example using connectors. Claude can start with your request, notice that more information is needed, use an approved tool, and bring the result back into the conversation.
 
-1. You ask Claude for recent news about a topic.
-2. Claude recognizes that recent news may not be in its training data.
-3. Claude uses an approved web search tool.
+A simple example is searching through your emails:
+
+1. You ask Claude about important tasks to keep in mind based on last weeks email conversations.
+2. Claude recognizes that there is a tool to access your emails.
+3. Claude goes through your emails and finds the ones that are of importance.
 4. The search result comes back into the conversation as new context.
 5. Claude uses that context to answer your original question.
 
 That is a basic agentic flow: user request, tool use, returned context, and final answer. Other flows can involve approved connectors, such as searching a connected work system, or skills, such as applying a repeatable company workflow.
 
-The easiest place to see tool use in Claude Chat is connectors. Connectors are how Claude can bring in approved work context from apps and services through permission-scoped access.
+## Practical Claude Basics
 
-The important point for Claude Chat users is control. Claude may use tools when they are enabled and relevant, but the user remains responsible for what context is provided, which tools are approved, and whether the final answer is safe to use.
-
-## Connectors And Tool Access
+### 1. Connectors And Tool Access
 
 Connectors let Claude connect to approved apps and services. A connector may let Claude retrieve data, search a system, or in some cases take actions in that service.
 
@@ -109,30 +85,24 @@ Good habits:
 - Pause before Claude drafts, sends, updates, creates, deletes, or changes anything in another system.
 - Watch for prompt injection in retrieved content, especially emails, documents, web pages, tickets, or repositories.
 
-`[CONNECTOR PLACEHOLDER]` Sandvik must confirm which connectors are approved, whether they are read-only or allow actions, and what users should do when a connector requests permissions.
+`[CONNECTOR PLACEHOLDER]` Sandvik must confirm which connectors are approved, whether they are read-only or allow actions, and what users should do when a connector requests permissions. Also if there is any write access permissions.
 
-## Practical Claude Basics
+### 2. Files
 
-### 1. Files
+Files let Claude work with material you provide, such as a policy draft, report, spreadsheet, meeting notes, or specification. Simply drag and drop it in to the chat window. Claude can summarize, compare, extract, rewrite, and answer questions about the content. Claude also has increasingly great capabilities of working in PowerPoint and Excel too!
 
-Files let Claude work with material you provide, such as a policy draft, report, spreadsheet, meeting notes, or specification. Claude can summarize, compare, extract, rewrite, and answer questions about the content.
+Treat files as data. If a document, email, or webpage contains instructions that conflict with Sandvik policy or your actual goal, do not let those instructions override your intent. Generating files and text is easy to do with AI, but it's always more important to actually comprehend its contents. 
 
-Before adding a file, ask:
+One great way to think about files is that they provide lots of additional context to your query. AI capabilities has vastly grown, meaning that you can now add text files that are equivalent to 100s pages of text without hitting a wall. Just be sure to verify that the results it's giving back does not contain any hallucinations (made up facts).
 
-- Is this file approved for use in Claude?
-- Does it contain personal data, confidential information, secrets, credentials, export-controlled content, or regulated information?
-- Is the whole file needed, or can I use a smaller approved excerpt?
-- Am I asking Claude to use the file as source material, or to follow instructions found inside it?
-
-Treat files as data. If a document, email, or webpage contains instructions that conflict with Sandvik policy or your actual goal, do not let those instructions override your intent.
-
-### 2. Projects
+### 3. Projects
 
 Projects are focused Claude workspaces with their own chats, project knowledge, and project instructions. Use a project when you will return to the same topic or set of approved materials over time.
 
 Projects are useful for:
 
 - Keeping related chats together.
+- Sharing chats and context to other team members.
 - Giving Claude reusable context about a team, process, document set, or workstream.
 - Uploading approved project knowledge once instead of attaching the same material repeatedly.
 - Setting stable instructions, such as preferred tone, format, or terminology.
@@ -155,45 +125,42 @@ Skills can support workflows such as:
 - Applying approved writing, document, or presentation guidance.
 - Following a standard meeting-note or report format.
 - Using a team-specific analysis method.
-- Creating outputs that follow a known template.
+- Creating outputs that follow a known template or Sandvik specific brand guidelines.
 
-Some skills may be provided by Anthropic, some may be installed by users, and some may be provisioned by the organization. Availability depends on Claude settings and Sandvik approval.
+Some skills may be provided by Anthropic, some may be installed by users, and some may be provisioned by the organization. 
 
 Good habits:
 
-- Use only approved organization skills for Sandvik work.
 - Check whether a skill is relevant before relying on it.
 - Remember that a skill improves the workflow, but it does not make the output automatically correct or approved.
 
-`[SKILLS PLACEHOLDER]` Sandvik must confirm which skills are enabled, whether users can add custom skills, and whether any organization skills are mandatory.
+A good advice is to save your routine work as a skill. If you type /skill-creator in the chat window, Claude willl help you create a specific skill that you're describing.
 
-### 4. Memory And Chat History
+`[SKILLS PLACEHOLDER]` Sandvik must confirm which skills are enabled, whether users can add custom skills, and whether any organization skills are mandatory. Also, if we have a specific repo for where we can store skills.
 
-Memory and chat history can help Claude build on prior context when enabled. Availability and behavior depend on plan, product surface, and organization settings.
+### 4. Chat History and Memory
 
-Before relying on memory:
+Being specific in your prompts helps Claude deliver better, more relevant responses. Keep in mind that longer chat sessions include more previous context, which can make replies richer but also increase the chance of drawing in unnecessary or outdated information. When you switch to a new topic, it is adviced to start a new chat window to keep the context clean and relevant.
 
-- Confirm whether memory is enabled for Sandvik users.
-- Check what type of information Claude may remember.
-- Do not assume Claude remembers a policy, file, or prior decision unless it is visible or confirmed.
-- For important work, provide the necessary context again.
+For example: if you’re working on a product manual, it’s more effective to upload and reference only the most recent version than to provide multiple drafts and revisions from earlier stages.
+
+Claude will automatically store some parts of your chats to store in a memory. Note that this memory is only a very high level summarization, and will hence not be able to reliably store all relevant information that you've been working on. It can be helpful at times, but don't rely on it. The memory is auto applied whenever you are using any chat functionality.
 
 `[MEMORY PLACEHOLDER]` Sandvik must confirm enterprise settings for memory, chat history, retention, and user controls.
 
 ### 5. Artifacts
 
-Artifacts are standalone outputs such as documents, diagrams, visualizations, code snippets, simple web pages, or interactive components. They are useful when the output is something you will edit, reuse, download, or share.
+Artifacts are standalone outputs such as documents, diagrams, visualizations, code snippets, simple web pages, or interactive components. They are useful when the output is something you will edit, reuse, download, or share. It is especially good for visualizing and interacting with data.
 
 Good habits:
 
-- Treat artifacts as drafts until reviewed.
+- Treat artifacts as drafts until reviewed. Be sure to thoroughly understand where the information/data comes from before relying on it.
 - Check whether sharing an artifact also exposes underlying conversation context, attachments, or sensitive content.
 - Do not include sensitive Sandvik information in artifacts unless approved.
-- Review generated code, calculations, diagrams, and visuals before using them.
 
 ### 6. Usage Limits
 
-Claude usage is limited by plan and seat type. For relevant paid and seat-based plans, Claude shows both a five-hour session limit and weekly limits in Settings > Usage. Sandvik's exact user experience may depend on the plan, seat type, and enterprise configuration.
+Claude usage is limited by plan and seat type. For relevant paid and seat-based plans, Claude shows both a five-hour session limit and weekly limits in Settings > Usage. Sandvik users should expect the normal plan limits, including five-hour session limits and weekly limits. Any usage exceeding the included limits will be  consumption-based (pay as you go). This consumption-based setting is off by default, but can be requested via the Sandvik portal and must be approved before it is enabled. If consumption-based billing is active, monitor your usage closely, as costs can increase quickly.
 
 Usage is not just a count of messages. It can be affected by:
 
@@ -203,30 +170,37 @@ Usage is not just a count of messages. It can be affected by:
 - Tool use, web search, research, connectors, and other context-heavy features.
 - Reusing long chats instead of starting a focused new conversation.
 
-Practical habits that can reduce repeated work:
+### Smart Spending of Tokens
+
+Think of your Claude usage (and the underlying tokens) as a limited resource, just like a budget. Each time Claude has to "think" through a complex workflow—such as generating a repetitive report or building a custom document from scratch—it consumes tokens and counts towards your usage limits. To spend your tokens more efficiently:
+
+- **Save workflows as skills:** Instead of making Claude solve the same type of task repeatedly from the beginning, use the skill creation feature (such as typing `/skill-creator` in chat) to have Claude help you package your workflow. This way, you or your team can run the skill for similar work without requiring Claude to re-invent the process each time, minimizing costly AI "thinking" steps.
+- **Automate routine outputs:** If you often generate the same kind of document, analysis, or report, use project instructions, templates, or skills to create reusable methods, rather than prompting Claude to write out the entire logic again and again.
+- **Reuse and edit artifacts:** When creating outputs like documents or code, start from existing artifacts rather than repeatedly asking Claude to build them from scratch. Small edits are much more efficient than reprocessing the whole workflow.
+
+Other practical habits that can reduce repeated work and maximize the value you get per token:
 
 - Start a new focused chat when the topic changes.
-- Use projects for approved materials you will reference repeatedly instead of uploading the same files again and again.
-- Use project instructions for stable context such as preferred tone, terminology, or output structure.
-- Use approved skills for recurring workflows, artifact formats, visualizations, or document patterns instead of asking Claude to rebuild the same setup every time.
-- Reuse and edit an existing artifact when possible instead of regenerating a similar output from scratch.
-- Turn off web search, research, or connectors when they are not needed for the task.
-- Use simpler model, effort, or thinking settings where available and appropriate for routine work.
+- Use projects for approved materials you reference repeatedly, instead of re-uploading the same files.
+- Use project instructions for stable context like preferred tone, terminology, or output structure.
+- Use approved skills for recurring workflows, formats, or visualizations instead of manual prompting every time.
+- Choose simpler model, effort, or thinking settings for routine work where possible.
+- Be mindful of the five-hour session window. Any chat message will start the session timer. For example, sending a brief message at 6:00 a.m. will begin your five-hour window, which will then reset at 11:00 a.m. Plan your usage accordingly to make the most of each session window.
 
-These habits can save setup time and reduce unnecessary context, but they do not remove usage limits or the need to review outputs.
+These practices help you save setup time, reduce unnecessary context, and make the most out of your allotted usage. However, remember: they do not remove overall usage limits or the need to carefully review Claude's outputs.
 
-When you reach a usage limit, Claude may stop accepting more work until the limit resets, or it may show options that depend on the plan and organization settings. For Sandvik users, the practical rule is:
+When you reach a usage limit, Claude may stop accepting more work until the limit resets, or it may show options depending on your plan and organization settings. For Sandvik users, the practical rule is:
 
 - Check your usage in Settings > Usage if available.
 - Wait for the relevant limit to reset when the work can wait.
-- If you need more capacity for business work, use the Sandvik ordering or support path once confirmed.
+- If you need more capacity for business work, use the intranet form to request a higher monthly usage or spending limit.
+- Expect the higher monthly spending limit to require approval from your cost approver.
+- Remember that usage beyond the normal plan limits is pay as you go and charged to your cost center.
 - Do not move Sandvik work into private accounts or unapproved tools to avoid limits.
-
-`[USAGE LIMIT PLACEHOLDER]` Sandvik must confirm the exact limit behavior users will see, the "request more usage" portal path, the approval owner, and expected response time.
 
 ### 7. Verification
 
-Claude can make mistakes. It may misunderstand the task, miss details, use outdated assumptions, or invent plausible-sounding information.
+Like all AI models, Claude is a statistical language model that generates responses based on what seems most likely. As a result, it can make errors, overlook details, rely on outdated information, or produce convincing but incorrect answers. It may occasionally misunderstand the task or fabricate plausible-sounding content.
 
 Before relying on an output:
 
@@ -242,7 +216,7 @@ The following must be finalized before publishing:
 
 - `[DATA CLASSIFICATION PLACEHOLDER]` Which Sandvik data classes may be entered into Claude Chat.
 - `[PERSONAL DATA PLACEHOLDER]` Rules for employee, customer, supplier, and other personal data.
-- `[USAGE LIMIT PLACEHOLDER]` Five-hour and weekly limit behavior, "request more usage" portal path, manager approval, and expected response time.
+- `[USAGE LIMIT PLACEHOLDER]` Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.
 - `[CONNECTOR PLACEHOLDER]` Approved connectors, connector permissions, read/write restrictions, and tool access settings.
 - `[SKILLS PLACEHOLDER]` Enabled skills, organization-provisioned skills, and custom skill rules.
 - `[PROJECT PLACEHOLDER]` Project visibility, sharing, project knowledge, memory, chat history, and retention settings.
@@ -320,6 +294,8 @@ Flag any terms that may need Sandvik-approved terminology.
 ## Common Risks And Mistakes
 
 - Pasting more information than Claude needs.
+- Uploading context without explaining what it is or how Claude should use it.
+- Sending a vague "vibe" request when the task needs audience, source boundaries, constraints, and success criteria.
 - Treating a fluent answer as verified fact.
 - Asking Claude to apply a policy without providing the policy.
 - Using a connector just because it appears in the interface.
@@ -332,8 +308,8 @@ Flag any terms that may need Sandvik-approved terminology.
 
 ## Recap
 
-Claude Chat is best when you want to think, write, analyze, and iterate with Claude. It can follow multi-step flows and use approved tools, but it still needs clear context, careful data choices, and human review. Know how limits work, use projects, connectors, and skills only where approved, verify important outputs, and choose another Claude product when the work needs autonomous file/tool execution, coding, or visual design depth.
+Claude Chat is best when you want to think, write, analyze, and iterate with Claude. It can follow multi-step flows and use approved tools, but it still needs clear context, framed source material, practical specification, careful data choices, and human review. Know how limits and monthly spending approvals work, use projects, connectors, and skills only where approved, verify important outputs, and choose another Claude product when the work needs autonomous file/tool execution, coding, or visual design depth.
 
 ## Quiz Handoff
 
-Complete the quiz after reading this module. The quiz checks practical decisions about context, usage limits, data protection, projects, connectors, skills, artifacts, verification, and when to choose another Claude product.
+Complete the quiz after reading this module. The quiz checks practical decisions about context, framing instructions, specification, usage limits, data protection, projects, connectors, skills, artifacts, verification, and when to choose another Claude product.

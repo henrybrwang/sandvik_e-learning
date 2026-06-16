@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code</title>
+<script src="scorm.js"></script>
+<style>
+  :root {
+    --page: #f5f7f8;
+    --surface: #ffffff;
+    --surface-muted: #eef2f4;
+    --ink: #1f2933;
+    --muted: #5f6f7a;
+    --line: #d8e0e5;
+    --accent: #1f6f78;
+    --accent-strong: #155760;
+    --accent-soft: #e2f1f2;
+    --warning: #8a5a00;
+    --warning-soft: #fff5d9;
+    --success: #237a4b;
+    --success-soft: #e2f3ea;
+    --error: #aa2f2f;
+    --error-soft: #f7e1e1;
+    --focus: #0f67ff;
+    --radius: 8px;
+    --shadow: 0 18px 48px rgba(31, 41, 51, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .brand-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 2px 0 0;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .status-pill {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .app {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 20px 36px;
+  }
+
+  .progress-wrap {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .progress-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .progress-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    cursor: default;
+  }
+
+  .progress-dot.visited {
+    background: #a9c7cc;
+    border-color: #a9c7cc;
+    cursor: pointer;
+  }
+
+  .progress-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .course-shell {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .page {
+    min-height: 540px;
+    padding: 34px;
+  }
+
+  .page-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid #cae4e7;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: 0;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 28px 0 10px;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  ul,
+  ol {
+    margin: 10px 0 18px 22px;
+    padding: 0;
+  }
+
+  li {
+    margin: 6px 0;
+  }
+
+  code {
+    background: var(--surface-muted);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.92em;
+  }
+
+  pre {
+    margin: 16px 0;
+    padding: 16px;
+    overflow-x: auto;
+    border-radius: var(--radius);
+    background: #17212b;
+    color: #e8eef2;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .lede {
+    max-width: 760px;
+    color: #35444f;
+    font-size: 1.08rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+  }
+
+  .grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fbfcfd;
+    padding: 16px;
+  }
+
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 16px;
+    margin: 18px 0;
+  }
+
+  .callout.warning {
+    border-left-color: var(--warning);
+    background: var(--warning-soft);
+  }
+
+  .callout p:last-child,
+  .panel p:last-child {
+    margin-bottom: 0;
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+
+  .flow-step {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: #fbfcfd;
+  }
+
+  .flow-step strong {
+    display: block;
+    color: var(--accent-strong);
+    margin-bottom: 4px;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+
+  .comparison th,
+  .comparison td {
+    border: 1px solid var(--line);
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .comparison th {
+    background: var(--surface-muted);
+  }
+
+  .nav {
+    border-top: 1px solid var(--line);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #fbfcfd;
+  }
+
+  .nav-center {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    min-height: 42px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .btn:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn.primary:hover:not(:disabled) {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+
+  .btn.ghost {
+    color: var(--accent-strong);
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .quiz-option {
+    width: 100%;
+    min-height: 54px;
+    text-align: left;
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 13px 14px;
+    cursor: pointer;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #f5fbfc;
+  }
+
+  .quiz-option.correct {
+    border-color: var(--success);
+    background: var(--success-soft);
+  }
+
+  .quiz-option.wrong {
+    border-color: var(--error);
+    background: var(--error-soft);
+  }
+
+  .quiz-option:disabled {
+    cursor: default;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+  }
+
+  .feedback.show {
+    display: block;
+  }
+
+  .feedback.correct {
+    background: var(--success-soft);
+    color: #164f31;
+    border: 1px solid #bde4cc;
+  }
+
+  .feedback.wrong {
+    background: var(--error-soft);
+    color: #7b2020;
+    border: 1px solid #ecc4c4;
+  }
+
+  .score {
+    font-size: 3.5rem;
+    line-height: 1;
+    font-weight: 800;
+    margin: 18px 0 8px;
+    color: var(--accent);
+  }
+
+  .score-bar {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin: 20px 0;
+  }
+
+  .score-segment {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--line);
+  }
+
+  .score-segment.ok {
+    background: var(--success);
+  }
+
+  .score-segment.fail {
+    background: var(--error);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 820px) {
+    .topbar-inner,
+    .progress-row,
+    .nav {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .top-actions {
+      justify-content: flex-start;
+    }
+
+    .page {
+      padding: 24px 18px;
+    }
+
+    h1 {
+      font-size: 1.55rem;
+    }
+
+    .grid,
+    .grid.three,
+    .flow {
+      grid-template-columns: 1fr;
+    }
+
+    .nav {
+      gap: 10px;
+    }
+
+    .nav .btn {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">C</div>
+      <div>
+        <p class="brand-title">Claude Code</p>
+        <p class="brand-meta">Interactive learning module</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="status-pill" id="moduleStatus">Not completed</span>
+      <button class="btn ghost" type="button" id="saveBtnTop">Save for later</button>
+    </div>
+  </div>
+</header>
+
+<main class="app">
+  <div class="progress-wrap" aria-label="Course progress">
+    <div class="progress-row">
+      <span id="sectionLabel">Claude Code</span>
+      <span id="pageLabel">Page 1 / 1</span>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <section class="course-shell" aria-live="polite">
+    <div class="page" id="pageRoot"></div>
+    <div class="nav">
+      <button class="btn" type="button" id="prevBtn">Back</button>
+      <span class="nav-center" id="navHint"></span>
+      <button class="btn primary" type="button" id="nextBtn">Next</button>
+    </div>
+  </section>
+</main>
+
+<script>
+var COURSE = {
+  id: "claude-code",
+  title: "Claude Code",
+  passingScore: 80,
+  questionsToServe: 8,
+  pages: [
+    {
+      tag: "Overview",
+      section: "Start",
+      title: "Claude Code: safe repository work",
+      body: [
+        '<p class="lede">This module introduces Claude Code as an agentic coding system for inspecting repositories, proposing plans, editing files, running commands, executing tests, and supporting development workflows.</p>',
+        '<div class="callout"><p><strong>Your responsibility stays the same.</strong> Claude can help accelerate work, but users remain responsible for what they enter, approve, share, and publish.</p></div>',
+        '<div class="grid three"><div class="panel"><h3>Duration</h3><p>25-35 minutes.</p></div><div class="panel"><h3>Completion</h3><p>Scored quiz with an 80% passing score.</p></div><div class="panel"><h3>Audience</h3><p>Sandvik developers and technical builders ordering Claude Code.</p></div></div>'
+      ]
+    },
+    {
+      tag: "Learning Objectives",
+      section: "Start",
+      title: "What you should be able to do",
+      body: [
+        '<ul><li>Decide when Claude Code is the right product.</li><li>Start with safe repository access and a clear goal.</li><li>Ask Claude Code to inspect before editing.</li><li>Control file changes, command execution, commits, and pushes.</li><li>Protect secrets, credentials, production data, and restricted repositories.</li><li>Use tests, code review, and CI as verification.</li><li>Apply Sandvik engineering guardrails before release.</li><li>Understand that longer or more complex Claude Code work can increase pay-as-you-go usage.</li></ul>'
+      ]
+    },
+    {
+      tag: "Product Fit",
+      section: "Concepts",
+      title: "When to use Claude Code",
+      body: [
+        '<p>At Sandvik, Claude Code is one of the selectable tools under the Claude Enterprise license. It complements GitHub Copilot for development use cases and is intended for agentic coding workflows, advanced debugging, scripting, and complex technical work where terminal-based repository access is useful.</p>',
+        '<div class="grid"><div class="panel"><h3>Use Claude Code when</h3><ul><li>You need help understanding an unfamiliar codebase.</li><li>You need to implement a change across files.</li><li>You want tests, linting, or build output interpreted and fixed.</li><li>You need help with refactoring, migration, documentation, or CI failure analysis.</li><li>The work belongs in a repository and should follow engineering workflow.</li></ul></div><div class="panel"><h3>Use another Claude product when</h3><ul><li>Chat: discussion, writing, or analysis without code edits.</li><li>Cowork: office-document or desktop workflow delegation.</li><li>Design: visual concepts, prototypes, slides, or design exploration.</li></ul></div></div>'
+      ]
+    },
+    {
+      tag: "Repository Context",
+      section: "Concepts",
+      title: "Repository context comes first",
+      body: [
+        '<p class="lede">Claude Code should inspect the project before changing it.</p>',
+        '<p>Good instructions ask it to understand architecture, existing patterns, tests, and constraints before it edits files or runs risky commands.</p>',
+        '<pre>Inspect the repository and explain the relevant files before making changes.\nThen propose a short implementation plan.\nDo not edit files until I approve the plan.</pre>',
+        '<div class="callout"><p>Inspect-first work reduces unnecessary changes and gives the human reviewer a chance to confirm scope before files are modified.</p></div>'
+      ]
+    },
+    {
+      tag: "Human Approval",
+      section: "Concepts",
+      title: "Human approval remains essential",
+      body: [
+        '<p>Claude Code may suggest or make changes quickly, but humans remain accountable for quality, security, and release decisions.</p>',
+        '<div class="panel"><h3>Require review before</h3><ul><li>Running unfamiliar commands.</li><li>Installing dependencies.</li><li>Editing security-sensitive code.</li><li>Changing authentication, authorization, logging, data retention, or encryption.</li><li>Creating commits, pushing branches, opening pull requests, or deploying.</li></ul></div>',
+        '<div class="callout"><p>Fast changes still need deliberate review. Use Claude Code as an assistant inside the engineering process, not as the owner of the release decision.</p></div>'
+      ]
+    },
+    {
+      tag: "Secrets",
+      section: "Concepts",
+      title: "Secrets and production data are out of scope",
+      body: [
+        '<p>Do not paste or expose sensitive values to Claude Code. If a task requires sensitive values, use approved secret-management and development workflows instead.</p>',
+        '<div class="grid"><div class="panel"><h3>Do not expose</h3><ul><li>Passwords.</li><li>API keys.</li><li>Tokens.</li><li>Private keys.</li><li>Certificates.</li><li>Connection strings.</li><li>Production customer data.</li><li>Restricted logs or dumps.</li></ul></div><div class="panel"><h3>Safer patterns</h3><ul><li>Use anonymized or development data.</li><li>Redact logs before sharing.</li><li>Reference environment-variable names without values.</li><li>Use approved secret managers and local tooling.</li></ul></div></div>',
+        '<div class="callout warning"><p>Default until approved: never paste credentials, production secrets, or restricted production data into Claude Code.</p></div>'
+      ]
+    },
+    {
+      tag: "Tests",
+      section: "Concepts",
+      title: "Tests are part of the work",
+      body: [
+        '<p>Claude Code should help run the appropriate checks, but passing tests does not replace human review.</p>',
+        '<div class="grid"><div class="panel"><h3>Good verification asks Claude Code to</h3><ul><li>Run targeted tests first.</li><li>Run broader tests when the change is risky.</li><li>Explain failures.</li><li>Avoid changing unrelated tests just to make the suite pass.</li><li>Summarize what was verified and what was not.</li></ul></div><div class="panel"><h3>Remember</h3><ul><li>A green suite can miss security, usability, and architecture problems.</li><li>Tests should support review, not replace it.</li><li>Risky changes may need broader checks and specialist review.</li></ul></div></div>'
+      ]
+    },
+    {
+      tag: "Git Workflow",
+      section: "Practical Basics",
+      title: "Git workflow must stay controlled",
+      body: [
+        '<p>Claude Code can support Git tasks, but Sandvik should define the allowed workflow.</p>',
+        '<div class="flow"><div class="flow-step"><strong>1. Branch</strong><span>Work on a branch.</span></div><div class="flow-step"><strong>2. Scope</strong><span>Keep changes focused.</span></div><div class="flow-step"><strong>3. Diff</strong><span>Review file changes.</span></div><div class="flow-step"><strong>4. Test</strong><span>Run relevant checks.</span></div><div class="flow-step"><strong>5. Review</strong><span>Open a pull request and require human review.</span></div></div>',
+        '<ul><li>Do not push or deploy without approval.</li><li>Do not work directly on protected branches unless the approved workflow requires it.</li><li>Do not let Claude Code hide or skip diffs.</li><li>Do not merge because Claude says tests pass.</li></ul>'
+      ]
+    },
+    {
+      tag: "Usage And Cost",
+      section: "Practical Basics",
+      title: "Usage and cost awareness",
+      body: [
+        '<p>Claude Code work can involve large repositories, long context, command output, tests, debugging loops, and repeated agentic steps. These can consume more usage than a short chat.</p>',
+        '<p>Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user\'s cost center.</p>',
+        '<ul><li>Keep tasks scoped.</li><li>Start with analysis before long edit loops.</li><li>Use targeted tests before broad test suites when appropriate.</li><li>Stop work that is no longer useful.</li><li>Request a higher monthly usage or spending limit through the intranet form when business needs justify it.</li><li>Remember that higher monthly spending limits require cost-approver approval.</li></ul>',
+        '<div class="callout"><p>The monthly spending limit should be visible in the user\'s Claude account.</p></div>'
+      ]
+    },
+    {
+      tag: "Policy Placeholders",
+      section: "Policy",
+      title: "What still needs Sandvik confirmation",
+      body: [
+        '<p>The following items must be finalized before publishing:</p>',
+        '<ul><li>Which repositories Claude Code may access.</li><li>Branching, commit, and pull request rules.</li><li>Approved command execution boundaries.</li><li>Secret handling and prohibited data.</li><li>Minimum test expectations by project type.</li><li>Security review triggers.</li><li>Rules for release, production access, and deployment.</li><li>Dependency and license review requirements.</li><li>Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.</li></ul>',
+        '<div class="callout warning"><p>Default until approved: Claude Code may assist development, but humans must review code, tests, security impact, and release decisions.</p></div>'
+      ]
+    },
+    {
+      tag: "Examples",
+      section: "Practice",
+      title: "Practical examples",
+      body: [
+        '<h2>Understand a codebase</h2><pre>Inspect this repository and explain the architecture for a new team member.\nFocus on entry points, main modules, data flow, tests, and where configuration lives.\nDo not modify files.</pre>',
+        '<h2>Fix a bug</h2><pre>Investigate this bug report.\nFirst identify likely files and explain the cause.\nThen propose a minimal fix and tests.\nDo not edit until I approve the plan.</pre>',
+        '<h2>Add tests</h2><pre>Add tests for the behavior described below.\nFollow existing test patterns.\nRun the relevant test command and summarize failures.\nDo not change production code unless the tests reveal a confirmed bug.</pre>'
+      ]
+    },
+    {
+      tag: "Examples",
+      section: "Practice",
+      title: "More practical examples",
+      body: [
+        '<h2>Refactor safely</h2><pre>Refactor this module to reduce duplication.\nKeep behavior unchanged.\nMake small commits or logical change groups if approved.\nRun tests before and after.\nExplain any risk areas.</pre>',
+        '<h2>Investigate CI failure</h2><pre>Read the CI failure log and identify the root cause.\nCheck whether the failure is test-only, environment-related, or product code.\nPropose the smallest safe fix.</pre>',
+        '<div class="callout"><p>Good Claude Code prompts make scope, approval points, tests, and definition of done explicit.</p></div>'
+      ]
+    },
+    {
+      tag: "Recap",
+      section: "Wrap Up",
+      title: "Common mistakes and recap",
+      body: [
+        '<div class="grid"><div class="panel"><h3>Common mistakes</h3><ul><li>Letting Claude Code edit before it understands the repository.</li><li>Running commands without knowing their impact.</li><li>Exposing secrets, production data, or restricted logs.</li><li>Accepting generated code without tests or review.</li><li>Changing unrelated files during a small task.</li><li>Treating a green test suite as a complete security review.</li><li>Allowing commits, pushes, or deploys without human approval.</li></ul></div><div class="panel"><h3>Recap</h3><p>Claude Code is strongest when paired with clear engineering guardrails. Give it a scoped goal, make it inspect first, control commands and Git actions, protect secrets, run tests, monitor usage for larger work, and use human review before release.</p></div></div>',
+        '<div class="callout"><p>Next: answer 8 knowledge-check questions. You need 80% to pass.</p></div>'
+      ]
+    }
+  ],
+  quizBank: [
+    { id: "code-q01", prompt: "What should Claude Code usually do before editing files?", options: { A: "Inspect the repository and propose a short plan.", B: "Rewrite the project immediately.", C: "Delete failing tests.", D: "Commit changes before showing a diff." }, answer: "A", correct: "Correct. Inspect first, then plan.", incorrect: "Claude Code should understand the repository before editing." },
+    { id: "code-q02", prompt: "Which information should not be pasted into Claude Code?", options: { A: "A public function name.", B: "A test failure message with no sensitive data.", C: "Passwords, API keys, tokens, private keys, or production secrets.", D: "A non-sensitive feature description." }, answer: "C", correct: "Correct. Secrets and credentials must not be exposed.", incorrect: "Never paste passwords, keys, tokens, or production secrets." },
+    { id: "code-q03", prompt: "Claude Code wants to run an unfamiliar command. What should happen?", options: { A: "Run it without review because commands are always safe.", B: "Review the command purpose and impact before approving.", C: "Ask Claude to hide command output.", D: "Run it only in production first." }, answer: "B", correct: "Correct. Commands need impact review before approval.", incorrect: "Unfamiliar commands may modify files, systems, or data." },
+    { id: "code-q04", prompt: "What is the role of tests when using Claude Code?", options: { A: "Tests help verify behavior, but do not replace human review.", B: "Tests are unnecessary if Claude explains the change.", C: "Only failing tests should be deleted.", D: "Tests should be skipped for small changes." }, answer: "A", correct: "Correct. Tests support verification but do not replace review.", incorrect: "Use tests and human review together." },
+    { id: "code-q05", prompt: "What is the safest default Git behavior?", options: { A: "Commit and push every change automatically.", B: "Review diffs and require approval before commit, push, pull request, or deployment.", C: "Work directly on the main branch.", D: "Merge if Claude says tests pass." }, answer: "B", correct: "Correct. Git actions should remain controlled.", incorrect: "Review diffs and get approval before Git or deployment actions." },
+    { id: "code-q06", prompt: "How should production data be treated?", options: { A: "Use it freely to help Claude debug.", B: "Avoid exposing it; use approved anonymized or development data where possible.", C: "Paste it only if the issue is urgent.", D: "Put it in comments and delete later." }, answer: "B", correct: "Correct. Use approved anonymized or development data.", incorrect: "Production data must be protected." },
+    { id: "code-q07", prompt: "A test suite passes after Claude Code changes security-sensitive code. What is still needed?", options: { A: "No further review.", B: "Human code review and any required security review.", C: "Immediate deployment.", D: "Removal of security notes." }, answer: "B", correct: "Correct. Security-sensitive code still needs human review.", incorrect: "Passing tests are not a full security review." },
+    { id: "code-q08", prompt: "What should you do if Claude Code changes unrelated files during a small task?", options: { A: "Review the diff, challenge the scope, and remove or reject unrelated changes.", B: "Accept all changes to save time.", C: "Ask Claude to change more files for consistency.", D: "Commit without review." }, answer: "A", correct: "Correct. Keep scope tight and review diffs.", incorrect: "Unrelated changes create risk and should be challenged." },
+    { id: "code-q09", prompt: "What is a good first step for a CI failure?", options: { A: "Ask Claude Code to identify the root cause from logs and relevant files.", B: "Disable the CI job.", C: "Delete tests that failed.", D: "Merge anyway." }, answer: "A", correct: "Correct. Start with root-cause analysis.", incorrect: "Do not disable or delete tests before understanding the failure." },
+    { id: "code-q10", prompt: "When is Claude Chat more appropriate than Claude Code?", options: { A: "When the task is discussion, drafting, or analysis without repository changes.", B: "When tests must be run.", C: "When code must be committed.", D: "When a branch needs a pull request." }, answer: "A", correct: "Correct. Chat is appropriate when no repository work is needed.", incorrect: "Claude Code is for repository and development workflows." },
+    { id: "code-q11", prompt: "Claude Code suggests adding a new open-source dependency. What should happen?", options: { A: "Add it immediately because it saves time.", B: "Follow Sandvik dependency, security, and license review rules.", C: "Hide it in the lockfile.", D: "Use any license if the package is popular." }, answer: "B", correct: "Correct. Dependencies require policy, security, and license review.", incorrect: "New dependencies can create security and license risk." },
+    { id: "code-q12", prompt: "Who remains accountable for code quality and release decisions?", options: { A: "Claude Code alone.", B: "The human users and Sandvik's approved engineering process.", C: "The package manager.", D: "The test runner only." }, answer: "B", correct: "Correct. Humans and approved processes remain accountable.", incorrect: "Claude Code assists but does not own release accountability." }
+  ]
+};
+
+var storageKey = "lms_progress_" + COURSE.id;
+var contentCount = COURSE.pages.length;
+var resultsOffset = contentCount + COURSE.questionsToServe;
+var state = {
+  page: 0,
+  maxVisited: 0,
+  selectedQuestionIds: null,
+  quizAnswers: {},
+  completed: false
+};
+var savedAndFinished = false;
+
+var pageRoot = document.getElementById("pageRoot");
+var prevBtn = document.getElementById("prevBtn");
+var nextBtn = document.getElementById("nextBtn");
+var saveBtnTop = document.getElementById("saveBtnTop");
+var pageLabel = document.getElementById("pageLabel");
+var sectionLabel = document.getElementById("sectionLabel");
+var navHint = document.getElementById("navHint");
+var progressDots = document.getElementById("progressDots");
+var moduleStatus = document.getElementById("moduleStatus");
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function shuffle(items) {
+  var copy = items.slice();
+  for (var i = copy.length - 1; i > 0; i -= 1) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+  return copy;
+}
+
+function selectQuestions() {
+  return shuffle(COURSE.quizBank.map(function(question) { return question.id; })).slice(0, COURSE.questionsToServe);
+}
+
+function getQuestionById(id) {
+  for (var i = 0; i < COURSE.quizBank.length; i += 1) {
+    if (COURSE.quizBank[i].id === id) return COURSE.quizBank[i];
+  }
+  return null;
+}
+
+function loadLocal() {
+  try {
+    var raw = localStorage.getItem(storageKey);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveLocal() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch (error) {}
+}
+
+function restoreState(saved) {
+  if (!saved) return;
+  if (typeof saved.page === "number") state.page = saved.page;
+  if (typeof saved.maxVisited === "number") state.maxVisited = saved.maxVisited;
+  if (Array.isArray(saved.selectedQuestionIds)) state.selectedQuestionIds = saved.selectedQuestionIds;
+  if (saved.quizAnswers && typeof saved.quizAnswers === "object") state.quizAnswers = saved.quizAnswers;
+  if (typeof saved.completed === "boolean") state.completed = saved.completed;
+}
+
+function persist() {
+  SCORM.setPage(state.page);
+  SCORM.saveSuspendData(state);
+  saveLocal();
+}
+
+function ensureQuestions() {
+  if (!Array.isArray(state.selectedQuestionIds) || state.selectedQuestionIds.length !== COURSE.questionsToServe) {
+    state.selectedQuestionIds = selectQuestions();
+    state.quizAnswers = {};
+  }
+}
+
+function getTotalPages() {
+  return contentCount + COURSE.questionsToServe + 1;
+}
+
+function getCurrentQuestionIndex() {
+  return state.page - contentCount;
+}
+
+function isQuizPage() {
+  return state.page >= contentCount && state.page < resultsOffset;
+}
+
+function isResultsPage() {
+  return state.page === resultsOffset;
+}
+
+function allQuizAnswered() {
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    if (!state.quizAnswers[state.selectedQuestionIds[i]]) return false;
+  }
+  return true;
+}
+
+function answeredCurrentQuestion() {
+  if (!isQuizPage()) return true;
+  var questionId = state.selectedQuestionIds[getCurrentQuestionIndex()];
+  return Boolean(state.quizAnswers[questionId]);
+}
+
+function escapeText(text) {
+  var span = document.createElement("span");
+  span.textContent = text;
+  return span.innerHTML;
+}
+
+function renderContentPage(page) {
+  var html = '<span class="page-tag">' + escapeText(page.tag) + '</span>';
+  html += '<h1>' + escapeText(page.title) + '</h1>';
+  html += page.body.join("");
+  pageRoot.innerHTML = html;
+}
+
+function renderQuizPage(questionIndex) {
+  var questionId = state.selectedQuestionIds[questionIndex];
+  var question = getQuestionById(questionId);
+  var saved = state.quizAnswers[questionId];
+  var optionKeys = ["A", "B", "C", "D"];
+  var html = '<span class="page-tag">Knowledge Check ' + (questionIndex + 1) + ' of ' + COURSE.questionsToServe + '</span>';
+  html += '<h1>' + escapeText(question.prompt) + '</h1>';
+  html += '<p class="lede">Choose the best answer. Feedback appears immediately after your selection.</p>';
+  html += '<div class="quiz-options" role="group" aria-label="Answer options">';
+  optionKeys.forEach(function(key) {
+    var classes = "quiz-option";
+    if (saved) {
+      if (key === question.answer) classes += " correct";
+      else if (key === saved.selected) classes += " wrong";
+    }
+    html += '<button class="' + classes + '" type="button" data-option="' + key + '"' + (saved ? " disabled" : "") + '><strong>' + key + '.</strong> ' + escapeText(question.options[key]) + '</button>';
+  });
+  html += '</div>';
+  html += '<div class="feedback' + (saved ? " show " + (saved.correct ? "correct" : "wrong") : "") + '" id="feedbackBox">' + (saved ? escapeText(saved.correct ? question.correct : question.incorrect) : "") + '</div>';
+  pageRoot.innerHTML = html;
+
+  var buttons = pageRoot.querySelectorAll(".quiz-option");
+  for (var i = 0; i < buttons.length; i += 1) {
+    buttons[i].addEventListener("click", function(event) {
+      answerQuestion(question, event.currentTarget.getAttribute("data-option"));
+    });
+  }
+}
+
+function calculateScore() {
+  var correctCount = 0;
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    var answer = state.quizAnswers[state.selectedQuestionIds[i]];
+    if (answer && answer.correct) correctCount += 1;
+  }
+  return Math.round((correctCount / COURSE.questionsToServe) * 100);
+}
+
+function renderResultsPage() {
+  var score = calculateScore();
+  var passed = score >= COURSE.passingScore;
+  state.completed = passed;
+  var html = '<span class="page-tag">Results</span>';
+  html += '<h1>Your results</h1>';
+  html += '<div class="score">' + score + '%</div>';
+  html += '<p class="lede">' + (passed ? "Passed. You have met the 80% requirement for this module." : "Not yet passed. Review the module and retake the quiz when ready.") + '</p>';
+  html += '<div class="score-bar" aria-label="Quiz result by question">';
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    var answer = state.quizAnswers[state.selectedQuestionIds[i]];
+    html += '<span class="score-segment ' + (answer && answer.correct ? "ok" : "fail") + '"></span>';
+  }
+  html += '</div>';
+  html += '<div class="grid"><div class="panel"><h3>What to remember</h3><ul><li>Claude Code is for repository and development workflows.</li><li>Ask it to inspect and plan before editing.</li><li>Protect secrets, production data, and restricted repositories.</li><li>Review diffs, commands, tests, dependencies, and release impact.</li><li>Humans remain accountable for code quality and release decisions.</li></ul></div><div class="panel"><h3>Next action</h3><p>If this course is running in an LMS, your score is sent when you view this page.</p><button class="btn" type="button" id="retryBtn">Retake quiz</button></div></div>';
+  pageRoot.innerHTML = html;
+  document.getElementById("retryBtn").addEventListener("click", retakeQuiz);
+  SCORM.complete(score, passed);
+  persist();
+}
+
+function renderProgress() {
+  var totalPages = getTotalPages();
+  var html = "";
+  for (var i = 0; i < totalPages; i += 1) {
+    var label = "Page " + (i + 1);
+    var classes = "progress-dot";
+    if (i === state.page) classes += " active";
+    else if (i <= state.maxVisited) classes += " visited";
+    html += '<button class="' + classes + '" type="button" data-page="' + i + '" aria-label="' + label + '"' + (i <= state.maxVisited ? "" : " disabled") + '><span class="sr-only">' + label + '</span></button>';
+  }
+  progressDots.innerHTML = html;
+  var dots = progressDots.querySelectorAll(".progress-dot");
+  for (var d = 0; d < dots.length; d += 1) {
+    dots[d].addEventListener("click", function(event) {
+      var page = parseInt(event.currentTarget.getAttribute("data-page"), 10);
+      if (page <= state.maxVisited) goToPage(page);
+    });
+  }
+}
+
+function render() {
+  ensureQuestions();
+  var totalPages = getTotalPages();
+  if (state.page < 0) state.page = 0;
+  if (state.page >= totalPages) state.page = totalPages - 1;
+  state.maxVisited = Math.max(state.maxVisited, state.page);
+
+  if (state.page < contentCount) {
+    renderContentPage(COURSE.pages[state.page]);
+    sectionLabel.textContent = COURSE.pages[state.page].section;
+  } else if (isQuizPage()) {
+    renderQuizPage(getCurrentQuestionIndex());
+    sectionLabel.textContent = "Knowledge Check";
+  } else {
+    renderResultsPage();
+    sectionLabel.textContent = "Results";
+  }
+
+  pageLabel.textContent = "Page " + (state.page + 1) + " / " + totalPages;
+  navHint.textContent = isQuizPage() && !answeredCurrentQuestion() ? "Answer this question to continue." : "";
+  prevBtn.disabled = state.page === 0;
+  nextBtn.style.display = isResultsPage() ? "none" : "";
+  nextBtn.textContent = state.page === totalPages - 2 ? "See results" : "Next";
+  nextBtn.disabled = isQuizPage() && !answeredCurrentQuestion();
+  moduleStatus.textContent = state.completed ? "Passed" : "Not completed";
+  renderProgress();
+  persist();
+}
+
+function goToPage(page) {
+  state.page = page;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function navigate(direction) {
+  var nextPage = state.page + direction;
+  if (nextPage < 0 || nextPage >= getTotalPages()) return;
+  if (direction > 0 && isQuizPage() && !answeredCurrentQuestion()) return;
+  if (nextPage === resultsOffset && !allQuizAnswered()) return;
+  goToPage(nextPage);
+}
+
+function answerQuestion(question, selected) {
+  if (state.quizAnswers[question.id]) return;
+  var correct = selected === question.answer;
+  state.quizAnswers[question.id] = { selected: selected, correct: correct };
+  renderQuizPage(getCurrentQuestionIndex());
+  nextBtn.disabled = false;
+  navHint.textContent = "";
+  persist();
+}
+
+function saveLater() {
+  persist();
+  SCORM.finish();
+  savedAndFinished = true;
+  pageRoot.innerHTML = '<span class="page-tag">Saved</span><h1>Your progress has been saved</h1><p class="lede">Next time you open this course in the same LMS or browser, you should continue from page ' + (state.page + 1) + '.</p>';
+  prevBtn.style.display = "none";
+  nextBtn.style.display = "none";
+  navHint.textContent = "You can close this window.";
+}
+
+function retakeQuiz() {
+  state.selectedQuestionIds = selectQuestions();
+  state.quizAnswers = {};
+  state.completed = false;
+  state.page = contentCount;
+  state.maxVisited = contentCount;
+  render();
+}
+
+prevBtn.addEventListener("click", function() { navigate(-1); });
+nextBtn.addEventListener("click", function() { navigate(1); });
+saveBtnTop.addEventListener("click", saveLater);
+
+window.addEventListener("beforeunload", function() {
+  if (!savedAndFinished) SCORM.finish();
+});
+
+var scormBookmark = SCORM.init();
+var suspended = SCORM.getSuspendData();
+restoreState(suspended || loadLocal());
+if (!suspended && scormBookmark && !state.page) state.page = scormBookmark;
+ensureQuestions();
+render();
+</script>
+</body>
+</html>

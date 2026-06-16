@@ -12,6 +12,8 @@ Claude Design is for creating visual work with Claude, such as design directions
 
 This module is for users who need Claude to help explore, draft, or refine visual outputs while following Sandvik brand, legal, accessibility, and review expectations.
 
+At Sandvik, Claude Design is one of the selectable tools under the Claude Enterprise license. The intranet launch context describes it as a visual design agent for creating and refining designs, layouts, and graphics through chat.
+
 ## Learning Objectives
 
 After this module, users should be able to:
@@ -22,6 +24,7 @@ After this module, users should be able to:
 - Review outputs for brand, accessibility, accuracy, and IP risk.
 - Understand export and sharing considerations.
 - Know when to hand off to Claude Chat, Cowork, or Code.
+- Understand that repeated visual exploration can increase pay-as-you-go usage.
 
 ## When To Use Claude Design
 
@@ -105,6 +108,12 @@ Good handoff includes:
 - Source data
 - Implementation notes for Claude Code or a development team
 
+### 6. Usage And Cost Awareness
+
+Visual exploration can involve many iterations, generated variants, large files, and repeated refinement. Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user's cost center.
+
+If business work needs a higher monthly usage or spending limit, use the intranet form and get approval from the cost approver. The monthly spending limit should be visible in the user's Claude account.
+
 ## Sandvik Policy Placeholders
 
 The following must be finalized before publishing:
@@ -115,6 +124,7 @@ The following must be finalized before publishing:
 - `[ACCESSIBILITY PLACEHOLDER]` Accessibility standard and review process.
 - `[SCREENSHOT PLACEHOLDER]` Rules for screenshots of internal systems or data.
 - `[EXPORT PLACEHOLDER]` Approved export formats and storage locations.
+- `[COST PLACEHOLDER]` Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.
 
 Default until approved: treat generated designs as internal drafts and do not publish externally without Brand and Legal review.
 
@@ -165,7 +175,7 @@ Do not include real employee or customer data.
 
 ## Recap
 
-Claude Design is best for visual drafts, concepts, prototypes, slides, and one-pagers. Give it a real brief, use approved assets, mark placeholders clearly, review for brand and legal risks, and hand off carefully when work needs production implementation.
+Claude Design is best for visual drafts, concepts, prototypes, slides, and one-pagers. Give it a real brief, use approved assets, mark placeholders clearly, monitor usage during repeated iteration, review for brand and legal risks, and hand off carefully when work needs production implementation.
 
 ## Quiz Handoff
 

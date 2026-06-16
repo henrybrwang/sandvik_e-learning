@@ -6,7 +6,7 @@ Learn how to use Claude Design for visual drafts, prototypes, slides, one-pagers
 
 ## Long Description
 
-This module prepares Sandvik users to use Claude Design responsibly. It covers visual briefs, approved assets, brand placeholders, accessibility, IP and sharing risks, export considerations, and handoff to Chat, Cowork, or Code when needed.
+This module prepares Sandvik users to use Claude Design responsibly. It covers visual briefs, approved assets, brand placeholders, accessibility, IP and sharing risks, usage awareness, export considerations, and handoff to Chat, Cowork, or Code when needed.
 
 ## Completion Rule
 

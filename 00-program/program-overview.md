@@ -18,13 +18,36 @@ For Claude Chat specifically, the learning spine should be: when to use Chat, wh
 4. The user passes the scored quiz.
 5. The portal records completion and continues the provisioning workflow.
 
+## Sandvik Launch And Ordering Context
+
+Sandvik announced Claude Enterprise on the intranet on 2026-06-16. The planned launch date is 2026-06-30, with a pre-order form available before launch. Submitting an order before launch reserves a license but does not grant earlier access, and the launch date may still change.
+
+Claude Enterprise is described as a Sandvik-approved AI assistant for writing, research, analysis, and coding. It complements GitHub Copilot and Microsoft 365 Copilot rather than replacing all existing AI tools at launch.
+
+The intranet post lists four selectable Claude tools under one license:
+
+- Claude Chat: web, desktop, and mobile assistant for questions, document analysis, drafting, and research.
+- Claude Code: terminal-based coding assistant for writing and debugging code.
+- Claude Cowork: desktop agent for working with files such as spreadsheets and documents, currently described as an early preview.
+- Claude Design: visual design agent for creating and refining designs, layouts, and graphics through chat.
+
+The post also notes a future direction of one AI assistant license per user per use case. Examples given are Microsoft 365 Copilot versus Claude Chat for office use, and GitHub Copilot versus Claude Code for development. This is not enforced yet, but training should remind users to choose the tool they need rather than ordering overlapping licenses by default.
+
+## Pricing And Usage Context
+
+Claude Enterprise is consumption-based at Sandvik. The intranet post states a base fee of 350 SEK per user/month, with additional usage costs charged on top depending on service use. The full cost is charged to the user's cost center with no markup.
+
+Users have the normal plan usage limits, including five-hour session limits and weekly limits. Further usage is pay as you go. Users who need a higher usage or spending limit must use the intranet form and receive approval from their cost approver. The spending limit is monthly and should be visible to users in their Claude account.
+
+Training should continue to avoid private-account workarounds. If a user reaches a limit, the safe choices are to wait for the reset, reduce unnecessary context or tool use, or request a higher monthly spending limit through the approved intranet flow.
+
 ## Program Principles
 
 - Keep modules practical, role-specific, and tied to the product being ordered.
 - Avoid duplicating general AI Fluency foundation courses unless a concept is needed to explain the Claude product.
 - Make Sandvik policy visible but clearly separated from product facts.
 - Use official Claude and Anthropic sources for product capabilities.
-- Avoid promising availability, cost, or admin behavior without Sandvik confirmation.
+- Avoid promising availability, cost, or admin behavior beyond confirmed Sandvik communication.
 - Prefer short examples that users can adapt immediately.
 - Make quiz questions test decisions users will actually face.
 

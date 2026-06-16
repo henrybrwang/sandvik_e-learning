@@ -1,11 +1,14 @@
 # Source Register
 
-Checked on: 2026-06-14
+Official Claude/Anthropic sources checked on: 2026-06-16
+
+Sandvik internal source context added on: 2026-06-16
 
 Use official Claude and Anthropic sources as the baseline for product facts. Recheck sources quarterly and before release.
 
 | ID | Source | Official URL | Used For | Notes |
 | --- | --- | --- | --- | --- |
+| SANDVIK-001 | Sandvik intranet post: "Introducing Claude Enterprise" | Internal Sandvik intranet, published 2026-06-16 | Sandvik launch timing, ordering, product list, license and usage-cost model, cost-center charging, and monthly cap approval context | Internal source. Planned launch is 2026-06-30; licenses are not issued before launch and launch may be delayed. Add the final intranet link when available. |
 | AGENT-001 | Anthropic Building effective agents article | https://www.anthropic.com/engineering/building-effective-agents | Agentic AI framing, workflows versus agents, tool-use explanation | Use only for plain-language concepts in end-user modules; avoid developer implementation detail. |
 | ENT-001 | Claude Enterprise plan help article | https://support.claude.com/en/articles/9797531-what-is-the-claude-enterprise-plan | Enterprise security, admin, usage, connectors, and billing context | Recheck before publishing because enterprise packaging and usage terms can change. |
 | CHAT-001 | Claude artifacts help article | https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them | Chat and Design artifact concepts, export, sharing, storage, and MCP considerations | Product capabilities may vary by plan and admin settings. |
@@ -22,11 +25,16 @@ Use official Claude and Anthropic sources as the baseline for product facts. Rec
 | COWORK-002 | Choosing between Claude Cowork or Chat | https://claude.com/resources/tutorials/choosing-between-claude-cowork-or-chat | Decision guidance for Chat vs Cowork | Useful for ordering portal descriptions and quiz scenarios. |
 | COWORK-003 | Claude Cowork product page | https://claude.com/product/cowork | Enterprise deployment, observability, and product positioning | Recheck before procurement or admin claims. |
 | CODE-001 | Claude Code product page | https://www.anthropic.com/product/claude-code | Code capability overview, safety posture, and use cases | Pair with Sandvik engineering policy before publishing. |
+| CODE-002 | Claude Code overview documentation | https://code.claude.com/docs/en/overview | Claude Code surfaces, CLI start pattern, desktop app, web, VS Code, Cursor, and JetBrains positioning | Product surfaces and install paths can change; use Sandvik-approved installation routes in training. |
+| CODE-003 | Claude Code common workflows documentation | https://code.claude.com/docs/en/common-workflows | Plan-before-editing guidance, repository exploration, tests, CI, pull request workflows, and subagent/review workflow context | Used for practical workflow framing; pair with Sandvik engineering process. |
+| CODE-004 | Claude Code memory and instruction-file documentation | https://code.claude.com/docs/en/memory | `CLAUDE.md`, `AGENTS.md` import pattern, instruction-file scope, specificity, and troubleshooting | Instruction files guide behavior but are not hard enforcement; Sandvik must confirm ownership and required contents. |
+| CODE-005 | Claude Code IDE integrations documentation | https://code.claude.com/docs/en/ide-integrations | VS Code extension, Cursor and VS Code-fork support, plan review in IDE, and IDE/CLI distinction | Recheck before publishing because IDE support and extension behavior can change. |
 | DESIGN-001 | Claude Design announcement | https://www.anthropic.com/news/claude-design-anthropic-labs | Design capability overview, supported work types, and preview status | Recheck availability and plan eligibility before publishing. |
 
 ## Source Rules
 
 - Quote sparingly in module content; prefer paraphrase and link to the source register.
 - Do not copy product marketing language into policy sections.
+- Use Sandvik internal sources for Sandvik-specific ordering, launch, pricing, approval, cost-center, and entitlement guidance.
 - If a source changes materially, update affected modules and quiz questions.
 - If a Sandvik rule conflicts with a product capability, the Sandvik rule takes precedence in training.
