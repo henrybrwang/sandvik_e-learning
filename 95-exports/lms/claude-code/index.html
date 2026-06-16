@@ -551,152 +551,432 @@
 
 <script>
 var COURSE = {
-  id: "claude-code",
-  title: "Claude Code",
-  passingScore: 80,
-  questionsToServe: 8,
-  pages: [
+  "id": "claude-code",
+  "title": "Claude Code",
+  "passingScore": 80,
+  "questionsToServe": 8,
+  "pages": [
     {
-      tag: "Overview",
-      section: "Start",
-      title: "Claude Code: safe repository work",
-      body: [
-        '<p class="lede">This module introduces Claude Code as an agentic coding system for inspecting repositories, proposing plans, editing files, running commands, executing tests, and supporting development workflows.</p>',
-        '<div class="callout"><p><strong>Your responsibility stays the same.</strong> Claude can help accelerate work, but users remain responsible for what they enter, approve, share, and publish.</p></div>',
-        '<div class="grid three"><div class="panel"><h3>Duration</h3><p>25-35 minutes.</p></div><div class="panel"><h3>Completion</h3><p>Scored quiz with an 80% passing score.</p></div><div class="panel"><h3>Audience</h3><p>Sandvik developers and technical builders ordering Claude Code.</p></div></div>'
+      "tag": "Start",
+      "section": "Start",
+      "title": "Claude Code",
+      "body": [
+        "<p>Estimated duration: 35-45 minutes Completion: scored quiz Audience: Sandvik developers and technical builders ordering Claude Code</p>",
+        "<div class=\"callout\"><p>Claude can help accelerate work, but users remain responsible for what they enter, approve, share, and publish. Follow Sandvik policy, protect sensitive information, and review outputs before relying on them.</p></div>"
       ]
     },
     {
-      tag: "Learning Objectives",
-      section: "Start",
-      title: "What you should be able to do",
-      body: [
-        '<ul><li>Decide when Claude Code is the right product.</li><li>Start with safe repository access and a clear goal.</li><li>Ask Claude Code to inspect before editing.</li><li>Control file changes, command execution, commits, and pushes.</li><li>Protect secrets, credentials, production data, and restricted repositories.</li><li>Use tests, code review, and CI as verification.</li><li>Apply Sandvik engineering guardrails before release.</li><li>Understand that longer or more complex Claude Code work can increase pay-as-you-go usage.</li></ul>'
+      "tag": "Overview And Audience",
+      "section": "Overview And Audience",
+      "title": "Overview And Audience",
+      "body": [
+        "<p>Claude Code is an agentic coding system for working with software projects. It can inspect codebases, propose plans, edit files, run commands, execute tests, investigate failures, and support development workflows.</p>",
+        "<p>This module is for developers, technical builders, and approved users who need Claude to work inside or alongside code repositories.</p>",
+        "<p>At Sandvik, Claude Code is one of the selectable tools under the Claude Enterprise license. It complements GitHub Copilot for development use cases and is intended for agentic coding workflows, advanced debugging, scripting, and complex technical work where repository and terminal access are useful.</p>",
+        "<p>The central skill is not &quot;let Claude write code.&quot; The central skill is deciding what kind of engineering work this is, giving Claude enough specification and repository context, and using it inside the same quality, security, and release process you would apply to human-written code.</p>"
       ]
     },
     {
-      tag: "Product Fit",
-      section: "Concepts",
-      title: "When to use Claude Code",
-      body: [
-        '<p>At Sandvik, Claude Code is one of the selectable tools under the Claude Enterprise license. It complements GitHub Copilot for development use cases and is intended for agentic coding workflows, advanced debugging, scripting, and complex technical work where terminal-based repository access is useful.</p>',
-        '<div class="grid"><div class="panel"><h3>Use Claude Code when</h3><ul><li>You need help understanding an unfamiliar codebase.</li><li>You need to implement a change across files.</li><li>You want tests, linting, or build output interpreted and fixed.</li><li>You need help with refactoring, migration, documentation, or CI failure analysis.</li><li>The work belongs in a repository and should follow engineering workflow.</li></ul></div><div class="panel"><h3>Use another Claude product when</h3><ul><li>Chat: discussion, writing, or analysis without code edits.</li><li>Cowork: office-document or desktop workflow delegation.</li><li>Design: visual concepts, prototypes, slides, or design exploration.</li></ul></div></div>'
+      "tag": "Learning Objectives",
+      "section": "Learning Objectives",
+      "title": "Learning Objectives",
+      "body": [
+        "<p>After this module, users should be able to:</p>",
+        "<ul><li>Decide when Claude Code is the right product.</li><li>Choose the right level of process for throwaway, experimental, shared, or production-bound work.</li><li>Start with safe repository access and a clear goal.</li><li>Use plan mode or equivalent review steps to create a specification before implementation.</li><li>Use project instruction files such as <code>CLAUDE.md</code> and <code>AGENTS.md</code> effectively.</li><li>Control file changes, command execution, commits, pushes, pull requests, and releases.</li><li>Protect secrets, credentials, production data, and restricted repositories.</li><li>Use tests, code review, CI, and independent review loops as verification.</li><li>Recognize the limits of AI-written tests and AI self-review.</li><li>Apply Sandvik engineering guardrails before release.</li><li>Understand that longer or more complex Claude Code work can increase pay-as-you-go usage.</li></ul>"
       ]
     },
     {
-      tag: "Repository Context",
-      section: "Concepts",
-      title: "Repository context comes first",
-      body: [
-        '<p class="lede">Claude Code should inspect the project before changing it.</p>',
-        '<p>Good instructions ask it to understand architecture, existing patterns, tests, and constraints before it edits files or runs risky commands.</p>',
-        '<pre>Inspect the repository and explain the relevant files before making changes.\nThen propose a short implementation plan.\nDo not edit files until I approve the plan.</pre>',
-        '<div class="callout"><p>Inspect-first work reduces unnecessary changes and gives the human reviewer a chance to confirm scope before files are modified.</p></div>'
+      "tag": "How To Start Claude Code",
+      "section": "How To Start Claude Code",
+      "title": "How To Start Claude Code",
+      "body": [
+        "<p>Claude Code can be used in several surfaces, depending on Sandvik enablement and local setup:</p>",
+        "<ul><li>Desktop app: open the Claude desktop app and use the Code tab where enabled.</li><li>Terminal or CLI: install Claude Code through the Sandvik-approved route, open a terminal in the repository folder, and run <code>claude</code>.</li><li>VS Code or Cursor: install the approved Claude Code extension, then use plan review and diff review before accepting changes.</li><li>JetBrains IDEs: use the approved Claude Code plugin where enabled.</li><li>Browser or web: use only if enabled by Sandvik for your work; do not treat it as the default path for repository work.</li></ul>",
+        "<p>Use your Sandvik-approved Claude Enterprise account. Do not move Sandvik work into private accounts, personal API keys, or unapproved tools to avoid limits or access controls.</p>"
       ]
     },
     {
-      tag: "Human Approval",
-      section: "Concepts",
-      title: "Human approval remains essential",
-      body: [
-        '<p>Claude Code may suggest or make changes quickly, but humans remain accountable for quality, security, and release decisions.</p>',
-        '<div class="panel"><h3>Require review before</h3><ul><li>Running unfamiliar commands.</li><li>Installing dependencies.</li><li>Editing security-sensitive code.</li><li>Changing authentication, authorization, logging, data retention, or encryption.</li><li>Creating commits, pushing branches, opening pull requests, or deploying.</li></ul></div>',
-        '<div class="callout"><p>Fast changes still need deliberate review. Use Claude Code as an assistant inside the engineering process, not as the owner of the release decision.</p></div>'
+      "tag": "When To Use Claude Code",
+      "section": "When To Use Claude Code",
+      "title": "When To Use Claude Code",
+      "body": [
+        "<p>Use Claude Code when:</p>",
+        "<ul><li>You need help understanding an unfamiliar codebase.</li><li>You need to implement a change across files.</li><li>You want tests, linting, or build output interpreted and fixed.</li><li>You need help with refactoring, migration, documentation, or CI failure analysis.</li><li>The work belongs in a repository and should follow engineering workflow.</li></ul>",
+        "<p>Use another Claude product when:</p>",
+        "<ul><li>The task is discussion, writing, or analysis without code edits: use Claude Chat.</li><li>The task is office-document or desktop workflow delegation: use Claude Cowork.</li><li>The main task is visual concept, prototype, slide, or design exploration: use Claude Design.</li></ul>"
       ]
     },
     {
-      tag: "Secrets",
-      section: "Concepts",
-      title: "Secrets and production data are out of scope",
-      body: [
-        '<p>Do not paste or expose sensitive values to Claude Code. If a task requires sensitive values, use approved secret-management and development workflows instead.</p>',
-        '<div class="grid"><div class="panel"><h3>Do not expose</h3><ul><li>Passwords.</li><li>API keys.</li><li>Tokens.</li><li>Private keys.</li><li>Certificates.</li><li>Connection strings.</li><li>Production customer data.</li><li>Restricted logs or dumps.</li></ul></div><div class="panel"><h3>Safer patterns</h3><ul><li>Use anonymized or development data.</li><li>Redact logs before sharing.</li><li>Reference environment-variable names without values.</li><li>Use approved secret managers and local tooling.</li></ul></div></div>',
-        '<div class="callout warning"><p>Default until approved: never paste credentials, production secrets, or restricted production data into Claude Code.</p></div>'
+      "tag": "Core Concepts",
+      "section": "Core Concepts",
+      "title": "1. Know Your Intent Before You Start",
+      "body": [
+        "<p>Before asking Claude Code to build or change something, decide what kind of work this is.</p>",
+        "<table class=\"comparison\"><thead><tr><th>If the work is...</th><th>You may move faster when...</th><th>You must slow down when...</th></tr></thead><tbody><tr><td>A throwaway script, personal helper, learning exercise, or local prototype</td><td>It uses no secrets, production data, customer data, employee data, or restricted information; it will not be used by others without review; and it is clearly experimental</td><td>It starts becoming useful enough that other people may rely on it</td></tr><tr><td>Shared Sandvik software, automation, integration, or production-bound work</td><td>Claude can still help with planning, implementation, tests, and review</td><td>Other Sandvik users will rely on it; it will be maintained, reused, deployed, scheduled, or integrated; it affects production, customers, employees, suppliers, finance, safety, legal, security, identity, access, logging, retention, or compliance; or it introduces dependencies, data flows, permissions, APIs, infrastructure, or operational support needs</td></tr></tbody></table>",
+        "<p>Useful questions:</p>",
+        "<ul><li>Who will use this, and what happens if it is wrong?</li><li>Is this temporary, or will someone maintain it?</li><li>Which repository, owner, backlog item, or approval path applies?</li><li>What data can it access?</li><li>What test, review, documentation, and support expectations apply?</li></ul>",
+        "<p>If the answer is &quot;this may be used by others,&quot; treat it as software, not as a chat output.</p>"
       ]
     },
     {
-      tag: "Tests",
-      section: "Concepts",
-      title: "Tests are part of the work",
-      body: [
-        '<p>Claude Code should help run the appropriate checks, but passing tests does not replace human review.</p>',
-        '<div class="grid"><div class="panel"><h3>Good verification asks Claude Code to</h3><ul><li>Run targeted tests first.</li><li>Run broader tests when the change is risky.</li><li>Explain failures.</li><li>Avoid changing unrelated tests just to make the suite pass.</li><li>Summarize what was verified and what was not.</li></ul></div><div class="panel"><h3>Remember</h3><ul><li>A green suite can miss security, usability, and architecture problems.</li><li>Tests should support review, not replace it.</li><li>Risky changes may need broader checks and specialist review.</li></ul></div></div>'
+      "tag": "Core Concepts",
+      "section": "Core Concepts",
+      "title": "2. Specification Comes Before Implementation",
+      "body": [
+        "<p>Claude Code is most useful when it can execute against a clear specification. If you do not make the important decisions, Claude may fill the gaps with plausible assumptions.</p>",
+        "<p>For non-trivial work, use plan mode or ask Claude to produce a specification before editing. In the CLI, plan mode can be started with <code>claude --permission-mode plan</code> or toggled during a session where supported. In IDE integrations, use the plan review flow where available.</p>",
+        "<p>Good specification prompts ask for:</p>",
+        "<ul><li>Goal and user need.</li><li>Non-goals.</li><li>Inputs and constraints.</li><li>Assumptions.</li><li>Decisions needed from the human owner.</li><li>Acceptance criteria.</li><li>Files or components likely affected.</li><li>Test and verification plan.</li><li>Security, privacy, dependency, or operational risks.</li><li>Open questions.</li></ul>",
+        "<p>Example:</p>",
+        "<pre>Use plan mode for this task.\nFirst inspect the repository and write a short specification.\nInclude goal, non-goals, users, assumptions, decisions I need to make,\nacceptance criteria, affected files, test plan, risks, and open questions.\nDo not edit files until I approve the specification.</pre>",
+        "<p>Review the plan like you would review a design note. Correct the goal, remove assumptions, add missing constraints, and decide open questions before implementation starts.</p>"
       ]
     },
     {
-      tag: "Git Workflow",
-      section: "Practical Basics",
-      title: "Git workflow must stay controlled",
-      body: [
-        '<p>Claude Code can support Git tasks, but Sandvik should define the allowed workflow.</p>',
-        '<div class="flow"><div class="flow-step"><strong>1. Branch</strong><span>Work on a branch.</span></div><div class="flow-step"><strong>2. Scope</strong><span>Keep changes focused.</span></div><div class="flow-step"><strong>3. Diff</strong><span>Review file changes.</span></div><div class="flow-step"><strong>4. Test</strong><span>Run relevant checks.</span></div><div class="flow-step"><strong>5. Review</strong><span>Open a pull request and require human review.</span></div></div>',
-        '<ul><li>Do not push or deploy without approval.</li><li>Do not work directly on protected branches unless the approved workflow requires it.</li><li>Do not let Claude Code hide or skip diffs.</li><li>Do not merge because Claude says tests pass.</li></ul>'
+      "tag": "Core Concepts",
+      "section": "Core Concepts",
+      "title": "3. Repository Context And Instruction Files Matter",
+      "body": [
+        "<p>Claude Code should inspect the project before changing it. Good instructions ask it to understand architecture, existing patterns, tests, and constraints.</p>",
+        "<p>Example:</p>",
+        "<pre>Inspect the repository and explain the relevant files before making changes.\nThen propose a short implementation plan.\nDo not edit files until I approve the plan.</pre>",
+        "<p>Project instruction files reduce repeated prompting. Use them for stable information that Claude should know at the start of work:</p>",
+        "<ul><li>Build, test, lint, and format commands.</li><li>Repository layout and ownership notes.</li><li>Coding conventions and architecture constraints.</li><li>Branch, commit, pull request, and review expectations.</li><li>Dependency, security, privacy, and data-handling reminders.</li><li>Known commands that must not be run without approval.</li></ul>",
+        "<p>Keep instruction files short, specific, and current. &quot;Run the documented backend test command before committing&quot; is better than &quot;test carefully.&quot; If an instruction is long, conditional, or only relevant for one folder, use a linked document, scoped rule, or repeatable skill instead of putting everything into the always-loaded file.</p>",
+        "<p>Claude Code reads <code>CLAUDE.md</code>. If a repository already uses <code>AGENTS.md</code> for coding-agent instructions, create a <code>CLAUDE.md</code> that imports it so the guidance is not duplicated:</p>",
+        "<pre>@AGENTS.md\n</pre>"
       ]
     },
     {
-      tag: "Usage And Cost",
-      section: "Practical Basics",
-      title: "Usage and cost awareness",
-      body: [
-        '<p>Claude Code work can involve large repositories, long context, command output, tests, debugging loops, and repeated agentic steps. These can consume more usage than a short chat.</p>',
-        '<p>Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user\'s cost center.</p>',
-        '<ul><li>Keep tasks scoped.</li><li>Start with analysis before long edit loops.</li><li>Use targeted tests before broad test suites when appropriate.</li><li>Stop work that is no longer useful.</li><li>Request a higher monthly usage or spending limit through the intranet form when business needs justify it.</li><li>Remember that higher monthly spending limits require cost-approver approval.</li></ul>',
-        '<div class="callout"><p>The monthly spending limit should be visible in the user\'s Claude account.</p></div>'
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "Claude Code",
+      "body": [
+        "<p>Use plan mode before modifying authentication, authorization, logging, or deployment files. Do not commit, push, or open a pull request without human approval.</p>",
+        "<pre>\nFiles imported with `@` syntax, such as `@AGENTS.md`, enter Claude&#x27;s context when the session starts. Large, outdated, duplicated, or conflicting imports can reduce focus and make Claude less likely to follow the most important rules. Keep imports intentional and review them when repository practices change.\n\nInstruction files guide Claude&#x27;s behavior, but they are not a hard control. Permissions, hooks, repository protections, tests, CI, code review, and Sandvik policy still matter.\n</pre>"
       ]
     },
     {
-      tag: "Policy Placeholders",
-      section: "Policy",
-      title: "What still needs Sandvik confirmation",
-      body: [
-        '<p>The following items must be finalized before publishing:</p>',
-        '<ul><li>Which repositories Claude Code may access.</li><li>Branching, commit, and pull request rules.</li><li>Approved command execution boundaries.</li><li>Secret handling and prohibited data.</li><li>Minimum test expectations by project type.</li><li>Security review triggers.</li><li>Rules for release, production access, and deployment.</li><li>Dependency and license review requirements.</li><li>Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.</li></ul>',
-        '<div class="callout warning"><p>Default until approved: Claude Code may assist development, but humans must review code, tests, security impact, and release decisions.</p></div>'
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "4. Human Approval Remains Essential",
+      "body": [
+        "<p>Claude Code may suggest or make changes quickly, but humans remain accountable for quality, security, and release decisions.</p>",
+        "<p>Require review before:</p>",
+        "<ul><li>Running unfamiliar commands.</li><li>Installing dependencies.</li><li>Editing security-sensitive code.</li><li>Changing authentication, authorization, logging, data retention, encryption, or deployment behavior.</li><li>Creating commits, pushing branches, opening pull requests, or deploying.</li><li>Taking actions in connected tools such as issue trackers, CI systems, package registries, cloud services, or source-control platforms.</li></ul>",
+        "<p>If Claude proposes a command, ask what it does and what files, systems, or data it can affect. If the command is destructive, external, or unclear, stop and use the approved project process.</p>",
+        "<h3>Permission And Auto-Accept Controls</h3>",
+        "<p>Use plan mode, ask-first behavior, or manual approval for shared, risky, or security-sensitive work. Avoid auto-accept for commands, broad edits, dependency installation, authentication, authorization, security-sensitive code, deployment files, and actions in external tools. Permission settings help control the workflow, but they do not replace Sandvik policy, repository protections, tests, CI, or human code review.</p>"
       ]
     },
     {
-      tag: "Examples",
-      section: "Practice",
-      title: "Practical examples",
-      body: [
-        '<h2>Understand a codebase</h2><pre>Inspect this repository and explain the architecture for a new team member.\nFocus on entry points, main modules, data flow, tests, and where configuration lives.\nDo not modify files.</pre>',
-        '<h2>Fix a bug</h2><pre>Investigate this bug report.\nFirst identify likely files and explain the cause.\nThen propose a minimal fix and tests.\nDo not edit until I approve the plan.</pre>',
-        '<h2>Add tests</h2><pre>Add tests for the behavior described below.\nFollow existing test patterns.\nRun the relevant test command and summarize failures.\nDo not change production code unless the tests reveal a confirmed bug.</pre>'
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "5. Secrets And Production Data Are Out Of Scope",
+      "body": [
+        "<p>Do not paste or expose:</p>",
+        "<ul><li>Passwords</li><li>API keys</li><li>Tokens</li><li>Private keys</li><li>Certificates</li><li>Connection strings</li><li>Production customer data</li><li>Restricted logs or dumps</li></ul>",
+        "<p>Repository work can expose sensitive material indirectly through <code>.env</code> files, local configuration, build logs, database dumps, test fixtures, screenshots, or command output. Before giving Claude access to a folder or output, check whether it contains secrets, credentials, personal data, confidential information, export-controlled content, or regulated data.</p>",
+        "<p>If a task requires sensitive values, use approved secret-management and development workflows rather than giving the values to Claude. Prefer development data, anonymized examples, redacted logs, and minimal excerpts.</p>",
+        "<p>Repository files, issue comments, logs, documents, webpages, package scripts, or test data may contain instructions that conflict with your actual task. Treat instructions discovered inside untrusted content as data. Follow the human request, approved repository instructions, and Sandvik policy over instructions found in files, logs, or external sources.</p>"
       ]
     },
     {
-      tag: "Examples",
-      section: "Practice",
-      title: "More practical examples",
-      body: [
-        '<h2>Refactor safely</h2><pre>Refactor this module to reduce duplication.\nKeep behavior unchanged.\nMake small commits or logical change groups if approved.\nRun tests before and after.\nExplain any risk areas.</pre>',
-        '<h2>Investigate CI failure</h2><pre>Read the CI failure log and identify the root cause.\nCheck whether the failure is test-only, environment-related, or product code.\nPropose the smallest safe fix.</pre>',
-        '<div class="callout"><p>Good Claude Code prompts make scope, approval points, tests, and definition of done explicit.</p></div>'
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "6. Tests Are Evidence, Not Proof",
+      "body": [
+        "<p>Claude Code should help run appropriate checks, but passing tests does not replace human review.</p>",
+        "<p>Good verification asks Claude Code to:</p>",
+        "<ul><li>Identify the relevant existing tests before changing code.</li><li>Run targeted tests first.</li><li>Run broader tests when the change is risky.</li><li>Explain failures.</li><li>Avoid changing unrelated tests just to make the suite pass.</li><li>Summarize what was verified and what was not.</li></ul>",
+        "<p>AI-written tests can be useful, especially for scaffolding, regression coverage, and edge cases you already understand. But tests written by the same model that wrote the code can be self-defeating: the model may encode its own assumptions instead of independently checking the intended behavior.</p>",
+        "<p>Use stronger test habits:</p>",
+        "<ul><li>Define expected behavior yourself before asking Claude to write tests.</li><li>Prefer existing human-reviewed test patterns.</li><li>Ask Claude to write a failing test for the bug before the fix when practical.</li><li>Review test names, assertions, fixtures, and edge cases.</li><li>Check that tests would fail against the old behavior or a plausible bug.</li><li>Use CI, code review, and subject-matter review for higher-risk changes.</li></ul>",
+        "<p>AI-written tests are useful scaffolding, not independent proof.</p>"
       ]
     },
     {
-      tag: "Recap",
-      section: "Wrap Up",
-      title: "Common mistakes and recap",
-      body: [
-        '<div class="grid"><div class="panel"><h3>Common mistakes</h3><ul><li>Letting Claude Code edit before it understands the repository.</li><li>Running commands without knowing their impact.</li><li>Exposing secrets, production data, or restricted logs.</li><li>Accepting generated code without tests or review.</li><li>Changing unrelated files during a small task.</li><li>Treating a green test suite as a complete security review.</li><li>Allowing commits, pushes, or deploys without human approval.</li></ul></div><div class="panel"><h3>Recap</h3><p>Claude Code is strongest when paired with clear engineering guardrails. Give it a scoped goal, make it inspect first, control commands and Git actions, protect secrets, run tests, monitor usage for larger work, and use human review before release.</p></div></div>',
-        '<div class="callout"><p>Next: answer 8 knowledge-check questions. You need 80% to pass.</p></div>'
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "7. Use Review Loops",
+      "body": [
+        "<p>LLMs are often especially useful as reviewers, evaluators, and assistants. They should not be treated as sole creators of high-stakes outputs.</p>",
+        "<p>Self-review can catch obvious gaps, but it is not independent review. For higher-risk work, use a separate review pass where practical: a separate Claude session, a different reviewer, human pull request review, CI, or a security reviewer.</p>",
+        "<p>Practical review loops:</p>",
+        "<ul><li>Plan review: ask Claude to critique the specification and list assumptions before implementation.</li><li>Diff review: ask Claude to summarize changed files, risks, and unrelated edits.</li><li>Test review: ask Claude whether the tests actually verify the stated behavior.</li><li>Security review: ask for likely authentication, authorization, logging, data-handling, injection, dependency, or secret-exposure risks.</li><li>CI review: ask Claude to explain failing checks and propose the smallest safe fix.</li><li>Human review: use the normal pull request, engineering, and security review process before merge or release.</li></ul>",
+        "<p>If your team uses a named review loop such as a &quot;Ralph loop,&quot; define it for the project and put the steps in the repository instructions. The important idea is repeated review and correction: plan, implement, review, test, revise, and only then release through the approved process.</p>"
+      ]
+    },
+    {
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "8. Git Workflow Must Stay Controlled",
+      "body": [
+        "<p>Claude Code can support Git tasks, but Sandvik should define the allowed workflow.</p>",
+        "<p>Default safe pattern:</p>",
+        "<ul><li>Work on a branch.</li><li>Keep changes scoped.</li><li>Review diffs.</li><li>Run tests.</li><li>Open a pull request.</li><li>Require human review before merge.</li><li>Do not push or deploy without approval.</li></ul>",
+        "<p>When work is experimental, keep that visible in the branch name, notes, or pull request. When work is intended for shared use, make sure ownership, documentation, test evidence, and review status are visible.</p>"
+      ]
+    },
+    {
+      "tag": "Claude Code",
+      "section": "Claude Code",
+      "title": "9. Usage And Cost Awareness",
+      "body": [
+        "<p>Claude Code work can involve large repositories, long context, command output, tests, debugging loops, and repeated agentic steps. These can consume more usage than a short chat.</p>",
+        "<p>Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user&#x27;s cost center. If a developer needs a higher monthly usage or spending limit for business work, they must use the intranet form and get approval from their cost approver. The monthly spending limit should be visible in the user&#x27;s Claude account.</p>",
+        "<p>Good cost habits:</p>",
+        "<ul><li>Start with a focused goal.</li><li>Use plan mode for complex changes so wrong directions are caught early.</li><li>Avoid giving Claude the whole repository when a smaller scope is enough.</li><li>Stop or redirect when the work drifts.</li><li>Summarize decisions and continue in a focused session when the conversation becomes too broad.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Sandvik Policy Placeholders",
+      "section": "Sandvik Policy Placeholders",
+      "title": "Sandvik Policy Placeholders",
+      "body": [
+        "<p>The following must be finalized before publishing:</p>",
+        "<ul><li><code>[REPOSITORY PLACEHOLDER]</code> Which repositories Claude Code may access.</li><li><code>[BRANCH PLACEHOLDER]</code> Branching, commit, and pull request rules.</li><li><code>[COMMAND PLACEHOLDER]</code> Approved command execution boundaries.</li><li><code>[SECRET PLACEHOLDER]</code> Secret handling and prohibited data.</li><li><code>[TEST PLACEHOLDER]</code> Minimum test expectations by project type, including expectations for AI-written tests.</li><li><code>[SECURITY PLACEHOLDER]</code> Security review triggers.</li><li><code>[DEPLOYMENT PLACEHOLDER]</code> Rules for release, production access, and deployment.</li><li><code>[OPEN SOURCE PLACEHOLDER]</code> Dependency and license review requirements.</li><li><code>[INSTRUCTION FILE PLACEHOLDER]</code> Ownership and required content for repository instruction files such as <code>CLAUDE.md</code> and <code>AGENTS.md</code>.</li><li><code>[COST PLACEHOLDER]</code> Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.</li></ul>",
+        "<p>Default until approved: Claude Code may assist development, but humans must review intent, specifications, code, tests, security impact, and release decisions.</p>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Classify The Work First",
+      "body": [
+        "<pre>Before implementing anything, help me classify this task.\nIs it a throwaway local helper, an experimental prototype, or software intended for other Sandvik users?\nList the engineering, test, review, documentation, and approval steps that should apply.\nAsk me for decisions where the answer is unclear.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Write A Specification In Plan Mode",
+      "body": [
+        "<pre>Use plan mode.\nInspect the repository and draft a short specification before editing.\nInclude goal, non-goals, affected files, acceptance criteria, test plan, risks, and open questions.\nDo not implement until I approve the specification.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Set Up Repository Instructions",
+      "body": [
+        "<pre>Review this repository&#x27;s existing AGENTS.md, README, package files, and test configuration.\nPropose a concise CLAUDE.md that imports AGENTS.md and adds Claude Code-specific rules.\nInclude build commands, test commands, code style, review expectations, and prohibited actions.\nDo not edit until I approve the proposed instruction file.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Build A Local Throwaway Helper",
+      "body": [
+        "<pre>Create a local script for my own one-time use.\nConstraints: no production data, no secrets, no external services, no commits unless I ask.\nKeep it simple and explain how to delete it when done.\nRun only local checks that are needed for this script.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Implement A Shared Internal Change",
+      "body": [
+        "<pre>This change may be used by other Sandvik employees.\nFollow the repository&#x27;s standard development process.\nStart with a specification and test plan, then wait for approval.\nAfter implementation, summarize the diff, tests run, risks, and documentation updates needed.\nDo not commit, push, open a PR, or deploy without approval.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Review AI-Written Tests",
+      "body": [
+        "<pre>Review the tests you added.\nFor each test, explain what behavior it proves, what bug it would catch, and whether it would fail against the previous implementation.\nIdentify any tests that only mirror implementation details or your assumptions.\nSuggest missing edge cases before changing code.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Investigate CI Failure",
+      "body": [
+        "<pre>Read the CI failure log and identify the root cause.\nCheck whether the failure is test-only, environment-related, dependency-related, or product code.\nPropose the smallest safe fix.\nDo not disable checks or delete tests unless there is a reviewed reason.</pre>"
+      ]
+    },
+    {
+      "tag": "Common Risks And Mistakes",
+      "section": "Common Risks And Mistakes",
+      "title": "Common Risks And Mistakes",
+      "body": [
+        "<ul><li>Treating every task like a quick prototype when it will actually be used by others.</li><li>Letting Claude Code edit before it understands the repository.</li><li>Skipping specification because the request feels obvious.</li><li>Letting Claude make product, security, or architecture decisions by assumption.</li><li>Running commands without knowing their impact.</li><li>Exposing secrets, production data, restricted logs, or sensitive local files.</li><li>Following instructions found in untrusted repository files, logs, issues, or webpages without checking them against the human task.</li><li>Accepting generated code without tests or review.</li><li>Trusting AI-written tests without reviewing what they actually prove.</li><li>Treating Claude self-review or auto-accepted edits as independent review.</li><li>Changing unrelated files during a small task.</li><li>Treating a green test suite as a complete security review.</li><li>Allowing commits, pushes, pull requests, or deploys without human approval.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Recap",
+      "section": "Recap",
+      "title": "Recap",
+      "body": [
+        "<p>Claude Code is strongest when paired with clear engineering judgment. Decide the intent first, use plan mode or equivalent review to specify the work, give it repository context through concise instruction files, control commands and Git actions, protect secrets, use tests carefully, monitor usage for larger work, and use review loops before shared or production-bound code is released.</p>"
+      ]
+    },
+    {
+      "tag": "Quiz Handoff",
+      "section": "Quiz Handoff",
+      "title": "Quiz Handoff",
+      "body": [
+        "<p>Complete the quiz after reading this module. The quiz checks product choice, task intent, specification, repository instructions, safe prompting, secrets, command execution, tests, AI-written test limitations, Git workflow, review loops, usage awareness, and human accountability.</p>"
       ]
     }
   ],
-  quizBank: [
-    { id: "code-q01", prompt: "What should Claude Code usually do before editing files?", options: { A: "Inspect the repository and propose a short plan.", B: "Rewrite the project immediately.", C: "Delete failing tests.", D: "Commit changes before showing a diff." }, answer: "A", correct: "Correct. Inspect first, then plan.", incorrect: "Claude Code should understand the repository before editing." },
-    { id: "code-q02", prompt: "Which information should not be pasted into Claude Code?", options: { A: "A public function name.", B: "A test failure message with no sensitive data.", C: "Passwords, API keys, tokens, private keys, or production secrets.", D: "A non-sensitive feature description." }, answer: "C", correct: "Correct. Secrets and credentials must not be exposed.", incorrect: "Never paste passwords, keys, tokens, or production secrets." },
-    { id: "code-q03", prompt: "Claude Code wants to run an unfamiliar command. What should happen?", options: { A: "Run it without review because commands are always safe.", B: "Review the command purpose and impact before approving.", C: "Ask Claude to hide command output.", D: "Run it only in production first." }, answer: "B", correct: "Correct. Commands need impact review before approval.", incorrect: "Unfamiliar commands may modify files, systems, or data." },
-    { id: "code-q04", prompt: "What is the role of tests when using Claude Code?", options: { A: "Tests help verify behavior, but do not replace human review.", B: "Tests are unnecessary if Claude explains the change.", C: "Only failing tests should be deleted.", D: "Tests should be skipped for small changes." }, answer: "A", correct: "Correct. Tests support verification but do not replace review.", incorrect: "Use tests and human review together." },
-    { id: "code-q05", prompt: "What is the safest default Git behavior?", options: { A: "Commit and push every change automatically.", B: "Review diffs and require approval before commit, push, pull request, or deployment.", C: "Work directly on the main branch.", D: "Merge if Claude says tests pass." }, answer: "B", correct: "Correct. Git actions should remain controlled.", incorrect: "Review diffs and get approval before Git or deployment actions." },
-    { id: "code-q06", prompt: "How should production data be treated?", options: { A: "Use it freely to help Claude debug.", B: "Avoid exposing it; use approved anonymized or development data where possible.", C: "Paste it only if the issue is urgent.", D: "Put it in comments and delete later." }, answer: "B", correct: "Correct. Use approved anonymized or development data.", incorrect: "Production data must be protected." },
-    { id: "code-q07", prompt: "A test suite passes after Claude Code changes security-sensitive code. What is still needed?", options: { A: "No further review.", B: "Human code review and any required security review.", C: "Immediate deployment.", D: "Removal of security notes." }, answer: "B", correct: "Correct. Security-sensitive code still needs human review.", incorrect: "Passing tests are not a full security review." },
-    { id: "code-q08", prompt: "What should you do if Claude Code changes unrelated files during a small task?", options: { A: "Review the diff, challenge the scope, and remove or reject unrelated changes.", B: "Accept all changes to save time.", C: "Ask Claude to change more files for consistency.", D: "Commit without review." }, answer: "A", correct: "Correct. Keep scope tight and review diffs.", incorrect: "Unrelated changes create risk and should be challenged." },
-    { id: "code-q09", prompt: "What is a good first step for a CI failure?", options: { A: "Ask Claude Code to identify the root cause from logs and relevant files.", B: "Disable the CI job.", C: "Delete tests that failed.", D: "Merge anyway." }, answer: "A", correct: "Correct. Start with root-cause analysis.", incorrect: "Do not disable or delete tests before understanding the failure." },
-    { id: "code-q10", prompt: "When is Claude Chat more appropriate than Claude Code?", options: { A: "When the task is discussion, drafting, or analysis without repository changes.", B: "When tests must be run.", C: "When code must be committed.", D: "When a branch needs a pull request." }, answer: "A", correct: "Correct. Chat is appropriate when no repository work is needed.", incorrect: "Claude Code is for repository and development workflows." },
-    { id: "code-q11", prompt: "Claude Code suggests adding a new open-source dependency. What should happen?", options: { A: "Add it immediately because it saves time.", B: "Follow Sandvik dependency, security, and license review rules.", C: "Hide it in the lockfile.", D: "Use any license if the package is popular." }, answer: "B", correct: "Correct. Dependencies require policy, security, and license review.", incorrect: "New dependencies can create security and license risk." },
-    { id: "code-q12", prompt: "Who remains accountable for code quality and release decisions?", options: { A: "Claude Code alone.", B: "The human users and Sandvik's approved engineering process.", C: "The package manager.", D: "The test runner only." }, answer: "B", correct: "Correct. Humans and approved processes remain accountable.", incorrect: "Claude Code assists but does not own release accountability." }
+  "quizBank": [
+    {
+      "id": "code-q01",
+      "prompt": "What should Claude Code usually do before implementing a non-trivial change?",
+      "options": {
+        "A": "Inspect the repository and write a plan or specification for review.",
+        "B": "Rewrite the project immediately.",
+        "C": "Delete failing tests first.",
+        "D": "Commit changes before showing a diff."
+      },
+      "answer": "A",
+      "correct": "Correct. Inspect first, then review the plan or specification before implementation.",
+      "incorrect": "Claude Code should understand the repository and produce a reviewable plan before non-trivial edits."
+    },
+    {
+      "id": "code-q02",
+      "prompt": "Which information should not be pasted into Claude Code?",
+      "options": {
+        "A": "A public function name.",
+        "B": "A test failure message with no sensitive data.",
+        "C": "Passwords, API keys, tokens, private keys, certificates, connection strings, or production secrets.",
+        "D": "A non-sensitive feature description."
+      },
+      "answer": "C",
+      "correct": "Correct. Secrets and credentials must not be exposed.",
+      "incorrect": "Never paste passwords, keys, tokens, certificates, connection strings, or production secrets."
+    },
+    {
+      "id": "code-q03",
+      "prompt": "Claude Code wants to run an unfamiliar command. What should happen?",
+      "options": {
+        "A": "Run it without review because commands are always safe.",
+        "B": "Review the command purpose, impact, affected files, and affected systems before approving.",
+        "C": "Ask Claude to hide command output.",
+        "D": "Run it only in production first."
+      },
+      "answer": "B",
+      "correct": "Correct. Commands need impact review before approval.",
+      "incorrect": "Unfamiliar commands may modify files, systems, dependencies, or data."
+    },
+    {
+      "id": "code-q04",
+      "prompt": "What is a good way to treat tests written by the same AI model that wrote the code?",
+      "options": {
+        "A": "Use them as useful scaffolding, but review whether they prove the intended behavior.",
+        "B": "Treat them as independent proof that the code is correct.",
+        "C": "Use only AI-written tests and skip existing tests.",
+        "D": "Delete them after the suite passes."
+      },
+      "answer": "A",
+      "correct": "Correct. AI-written tests can help, but they need review against the intended behavior.",
+      "incorrect": "Tests written by the same model can reflect the same assumptions as the code."
+    },
+    {
+      "id": "code-q05",
+      "prompt": "What is the safest default Git behavior?",
+      "options": {
+        "A": "Commit and push every change automatically.",
+        "B": "Review diffs and require approval before commit, push, pull request, or deployment.",
+        "C": "Work directly on the main branch.",
+        "D": "Merge if Claude says tests pass."
+      },
+      "answer": "B",
+      "correct": "Correct. Git actions should remain controlled.",
+      "incorrect": "Review diffs and get approval before Git or deployment actions."
+    },
+    {
+      "id": "code-q06",
+      "prompt": "Why should you decide whether work is throwaway, experimental, shared, or production-bound before using Claude Code?",
+      "options": {
+        "A": "Because shared or production-bound work requires normal engineering process, review, tests, and approvals.",
+        "B": "Because throwaway scripts never need any data checks.",
+        "C": "Because Claude Code cannot work on prototypes.",
+        "D": "Because intent only affects the color theme."
+      },
+      "answer": "A",
+      "correct": "Correct. Intent determines the level of engineering process needed.",
+      "incorrect": "Shared or production-bound work needs stronger process than a local throwaway prototype."
+    },
+    {
+      "id": "code-q07",
+      "prompt": "A test suite passes after Claude Code changes security-sensitive code. What is still needed?",
+      "options": {
+        "A": "No further review.",
+        "B": "Human code review and any required security review.",
+        "C": "Immediate deployment.",
+        "D": "Removal of security notes."
+      },
+      "answer": "B",
+      "correct": "Correct. Security-sensitive code still needs human review.",
+      "incorrect": "Passing tests are not a full security review."
+    },
+    {
+      "id": "code-q08",
+      "prompt": "How should a repository that already uses AGENTS.md make those instructions available to Claude Code?",
+      "options": {
+        "A": "Create a concise CLAUDE.md that imports AGENTS.md and adds Claude-specific guidance where needed.",
+        "B": "Copy every project document into every prompt.",
+        "C": "Rely on Claude to guess repository rules from file names.",
+        "D": "Put secrets and production credentials in AGENTS.md so Claude can run everything."
+      },
+      "answer": "A",
+      "correct": "Correct. Claude Code reads CLAUDE.md, which can import AGENTS.md.",
+      "incorrect": "Repository instructions should be concise, visible, and safe; do not rely on guessing or include secrets."
+    },
+    {
+      "id": "code-q09",
+      "prompt": "Why should Sandvik users monitor usage during longer Claude Code work?",
+      "options": {
+        "A": "Large repositories, long context, command output, tests, and repeated debugging loops can consume more usage and may create pay-as-you-go cost.",
+        "B": "Claude Code work is always free once the desktop app is installed.",
+        "C": "Usage only depends on the number of files changed.",
+        "D": "Private accounts should be used when the normal plan limit is reached."
+      },
+      "answer": "A",
+      "correct": "Correct. Long, context-heavy Claude Code work can consume more usage and create pay-as-you-go cost.",
+      "incorrect": "Monitor usage for longer work and use the approved intranet flow if a higher monthly limit is needed."
+    },
+    {
+      "id": "code-q10",
+      "prompt": "Which setup is appropriate for Sandvik work with Claude Code?",
+      "options": {
+        "A": "Use the Sandvik-approved Enterprise account and approved desktop, terminal, or IDE setup.",
+        "B": "Use a private account to avoid Sandvik limits.",
+        "C": "Paste Sandvik repository data into any public coding tool.",
+        "D": "Use personal API keys for Sandvik work by default."
+      },
+      "answer": "A",
+      "correct": "Correct. Use the approved Enterprise account and approved product surface.",
+      "incorrect": "Do not move Sandvik work to private accounts, personal API keys, or unapproved tools."
+    },
+    {
+      "id": "code-q11",
+      "prompt": "Claude Code suggests adding a new open-source dependency. What should happen?",
+      "options": {
+        "A": "Add it immediately because it saves time.",
+        "B": "Follow Sandvik dependency, security, and license review rules.",
+        "C": "Hide it in the lockfile.",
+        "D": "Use any license if the package is popular."
+      },
+      "answer": "B",
+      "correct": "Correct. Dependencies require policy, security, and license review.",
+      "incorrect": "New dependencies can create security, maintenance, and license risk."
+    },
+    {
+      "id": "code-q12",
+      "prompt": "Why are review loops useful when working with Claude Code?",
+      "options": {
+        "A": "They help catch bad assumptions through plan, diff, test, CI, security, and independent human review before release.",
+        "B": "They replace human accountability.",
+        "C": "They allow deployment without review.",
+        "D": "They make secrets safe to paste."
+      },
+      "answer": "A",
+      "correct": "Correct. Review loops combine AI assistance with independent checks and human accountability.",
+      "incorrect": "Review loops support human accountability; self-review alone is not independent review."
+    }
   ]
 };
 
@@ -879,7 +1159,7 @@ function renderResultsPage() {
     html += '<span class="score-segment ' + (answer && answer.correct ? "ok" : "fail") + '"></span>';
   }
   html += '</div>';
-  html += '<div class="grid"><div class="panel"><h3>What to remember</h3><ul><li>Claude Code is for repository and development workflows.</li><li>Ask it to inspect and plan before editing.</li><li>Protect secrets, production data, and restricted repositories.</li><li>Review diffs, commands, tests, dependencies, and release impact.</li><li>Humans remain accountable for code quality and release decisions.</li></ul></div><div class="panel"><h3>Next action</h3><p>If this course is running in an LMS, your score is sent when you view this page.</p><button class="btn" type="button" id="retryBtn">Retake quiz</button></div></div>';
+  html += "<div class=\"grid\"><div class=\"panel\"><h3>Completion</h3><p>If this course is running in an LMS, your score is sent when you view this page.</p></div><div class=\"panel\"><h3>Next action</h3><p>You can retake the quiz as needed.</p><button class=\"btn\" type=\"button\" id=\"retryBtn\">Retake quiz</button></div></div>";
   pageRoot.innerHTML = html;
   document.getElementById("retryBtn").addEventListener("click", retakeQuiz);
   SCORM.complete(score, passed);

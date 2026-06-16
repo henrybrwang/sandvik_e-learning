@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Cowork</title>
+<script src="scorm.js"></script>
+<style>
+  :root {
+    --page: #f5f7f8;
+    --surface: #ffffff;
+    --surface-muted: #eef2f4;
+    --ink: #1f2933;
+    --muted: #5f6f7a;
+    --line: #d8e0e5;
+    --accent: #1f6f78;
+    --accent-strong: #155760;
+    --accent-soft: #e2f1f2;
+    --warning: #8a5a00;
+    --warning-soft: #fff5d9;
+    --success: #237a4b;
+    --success-soft: #e2f3ea;
+    --error: #aa2f2f;
+    --error-soft: #f7e1e1;
+    --focus: #0f67ff;
+    --radius: 8px;
+    --shadow: 0 18px 48px rgba(31, 41, 51, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .brand-meta {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 2px 0 0;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .status-pill {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--surface);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .app {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 24px 20px 36px;
+  }
+
+  .progress-wrap {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .progress-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .progress-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    cursor: default;
+  }
+
+  .progress-dot.visited {
+    background: #a9c7cc;
+    border-color: #a9c7cc;
+    cursor: pointer;
+  }
+
+  .progress-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .course-shell {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .page {
+    min-height: 540px;
+    padding: 34px;
+  }
+
+  .page-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border: 1px solid #cae4e7;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: 0;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 28px 0 10px;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+
+  p {
+    margin: 0 0 14px;
+  }
+
+  ul,
+  ol {
+    margin: 10px 0 18px 22px;
+    padding: 0;
+  }
+
+  li {
+    margin: 6px 0;
+  }
+
+  code {
+    background: var(--surface-muted);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.92em;
+  }
+
+  pre {
+    margin: 16px 0;
+    padding: 16px;
+    overflow-x: auto;
+    border-radius: var(--radius);
+    background: #17212b;
+    color: #e8eef2;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .lede {
+    max-width: 760px;
+    color: #35444f;
+    font-size: 1.08rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+  }
+
+  .grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fbfcfd;
+    padding: 16px;
+  }
+
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 16px;
+    margin: 18px 0;
+  }
+
+  .callout.warning {
+    border-left-color: var(--warning);
+    background: var(--warning-soft);
+  }
+
+  .callout p:last-child,
+  .panel p:last-child {
+    margin-bottom: 0;
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+
+  .flow-step {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px;
+    background: #fbfcfd;
+  }
+
+  .flow-step strong {
+    display: block;
+    color: var(--accent-strong);
+    margin-bottom: 4px;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+
+  .comparison th,
+  .comparison td {
+    border: 1px solid var(--line);
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .comparison th {
+    background: var(--surface-muted);
+  }
+
+  .nav {
+    border-top: 1px solid var(--line);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #fbfcfd;
+  }
+
+  .nav-center {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    min-height: 42px;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 9px 14px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .btn:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .btn.primary:hover:not(:disabled) {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+
+  .btn.ghost {
+    color: var(--accent-strong);
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .quiz-option {
+    width: 100%;
+    min-height: 54px;
+    text-align: left;
+    border: 2px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    padding: 13px 14px;
+    cursor: pointer;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #f5fbfc;
+  }
+
+  .quiz-option.correct {
+    border-color: var(--success);
+    background: var(--success-soft);
+  }
+
+  .quiz-option.wrong {
+    border-color: var(--error);
+    background: var(--error-soft);
+  }
+
+  .quiz-option:disabled {
+    cursor: default;
+  }
+
+  .feedback {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+  }
+
+  .feedback.show {
+    display: block;
+  }
+
+  .feedback.correct {
+    background: var(--success-soft);
+    color: #164f31;
+    border: 1px solid #bde4cc;
+  }
+
+  .feedback.wrong {
+    background: var(--error-soft);
+    color: #7b2020;
+    border: 1px solid #ecc4c4;
+  }
+
+  .score {
+    font-size: 3.5rem;
+    line-height: 1;
+    font-weight: 800;
+    margin: 18px 0 8px;
+    color: var(--accent);
+  }
+
+  .score-bar {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    margin: 20px 0;
+  }
+
+  .score-segment {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--line);
+  }
+
+  .score-segment.ok {
+    background: var(--success);
+  }
+
+  .score-segment.fail {
+    background: var(--error);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 820px) {
+    .topbar-inner,
+    .progress-row,
+    .nav {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .top-actions {
+      justify-content: flex-start;
+    }
+
+    .page {
+      padding: 24px 18px;
+    }
+
+    h1 {
+      font-size: 1.55rem;
+    }
+
+    .grid,
+    .grid.three,
+    .flow {
+      grid-template-columns: 1fr;
+    }
+
+    .nav {
+      gap: 10px;
+    }
+
+    .nav .btn {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">C</div>
+      <div>
+        <p class="brand-title">Claude Cowork</p>
+        <p class="brand-meta">Interactive learning module</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="status-pill" id="moduleStatus">Not completed</span>
+      <button class="btn ghost" type="button" id="saveBtnTop">Save for later</button>
+    </div>
+  </div>
+</header>
+
+<main class="app">
+  <div class="progress-wrap" aria-label="Course progress">
+    <div class="progress-row">
+      <span id="sectionLabel">Claude Cowork</span>
+      <span id="pageLabel">Page 1 / 1</span>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <section class="course-shell" aria-live="polite">
+    <div class="page" id="pageRoot"></div>
+    <div class="nav">
+      <button class="btn" type="button" id="prevBtn">Back</button>
+      <span class="nav-center" id="navHint"></span>
+      <button class="btn primary" type="button" id="nextBtn">Next</button>
+    </div>
+  </section>
+</main>
+
+<script>
+var COURSE = {
+  "id": "claude-cowork",
+  "title": "Claude Cowork",
+  "passingScore": 80,
+  "questionsToServe": 8,
+  "pages": [
+    {
+      "tag": "Start",
+      "section": "Start",
+      "title": "Claude Cowork",
+      "body": [
+        "<p>Estimated duration: 20-30 minutes Completion: scored quiz Audience: Sandvik users ordering Claude Cowork</p>",
+        "<div class=\"callout\"><p>Claude can help accelerate work, but users remain responsible for what they enter, approve, share, and publish. Follow Sandvik policy, protect sensitive information, and review outputs before relying on them.</p></div>"
+      ]
+    },
+    {
+      "tag": "Overview And Audience",
+      "section": "Overview And Audience",
+      "title": "Overview And Audience",
+      "body": [
+        "<p>Claude Chat helps you think in conversation. Claude Cowork helps you hand off a defined task that can use approved files, tools, browser steps, and desktop actions.</p>",
+        "<p>Use Cowork when you need a delegated deliverable, not just an answer: a report, spreadsheet, presentation draft, organized folder, or follow-up pack.</p>",
+        "<p>The pattern is simple: choose the right task, prepare context, brief Cowork clearly, control what it may do, and verify before use.</p>"
+      ]
+    },
+    {
+      "tag": "Safe Defaults",
+      "section": "Safe Defaults",
+      "title": "Safe Defaults",
+      "body": [
+        "<p>Cowork capabilities depend on Sandvik policy, product settings, and user permissions. Use these defaults unless rules say otherwise:</p>",
+        "<ul><li>Use approved sources.</li><li>Grant narrow access.</li><li>Treat browser actions, desktop actions, connectors, plugins, skills, and scheduled tasks as available only if enabled.</li><li>Pause before consequential actions such as sending, submitting, uploading, deleting, changing records, or editing outside the working folder.</li><li>Do not use Cowork with secrets, credentials, prohibited data, or unapproved sensitive information.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Learning Objectives",
+      "section": "Learning Objectives",
+      "title": "Learning Objectives",
+      "body": [
+        "<p>After this module, users should be able to:</p>",
+        "<ul><li>Choose when Cowork is a better fit than Chat.</li><li>Prepare a controlled working folder with approved context.</li><li>Brief Cowork with goal, sources, boundaries, verification, pause points, and definition of done.</li><li>Control file access, browser actions, connector use, desktop actions, background delegation, and scheduled work.</li><li>Verify and review deliverables before using or sharing them.</li></ul>"
+      ]
+    },
+    {
+      "tag": "When To Use Claude Cowork",
+      "section": "When To Use Claude Cowork",
+      "title": "When To Use Claude Cowork",
+      "body": [
+        "<p>Use Cowork when:</p>",
+        "<ul><li>You have a clear deliverable in mind, not only a question.</li><li>The work needs approved context from a working folder, template, export, browser system, connector, or app.</li><li>Claude needs to produce a finished document, spreadsheet, presentation, report, or organized file set.</li><li>The task may take time, touch several sources, or benefit from background delegation.</li><li>The work is repeated and could use a reusable manual brief, or scheduled work if Sandvik enables it.</li></ul>",
+        "<p>Use Claude Chat instead when:</p>",
+        "<ul><li>You are still exploring the problem.</li><li>You want quick drafting, analysis, or translation in a conversation.</li><li>The task does not need local files, browser activity, desktop apps, or longer-running delegation.</li><li>You need to stay present for every step.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "1. Choose And Define The Deliverable",
+      "body": [
+        "<p>Start by deciding what finished means. Cowork works best when you brief it like a capable colleague who can act inside a bounded workspace. A vague instruction such as &quot;handle this&quot; can lead to wrong scope, unnecessary access, or unusable output.</p>",
+        "<p>Useful starting decisions:</p>",
+        "<ul><li>Goal: what deliverable should Claude create or update?</li><li>Audience: who will use the output?</li><li>Sources: what approved files, folders, systems, or connectors may Claude use?</li><li>Boundaries: what must Claude not access, edit, send, submit, upload, or delete?</li><li>Output: what file, format, location, and level of detail are expected?</li><li>Verification: what checks should Claude perform before calling the work complete?</li><li>Pause points: when should Claude stop and ask for human approval?</li></ul>",
+        "<p>If you cannot define the deliverable, use Claude Chat first. Move to Cowork when you know what outcome you want delegated.</p>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "2. Prepare The Working Folder",
+      "body": [
+        "<p>A working folder is a context package. It should contain only the materials Claude needs for the task and a clear place to save outputs.</p>",
+        "<p>Good working folder contents:</p>",
+        "<ul><li>Approved source files, exports, notes, spreadsheets, or screenshots.</li><li>Templates, examples, or previous versions Claude should follow.</li><li>A short instruction file if the task has special rules.</li><li>An output folder for generated files.</li><li>Review expectations, such as &quot;mark uncertain claims&quot; or &quot;show a plan first.&quot;</li></ul>",
+        "<p>Treat the folder as a controlled workspace. When you attach or approve a working folder, assume Cowork may be able to read, create, and modify files inside it, depending on Sandvik settings and task permissions. A narrow working folder is safer than a broad personal, project, or shared directory.</p>",
+        "<p>Good folder habits:</p>",
+        "<ul><li>Start with the smallest approved folder or source set that fits the task.</li><li>Remove unrelated, sensitive, personal, or outdated files.</li><li>Keep originals unchanged unless editing them is the explicit task.</li><li>Ask Claude to summarize a complex folder before it starts.</li><li>Avoid treating a broad folder as &quot;more context.&quot; Random context can increase cost, expose information unnecessarily, and make the result worse.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "3. Brief Cowork",
+      "body": [
+        "<p>The brief connects the deliverable to the working folder and approval boundaries. Use a stable structure so important controls are not forgotten.</p>",
+        "<p>Reusable Cowork brief:</p>",
+        "<pre>Goal:\nContext:\nAllowed sources:\nNot allowed:\nOutput:\nVerification:\nPause before:\nDefinition of done:</pre>",
+        "<p>Simple example:</p>",
+        "<pre>Goal: create a two-page summary for regional sales managers.\nContext: approved files in this working folder.\nAllowed sources: this working folder only.\nOutput: management-summary.md in the output folder.\nVerification: compare key findings against the source files and mark uncertain claims as [CHECK REQUIRED].\nPause before: using any browser, connector, desktop app, or editing source files.\nDefinition of done: include key findings, risks, open questions, and source notes.</pre>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "4. Control Tools And Actions",
+      "body": [
+        "<p>Cowork may work with browser sessions, desktop apps, connectors, skills, or plugins when Sandvik settings and user permissions allow it. These capabilities can help complete real workflows, but they can also affect real systems.</p>",
+        "<p>Examples of useful tool or desktop work:</p>",
+        "<ul><li>Reading approved information from a logged-in business system.</li><li>Pulling values from an approved dashboard into a report template.</li><li>Updating a local spreadsheet from approved inputs.</li><li>Preparing a draft in a document or presentation.</li><li>Navigating a browser workflow and stopping before submission.</li></ul>",
+        "<p>Before approving tool, browser, or desktop actions:</p>",
+        "<ul><li>Confirm the site, system, app, connector, or folder is approved for the task.</li><li>Check whether the action changes a record, sends information, submits a form, deletes content, uploads files, or triggers a workflow.</li><li>Complete login, multi-factor authentication (MFA), and access approval steps yourself.</li><li>Do not ask Cowork to enter, store, manage, approve, bypass, or reveal passwords, MFA codes, access tokens, or credentials.</li><li>Pause before consequential actions such as sending, submitting, uploading, deleting, changing records, or editing outside the working folder.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "5. Verify And Review",
+      "body": [
+        "<p>Cowork may plan, execute, verify, and deliver work, but the user remains responsible. Stay close enough to notice drift, especially when the task touches files, systems, or business data.</p>",
+        "<p>Good review points:</p>",
+        "<ul><li>After Claude explains its plan.</li><li>Before accessing a new source.</li><li>Before changing files.</li><li>Before consequential actions.</li><li>Before using personal, customer, supplier, or confidential data.</li><li>Before accepting a final deliverable.</li></ul>",
+        "<p>If the task starts to drift, interrupt it. Give a correction, narrow the scope, ask it to show its current state, or stop the task entirely.</p>",
+        "<p>Verification should be part of the brief, not an afterthought. Ask Cowork to compare claims against source files, list source locations, check row counts, flag missing data, name assumptions, or mark uncertain claims as <code>[CHECK REQUIRED]</code>. Human review is still required before the output is used or shared.</p>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "6. Reuse Background Briefs Carefully",
+      "body": [
+        "<p>Some Cowork tasks are useful because the same brief can be reused. Reuse does not automatically mean scheduling.</p>",
+        "<p>Think in three patterns:</p>",
+        "<ul><li>One-off background work: Cowork completes a defined task while you do something else, then you review the result.</li><li>Reusable manual brief: you save a clear prompt for repeated work, but start each run yourself.</li><li>Scheduled or recurring work: Cowork runs on a cadence only if Sandvik policy and product settings allow it.</li></ul>",
+        "<p>A repeatable brief should still include approved sources, output location, pause points, verification, stop conditions, and a cost boundary. Until Sandvik confirms scheduled or recurring task rules, treat recurring work as conditional and policy dependent.</p>"
+      ]
+    },
+    {
+      "tag": "Cowork Workflow",
+      "section": "Cowork Workflow",
+      "title": "7. Keep Long Work Scoped",
+      "body": [
+        "<p>Longer tasks, many sources, tool-heavy work, background work, and repeated runs can consume more usage than a short chat. Sandvik&#x27;s Claude Enterprise cost model includes normal plan usage limits, such as five-hour session limits and weekly limits, plus pay-as-you-go usage beyond those limits. The base license fee is 350 SEK per user/month, and additional usage is charged to the user&#x27;s cost center with no markup.</p>",
+        "<p>Good habits:</p>",
+        "<ul><li>Use clear scope.</li><li>Avoid unnecessary working folders or source systems.</li><li>Reuse reviewed outputs rather than rerunning the same work.</li><li>Stop tasks that are no longer useful.</li><li>Request a higher monthly usage or spending limit through the intranet form when business needs justify it.</li><li>Remember that higher monthly spending limits require cost-approver approval.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Before Publishing",
+      "section": "Before Publishing",
+      "title": "Before Publishing",
+      "body": [
+        "<p>Final Sandvik rules must be confirmed before publishing. Until then, use approved sources, grant narrow access, pause before consequential actions, and avoid secrets, credentials, prohibited data, or unapproved sensitive information.</p>",
+        "<p>Open placeholders: <code>[LOCAL FILE PLACEHOLDER]</code>, <code>[BROWSER PLACEHOLDER]</code>, <code>[DESKTOP APP PLACEHOLDER]</code>, <code>[CONNECTOR PLACEHOLDER]</code>, <code>[APPROVAL PLACEHOLDER]</code>, <code>[SCHEDULE PLACEHOLDER]</code>, and <code>[COST PLACEHOLDER]</code>.</p>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Create A Management Summary From A Prepared Folder",
+      "body": [
+        "<pre>Goal: create a management summary for department leadership.\nContext: the folder contains meeting notes, an exported issue list, and the Sandvik summary template.\nAllowed sources: approved files in this working folder only.\nOutput: management-summary.md in the output folder.\nVerification: cite or name the source file behind each key theme and mark uncertain claims as [CHECK REQUIRED].\nPause before: using any browser, connector, desktop app, or editing source files.\nDefinition of done: include key themes, decisions needed, risks, owners, and missing information. Do not edit original files.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Build A Spreadsheet From Local Inputs",
+      "body": [
+        "<pre>Goal: create an Excel workbook from the CSV and XLSX files in this working folder.\nContext: local data exports prepared for this task.\nAllowed sources: this working folder only.\nOutput: supplier-input-summary.xlsx in the output folder.\nVerification: compare row counts against the source files and flag any mismatch.\nPause before: using any browser, connector, or desktop app.\nDefinition of done: one sheet per source file, one summary sheet, checked formulas, flagged missing values, and assumptions listed on a notes sheet.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Draft A Briefing In The Background",
+      "body": [
+        "<pre>Goal: draft a one-page briefing from the approved files in this working folder.\nContext: I want a first draft while I work on something else.\nAllowed sources: this working folder only.\nOutput: briefing-draft.md saved in the output folder.\nVerification: list every source file used and mark uncertain claims as [CHECK REQUIRED].\nPause before: using any browser, connector, or desktop app.\nDefinition of done: include summary, risks, decisions needed, and open questions. This is a one-off task; do not schedule or repeat it automatically.</pre>",
+        "<p>If Sandvik enables scheduled tasks, the same brief can become a scheduled weekly draft. Until then, treat it as a reusable manual brief.</p>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Use An Approved Browser Workflow",
+      "body": [
+        "<pre>Goal: collect current values for this report.\nAllowed sources: approved browser system [name] and fields listed in instructions.md.\nOutput: update the report template in this working folder.\nVerification: save a source note with system name, date, fields used, and uncertainty.\nPause before: any write-back, submit, upload, or record change.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Prepare A Supplier Follow-Up Pack",
+      "body": [
+        "<pre>Goal: prepare a supplier follow-up pack.\nContext: supplier briefing folder plus approved browser records listed in instructions.md.\nAllowed sources: files in this working folder and the approved browser records listed in instructions.md.\nOutput: follow-up-pack.md and an updated local action-tracker.xlsx in the output folder.\nVerification: list each source used, flag missing information, and compare action owners against the source notes.\nPause before: any send, submit, upload, record change, or edit outside the working folder.\nDefinition of done: create the pack and, if desktop app access is enabled, update only the local action-tracker.xlsx copy. Do not send emails, submit forms, change supplier records, or upload files.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Draft A Recurring Weekly Update",
+      "body": [
+        "<pre>If scheduled tasks are enabled by Sandvik, prepare a weekly Friday draft.\nSources: approved project folder and dashboard export only.\nOutput: weekly-updates/status-draft.md.\nVerification: compare against the dashboard export and list missing data.\nPause before: sending, publishing, or continuing if source data is missing or inconsistent.</pre>"
+      ]
+    },
+    {
+      "tag": "Practical Examples",
+      "section": "Practical Examples",
+      "title": "Organize A Folder After Showing A Plan",
+      "body": [
+        "<pre>Review this working folder and propose an organization plan.\nInclude: subfolders, naming conventions, duplicate candidates, and files needing review.\nDo not move, rename, delete, or edit anything yet.\nVerification: explain why each suggested change is needed.\nWait for approval before making changes.</pre>"
+      ]
+    },
+    {
+      "tag": "Common Risks And Mistakes",
+      "section": "Common Risks And Mistakes",
+      "title": "Common Risks And Mistakes",
+      "body": [
+        "<ul><li>Delegating a vague goal and expecting Cowork to infer the right outcome.</li><li>Giving Cowork a broad folder when a small working folder is enough.</li><li>Forgetting that Cowork may read, create, and modify files inside an approved working folder.</li><li>Treating scheduled tasks as approved before Sandvik has enabled them.</li><li>Letting Cowork act in a logged-in browser or desktop app without review.</li><li>Asking Cowork to handle passwords, MFA, credentials, or access approval steps.</li><li>Forgetting that browser and desktop actions may affect real systems.</li><li>Running long tasks without checking scope, quality, verification, or cost.</li><li>Using Cowork when Chat would be simpler.</li></ul>"
+      ]
+    },
+    {
+      "tag": "Recap",
+      "section": "Recap",
+      "title": "Recap",
+      "body": [
+        "<p>Claude Cowork is best for delegated deliverables that need controlled action. Choose Cowork when the outcome is clear, prepare the working folder, write a complete brief, grant narrow access, pause before consequential actions, verify against sources, and review the result before using it. Reuse manual briefs carefully, schedule work only when Sandvik allows it, and keep longer work scoped so usage and cost stay visible.</p>"
+      ]
+    },
+    {
+      "tag": "Quiz Handoff",
+      "section": "Quiz Handoff",
+      "title": "Quiz Handoff",
+      "body": [
+        "<p>Complete the quiz after reading this module. The quiz checks when to choose Cowork, how to delegate safely, and how to manage working folders, controlled tool access, pause points, verification, scheduled work, usage, and final review.</p>"
+      ]
+    }
+  ],
+  "quizBank": [
+    {
+      "id": "cowork-q01",
+      "prompt": "Which task is the best fit for Claude Cowork?",
+      "options": {
+        "A": "A one-sentence translation.",
+        "B": "A clear deliverable that spans multiple files, tools, or browser steps.",
+        "C": "A production deployment with no human approval.",
+        "D": "A casual brainstorming chat with no output needed."
+      },
+      "answer": "B",
+      "correct": "Correct. Cowork is for clear multi-step deliverables.",
+      "incorrect": "Cowork is best when the work spans files, tools, browser, or desktop actions."
+    },
+    {
+      "id": "cowork-q02",
+      "prompt": "What should a strong Cowork brief include?",
+      "options": {
+        "A": "Only the phrase handle this.",
+        "B": "Permission to use all local folders.",
+        "C": "Goal, working folder, allowed sources, boundaries, output, verification, pause points, and definition of done.",
+        "D": "A request to avoid asking questions."
+      },
+      "answer": "C",
+      "correct": "Correct. Cowork needs a clear brief, including verification, not just a loose request.",
+      "incorrect": "Use a complete brief: goal, working folder, allowed sources, boundaries, output, verification, pause points, and definition of done."
+    },
+    {
+      "id": "cowork-q03",
+      "prompt": "What is the safest folder-access approach?",
+      "options": {
+        "A": "Grant access to the entire computer.",
+        "B": "Use the smallest approved working folder needed for the task.",
+        "C": "Use personal downloads because they are convenient.",
+        "D": "Copy unrelated files into the folder so Claude has context."
+      },
+      "answer": "B",
+      "correct": "Correct. Narrow access reduces risk.",
+      "incorrect": "Use the smallest approved working folder, not broad local access."
+    },
+    {
+      "id": "cowork-q04",
+      "prompt": "Cowork needs access to a logged-in browser system. How should passwords and MFA be handled?",
+      "options": {
+        "A": "Paste the password into the Cowork task.",
+        "B": "Ask Cowork to approve the access request on your behalf.",
+        "C": "Let Cowork handle MFA so the task can continue unattended.",
+        "D": "Complete login, MFA, and access approval yourself; do not share credentials with Cowork."
+      },
+      "answer": "D",
+      "correct": "Correct. Login, MFA, and access approval stay with the human user.",
+      "incorrect": "Do not ask Cowork to handle passwords, MFA, credentials, or access approval steps."
+    },
+    {
+      "id": "cowork-q05",
+      "prompt": "What should you do if a Cowork task starts moving in the wrong direction?",
+      "options": {
+        "A": "Wait until all files are changed.",
+        "B": "Ignore the plan and review only at the end.",
+        "C": "Interrupt, redirect, or stop the task.",
+        "D": "Start another task with the same vague prompt."
+      },
+      "answer": "C",
+      "correct": "Correct. Users should stay in control.",
+      "incorrect": "Interrupt or redirect when the task is no longer aligned."
+    },
+    {
+      "id": "cowork-q06",
+      "prompt": "Why does cost and usage awareness matter for Cowork?",
+      "options": {
+        "A": "Cowork tasks may be longer, tool-heavy, repeated, and may create pay-as-you-go usage.",
+        "B": "Cowork cannot use any tokens.",
+        "C": "Cost never depends on scope.",
+        "D": "Usage disappears if files are local."
+      },
+      "answer": "A",
+      "correct": "Correct. Scope affects usage and can affect cost.",
+      "incorrect": "Long or repeated tool-heavy tasks require usage and cost awareness."
+    },
+    {
+      "id": "cowork-q07",
+      "prompt": "How should scheduled or recurring Cowork tasks be treated?",
+      "options": {
+        "A": "Use them whenever a user wants.",
+        "B": "Use them for sensitive tasks because nobody is present.",
+        "C": "Use them only if Sandvik policy and product settings allow them.",
+        "D": "Use them to bypass review."
+      },
+      "answer": "C",
+      "correct": "Correct. Scheduled work requires explicit approval.",
+      "incorrect": "Recurring tasks must follow Sandvik policy and product settings."
+    },
+    {
+      "id": "cowork-q08",
+      "prompt": "When is Claude Chat usually better than Cowork?",
+      "options": {
+        "A": "When you want a quick conversation, draft, or small analysis.",
+        "B": "When a task must operate a desktop app.",
+        "C": "When many files need to be reorganized.",
+        "D": "When a browser workflow needs approvals."
+      },
+      "answer": "A",
+      "correct": "Correct. Chat is better for quick interactive work.",
+      "incorrect": "Use Cowork when delegation across files or tools is needed."
+    },
+    {
+      "id": "cowork-q09",
+      "prompt": "What should you assume after approving or attaching a working folder for Cowork?",
+      "options": {
+        "A": "The folder no longer needs sensitivity review.",
+        "B": "All files in the folder are automatically public.",
+        "C": "Cowork can only summarize the file names.",
+        "D": "Cowork may be able to read, create, and modify files inside that folder, depending on settings and permissions."
+      },
+      "answer": "D",
+      "correct": "Correct. A working folder can become a read/write workspace, depending on settings and permissions.",
+      "incorrect": "Treat approved working folders carefully because Cowork may be able to read, create, and modify files inside them."
+    },
+    {
+      "id": "cowork-q10",
+      "prompt": "Which action should always be treated as consequential?",
+      "options": {
+        "A": "Drafting a private outline.",
+        "B": "Sending, submitting, deleting, or changing records in another system.",
+        "C": "Listing assumptions.",
+        "D": "Summarizing the task plan."
+      },
+      "answer": "B",
+      "correct": "Correct. These actions can affect real systems.",
+      "incorrect": "Consequential actions require review and approval."
+    },
+    {
+      "id": "cowork-q11",
+      "prompt": "What should happen before using a Cowork deliverable?",
+      "options": {
+        "A": "Automatic external publication.",
+        "B": "Deletion of all source files.",
+        "C": "Human review for accuracy, policy, and intended use.",
+        "D": "Skipping review because Cowork verifies itself."
+      },
+      "answer": "C",
+      "correct": "Correct. Finished work still needs human review.",
+      "incorrect": "Cowork output is not automatically approved."
+    },
+    {
+      "id": "cowork-q12",
+      "prompt": "What is the main problem with a vague Cowork prompt?",
+      "options": {
+        "A": "It may lead to wrong scope, unnecessary access, or unusable output.",
+        "B": "It makes Cowork ask too few questions.",
+        "C": "It prevents any file access.",
+        "D": "It automatically improves security."
+      },
+      "answer": "A",
+      "correct": "Correct. Vague delegation increases risk and rework.",
+      "incorrect": "A clear goal and constraints are essential for Cowork."
+    },
+    {
+      "id": "cowork-q13",
+      "prompt": "What belongs in a good Cowork working folder?",
+      "options": {
+        "A": "Every related folder the user can access.",
+        "B": "Unrelated personal files to give Claude more background.",
+        "C": "Credentials so Claude can log in without asking.",
+        "D": "Approved source files, templates, instructions, and a clear output location."
+      },
+      "answer": "D",
+      "correct": "Correct. A working folder should be narrow, approved, and organized around the task.",
+      "incorrect": "Use approved task-relevant sources, templates, instructions, and output expectations, not unrelated files or credentials."
+    },
+    {
+      "id": "cowork-q14",
+      "prompt": "What is the safest way to handle work you repeat, before scheduled Cowork tasks are approved?",
+      "options": {
+        "A": "Ask Cowork to run automatically whenever it wants.",
+        "B": "Create a reusable manual brief and start each run yourself.",
+        "C": "Remove all review points so the work is faster.",
+        "D": "Use the broadest folder so the brief never needs updating."
+      },
+      "answer": "B",
+      "correct": "Correct. A reusable manual brief is safer until scheduled work is approved.",
+      "incorrect": "Repeated work still needs human control unless Sandvik has approved scheduled or recurring tasks."
+    },
+    {
+      "id": "cowork-q15",
+      "prompt": "Which instruction best fits a one-off background Cowork task?",
+      "options": {
+        "A": "Schedule this forever, even if Sandvik has not enabled recurring work.",
+        "B": "Change any source files you find without showing a plan.",
+        "C": "Work on this approved folder, save the draft in the output folder, verify sources, and pause before using browser or connector access.",
+        "D": "Use any local folder or system that might help."
+      },
+      "answer": "C",
+      "correct": "Correct. One-off background work still needs narrow access, source checks, output expectations, and pause points.",
+      "incorrect": "Background work is not permission to schedule, broaden access, or make consequential changes without review."
+    }
+  ]
+};
+
+var storageKey = "lms_progress_" + COURSE.id;
+var contentCount = COURSE.pages.length;
+var resultsOffset = contentCount + COURSE.questionsToServe;
+var state = {
+  page: 0,
+  maxVisited: 0,
+  selectedQuestionIds: null,
+  quizAnswers: {},
+  completed: false
+};
+var savedAndFinished = false;
+
+var pageRoot = document.getElementById("pageRoot");
+var prevBtn = document.getElementById("prevBtn");
+var nextBtn = document.getElementById("nextBtn");
+var saveBtnTop = document.getElementById("saveBtnTop");
+var pageLabel = document.getElementById("pageLabel");
+var sectionLabel = document.getElementById("sectionLabel");
+var navHint = document.getElementById("navHint");
+var progressDots = document.getElementById("progressDots");
+var moduleStatus = document.getElementById("moduleStatus");
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function shuffle(items) {
+  var copy = items.slice();
+  for (var i = copy.length - 1; i > 0; i -= 1) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+  return copy;
+}
+
+function selectQuestions() {
+  return shuffle(COURSE.quizBank.map(function(question) { return question.id; })).slice(0, COURSE.questionsToServe);
+}
+
+function getQuestionById(id) {
+  for (var i = 0; i < COURSE.quizBank.length; i += 1) {
+    if (COURSE.quizBank[i].id === id) return COURSE.quizBank[i];
+  }
+  return null;
+}
+
+function loadLocal() {
+  try {
+    var raw = localStorage.getItem(storageKey);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveLocal() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  } catch (error) {}
+}
+
+function restoreState(saved) {
+  if (!saved) return;
+  if (typeof saved.page === "number") state.page = saved.page;
+  if (typeof saved.maxVisited === "number") state.maxVisited = saved.maxVisited;
+  if (Array.isArray(saved.selectedQuestionIds)) state.selectedQuestionIds = saved.selectedQuestionIds;
+  if (saved.quizAnswers && typeof saved.quizAnswers === "object") state.quizAnswers = saved.quizAnswers;
+  if (typeof saved.completed === "boolean") state.completed = saved.completed;
+}
+
+function persist() {
+  SCORM.setPage(state.page);
+  SCORM.saveSuspendData(state);
+  saveLocal();
+}
+
+function ensureQuestions() {
+  if (!Array.isArray(state.selectedQuestionIds) || state.selectedQuestionIds.length !== COURSE.questionsToServe) {
+    state.selectedQuestionIds = selectQuestions();
+    state.quizAnswers = {};
+  }
+}
+
+function getTotalPages() {
+  return contentCount + COURSE.questionsToServe + 1;
+}
+
+function getCurrentQuestionIndex() {
+  return state.page - contentCount;
+}
+
+function isQuizPage() {
+  return state.page >= contentCount && state.page < resultsOffset;
+}
+
+function isResultsPage() {
+  return state.page === resultsOffset;
+}
+
+function allQuizAnswered() {
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    if (!state.quizAnswers[state.selectedQuestionIds[i]]) return false;
+  }
+  return true;
+}
+
+function answeredCurrentQuestion() {
+  if (!isQuizPage()) return true;
+  var questionId = state.selectedQuestionIds[getCurrentQuestionIndex()];
+  return Boolean(state.quizAnswers[questionId]);
+}
+
+function escapeText(text) {
+  var span = document.createElement("span");
+  span.textContent = text;
+  return span.innerHTML;
+}
+
+function renderContentPage(page) {
+  var html = '<span class="page-tag">' + escapeText(page.tag) + '</span>';
+  html += '<h1>' + escapeText(page.title) + '</h1>';
+  html += page.body.join("");
+  pageRoot.innerHTML = html;
+}
+
+function renderQuizPage(questionIndex) {
+  var questionId = state.selectedQuestionIds[questionIndex];
+  var question = getQuestionById(questionId);
+  var saved = state.quizAnswers[questionId];
+  var optionKeys = ["A", "B", "C", "D"];
+  var html = '<span class="page-tag">Knowledge Check ' + (questionIndex + 1) + ' of ' + COURSE.questionsToServe + '</span>';
+  html += '<h1>' + escapeText(question.prompt) + '</h1>';
+  html += '<p class="lede">Choose the best answer. Feedback appears immediately after your selection.</p>';
+  html += '<div class="quiz-options" role="group" aria-label="Answer options">';
+  optionKeys.forEach(function(key) {
+    var classes = "quiz-option";
+    if (saved) {
+      if (key === question.answer) classes += " correct";
+      else if (key === saved.selected) classes += " wrong";
+    }
+    html += '<button class="' + classes + '" type="button" data-option="' + key + '"' + (saved ? " disabled" : "") + '><strong>' + key + '.</strong> ' + escapeText(question.options[key]) + '</button>';
+  });
+  html += '</div>';
+  html += '<div class="feedback' + (saved ? " show " + (saved.correct ? "correct" : "wrong") : "") + '" id="feedbackBox">' + (saved ? escapeText(saved.correct ? question.correct : question.incorrect) : "") + '</div>';
+  pageRoot.innerHTML = html;
+
+  var buttons = pageRoot.querySelectorAll(".quiz-option");
+  for (var i = 0; i < buttons.length; i += 1) {
+    buttons[i].addEventListener("click", function(event) {
+      answerQuestion(question, event.currentTarget.getAttribute("data-option"));
+    });
+  }
+}
+
+function calculateScore() {
+  var correctCount = 0;
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    var answer = state.quizAnswers[state.selectedQuestionIds[i]];
+    if (answer && answer.correct) correctCount += 1;
+  }
+  return Math.round((correctCount / COURSE.questionsToServe) * 100);
+}
+
+function renderResultsPage() {
+  var score = calculateScore();
+  var passed = score >= COURSE.passingScore;
+  state.completed = passed;
+  var html = '<span class="page-tag">Results</span>';
+  html += '<h1>Your results</h1>';
+  html += '<div class="score">' + score + '%</div>';
+  html += '<p class="lede">' + (passed ? "Passed. You have met the 80% requirement for this module." : "Not yet passed. Review the module and retake the quiz when ready.") + '</p>';
+  html += '<div class="score-bar" aria-label="Quiz result by question">';
+  for (var i = 0; i < state.selectedQuestionIds.length; i += 1) {
+    var answer = state.quizAnswers[state.selectedQuestionIds[i]];
+    html += '<span class="score-segment ' + (answer && answer.correct ? "ok" : "fail") + '"></span>';
+  }
+  html += '</div>';
+  html += "<div class=\"grid\"><div class=\"panel\"><h3>Completion</h3><p>If this course is running in an LMS, your score is sent when you view this page.</p></div><div class=\"panel\"><h3>Next action</h3><p>You can retake the quiz as needed.</p><button class=\"btn\" type=\"button\" id=\"retryBtn\">Retake quiz</button></div></div>";
+  pageRoot.innerHTML = html;
+  document.getElementById("retryBtn").addEventListener("click", retakeQuiz);
+  SCORM.complete(score, passed);
+  persist();
+}
+
+function renderProgress() {
+  var totalPages = getTotalPages();
+  var html = "";
+  for (var i = 0; i < totalPages; i += 1) {
+    var label = "Page " + (i + 1);
+    var classes = "progress-dot";
+    if (i === state.page) classes += " active";
+    else if (i <= state.maxVisited) classes += " visited";
+    html += '<button class="' + classes + '" type="button" data-page="' + i + '" aria-label="' + label + '"' + (i <= state.maxVisited ? "" : " disabled") + '><span class="sr-only">' + label + '</span></button>';
+  }
+  progressDots.innerHTML = html;
+  var dots = progressDots.querySelectorAll(".progress-dot");
+  for (var d = 0; d < dots.length; d += 1) {
+    dots[d].addEventListener("click", function(event) {
+      var page = parseInt(event.currentTarget.getAttribute("data-page"), 10);
+      if (page <= state.maxVisited) goToPage(page);
+    });
+  }
+}
+
+function render() {
+  ensureQuestions();
+  var totalPages = getTotalPages();
+  if (state.page < 0) state.page = 0;
+  if (state.page >= totalPages) state.page = totalPages - 1;
+  state.maxVisited = Math.max(state.maxVisited, state.page);
+
+  if (state.page < contentCount) {
+    renderContentPage(COURSE.pages[state.page]);
+    sectionLabel.textContent = COURSE.pages[state.page].section;
+  } else if (isQuizPage()) {
+    renderQuizPage(getCurrentQuestionIndex());
+    sectionLabel.textContent = "Knowledge Check";
+  } else {
+    renderResultsPage();
+    sectionLabel.textContent = "Results";
+  }
+
+  pageLabel.textContent = "Page " + (state.page + 1) + " / " + totalPages;
+  navHint.textContent = isQuizPage() && !answeredCurrentQuestion() ? "Answer this question to continue." : "";
+  prevBtn.disabled = state.page === 0;
+  nextBtn.style.display = isResultsPage() ? "none" : "";
+  nextBtn.textContent = state.page === totalPages - 2 ? "See results" : "Next";
+  nextBtn.disabled = isQuizPage() && !answeredCurrentQuestion();
+  moduleStatus.textContent = state.completed ? "Passed" : "Not completed";
+  renderProgress();
+  persist();
+}
+
+function goToPage(page) {
+  state.page = page;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function navigate(direction) {
+  var nextPage = state.page + direction;
+  if (nextPage < 0 || nextPage >= getTotalPages()) return;
+  if (direction > 0 && isQuizPage() && !answeredCurrentQuestion()) return;
+  if (nextPage === resultsOffset && !allQuizAnswered()) return;
+  goToPage(nextPage);
+}
+
+function answerQuestion(question, selected) {
+  if (state.quizAnswers[question.id]) return;
+  var correct = selected === question.answer;
+  state.quizAnswers[question.id] = { selected: selected, correct: correct };
+  renderQuizPage(getCurrentQuestionIndex());
+  nextBtn.disabled = false;
+  navHint.textContent = "";
+  persist();
+}
+
+function saveLater() {
+  persist();
+  SCORM.finish();
+  savedAndFinished = true;
+  pageRoot.innerHTML = '<span class="page-tag">Saved</span><h1>Your progress has been saved</h1><p class="lede">Next time you open this course in the same LMS or browser, you should continue from page ' + (state.page + 1) + '.</p>';
+  prevBtn.style.display = "none";
+  nextBtn.style.display = "none";
+  navHint.textContent = "You can close this window.";
+}
+
+function retakeQuiz() {
+  state.selectedQuestionIds = selectQuestions();
+  state.quizAnswers = {};
+  state.completed = false;
+  state.page = contentCount;
+  state.maxVisited = contentCount;
+  render();
+}
+
+prevBtn.addEventListener("click", function() { navigate(-1); });
+nextBtn.addEventListener("click", function() { navigate(1); });
+saveBtnTop.addEventListener("click", saveLater);
+
+window.addEventListener("beforeunload", function() {
+  if (!savedAndFinished) SCORM.finish();
+});
+
+var scormBookmark = SCORM.init();
+var suspended = SCORM.getSuspendData();
+restoreState(suspended || loadLocal());
+if (!suspended && scormBookmark && !state.page) state.page = scormBookmark;
+ensureQuestions();
+render();
+</script>
+</body>
+</html>

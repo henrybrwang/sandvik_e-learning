@@ -146,7 +146,7 @@ Being specific in your prompts helps Claude deliver better, more relevant respon
 
 For example: if you are working on a product manual, it is more effective to upload and reference only the most recent approved version than to provide multiple drafts and revisions from earlier stages.
 
-Memory and chat history can help Claude build on prior context when enabled. Availability and behavior depend on plan, product surface, and organization settings.
+Memory and chat history can help Claude build on prior context when enabled. Note that the memory stored is only a summarization of your previous chats, so it does not contain full information.
 
 Before relying on memory:
 
