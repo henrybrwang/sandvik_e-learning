@@ -8,76 +8,102 @@ Audience: Sandvik users ordering Claude Cowork
 
 ## Overview And Audience
 
-Claude Cowork is Claude Chat plus action in the desktop environment. Chat is best when you want to think, ask, draft, and refine in a conversation. Cowork is for handing off a defined outcome and letting Claude work across approved local files and folders, connectors, browser steps, desktop apps, and longer-running delegated work.
+Claude Chat helps you think in conversation. Claude Cowork helps you hand off a defined task that can use approved files, tools, browser steps, and desktop actions.
 
-This module is for users who need Claude to assemble finished work, not only answer questions. Cowork is especially useful when the right context already exists on your computer: source folders, spreadsheets, templates, briefing notes, screenshots, exports, or approved browser-based systems.
+Use Cowork when you need a delegated deliverable, not just an answer: a report, spreadsheet, presentation draft, organized folder, or follow-up pack.
 
-## Current Sandvik Approval Status
+The pattern is simple: choose the right task, prepare context, brief Cowork clearly, control what it may do, and verify before use.
 
-Claude Cowork capabilities depend on Sandvik policy, product settings, and user permissions. Until final Sandvik rules are published:
+## Safe Defaults
 
-- Use only approved information, folders, systems, and connectors.
-- Grant the minimum access needed for the task.
-- Treat browser actions, desktop actions, connectors, plugins, skills, and scheduled tasks as available only if Sandvik enables them.
-- Keep a human review point before consequential actions such as sending, submitting, deleting, changing records, or editing outside the working folder.
+Cowork capabilities depend on Sandvik policy, product settings, and user permissions. Use these defaults unless rules say otherwise:
+
+- Use approved sources.
+- Grant narrow access.
+- Treat browser actions, desktop actions, connectors, plugins, skills, and scheduled tasks as available only if enabled.
+- Pause before consequential actions such as sending, submitting, uploading, deleting, changing records, or editing outside the working folder.
 - Do not use Cowork with secrets, credentials, prohibited data, or unapproved sensitive information.
-
-Detailed policy decisions are tracked in the placeholders later in this module.
 
 ## Learning Objectives
 
 After this module, users should be able to:
 
-- Decide when Cowork is a better fit than Chat.
-- Prepare a local working folder that gives Claude useful context.
-- Write delegation prompts with a clear goal, inputs, constraints, and definition of done.
-- Brief background, reusable, or scheduled automation-style tasks with sources, outputs, review points, and stop conditions.
-- Grant file, browser, connector, and desktop access carefully and deliberately.
-- Monitor plans, progress, approvals, and review points.
-- Recognize when to interrupt or redirect a task.
-- Review finished deliverables before using or sharing them.
-- Understand cost, usage, and control considerations for longer-running tasks.
+- Choose when Cowork is a better fit than Chat.
+- Prepare a controlled working folder with approved context.
+- Brief Cowork with goal, sources, boundaries, verification, pause points, and definition of done.
+- Control file access, browser actions, connector use, desktop actions, background delegation, and scheduled work.
+- Verify and review deliverables before using or sharing them.
 
 ## When To Use Claude Cowork
 
 Use Cowork when:
 
 - You have a clear deliverable in mind, not only a question.
-- The work needs context from local files, folders, templates, or exports.
+- The work needs approved context from a working folder, template, export, browser system, connector, or app.
 - Claude needs to produce a finished document, spreadsheet, presentation, report, or organized file set.
-- The task spans approved connectors, browser steps, desktop apps, or several sources.
-- The work is repetitive, recurring, or scheduled, if Sandvik enables that capability.
-- The task may benefit from longer-running work or parallel workstreams.
+- The task may take time, touch several sources, or benefit from background delegation.
+- The work is repeated and could use a reusable manual brief, or scheduled work if Sandvik enables it.
 
 Use Claude Chat instead when:
 
 - You are still exploring the problem.
-- You want quick drafting or analysis in a conversation.
-- The task does not require local files, browser activity, or desktop apps.
+- You want quick drafting, analysis, or translation in a conversation.
+- The task does not need local files, browser activity, desktop apps, or longer-running delegation.
 - You need to stay present for every step.
 
-## Core Concepts
+## Cowork Workflow
 
-### 1. Cowork Is For Delegated Work
+### 1. Choose And Define The Deliverable
 
-Cowork works best when you brief it like a capable colleague who can take action on your computer. The request should describe the outcome, the sources, the rules, the review points, and what finished means.
+Start by deciding what finished means. Cowork works best when you brief it like a capable colleague who can act inside a bounded workspace. A vague instruction such as "handle this" can lead to wrong scope, unnecessary access, or unusable output.
 
-A strong Cowork brief includes:
+Useful starting decisions:
 
-- Goal: the deliverable Claude should create or update.
-- Inputs: the approved files, folders, browser systems, or connectors Claude may use.
-- Boundaries: what Claude must not access, change, send, submit, or delete.
-- Definition of done: file name, format, audience, quality checks, and where to save the result.
-- Review points: when Claude should pause for approval.
+- Goal: what deliverable should Claude create or update?
+- Audience: who will use the output?
+- Sources: what approved files, folders, systems, or connectors may Claude use?
+- Boundaries: what must Claude not access, edit, send, submit, upload, or delete?
+- Output: what file, format, location, and level of detail are expected?
+- Verification: what checks should Claude perform before calling the work complete?
+- Pause points: when should Claude stop and ask for human approval?
 
-Use this reusable structure when you want a reliable Cowork result:
+If you cannot define the deliverable, use Claude Chat first. Move to Cowork when you know what outcome you want delegated.
+
+### 2. Prepare The Working Folder
+
+A working folder is a context package. It should contain only the materials Claude needs for the task and a clear place to save outputs.
+
+Good working folder contents:
+
+- Approved source files, exports, notes, spreadsheets, or screenshots.
+- Templates, examples, or previous versions Claude should follow.
+- A short instruction file if the task has special rules.
+- An output folder for generated files.
+- Review expectations, such as "mark uncertain claims" or "show a plan first."
+
+Treat the folder as a controlled workspace. When you attach or approve a working folder, assume Cowork may be able to read, create, and modify files inside it, depending on Sandvik settings and task permissions. A narrow working folder is safer than a broad personal, project, or shared directory.
+
+Good folder habits:
+
+- Start with the smallest approved folder or source set that fits the task.
+- Remove unrelated, sensitive, personal, or outdated files.
+- Keep originals unchanged unless editing them is the explicit task.
+- Ask Claude to summarize a complex folder before it starts.
+- Avoid treating a broad folder as "more context." Random context can increase cost, expose information unnecessarily, and make the result worse.
+
+### 3. Brief Cowork
+
+The brief connects the deliverable to the working folder and approval boundaries. Use a stable structure so important controls are not forgotten.
+
+Reusable Cowork brief:
 
 ```text
 Goal:
-Context folder:
+Context:
 Allowed sources:
 Not allowed:
 Output:
+Verification:
 Pause before:
 Definition of done:
 ```
@@ -85,204 +111,181 @@ Definition of done:
 Simple example:
 
 ```text
-Create a two-page summary from the approved files in this working folder.
-Audience: regional sales managers.
-Definition of done: save a Markdown summary with key findings, risks, and open questions.
-Do not edit the source files.
-Pause before using any browser or connector.
+Goal: create a two-page summary for regional sales managers.
+Context: approved files in this working folder.
+Allowed sources: this working folder only.
+Output: management-summary.md in the output folder.
+Verification: compare key findings against the source files and mark uncertain claims as [CHECK REQUIRED].
+Pause before: using any browser, connector, desktop app, or editing source files.
+Definition of done: include key findings, risks, open questions, and source notes.
 ```
 
-### 2. Folders Are Context Packages
+### 4. Control Tools And Actions
 
-One of Cowork's most useful capabilities is local file and folder access. A well-prepared folder is a practical way to give Claude context without pasting everything into a chat.
+Cowork may work with browser sessions, desktop apps, connectors, skills, or plugins when Sandvik settings and user permissions allow it. These capabilities can help complete real workflows, but they can also affect real systems.
 
-Think of the folder as a context package. It should contain only the materials Claude needs for the task:
-
-- Approved source files, exports, notes, spreadsheets, or screenshots.
-- Templates, examples, or previous versions Claude should follow.
-- A short instruction file if the task has special rules.
-- A clear place to save outputs.
-- Any review expectations, such as "mark uncertain claims" or "show a plan first."
-
-Good folder habits:
-
-- Start with the smallest folder or source set that fits the task.
-- Use a dedicated working folder when possible.
-- Remove unrelated, sensitive, personal, or outdated files.
-- Ask Claude to summarize the folder contents before it starts if the folder is complex.
-- Keep original source files unchanged unless editing them is the explicit task.
-
-Avoid treating a broad folder as "more context." Random context can increase cost, expose information unnecessarily, and make the result worse.
-
-### 3. Automations Need A Clear Brief
-
-Cowork can support automation-style work when Sandvik settings and product capabilities allow it. Automation does not only mean scheduled work. Think in three patterns:
-
-- Start-and-return background work: ask Cowork to complete a one-off task while you do something else, then review the result.
-- Reusable manual briefs: keep a clear prompt for work you repeat, but start each run yourself.
-- Scheduled or recurring work: ask Cowork to run on a cadence only if Sandvik policy and product settings allow it.
-
-These patterns are useful for work such as preparing a status draft, refreshing a report from approved sources, organizing a folder, or collecting information from an approved system. They also increase responsibility because the task may run for longer, repeat, or touch several systems.
-
-A clear automation brief says:
-
-- Pattern and cadence: one-off background task, reusable manual task, weekly, monthly, or only when you ask.
-- Trigger: what should start the work.
-- Sources: exactly which folders, files, connectors, dashboards, or browser systems are approved.
-- Output: what should be created, updated, and where it should be saved.
-- Approval points: what requires human confirmation before continuing.
-- Stop conditions: when Claude should pause, ask, or stop instead of guessing.
-- Cost boundary: how much work is reasonable before asking for approval.
-
-Until Sandvik confirms scheduled or recurring task rules, treat recurring automation as conditional and policy dependent.
-
-### 4. Browser And Desktop Actions Extend What Claude Can Do
-
-Depending on Sandvik settings and user permissions, Cowork may work with browser sessions, desktop apps, connectors, skills, or plugins. This is the difference between asking for advice and asking Claude to help complete a workflow.
-
-Examples of useful browser or desktop work include:
+Examples of useful tool or desktop work:
 
 - Reading approved information from a logged-in business system.
-- Pulling figures from an approved dashboard into a report template.
+- Pulling values from an approved dashboard into a report template.
 - Updating a local spreadsheet from approved inputs.
 - Preparing a draft in a document or presentation.
 - Navigating a browser workflow and stopping before submission.
 
-Browser and desktop actions need extra care because they can affect real systems. A logged-in browser can expose information and permissions Claude would otherwise not have.
+Before approving tool, browser, or desktop actions:
 
-Before approving browser or desktop actions:
+- Confirm the site, system, app, connector, or folder is approved for the task.
+- Check whether the action changes a record, sends information, submits a form, deletes content, uploads files, or triggers a workflow.
+- Complete login, multi-factor authentication (MFA), and access approval steps yourself.
+- Do not ask Cowork to enter, store, manage, approve, bypass, or reveal passwords, MFA codes, access tokens, or credentials.
+- Pause before consequential actions such as sending, submitting, uploading, deleting, changing records, or editing outside the working folder.
 
-- Confirm the site, system, or app is approved for the task.
-- Check whether the action changes a record, sends information, submits a form, deletes content, or triggers a workflow.
-- Avoid tasks involving secrets, credentials, regulated data, or high-impact decisions unless approved.
-- Ask Cowork to pause before sending, submitting, deleting, changing records, or editing outside the working folder.
-- Review any information copied from a browser or app before using it in a deliverable.
+### 5. Verify And Review
 
-### 5. Stay In Control
-
-Cowork may plan, execute, verify, and deliver work, but the user remains responsible. Monitor the task, review intermediate plans where available, and interrupt if the task moves in the wrong direction.
+Cowork may plan, execute, verify, and deliver work, but the user remains responsible. Stay close enough to notice drift, especially when the task touches files, systems, or business data.
 
 Good review points:
 
 - After Claude explains its plan.
 - Before accessing a new source.
 - Before changing files.
-- Before sending or submitting anything.
+- Before consequential actions.
 - Before using personal, customer, supplier, or confidential data.
 - Before accepting a final deliverable.
 
 If the task starts to drift, interrupt it. Give a correction, narrow the scope, ask it to show its current state, or stop the task entirely.
 
-### 6. Cost And Usage Awareness
+Verification should be part of the brief, not an afterthought. Ask Cowork to compare claims against source files, list source locations, check row counts, flag missing data, name assumptions, or mark uncertain claims as `[CHECK REQUIRED]`. Human review is still required before the output is used or shared.
 
-Longer tasks, many sources, parallel work, and repeated runs can consume more usage than a short chat. Sandvik's Claude Enterprise cost model includes normal plan usage limits, such as five-hour session limits and weekly limits, plus pay-as-you-go usage beyond those limits. The base license fee is 350 SEK per user/month, and additional usage is charged to the user's cost center with no markup.
+### 6. Reuse Background Briefs Carefully
+
+Some Cowork tasks are useful because the same brief can be reused. Reuse does not automatically mean scheduling.
+
+Think in three patterns:
+
+- One-off background work: Cowork completes a defined task while you do something else, then you review the result.
+- Reusable manual brief: you save a clear prompt for repeated work, but start each run yourself.
+- Scheduled or recurring work: Cowork runs on a cadence only if Sandvik policy and product settings allow it.
+
+A repeatable brief should still include approved sources, output location, pause points, verification, stop conditions, and a cost boundary. Until Sandvik confirms scheduled or recurring task rules, treat recurring work as conditional and policy dependent.
+
+### 7. Keep Long Work Scoped
+
+Longer tasks, many sources, tool-heavy work, background work, and repeated runs can consume more usage than a short chat. Sandvik's Claude Enterprise cost model includes normal plan usage limits, such as five-hour session limits and weekly limits, plus pay-as-you-go usage beyond those limits. The base license fee is 350 SEK per user/month, and additional usage is charged to the user's cost center with no markup.
 
 Good habits:
 
 - Use clear scope.
-- Avoid unnecessary source folders.
-- Avoid repeated automation runs when one reviewed output is enough.
+- Avoid unnecessary working folders or source systems.
+- Reuse reviewed outputs rather than rerunning the same work.
 - Stop tasks that are no longer useful.
-- Reuse outputs rather than rerunning the same work repeatedly.
 - Request a higher monthly usage or spending limit through the intranet form when business needs justify it.
 - Remember that higher monthly spending limits require cost-approver approval.
 
-## Sandvik Policy Placeholders
+## Before Publishing
 
-The following must be finalized before publishing:
+Final Sandvik rules must be confirmed before publishing. Until then, use approved sources, grant narrow access, pause before consequential actions, and avoid secrets, credentials, prohibited data, or unapproved sensitive information.
 
-- `[LOCAL FILE PLACEHOLDER]` Approved folder access patterns and prohibited locations.
-- `[BROWSER PLACEHOLDER]` Approved browser automation rules.
-- `[DESKTOP APP PLACEHOLDER]` Which desktop apps Claude may operate.
-- `[CONNECTOR PLACEHOLDER]` Approved connectors, plugins, and skills.
-- `[APPROVAL PLACEHOLDER]` Actions that always require human approval.
-- `[SCHEDULE PLACEHOLDER]` Whether recurring or scheduled Cowork tasks are allowed.
-- `[COST PLACEHOLDER]` Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.
-
-Default until approved: grant only the minimum access needed, keep a human review point before consequential actions, and do not use Cowork with secrets or prohibited data.
+Open placeholders: `[LOCAL FILE PLACEHOLDER]`, `[BROWSER PLACEHOLDER]`, `[DESKTOP APP PLACEHOLDER]`, `[CONNECTOR PLACEHOLDER]`, `[APPROVAL PLACEHOLDER]`, `[SCHEDULE PLACEHOLDER]`, and `[COST PLACEHOLDER]`.
 
 ## Practical Examples
 
 ### Create A Management Summary From A Prepared Folder
 
 ```text
-Use only the approved files in this working folder to create a management summary.
+Goal: create a management summary for department leadership.
 Context: the folder contains meeting notes, an exported issue list, and the Sandvik summary template.
-Audience: department leadership.
-Definition of done: save one Markdown file called management-summary.md in the output folder.
-Include: key themes, decisions needed, risks, owners, and missing information.
-Mark uncertain claims as [CHECK REQUIRED].
-Do not edit original files.
-Show your outline before writing the final version.
+Allowed sources: approved files in this working folder only.
+Output: management-summary.md in the output folder.
+Verification: cite or name the source file behind each key theme and mark uncertain claims as [CHECK REQUIRED].
+Pause before: using any browser, connector, desktop app, or editing source files.
+Definition of done: include key themes, decisions needed, risks, owners, and missing information. Do not edit original files.
 ```
 
 ### Build A Spreadsheet From Local Inputs
 
 ```text
-Create an Excel workbook from the CSV and XLSX files in this working folder.
-Use one sheet per source file and add a summary sheet.
-Check formulas, flag rows with missing values, and list assumptions on a separate notes sheet.
-Do not use any browser or connector.
-Save the result as supplier-input-summary.xlsx in the output folder.
+Goal: create an Excel workbook from the CSV and XLSX files in this working folder.
+Context: local data exports prepared for this task.
+Allowed sources: this working folder only.
+Output: supplier-input-summary.xlsx in the output folder.
+Verification: compare row counts against the source files and flag any mismatch.
+Pause before: using any browser, connector, or desktop app.
+Definition of done: one sheet per source file, one summary sheet, checked formulas, flagged missing values, and assumptions listed on a notes sheet.
 ```
 
 ### Draft A Briefing In The Background
 
 ```text
-Start a one-off Cowork task while I work on something else.
 Goal: draft a one-page briefing from the approved files in this working folder.
-Allowed sources: this folder only.
+Context: I want a first draft while I work on something else.
+Allowed sources: this working folder only.
 Output: briefing-draft.md saved in the output folder.
-Pause before using any browser, connector, or desktop app.
-Do not schedule this task or repeat it automatically.
-Definition of done: include summary, risks, decisions needed, open questions, and [CHECK REQUIRED] markers for uncertain claims.
+Verification: list every source file used and mark uncertain claims as [CHECK REQUIRED].
+Pause before: using any browser, connector, or desktop app.
+Definition of done: include summary, risks, decisions needed, and open questions. This is a one-off task; do not schedule or repeat it automatically.
+```
+
+If Sandvik enables scheduled tasks, the same brief can become a scheduled weekly draft. Until then, treat it as a reusable manual brief.
+
+### Use An Approved Browser Workflow
+
+```text
+Goal: collect current values for this report.
+Allowed sources: approved browser system [name] and fields listed in instructions.md.
+Output: update the report template in this working folder.
+Verification: save a source note with system name, date, fields used, and uncertainty.
+Pause before: any write-back, submit, upload, or record change.
+```
+
+### Prepare A Supplier Follow-Up Pack
+
+```text
+Goal: prepare a supplier follow-up pack.
+Context: supplier briefing folder plus approved browser records listed in instructions.md.
+Allowed sources: files in this working folder and the approved browser records listed in instructions.md.
+Output: follow-up-pack.md and an updated local action-tracker.xlsx in the output folder.
+Verification: list each source used, flag missing information, and compare action owners against the source notes.
+Pause before: any send, submit, upload, record change, or edit outside the working folder.
+Definition of done: create the pack and, if desktop app access is enabled, update only the local action-tracker.xlsx copy. Do not send emails, submit forms, change supplier records, or upload files.
 ```
 
 ### Draft A Recurring Weekly Update
 
 ```text
-If scheduled Cowork tasks are enabled by Sandvik, prepare a weekly draft every Friday morning.
-Sources: the approved project folder and the approved dashboard export only.
-Output: a draft status update in Markdown saved to the weekly-updates folder.
-Include: progress, blockers, decisions needed, and items requiring human follow-up.
-Do not send or publish the update.
-Pause and ask if source data is missing, inconsistent, or unusually large.
-```
-
-### Use An Approved Browser Workflow
-
-```text
-Use the approved browser system [name] to collect the current values needed for this report.
-Use only the fields listed in instructions.md.
-Copy the values into the report template in this working folder.
-Do not submit forms, change records, or download unrelated files.
-Pause before any action that writes back to the browser system.
-Save a short source note explaining what you used.
+If scheduled tasks are enabled by Sandvik, prepare a weekly Friday draft.
+Sources: approved project folder and dashboard export only.
+Output: weekly-updates/status-draft.md.
+Verification: compare against the dashboard export and list missing data.
+Pause before: sending, publishing, or continuing if source data is missing or inconsistent.
 ```
 
 ### Organize A Folder After Showing A Plan
 
 ```text
-Review the files in this working folder and propose an organization plan.
-Include: suggested subfolders, naming conventions, duplicate candidates, and files that need human review.
-Do not move, rename, delete, or edit any files yet.
-Wait for my approval before making changes.
+Review this working folder and propose an organization plan.
+Include: subfolders, naming conventions, duplicate candidates, and files needing review.
+Do not move, rename, delete, or edit anything yet.
+Verification: explain why each suggested change is needed.
+Wait for approval before making changes.
 ```
 
 ## Common Risks And Mistakes
 
 - Delegating a vague goal and expecting Cowork to infer the right outcome.
-- Giving Cowork a broad folder when a small context package is enough.
-- Treating recurring or scheduled tasks as approved before Sandvik has enabled them.
+- Giving Cowork a broad folder when a small working folder is enough.
+- Forgetting that Cowork may read, create, and modify files inside an approved working folder.
+- Treating scheduled tasks as approved before Sandvik has enabled them.
 - Letting Cowork act in a logged-in browser or desktop app without review.
-- Forgetting that desktop and browser actions may affect real systems.
-- Running long tasks without checking scope, quality, or cost.
-- Using Cowork when Chat would be simpler and safer.
+- Asking Cowork to handle passwords, MFA, credentials, or access approval steps.
+- Forgetting that browser and desktop actions may affect real systems.
+- Running long tasks without checking scope, quality, verification, or cost.
+- Using Cowork when Chat would be simpler.
 
 ## Recap
 
-Claude Cowork is best for clear deliverables that need action: local files and folders as context, approved tools and systems, browser or desktop steps, and longer-running delegated work. Start with a precise goal, package the right context, use a clear brief, grant narrow access, define automation boundaries, watch approval points, monitor usage, and review the result before using it.
+Claude Cowork is best for delegated deliverables that need controlled action. Choose Cowork when the outcome is clear, prepare the working folder, write a complete brief, grant narrow access, pause before consequential actions, verify against sources, and review the result before using it. Reuse manual briefs carefully, schedule work only when Sandvik allows it, and keep longer work scoped so usage and cost stay visible.
 
 ## Quiz Handoff
 
-Complete the quiz after reading this module. The quiz checks when to choose Cowork, how to delegate safely, and how to manage files, folders, automation-style work, tools, browser actions, approvals, and review.
+Complete the quiz after reading this module. The quiz checks when to choose Cowork, how to delegate safely, and how to manage working folders, controlled tool access, pause points, verification, scheduled work, usage, and final review.

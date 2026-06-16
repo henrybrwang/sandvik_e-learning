@@ -2,11 +2,11 @@
 
 ## Short Description
 
-Learn how to use Claude Cowork for delegated work with local folders as context, automation-style tasks, browser or desktop actions, approvals, and final review.
+Learn a practical Cowork workflow for delegated deliverables: package context, brief the task, grant narrow access, monitor progress, verify results, and review before use.
 
 ## Long Description
 
-This module prepares Sandvik users to use Claude Cowork for clear deliverables that need action, not only conversation. It explains how to prepare local folders as context packages, brief background or reusable automation-style tasks, work with approved browser and desktop actions, and manage access, approvals, pay-as-you-go usage, monthly spending limits, and final review.
+This module prepares Sandvik users to use Claude Cowork for clear deliverables that need action, not only conversation. It teaches a controlled delegation workflow: choose when Cowork fits, package an approved working folder, write a complete brief, approve browser or desktop actions carefully, pause before consequential actions, verify outputs against sources, reuse or schedule work only when approved, and manage usage, cost, and final review.
 
 ## Completion Rule
 

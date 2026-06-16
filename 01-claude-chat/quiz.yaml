@@ -1,10 +1,10 @@
 module_id: "claude-chat"
 title: "Claude Chat"
-version: "0.2"
+version: "0.3"
 language: "en"
 recommended_duration_minutes: 45
 passing_score: 80
-question_bank_size: 18
+question_bank_size: 15
 questions_to_serve: 10
 retakes: "unlimited"
 randomize_questions: true
@@ -46,18 +46,6 @@ questions:
         text: "It asks Claude to decide all policies on its own."
       - key: "D"
         text: "It hides the audience and purpose."
-  - id: "chat-q04"
-    type: "multiple_choice"
-    prompt: "Where can Sandvik users usually check Claude usage progress and their monthly spending limit?"
-    options:
-      - key: "A"
-        text: "In their Claude account usage area, if available for their plan and organization."
-      - key: "B"
-        text: "Only by asking Claude to guess the remaining limit."
-      - key: "C"
-        text: "In every generated artifact."
-      - key: "D"
-        text: "In the source document being summarized."
   - id: "chat-q05"
     type: "multiple_choice"
     prompt: "What should a Sandvik user do if they hit a Claude usage limit during business work?"
@@ -142,18 +130,6 @@ questions:
         text: "Check Sandvik policy and use only approved, minimized information."
       - key: "D"
         text: "Move it into a project so it becomes safe."
-  - id: "chat-q12"
-    type: "multiple_choice"
-    prompt: "If you ask Claude to summarize a document, which instruction reduces invented content?"
-    options:
-      - key: "A"
-        text: "Use only the document and label assumptions or missing information."
-      - key: "B"
-        text: "Add helpful market context from memory."
-      - key: "C"
-        text: "Fill gaps with likely answers."
-      - key: "D"
-        text: "Make it sound complete even if information is missing."
   - id: "chat-q13"
     type: "multiple_choice"
     prompt: "What is a key risk when sharing a Claude artifact?"
@@ -190,18 +166,6 @@ questions:
         text: "Publish it and fix issues later."
       - key: "D"
         text: "Ask Claude to make it sound more confident."
-  - id: "chat-q16"
-    type: "multiple_choice"
-    prompt: "What is the main risk of giving Claude a large set of documents without framing instructions?"
-    options:
-      - key: "A"
-        text: "Claude may focus on the wrong material or treat background as instructions."
-      - key: "B"
-        text: "Claude will always refuse to read the documents."
-      - key: "C"
-        text: "The documents become approved for all future use."
-      - key: "D"
-        text: "The output is automatically more accurate because there is more text."
   - id: "chat-q17"
     type: "multiple_choice"
     prompt: "Which prompt is closest to a useful specification?"
@@ -230,7 +194,6 @@ answers:
   chat-q01: "B"
   chat-q02: "B"
   chat-q03: "B"
-  chat-q04: "A"
   chat-q05: "B"
   chat-q06: "A"
   chat-q07: "B"
@@ -238,11 +201,9 @@ answers:
   chat-q09: "A"
   chat-q10: "A"
   chat-q11: "C"
-  chat-q12: "A"
   chat-q13: "B"
   chat-q14: "A"
   chat-q15: "A"
-  chat-q16: "A"
   chat-q17: "C"
   chat-q18: "A"
 feedback:
@@ -255,9 +216,6 @@ feedback:
   chat-q03:
     correct: "Correct. Clear prompts reduce rework and uncertainty."
     incorrect: "A strong prompt includes goal, context, constraints, output format, and checks."
-  chat-q04:
-    correct: "Correct. Usage and monthly spending-limit visibility depend on plan and organization settings."
-    incorrect: "Use the available usage settings rather than guessing."
   chat-q05:
     correct: "Correct. Follow the approved intranet path or wait for the reset."
     incorrect: "Do not work around limits using private accounts or unapproved access."
@@ -279,9 +237,6 @@ feedback:
   chat-q11:
     correct: "Correct. Check policy and minimize data before using Claude."
     incorrect: "Sensitive data requires policy review and minimization before use."
-  chat-q12:
-    correct: "Correct. This limits invented content."
-    incorrect: "Ask Claude to use the source and label uncertainty."
   chat-q13:
     correct: "Correct. Shared outputs can expose content that needs review."
     incorrect: "Artifacts are drafts and may contain sensitive or unapproved information."
@@ -291,9 +246,6 @@ feedback:
   chat-q15:
     correct: "Correct. Ask for assumptions, gaps, and verification needs."
     incorrect: "Useful output still needs review when context may be incomplete."
-  chat-q16:
-    correct: "Correct. Large context still needs labels and instructions."
-    incorrect: "More context helps only when Claude knows how to interpret it."
   chat-q17:
     correct: "Correct. A useful specification defines source boundaries, output, required content, and checks."
     incorrect: "Move from a vague request to a clear specification."

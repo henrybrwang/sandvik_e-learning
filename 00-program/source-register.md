@@ -29,7 +29,7 @@ Use official Claude and Anthropic sources as the baseline for product facts. Rec
 | CODE-003 | Claude Code common workflows documentation | https://code.claude.com/docs/en/common-workflows | Plan-before-editing guidance, repository exploration, tests, CI, pull request workflows, and subagent/review workflow context | Used for practical workflow framing; pair with Sandvik engineering process. |
 | CODE-004 | Claude Code memory and instruction-file documentation | https://code.claude.com/docs/en/memory | `CLAUDE.md`, `AGENTS.md` import pattern, instruction-file scope, specificity, and troubleshooting | Instruction files guide behavior but are not hard enforcement; Sandvik must confirm ownership and required contents. |
 | CODE-005 | Claude Code IDE integrations documentation | https://code.claude.com/docs/en/ide-integrations | VS Code extension, Cursor and VS Code-fork support, plan review in IDE, and IDE/CLI distinction | Recheck before publishing because IDE support and extension behavior can change. |
-| DESIGN-001 | Claude Design announcement | https://www.anthropic.com/news/claude-design-anthropic-labs | Design capability overview, supported work types, and preview status | Recheck availability and plan eligibility before publishing. |
+| DESIGN-001 | Claude Design announcement | https://www.anthropic.com/news/claude-design-anthropic-labs | Design capability overview, supported work types, preview status, Enterprise admin enablement, design-system support, refinement methods, sharing, export, and Claude Code handoff | Recheck availability, Sandvik enablement, export routes, sharing settings, and plan eligibility before publishing. |
 
 ## Source Rules
 

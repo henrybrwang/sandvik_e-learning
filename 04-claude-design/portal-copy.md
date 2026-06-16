@@ -2,11 +2,11 @@
 
 ## Short Description
 
-Learn how to use Claude Design for visual drafts, prototypes, slides, one-pagers, and design concepts while following Sandvik brand and review rules.
+Learn a practical Claude Design workflow for briefs, source preparation, visual exploration, review, export, sharing, and handoff.
 
 ## Long Description
 
-This module prepares Sandvik users to use Claude Design responsibly. It covers visual briefs, approved assets, brand placeholders, accessibility, IP and sharing risks, usage awareness, export considerations, and handoff to Chat, Cowork, or Code when needed.
+This module prepares Sandvik users to use Claude Design for reviewable visual work such as internal one-pagers, slide concepts, prototypes, layouts, and visual explanations. It teaches a practical workflow: choose the right product, prepare approved sources and assets, write a visual brief, explore directions, refine with feedback, review for brand, accessibility, facts, IP, and sensitive information, then export, share, or hand off only through approved Sandvik routes.
 
 ## Completion Rule
 

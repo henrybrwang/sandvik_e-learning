@@ -8,175 +8,247 @@ Audience: Sandvik users ordering Claude Design
 
 ## Overview And Audience
 
-Claude Design is for creating visual work with Claude, such as design directions, prototypes, slides, one-pagers, and shareable visual concepts. As of the 2026-06-09 source check, Claude Design is described by Anthropic as a research-preview product, so availability and exact behavior must be rechecked before publishing this module.
+Claude Design is for creating visual work with Claude, such as design directions, prototypes, slides, one-pagers, layouts, graphics, and shareable visual concepts. You can start from a rough idea, source material, approved assets, or a design system, then refine the result through feedback until it is ready for human review.
 
-This module is for users who need Claude to help explore, draft, or refine visual outputs while following Sandvik brand, legal, accessibility, and review expectations.
+As of the 2026-06-16 source check, Anthropic describes Claude Design as a research-preview product for Claude Pro, Max, Team, and Enterprise subscribers. For Enterprise organizations, Anthropic says Claude Design is off by default and must be enabled by an administrator. Sandvik availability, settings, approved inputs, export routes, and review rules must be confirmed before this module is published.
 
 At Sandvik, Claude Design is one of the selectable tools under the Claude Enterprise license. The intranet launch context describes it as a visual design agent for creating and refining designs, layouts, and graphics through chat.
+
+This module is for users who need Claude to help explore, draft, or refine visual outputs while following Sandvik brand, legal, accessibility, information protection, and review expectations.
 
 ## Learning Objectives
 
 After this module, users should be able to:
 
 - Decide when Claude Design is the right product.
+- Prepare approved source material, assets, and constraints before designing.
 - Write a clear visual brief.
-- Use Sandvik-approved brand assets and templates.
-- Review outputs for brand, accessibility, accuracy, and IP risk.
-- Understand export and sharing considerations.
-- Know when to hand off to Claude Chat, Cowork, or Code.
-- Understand that repeated visual exploration can increase pay-as-you-go usage.
+- Explore, compare, and refine design directions without treating them as final.
+- Review outputs for brand, accessibility, factual accuracy, IP risk, sensitive information, and audience fit.
+- Export, share, hand off, and monitor usage through approved routes.
 
 ## When To Use Claude Design
 
-Use Claude Design when:
+Use Claude Design when the main output is visual and reviewable. Good fits include:
 
-- The main output is visual.
-- You need to explore multiple design directions quickly.
-- You need a prototype, one-pager, slide concept, layout, visual explanation, or draft design asset.
-- You want to turn a rough idea into a reviewable visual draft.
-- You need to communicate an idea before investing in full production.
+- Exploring several visual directions before choosing one.
+- Creating an internal one-pager, slide concept, layout, or visual explanation.
+- Creating a prototype concept before investing in production implementation.
+- Preparing a draft that a designer, Brand, Legal, or business owner can review.
 
 Use another Claude product when:
 
 - The task is mainly text, analysis, or discussion: use Claude Chat.
 - The task is a multi-step deliverable across files or desktop tools: use Claude Cowork.
-- The task requires production code, repository changes, or tests: use Claude Code.
+- The task requires production code, repository changes, tests, or pull requests: use Claude Code.
 
-## Core Concepts
+Do not use Claude Design to bypass review. A polished generated design is still a draft until the right owner approves it.
 
-### 1. Start With A Visual Brief
+## Claude Design Workflow
 
-A good design prompt is a brief, not just a request. It includes audience, purpose, format, content, brand constraints, accessibility needs, and review expectations.
+### 1. Choose The Fit And Outcome
+
+Start by naming the deliverable and the decision it should support. A design exploration for a meeting is different from a prototype that may later become software, and both are different from external-facing campaign material.
+
+Before designing, identify the audience, intended action, internal or external sharing status, approved sources, required reviewers, and target format.
+
+If the answers are unclear, use Claude Chat first to clarify the message, audience, and source material before moving into visual work.
+
+### 2. Prepare Sources And Assets
+
+Visual work can expose information quickly. Before prompting, prepare the smallest approved source set that can support the design.
+
+Approved-source and asset checklist:
+
+- Use approved Sandvik templates, brand assets, imagery, colors, typography, and product names where available.
+- Remove unrelated files, personal data, confidential figures, customer names, supplier details, and screenshots Claude does not need.
+- Replace missing logos, screenshots, customer names, or visual assets with clear placeholders.
+- Confirm that charts, numbers, dates, claims, and third-party material are sourced and allowed.
+- Track source material so reviewers can verify the output.
+
+If an approved asset is missing, do not ask Claude to invent it. Ask Claude to mark it clearly:
+
+```text
+Do not invent Sandvik logos, product screenshots, customer logos, certification marks, or brand assets.
+Use [BRAND PLACEHOLDER] or [SCREENSHOT PLACEHOLDER] where approved material is required.
+```
+
+### 3. Write A Visual Brief
+
+A good design prompt is a brief, not a vibe request. It gives Claude enough context to make design choices while keeping policy boundaries visible.
+
+Visual brief template:
+
+```text
+Goal:
+Audience:
+Use case:
+Source material:
+Format:
+Brand constraints:
+Accessibility needs:
+Do not use:
+Review required:
+Output needed:
+```
 
 Example:
 
 ```text
-Create a draft one-page internal concept sheet.
+Goal: Create a draft one-page internal concept sheet.
 Audience: Sandvik managers.
-Purpose: explain the new onboarding workflow.
-Brand: use Sandvik-approved visual style only; mark any missing brand asset as [BRAND PLACEHOLDER].
-Accessibility: clear headings, readable contrast, no meaning by color alone.
-Output: editable structure with notes for review.
+Use case: Explain a proposed onboarding workflow before a review meeting.
+Source material: Use only the notes pasted below.
+Format: One-page layout with sections and review notes.
+Brand constraints: Use Sandvik-approved visual style only. Mark missing assets as [BRAND PLACEHOLDER].
+Accessibility needs: Clear headings, readable contrast, no meaning by color alone.
+Do not use: External images, invented metrics, real employee names, or customer details.
+Review required: Brand, process owner, and Legal if shared outside Sandvik.
+Output needed: Editable draft structure plus a list of facts to verify.
 ```
 
-### 2. Generated Visuals Are Drafts
+### 4. Explore Directions, Then Choose
 
-Claude Design can accelerate exploration, but generated visual work needs review. Treat every output as a draft until the right owner approves it.
+Claude Design is useful for exploring options quickly. Ask for a small number of distinct directions, then choose one to refine. This keeps exploration useful without burning unnecessary usage.
 
-Review for:
-
-- Brand alignment
-- Factual accuracy
-- Legal and IP risk
-- Accessibility
-- Audience fit
-- Sensitive or confidential content
-- External sharing permission
-
-### 3. Use Approved Assets
-
-Visual work often involves logos, imagery, typography, screenshots, icons, templates, and product names. Use approved assets only. If an asset is missing, ask Claude to mark it as a placeholder rather than inventing it.
-
-Good instruction:
+Good exploration prompt:
 
 ```text
-Do not invent Sandvik logos, product screenshots, customer logos, or certification marks.
-Use [BRAND PLACEHOLDER] where approved assets are needed.
+Create three distinct visual directions for this internal one-pager.
+For each direction, describe the layout, intended audience effect, strengths, risks, and what source facts still need verification.
+Do not finalize the design yet.
 ```
 
-### 4. Protect Information In Visual Outputs
+Choose based on the business goal, not only appearance. A strong leadership concept may be too dense for frontline users, and a visually striking prototype may still fail if the flow is unclear or inaccessible.
 
-Visual drafts may expose sensitive information through screenshots, diagrams, labels, customer names, charts, or metadata.
+### 5. Refine With Specific Feedback
 
-Before sharing:
+Refinement works best when feedback is specific. Instead of "make it better," name the problem and the desired change.
 
-- Remove unnecessary names, IDs, email addresses, and confidential figures.
-- Check whether screenshots show restricted systems.
-- Confirm that charts and claims are sourced.
-- Use anonymized examples when possible.
+Useful refinement prompts:
 
-### 5. Handoff Matters
+- "Make the hierarchy clearer: the action users must take should be visible first."
+- "Simplify the wording for global English readers."
+- "Reduce the number of sections and keep only decision-relevant information."
+- "Show the same workflow as a three-step process and a swimlane option."
+- "Mark all unsupported numbers as [CHECK REQUIRED]."
+- "Keep the layout, but replace invented imagery with [BRAND PLACEHOLDER]."
 
-Claude Design may produce a prototype or concept that later needs production implementation. The handoff should identify what is draft, what is approved, and what needs follow-up.
+If Claude Design offers fine-grained editing, inline comments, direct text edits, design-system support, or export options, use them only within Sandvik-approved settings. Product features do not replace Sandvik policy.
 
-Good handoff includes:
+### 6. Review Before Sharing
 
-- Purpose and audience
-- Approved assets used
-- Open brand or legal questions
-- Accessibility notes
-- Source data
-- Implementation notes for Claude Code or a development team
+Generated visual work can look finished before it is ready. Treat every output as a draft until approved.
 
-### 6. Usage And Cost Awareness
+Design review checklist:
 
-Visual exploration can involve many iterations, generated variants, large files, and repeated refinement. Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user's cost center.
+- Purpose: The design supports the intended audience and decision.
+- Source accuracy: Facts, numbers, dates, names, and claims match approved source material.
+- Brand: Logos, colors, typography, templates, product names, and imagery follow approved Sandvik guidance or are marked as placeholders.
+- Accessibility: Headings are clear, text is readable, contrast is sufficient, and meaning does not rely on color alone.
+- Data protection: Screenshots, diagrams, labels, charts, and metadata do not expose unnecessary personal, confidential, customer, supplier, or restricted information.
+- IP and legal: Third-party images, icons, logos, references, and generated media are allowed or removed.
+- Status and handoff: The draft or approval status, sharing limits, and any production assumptions are documented.
 
-If business work needs a higher monthly usage or spending limit, use the intranet form and get approval from the cost approver. The monthly spending limit should be visible in the user's Claude account.
+For external use, do not publish generated Sandvik-branded material without Brand and Legal review according to Sandvik rules.
+
+### 7. Export, Share, Or Handoff
+
+Claude Design may support sharing inside an organization, exporting to formats such as PDF, PPTX, HTML, or other tools, and packaging design work for handoff to Claude Code. Use only the routes Sandvik approves.
+
+Export, sharing, and handoff checklist:
+
+- Use approved export formats and Sandvik storage locations.
+- Confirm who can view, comment, or edit before sharing a link.
+- Remove unnecessary sensitive information and check for metadata or hidden content.
+- Label drafts clearly and include source facts reviewers should verify.
+- State what is design intent, what is approved, and what still needs review.
+
+If the design becomes production software, hand off to Claude Code or a development team. Include purpose, audience, selected concept, approved assets, source data, accessibility notes, open brand or legal questions, and implementation notes. A prototype is not production-ready software.
+
+### 8. Monitor Usage And Cost
+
+Visual exploration can involve many iterations, generated variants, large files, exports, and repeated refinement. Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user's cost center.
+
+Good usage habits:
+
+- Start with a clear brief.
+- Explore a limited number of directions, then choose before deep refinement.
+- Reuse approved templates and avoid uploading unnecessary files.
+- Request a higher monthly usage or spending limit through the intranet form when business needs justify it.
+
+Higher monthly usage or spending limits require cost-approver approval. The monthly spending limit should be visible in the user's Claude account.
 
 ## Sandvik Policy Placeholders
 
 The following must be finalized before publishing:
 
-- `[BRAND PLACEHOLDER]` Approved brand assets, templates, colors, typography, and logo rules.
-- `[IP PLACEHOLDER]` Use of third-party images, icons, references, and generated media.
-- `[EXTERNAL SHARING PLACEHOLDER]` Rules for publishing or sharing visual outputs.
+- `[BRAND PLACEHOLDER]` Approved brand assets, design systems, templates, colors, typography, imagery, and logo rules.
+- `[IP PLACEHOLDER]` Use of third-party images, icons, references, style examples, and generated media.
+- `[EXTERNAL SHARING PLACEHOLDER]` Rules for publishing or sharing visual outputs outside Sandvik.
 - `[ACCESSIBILITY PLACEHOLDER]` Accessibility standard and review process.
 - `[SCREENSHOT PLACEHOLDER]` Rules for screenshots of internal systems or data.
-- `[EXPORT PLACEHOLDER]` Approved export formats and storage locations.
+- `[EXPORT PLACEHOLDER]` Approved export formats, internal sharing settings, and storage locations.
 - `[COST PLACEHOLDER]` Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.
 
 Default until approved: treat generated designs as internal drafts and do not publish externally without Brand and Legal review.
 
-## Practical Examples
+## Practical Scenarios
 
-### One-Pager Draft
+### Internal One-Pager
 
 ```text
-Create a one-page internal draft explaining this process.
+Create an internal one-page draft from the notes below.
 Audience: global business users.
-Use clear sections: What changes, Why it matters, What users need to do, Where to get help.
-Mark missing brand assets as [BRAND PLACEHOLDER].
+Purpose: explain what changes, why it matters, what users need to do, and where to get help.
+Use only the supplied notes. Mark unsupported claims as [CHECK REQUIRED].
+Use [BRAND PLACEHOLDER] for missing Sandvik assets.
+Return a draft layout plus a short review checklist for the process owner.
 ```
 
 ### Slide Concept
 
 ```text
-Create a 5-slide concept deck for an internal update.
-Use simple layouts and global English.
-Do not use external images.
-Include speaker notes and a list of facts that need verification.
+Create a five-slide concept deck.
+Audience: regional managers.
+Use simple layouts, clear headings, and speaker notes.
+Do not use external images or invented numbers.
+Include a final slide listing facts, figures, and claims that need verification before presentation.
 ```
 
-### Prototype Brief
+### Clickable Prototype Concept
 
 ```text
 Create a clickable prototype concept for an internal request form.
-Focus on user flow and information hierarchy, not production code.
-Flag accessibility and policy questions.
+Focus on user flow, field grouping, required information, and review states.
+Do not create production code.
+Use [SCREENSHOT PLACEHOLDER] instead of real system screenshots.
+Include handoff notes for a development team: assumptions, open questions, accessibility concerns, and data fields that need owner approval.
 ```
 
-### Visual Explanation
+### Visual Explanation From Source Material
 
 ```text
-Turn this workflow into a visual explanation for non-technical users.
-Use clear labels, minimal text, and a summary.
-Do not include real employee or customer data.
+Turn the source workflow into a visual explanation for non-technical users.
+Use clear labels, minimal text, and no real employee or customer data.
+Show two options: a step-by-step process and a swimlane view.
+Flag any terms that need Sandvik-approved wording.
 ```
 
 ## Common Risks And Mistakes
 
-- Publishing generated visual work without Brand or Legal review.
-- Using unapproved logos, images, customer names, or product marks.
-- Including sensitive data in screenshots or diagrams.
-- Treating a prototype as production-ready software.
-- Forgetting accessibility requirements.
-- Using Claude Design when the task needs tested code or a controlled repository workflow.
+- Starting from a vague "make it look nice" request.
+- Uploading too many files, screenshots, or examples without checking sensitivity.
+- Letting Claude invent logos, product screenshots, customer names, metrics, or certification marks.
+- Treating generated visual work as approved final material or production-ready software.
+- Publishing Sandvik-branded content externally without Brand and Legal review.
+- Using third-party material, ignoring accessibility, or exporting through unapproved routes.
+- Iterating many variants without monitoring usage and cost.
 
 ## Recap
 
-Claude Design is best for visual drafts, concepts, prototypes, slides, and one-pagers. Give it a real brief, use approved assets, mark placeholders clearly, monitor usage during repeated iteration, review for brand and legal risks, and hand off carefully when work needs production implementation.
+Claude Design is strongest as a visual workflow: choose the fit, prepare approved sources and assets, write a clear brief, explore a few directions, refine with specific feedback, review carefully, and only then export, share, or hand off through approved Sandvik routes. Keep generated designs visibly draft until reviewed, protect sensitive information, use placeholders, and monitor usage during repeated exploration.
 
 ## Quiz Handoff
 
-Complete the quiz after reading this module. The quiz checks product fit, visual briefs, brand controls, accessibility, IP risk, sharing, exports, and handoff decisions.
+Complete the quiz after reading this module. The quiz checks product fit, visual briefs, approved sources and assets, design iteration, review decisions, accessibility, IP risk, screenshots, sharing, exports, usage cost, and handoff.

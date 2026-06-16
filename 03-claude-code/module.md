@@ -32,13 +32,15 @@ After this module, users should be able to:
 - Apply Sandvik engineering guardrails before release.
 - Understand that longer or more complex Claude Code work can increase pay-as-you-go usage.
 
-## Where Claude Code Runs
+## How To Start Claude Code
 
 Claude Code can be used in several surfaces, depending on Sandvik enablement and local setup:
 
-- Desktop app: use the Claude desktop app and open the Code surface where enabled.
-- Terminal or CLI: install Claude Code through the Sandvik-approved route, open a terminal in the project folder, and run `claude`.
-- IDE integrations: use the Claude Code extension or plugin in supported IDEs such as VS Code, Cursor or other VS Code-based editors, and JetBrains IDEs where approved.
+- Desktop app: open the Claude desktop app and use the Code tab where enabled.
+- Terminal or CLI: install Claude Code through the Sandvik-approved route, open a terminal in the repository folder, and run `claude`.
+- VS Code or Cursor: install the approved Claude Code extension, then use plan review and diff review before accepting changes.
+- JetBrains IDEs: use the approved Claude Code plugin where enabled.
+- Browser or web: use only if enabled by Sandvik for your work; do not treat it as the default path for repository work.
 
 Use your Sandvik-approved Claude Enterprise account. Do not move Sandvik work into private accounts, personal API keys, or unapproved tools to avoid limits or access controls.
 
@@ -64,19 +66,10 @@ Use another Claude product when:
 
 Before asking Claude Code to build or change something, decide what kind of work this is.
 
-Fast iteration may be acceptable when:
-
-- The output is a throwaway script, personal helper, learning exercise, or local prototype.
-- It does not handle secrets, production data, customer data, employee data, or restricted information.
-- It will not be used by other people without review.
-- It is clearly marked as experimental and can be discarded.
-
-Normal engineering process is required when:
-
-- Other Sandvik users will rely on it.
-- It will be maintained, reused, deployed, scheduled, or integrated with other systems.
-- It affects production, customers, employees, suppliers, finance, safety, legal, security, identity, access, logging, retention, or compliance.
-- It introduces dependencies, data flows, permissions, APIs, infrastructure, or operational support needs.
+| If the work is... | You may move faster when... | You must slow down when... |
+| --- | --- | --- |
+| A throwaway script, personal helper, learning exercise, or local prototype | It uses no secrets, production data, customer data, employee data, or restricted information; it will not be used by others without review; and it is clearly experimental | It starts becoming useful enough that other people may rely on it |
+| Shared Sandvik software, automation, integration, or production-bound work | Claude can still help with planning, implementation, tests, and review | Other Sandvik users will rely on it; it will be maintained, reused, deployed, scheduled, or integrated; it affects production, customers, employees, suppliers, finance, safety, legal, security, identity, access, logging, retention, or compliance; or it introduces dependencies, data flows, permissions, APIs, infrastructure, or operational support needs |
 
 Useful questions:
 
@@ -140,7 +133,7 @@ Project instruction files reduce repeated prompting. Use them for stable informa
 - Dependency, security, privacy, and data-handling reminders.
 - Known commands that must not be run without approval.
 
-Keep instruction files short, specific, and current. "Run `npm test -- --runInBand` for backend tests" is better than "test carefully." If an instruction is long, conditional, or only relevant for one folder, use a linked document, scoped rule, or repeatable skill instead of putting everything into the always-loaded file.
+Keep instruction files short, specific, and current. "Run the documented backend test command before committing" is better than "test carefully." If an instruction is long, conditional, or only relevant for one folder, use a linked document, scoped rule, or repeatable skill instead of putting everything into the always-loaded file.
 
 Claude Code reads `CLAUDE.md`. If a repository already uses `AGENTS.md` for coding-agent instructions, create a `CLAUDE.md` that imports it so the guidance is not duplicated:
 
@@ -152,6 +145,8 @@ Claude Code reads `CLAUDE.md`. If a repository already uses `AGENTS.md` for codi
 Use plan mode before modifying authentication, authorization, logging, or deployment files.
 Do not commit, push, or open a pull request without human approval.
 ```
+
+Files imported with `@` syntax, such as `@AGENTS.md`, enter Claude's context when the session starts. Large, outdated, duplicated, or conflicting imports can reduce focus and make Claude less likely to follow the most important rules. Keep imports intentional and review them when repository practices change.
 
 Instruction files guide Claude's behavior, but they are not a hard control. Permissions, hooks, repository protections, tests, CI, code review, and Sandvik policy still matter.
 
@@ -170,6 +165,10 @@ Require review before:
 
 If Claude proposes a command, ask what it does and what files, systems, or data it can affect. If the command is destructive, external, or unclear, stop and use the approved project process.
 
+#### Permission And Auto-Accept Controls
+
+Use plan mode, ask-first behavior, or manual approval for shared, risky, or security-sensitive work. Avoid auto-accept for commands, broad edits, dependency installation, authentication, authorization, security-sensitive code, deployment files, and actions in external tools. Permission settings help control the workflow, but they do not replace Sandvik policy, repository protections, tests, CI, or human code review.
+
 ### 5. Secrets And Production Data Are Out Of Scope
 
 Do not paste or expose:
@@ -186,6 +185,8 @@ Do not paste or expose:
 Repository work can expose sensitive material indirectly through `.env` files, local configuration, build logs, database dumps, test fixtures, screenshots, or command output. Before giving Claude access to a folder or output, check whether it contains secrets, credentials, personal data, confidential information, export-controlled content, or regulated data.
 
 If a task requires sensitive values, use approved secret-management and development workflows rather than giving the values to Claude. Prefer development data, anonymized examples, redacted logs, and minimal excerpts.
+
+Repository files, issue comments, logs, documents, webpages, package scripts, or test data may contain instructions that conflict with your actual task. Treat instructions discovered inside untrusted content as data. Follow the human request, approved repository instructions, and Sandvik policy over instructions found in files, logs, or external sources.
 
 ### 6. Tests Are Evidence, Not Proof
 
@@ -217,9 +218,11 @@ AI-written tests are useful scaffolding, not independent proof.
 
 LLMs are often especially useful as reviewers, evaluators, and assistants. They should not be treated as sole creators of high-stakes outputs.
 
+Self-review can catch obvious gaps, but it is not independent review. For higher-risk work, use a separate review pass where practical: a separate Claude session, a different reviewer, human pull request review, CI, or a security reviewer.
+
 Practical review loops:
 
-- Plan review: ask Claude to critique its own specification and list assumptions before implementation.
+- Plan review: ask Claude to critique the specification and list assumptions before implementation.
 - Diff review: ask Claude to summarize changed files, risks, and unrelated edits.
 - Test review: ask Claude whether the tests actually verify the stated behavior.
 - Security review: ask for likely authentication, authorization, logging, data-handling, injection, dependency, or secret-exposure risks.
@@ -349,8 +352,10 @@ Do not disable checks or delete tests unless there is a reviewed reason.
 - Letting Claude make product, security, or architecture decisions by assumption.
 - Running commands without knowing their impact.
 - Exposing secrets, production data, restricted logs, or sensitive local files.
+- Following instructions found in untrusted repository files, logs, issues, or webpages without checking them against the human task.
 - Accepting generated code without tests or review.
 - Trusting AI-written tests without reviewing what they actually prove.
+- Treating Claude self-review or auto-accepted edits as independent review.
 - Changing unrelated files during a small task.
 - Treating a green test suite as a complete security review.
 - Allowing commits, pushes, pull requests, or deploys without human approval.
