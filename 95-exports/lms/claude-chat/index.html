@@ -571,8 +571,20 @@ var COURSE = {
       "title": "Overview And Audience",
       "body": [
         "<p>Claude Chat is the conversational Claude experience. It is best for turn-by-turn work where you ask questions, draft text, analyze information, summarize content, translate, brainstorm, compare options, or create reusable outputs such as documents and artifacts.</p>",
-        "<p>This module is for users who need Claude as a daily work partner. It explains the practical basics: how Claude uses context, what happens when usage limits are reached, what projects, connectors, and skills are, and how to review outputs before using them.</p>",
-        "<p>Claude Chat is not the same as an autonomous desktop agent, coding agent, or design-only tool. If the work requires Claude to operate across many files, browser steps, development tools, or visual design deliverables, another Claude product may be a better fit.</p>"
+        "<p>This module is for users who need Claude Chat as a daily work partner. It explains when Chat is the right Claude product, how to give it useful context, how approved tools and connectors can extend a conversation, how Claude-specific features such as files, projects, memory, skills, and artifacts work, and how to review outputs before using them.</p>",
+        "<p>Claude Chat is not the same as Claude Cowork, Claude Code, Claude Design, Microsoft 365 Copilot, GitHub Copilot, or a built agent in Copilot Agent Builder. If the work needs desktop actions, repository changes, visual design depth, or a reusable agent that is configured and shared, another tool may be a better fit.</p>"
+      ]
+    },
+    {
+      "tag": "What This Module Adds",
+      "section": "What This Module Adds",
+      "title": "What This Module Adds",
+      "body": [
+        "<p>The AI Fluency foundation already covers the general rules of safe AI use: use approved tools, protect information, give useful context, iterate, and check confident answers before acting on them.</p>",
+        "<p>It also introduces agents in the Microsoft-style sense: an agent is something you build once, configure with instructions and data sources, reuse for a recurring job, and may share with others under the right governance rules.</p>",
+        "<p>This module uses that foundation, but focuses on Claude Chat. In Claude Chat, you are usually not building a reusable agent. You are steering a conversation. Claude may still behave in an agentic way when it follows multiple steps, uses approved tools or connectors, brings back context, and continues the work in the chat.</p>",
+        "<p>Practical terminology for this module:</p>",
+        "<ul><li>Agent: a built, configured, reusable tool with instructions and data sources, which may be shared if approved.</li><li>Agentic chat: a Claude Chat conversation where Claude works through steps, sometimes using tools or connectors.</li><li>Tool-assisted chat: a clearer everyday phrase for agentic chat when the important point is approved tool or connector use.</li></ul>"
       ]
     },
     {
@@ -581,7 +593,7 @@ var COURSE = {
       "title": "Learning Objectives",
       "body": [
         "<p>After this module, users should be able to:</p>",
-        "<ul><li>Decide when Claude Chat is the right product for a task.</li><li>Explain why context is what makes Claude useful for a specific work problem.</li><li>Turn vague requests into clearer context, framing, and specification.</li><li>Explain what people usually mean by agentic AI and tool use.</li><li>Understand five-hour session limits, weekly limits, pay-as-you-go usage, and the Sandvik path for requesting a higher monthly spending limit.</li><li>Use files, projects, memory, connectors, skills, and artifacts responsibly where approved.</li><li>Recognize hallucination, missing context, outdated information, and unsupported claims.</li><li>Protect Sandvik information and avoid entering prohibited data.</li><li>Review Claude outputs before using them in decisions or communication.</li><li>Know when to use Claude Cowork, Claude Code, or Claude Design instead.</li></ul>"
+        "<ul><li>Decide when Claude Chat is the right product, and when another Claude or Sandvik-approved tool is a better fit.</li><li>Give Claude useful context, boundaries, output instructions, and review points.</li><li>Explain the difference between a built agent and agentic or tool-assisted chat.</li><li>Use files, projects, memory, connectors, skills, and artifacts responsibly where approved.</li><li>Manage usage and cost by scoping context, tool use, and long conversations deliberately.</li><li>Verify and share outputs safely, with Sandvik policy and human accountability in mind.</li></ul>"
       ]
     },
     {
@@ -590,57 +602,62 @@ var COURSE = {
       "title": "When To Use Claude Chat",
       "body": [
         "<p>Use Claude Chat when:</p>",
-        "<ul><li>You are still thinking through a problem and want an interactive thought partner.</li><li>You need a first draft, summary, translation, comparison, checklist, or structured analysis.</li><li>The task is small enough to steer through a conversation.</li><li>You want to upload or paste selected context and ask questions about it.</li><li>You want text or an artifact you can inspect, edit, and reuse.</li></ul>",
-        "<p>Use a different Claude product when:</p>",
-        "<ul><li>The work is a clear deliverable that spans many files, tools, browser steps, or desktop actions: consider Claude Cowork.</li><li>The work requires reading and changing a codebase, running tests, or using development tools: consider Claude Code.</li><li>The main output is visual exploration, prototypes, slides, or design concepts: consider Claude Design.</li></ul>"
+        "<ul><li>You are still thinking through a problem and want an interactive thought partner.</li><li>You need a first draft, summary, translation, comparison, checklist, or structured analysis.</li><li>The task is small enough to steer through a conversation.</li><li>You want to upload or paste selected context and ask questions about it.</li><li>You want text or an artifact you can inspect, edit, and reuse.</li><li>You want Claude to use approved chat tools or connectors as part of a controlled conversation.</li></ul>",
+        "<p>Use a different product or tool when:</p>",
+        "<ul><li>The work is a clear deliverable that spans many files, browser steps, desktop files, or desktop actions: consider Claude Cowork.</li><li>The work requires reading and changing a codebase, running tests, or using development tools: consider Claude Code.</li><li>The main output is visual exploration, prototypes, slides, or design concepts: consider Claude Design.</li><li>The work should happen inside Outlook, Word, Excel, PowerPoint, Teams, or your Microsoft 365 work graph: consider Microsoft 365 Copilot where approved and licensed.</li><li>The work is a recurring task that should be configured once, reused, and possibly shared: consider an approved agent-building route rather than treating every run as a fresh chat.</li></ul>"
       ]
     },
     {
-      "tag": "How To Give Claude Useful Context",
-      "section": "How To Give Claude Useful Context",
-      "title": "How To Give Claude Useful Context",
+      "tag": "The Core Workflow: Context, Boundaries, Output, Review",
+      "section": "The Core Workflow: Context, Boundaries, Output, Review",
+      "title": "The Core Workflow: Context, Boundaries, Output, Review",
       "body": [
-        "<p>Claude Chat becomes more useful when it understands the work problem, not just the immediate wording of your request. A strong prompt gives Claude enough context to produce a useful response or draft while still staying inside clear boundaries.</p>",
-        "<p>Include what matters:</p>",
-        "<ul><li>Goal: what you need done and why.</li><li>Audience: who will read or use the output.</li><li>Source boundaries: which files, notes, links, or facts Claude should use.</li><li>Constraints: Sandvik policy, length, tone, format, terminology, exclusions, and deadlines.</li><li>Output format: the structure you want back, such as a table, email, checklist, or summary.</li><li>Checks: what Claude should verify, flag, or leave as <code>[CHECK REQUIRED]</code>.</li></ul>",
+        "<p>Claude Chat becomes useful when it understands the work problem, not just the immediate wording of your request. The foundation prompt habits still apply, but in this module they serve one practical workflow:</p>",
+        "<ol><li>Give context: what the work is about, who it is for, and what source material Claude may use.</li><li>Set boundaries: what Claude must not assume, access, include, or decide.</li><li>Define the output: format, length, tone, audience, and required sections.</li><li>Build in review: ask Claude to flag missing facts, assumptions, uncertainty, and items that need human or policy review.</li></ol>",
         "<p>For example, this is vague:</p>",
         "<pre>Make this update better.</pre>",
         "<p>This is more useful:</p>",
-        "<pre>Rewrite the attached project update for a Sandvik steering group.\nUse only the attached notes.\nKeep it to one page.\nInclude progress, decisions needed, risks, assumptions, and open questions.\nIf the notes do not support a claim, mark it as [CHECK REQUIRED].</pre>",
-        "<p>Conditional instructions are useful when real work has branches. For example:</p>",
-        "<pre>If the source includes confirmed dates, include them.\nIf a date is missing or uncertain, do not guess. Write [CHECK REQUIRED].\nIf the text may be used externally, flag anything that needs Legal, Brand, or Data Protection review.</pre>"
+        "<pre>Rewrite the attached project update for a Sandvik steering group.\nUse only the attached notes.\nKeep it to one page.\nInclude progress, decisions needed, risks, assumptions, and open questions.\nIf the notes do not support a claim, mark it as [CHECK REQUIRED].\nIf the text may be used externally, flag anything that needs Legal, Brand, or Data Protection review.</pre>",
+        "<p>Conditional instructions are helpful when real work has branches:</p>",
+        "<pre>If the source includes confirmed dates, include them.\nIf a date is missing or uncertain, do not guess. Write [CHECK REQUIRED].\nIf any action sounds like a commitment to a customer, mark it for owner review.</pre>"
       ]
     },
     {
-      "tag": "Agentic AI",
-      "section": "Agentic AI",
-      "title": "Agentic AI",
+      "tag": "Agents, Agentic Chat, And Tool Use",
+      "section": "Agents, Agentic Chat, And Tool Use",
+      "title": "Agents, Agentic Chat, And Tool Use",
       "body": [
-        "<p>In this module, agentic AI means that Claude can do more than answer once. It can follow a multi-step flow, use approved tools, bring new context back into the chat, and adapt based on what it finds.</p>",
-        "<p>An AI model by itself does not inherently know your current work context, remember every relevant decision, access your files, or use business systems.</p>",
-        "<p>Claude can only work with what is available in the current product setting: the conversation, approved memory or project context, uploaded material, and any enabled tools or connectors.</p>",
-        "<p>Agentic AI helps bridge that gap. Instead of answering from the initial prompt alone, Claude can identify missing context, use an approved tool or connector, bring the result back into the conversation, and continue from there. That is why context and tool access matter so much. The clearer the goal, source boundaries, allowed tools, and review points are, the more useful and controlled the flow becomes.</p>",
-        "<p>A simple example is using an approved work connector:</p>",
-        "<ol><li>You ask Claude to summarize important open actions from a connected work system you are allowed to access.</li><li>Claude recognizes that an approved connector is available for that system.</li><li>Claude searches only the information available through your account permissions and the connector&#x27;s allowed actions.</li><li>The connector result comes back into the conversation as new context.</li><li>Claude uses that context to answer your original question.</li></ol>",
-        "<p>That is a basic agentic flow: user request, tool use, returned context, and final answer. The next sections explain the main ways Claude Chat can receive, organize, retrieve, reuse, and turn context into outputs.</p>"
+        "<p>The word &quot;agent&quot; can mean different things in different tools. To avoid confusion, use the terms carefully.</p>",
+        "<p>In the AI Fluency foundation and Microsoft Copilot Agent Builder context, an agent is a built thing: you define its role, instructions, and data sources, then reuse it for a recurring job. If it is shared, the builder must consider governance, data access, maintenance, and cost.</p>",
+        "<p>In Claude Chat, &quot;agentic&quot; usually describes behavior rather than a thing you have built. Claude may work through a multi-step flow, use approved tools, bring new context back into the chat, and adapt based on what it finds. That can be useful, but it does not turn the chat into a governed, reusable, shared agent.</p>",
+        "<p>A simple tool-assisted chat flow looks like this:</p>",
+        "<ol><li>You ask Claude to prepare a steering-group update from approved material.</li><li>Claude identifies that more status context is needed.</li><li>If an approved connector is available, Claude asks for or uses the allowed access.</li><li>The connector returns only information available through your permissions and the connector&#x27;s allowed actions.</li><li>Claude uses the returned context to continue the draft.</li><li>You review the sources, assumptions, policy flags, and final wording before using it.</li></ol>",
+        "<p>That is agentic chat: user goal, approved tool use, returned context, Claude output, and human review. It is still your responsibility to decide whether the tool should be used, whether the context is appropriate, and whether the answer is good enough to rely on.</p>"
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "1. Files",
+      "tag": "The Claude Chat Context Stack",
+      "section": "The Claude Chat Context Stack",
+      "title": "The Claude Chat Context Stack",
+      "body": [
+        "<p>Claude Chat can use context in several different ways. Think of the features below as a context stack: each one changes what Claude can see, remember, retrieve, reuse, or produce.</p>"
+      ]
+    },
+    {
+      "tag": "The Claude Chat Context Stack",
+      "section": "The Claude Chat Context Stack",
+      "title": "1. Files: Context You Attach",
       "body": [
         "<p>Files let Claude work with material you provide, such as a policy draft, report, spreadsheet, meeting notes, or specification. Claude can summarize, compare, extract, rewrite, and answer questions about the content.</p>",
         "<p>Before adding a file, ask:</p>",
         "<ul><li>Is this file approved for use in Claude?</li><li>Does it contain personal data, confidential information, secrets, credentials, export-controlled content, or regulated information?</li><li>Is the whole file needed, or can I use a smaller approved excerpt?</li><li>Am I asking Claude to use the file as source material, or to follow instructions found inside it?</li></ul>",
-        "<p>Treat files as data. If a document, email, or webpage contains instructions that conflict with Sandvik policy or your actual goal, do not let those instructions override your intent. Generating files and text is easy to do with AI, but it is always more important to understand the content before using it.</p>",
-        "<p>Files can provide a lot of context, but more context is not automatically better. Give Claude clear instructions about which file matters most, what the file is, and what kind of output you need. Always verify that summaries, extracted facts, calculations, and recommendations match the source material.</p>"
+        "<p>Treat files as data. If a document, email, or webpage contains instructions that conflict with Sandvik policy or your actual goal, do not let those instructions override your intent. Give Claude clear instructions about which file matters most, what the file is, and what kind of output you need.</p>"
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "2. Projects",
+      "tag": "The Claude Chat Context Stack",
+      "section": "The Claude Chat Context Stack",
+      "title": "2. Projects: Context You Organize",
       "body": [
         "<p>Projects are focused Claude workspaces with their own chats, project knowledge, and project instructions. Use a project when you will return to the same topic or set of approved materials over time.</p>",
         "<p>Projects are useful for:</p>",
@@ -651,25 +668,24 @@ var COURSE = {
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "3. Chat History And Memory",
+      "tag": "The Claude Chat Context Stack",
+      "section": "The Claude Chat Context Stack",
+      "title": "3. Memory And Chat History: Context That May Carry Forward",
       "body": [
-        "<p>Being specific in your prompts helps Claude deliver better, more relevant responses. Longer chat sessions include more previous context, which can make replies richer but also increase the chance of drawing in unnecessary or outdated information. When you switch to a new topic, start a new chat to keep the context clean and relevant.</p>",
-        "<p>For example: if you are working on a product manual, it is more effective to upload and reference only the most recent approved version than to provide multiple drafts and revisions from earlier stages.</p>",
-        "<p>Memory and chat history can help Claude build on prior context when enabled. Availability and behavior depend on plan, product surface, and organization settings.</p>",
+        "<p>Longer chat sessions include more previous context, which can make replies richer but also increase the chance of drawing in unnecessary or outdated information. When you switch to a new topic, start a new chat to keep the context clean and relevant.</p>",
+        "<p>Memory and chat history can help Claude build on prior context when enabled. Note that memory is not a complete copy of every previous chat. Do not assume Claude remembers a policy, file, or prior decision unless it is visible or confirmed.</p>",
         "<p>Before relying on memory:</p>",
-        "<ul><li>Confirm whether memory is enabled for Sandvik users.</li><li>Check what type of information Claude may remember.</li><li>Do not assume Claude remembers a policy, file, or prior decision unless it is visible or confirmed.</li><li>For important work, provide the necessary context again.</li></ul>",
+        "<ul><li>Confirm whether memory is enabled for Sandvik users.</li><li>Check what type of information Claude may remember.</li><li>Provide important context again when accuracy matters.</li><li>Avoid letting old context override current approved source material.</li></ul>",
         "<p><code>[POLICY DECISION REQUIRED]</code> Memory and chat history: Sandvik must confirm enterprise settings for memory, chat history, retention, and user controls.</p>"
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "4. Connectors And Tool Access",
+      "tag": "The Claude Chat Context Stack",
+      "section": "The Claude Chat Context Stack",
+      "title": "4. Connectors And Tool Access: Context Claude Retrieves",
       "body": [
         "<p>Connectors let Claude connect to approved apps and services. A connector may let Claude retrieve data, search a system, or in some cases take actions in that service.</p>",
-        "<p>The practical idea is: connectors bring extra context into Claude Chat without you manually copying everything. Claude uses the connected service through the user&#x27;s own login and permissions. If the user cannot access a file, channel, record, or repository in the source system, the connector should not give Claude access to it either. This is permission-scoped access, not a replacement for Sandvik policy.</p>",
+        "<p>The practical idea is that connectors bring extra context into Claude Chat without you manually copying everything. Claude uses the connected service through your login and permissions. If you cannot access a file, channel, record, or repository in the source system, the connector should not give Claude access to it either. This is permission-scoped access, not a replacement for Sandvik policy.</p>",
         "<p>Examples, if approved by Sandvik:</p>",
         "<ul><li>A Microsoft 365 connector could help find or summarize work content the user is allowed to access.</li><li>A GitHub connector could help retrieve repository or issue context the user is allowed to access.</li><li>Another approved business connector could bring in task, ticket, document, or project information.</li></ul>",
         "<p>Good habits:</p>",
@@ -678,9 +694,9 @@ var COURSE = {
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "5. Skills",
+      "tag": "The Claude Chat Context Stack",
+      "section": "The Claude Chat Context Stack",
+      "title": "5. Skills: Reusable Instructions And Resources",
       "body": [
         "<p>Skills are not just saved prompts. Claude skills are reusable packages of instructions, scripts, and resources that Claude can load when relevant to a task. They help Claude perform specialized work more consistently.</p>",
         "<p>Skills can support workflows such as:</p>",
@@ -693,19 +709,21 @@ var COURSE = {
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "6. Artifacts",
+      "tag": "Artifacts And Sharing",
+      "section": "Artifacts And Sharing",
+      "title": "Artifacts And Sharing",
       "body": [
-        "<p>Artifacts are standalone outputs such as documents, diagrams, visualizations, code snippets, simple web pages, or interactive components. They are useful when the output is something you will edit, reuse, download, or share. It is especially good for visualizing and interacting with data.</p>",
-        "<p>Good habits:</p>",
-        "<ul><li>Treat artifacts as drafts until reviewed. Be sure to thoroughly understand where the information/data comes from before relying on it.</li><li>Check whether sharing an artifact also exposes underlying conversation context, attachments, or sensitive content.</li><li>Do not include sensitive Sandvik information in artifacts unless approved.</li></ul>"
+        "<p>Artifacts are standalone outputs such as documents, diagrams, visualizations, code snippets, simple web pages, or interactive components. They are useful when the output is something you will inspect, edit, download, reuse, or share.</p>",
+        "<p>For the steering-group update scenario, an artifact might be a one-page update, a table of decisions and risks, or a simple visual summary. Treat it as a draft until it has been reviewed against the source material and any relevant Sandvik policy.</p>",
+        "<p>Before sharing an artifact or downloaded output, check:</p>",
+        "<ul><li>Does it contain sensitive Sandvik information, personal data, confidential information, or restricted content?</li><li>Does sharing the artifact also expose related conversation context, attachments, links, or source material?</li><li>Does it need Legal, Brand, Data Protection, manager, or subject-matter review?</li><li>Is the output clearly marked as draft where appropriate?</li></ul>",
+        "<p>Do not include sensitive Sandvik information in artifacts unless approved. Do not treat an artifact as approved just because it looks polished.</p>"
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "7. Usage Limits",
+      "tag": "Work Efficiently And Manage Usage",
+      "section": "Work Efficiently And Manage Usage",
+      "title": "Work Efficiently And Manage Usage",
       "body": [
         "<p>Claude has two practical kinds of limits to understand:</p>",
         "<ul><li>Usage limits control how much you can use Claude over time.</li><li>Length or context limits control how much material Claude can work with in one conversation.</li></ul>",
@@ -713,8 +731,7 @@ var COURSE = {
         "<p>Sandvik&#x27;s 2026-06-16 intranet announcement says Claude Enterprise is consumption-based: there is a 350 SEK per user/month base fee, and usage costs are added depending on how much the service is used. The full cost is charged to the user&#x27;s cost center with no markup.</p>",
         "<p>Usage is not just a count of messages. It can be affected by:</p>",
         "<ul><li>The length of your conversation.</li><li>The size and number of files, project materials, or artifacts Claude uses.</li><li>The model, effort, or thinking settings available to you.</li><li>Tool use, web search, research, connectors, and other context-heavy features.</li><li>Reusing long chats instead of starting a focused new conversation.</li></ul>",
-        "<h3>Using Capacity Wisely</h3>",
-        "<p>Treat Claude usage as a limited work resource. Practical habits that can reduce repeated work:</p>",
+        "<p>Practical habits:</p>",
         "<ul><li>Start a new focused chat when the topic changes.</li><li>Use projects for approved materials you will reference repeatedly instead of re-uploading the same files.</li><li>Use project instructions for stable context such as preferred tone, terminology, or output structure.</li><li>Use approved skills for recurring workflows, formats, or visualizations where Sandvik allows them.</li><li>Reuse and edit an existing artifact when possible instead of regenerating a similar output from scratch.</li><li>Turn off web search, research, or connectors when they are not needed for the task.</li><li>Choose simpler model, effort, or thinking settings for routine work where available and appropriate.</li></ul>",
         "<p>These practices can save setup time and reduce unnecessary context, but they do not remove usage limits, Sandvik cost controls, or the need to review Claude&#x27;s outputs.</p>",
         "<p>When you reach a usage limit, Claude may stop accepting more work until the limit resets, or it may show options depending on your plan and organization settings. For Sandvik users, the practical rule is:</p>",
@@ -723,69 +740,54 @@ var COURSE = {
       ]
     },
     {
-      "tag": "How Claude Gets And Uses Context",
-      "section": "How Claude Gets And Uses Context",
-      "title": "8. Verification",
+      "tag": "Verification And Sandvik Policy",
+      "section": "Verification And Sandvik Policy",
+      "title": "Verification And Sandvik Policy",
       "body": [
         "<p>Claude can make mistakes. It may misunderstand the task, overlook details, rely on outdated information, or produce convincing but incorrect answers.</p>",
         "<p>Before relying on an output:</p>",
-        "<ul><li>Compare summaries against the original source.</li><li>Check numbers, dates, names, and legal or technical claims.</li><li>Ask Claude to list assumptions and uncertainties.</li><li>Use subject matter experts for high-impact decisions.</li><li>Keep accountability with the human owner, not the tool.</li></ul>"
+        "<ul><li>Compare summaries against the original source.</li><li>Check numbers, dates, names, and legal or technical claims.</li><li>Ask Claude to list assumptions, missing facts, and uncertainties.</li><li>Check whether the source material is current and approved for the purpose.</li><li>Use subject-matter experts for high-impact decisions.</li><li>Keep accountability with the human owner, not the tool.</li></ul>",
+        "<p>Policy is not something Claude can decide on its own. If you ask Claude to apply Sandvik policy, provide the approved policy or source and still review the result. If a policy item is not final in this module, follow the placeholder guidance and the current approved Sandvik route.</p>"
       ]
     },
     {
       "tag": "Practical Examples",
       "section": "Practical Examples",
-      "title": "Recent Information With Web Search",
+      "title": "Start With The Steering-Group Update",
       "body": [
-        "<pre>Find recent public news about [topic].\nUse web search if needed.\nSummarize the main developments and include links to the sources you used.\nSeparate confirmed facts from interpretation.</pre>"
+        "<pre>Rewrite the attached project notes into a one-page steering-group update.\nAudience: Sandvik steering group.\nUse only the attached notes.\nInclude: progress, decisions needed, risks, assumptions, and open questions.\nMark unsupported claims as [CHECK REQUIRED].\nFlag anything that may need Legal, Brand, Data Protection, or owner review.</pre>"
       ]
     },
     {
       "tag": "Practical Examples",
       "section": "Practical Examples",
-      "title": "Summarizing A Long Document",
+      "title": "Add An Approved Connector Carefully",
       "body": [
-        "<pre>Summarize the attached document for a non-technical Sandvik manager.\nUse only the document.\nReturn:\n1. Five key points\n2. Decisions needed\n3. Risks or assumptions\n4. Questions for the document owner</pre>"
+        "<pre>Using only the approved [connector name] connector, find the latest status information I can access about [project/topic].\nSummarize what you found and name the source location.\nDo not create, send, update, or delete anything.\nUse the connector result only as source context for the steering-group update.</pre>"
       ]
     },
     {
       "tag": "Practical Examples",
       "section": "Practical Examples",
-      "title": "Working In A Project",
+      "title": "Work In A Project",
       "body": [
-        "<pre>Use this project&#x27;s approved knowledge base and instructions.\nDraft a one-page update for the project steering group.\nInclude progress, risks, decisions needed, and open questions.\nIf the project knowledge does not answer something, say so.</pre>"
+        "<pre>Use this project&#x27;s approved knowledge base and project instructions.\nDraft a one-page update for the project steering group.\nIf the project knowledge does not answer something, say so.\nList any project files or instructions you relied on.</pre>"
       ]
     },
     {
       "tag": "Practical Examples",
       "section": "Practical Examples",
-      "title": "Using An Approved Connector",
+      "title": "Create An Artifact For Review",
       "body": [
-        "<pre>Using only the approved [connector name] connector, find the latest status information I can access about [topic].\nSummarize what you found and name the source location.\nDo not create, send, update, or delete anything.</pre>"
+        "<pre>Create a draft artifact with:\n1. One-page steering-group update\n2. Decision table\n3. Risk and assumption list\n\nKeep it clearly marked as draft.\nDo not add facts that are not in the approved source material.</pre>"
       ]
     },
     {
       "tag": "Practical Examples",
       "section": "Practical Examples",
-      "title": "Drafting A Message",
+      "title": "Verify Before Use",
       "body": [
-        "<pre>Draft a concise email to a project team.\nGoal: Explain that the deadline has moved from Friday to next Wednesday.\nTone: Clear, calm, and professional.\nInclude: reason, new deadline, what each person should do next.\nDo not blame any individual.</pre>"
-      ]
-    },
-    {
-      "tag": "Practical Examples",
-      "section": "Practical Examples",
-      "title": "Comparing Options",
-      "body": [
-        "<pre>Compare the three options below for a global operations team.\nUse a table with columns: Option, Benefits, Risks, Implementation effort, Open questions.\nIf information is missing, say so instead of guessing.</pre>"
-      ]
-    },
-    {
-      "tag": "Practical Examples",
-      "section": "Practical Examples",
-      "title": "Translating For Global Readers",
-      "body": [
-        "<pre>Translate this text into clear global English.\nKeep the meaning, simplify idioms, and avoid culture-specific phrasing.\nFlag any terms that may need Sandvik-approved terminology.</pre>"
+        "<pre>Review the draft against the source material.\nList:\n1. Claims that are directly supported\n2. Claims that need checking\n3. Names, dates, numbers, or commitments to verify\n4. Items that may need Legal, Brand, Data Protection, or owner review</pre>"
       ]
     },
     {
@@ -793,7 +795,7 @@ var COURSE = {
       "section": "Common Risks And Mistakes",
       "title": "Common Risks And Mistakes",
       "body": [
-        "<ul><li>Pasting more information than Claude needs.</li><li>Uploading context without explaining what it is or how Claude should use it.</li><li>Sending a vague &quot;vibe&quot; request when the task needs audience, source boundaries, constraints, and success criteria.</li><li>Treating a fluent answer as verified fact.</li><li>Asking Claude to apply a policy without providing the policy.</li><li>Using a connector just because it appears in the interface.</li><li>Assuming projects make sensitive information safe to upload or share.</li><li>Treating skills as automatic approval or fact-checking.</li><li>Sharing generated content externally without review.</li><li>Using private accounts or unapproved tools to avoid usage limits.</li><li>Asking for legal, HR, security, medical, or financial decisions without expert review.</li><li>Forgetting that human users remain accountable for outputs.</li></ul>"
+        "<ul><li>Treating a Claude Chat conversation as if it were a built, governed, reusable agent.</li><li>Pasting more information than Claude needs.</li><li>Uploading context without explaining what it is or how Claude should use it.</li><li>Sending a vague request when the task needs audience, source boundaries, constraints, and success criteria.</li><li>Treating a fluent answer as verified fact.</li><li>Asking Claude to apply a policy without providing the policy.</li><li>Using a connector just because it appears in the interface.</li><li>Assuming connector permissions replace Sandvik policy.</li><li>Assuming projects make sensitive information safe to upload or share.</li><li>Treating skills as automatic approval or fact-checking.</li><li>Sharing artifacts or downloaded outputs without checking what they expose.</li><li>Using private accounts or unapproved tools to avoid usage limits.</li><li>Asking for legal, HR, security, medical, or financial decisions without expert review.</li><li>Forgetting that human users remain accountable for outputs.</li></ul>"
       ]
     },
     {
@@ -811,7 +813,8 @@ var COURSE = {
       "section": "Recap",
       "title": "Recap",
       "body": [
-        "<p>Claude Chat is best when you want to think, write, analyze, and iterate with Claude. It can follow multi-step flows and use approved tools, but it still needs clear context, framed source material, practical specification, careful data choices, and human review. Know how limits and monthly spending approvals work, use projects, connectors, and skills only where approved, verify important outputs, and choose another Claude product when the work needs autonomous file/tool execution, coding, or visual design depth.</p>"
+        "<p>Claude Chat is best when you want to think, write, analyze, and iterate with Claude in a conversation. It is not the same as a built agent, but it can support agentic or tool-assisted chat when Claude works through steps, uses approved tools or connectors, brings back context, and continues from there.</p>",
+        "<p>The practical pattern is simple: choose Chat for the right kind of work, give clear context and boundaries, use the Claude Chat context stack deliberately, manage usage and cost, treat artifacts as drafts, verify important outputs, and follow Sandvik policy before sharing or relying on the result.</p>"
       ]
     },
     {
@@ -819,7 +822,7 @@ var COURSE = {
       "section": "Quiz Handoff",
       "title": "Quiz Handoff",
       "body": [
-        "<p>Complete the quiz after reading this module. The quiz checks practical decisions about context, framing instructions, specification, usage limits, data protection, projects, connectors, skills, artifacts, verification, and when to choose another Claude product.</p>"
+        "<p>Complete the quiz after reading this module. The quiz checks practical decisions about product choice, context, built agents versus agentic chat, connector use, files, projects, memory, skills, artifacts, usage limits, verification, sharing, and Sandvik accountability.</p>"
       ]
     }
   ],
@@ -828,196 +831,196 @@ var COURSE = {
       "id": "chat-q01",
       "prompt": "Which task is the best fit for Claude Chat?",
       "options": {
-        "A": "Autonomously editing many files across your desktop while you are away.",
-        "B": "Discussing a problem, drafting text, and iterating turn by turn.",
+        "A": "Discussing a problem, drafting text, analyzing source material, and iterating turn by turn.",
+        "B": "Autonomously editing many desktop files while you are away.",
         "C": "Deploying code to production without human review.",
         "D": "Publishing external Sandvik-branded design assets without approval."
       },
-      "answer": "B",
-      "correct": "Correct. Chat is best for interactive, turn-by-turn work.",
-      "incorrect": "Review when Chat is appropriate versus Cowork, Code, or Design."
+      "answer": "A",
+      "correct": "Correct. Chat is best for interactive, turn-by-turn thinking, drafting, and analysis.",
+      "incorrect": "Review when Chat is appropriate versus Cowork, Code, Design, or another approved tool."
     },
     {
       "id": "chat-q02",
-      "prompt": "In this module, what does agentic AI usually mean in practical terms?",
+      "prompt": "In this module, what is the clearest difference between an agent and agentic chat?",
       "options": {
-        "A": "Claude is always fully autonomous and no longer needs user review.",
-        "B": "Claude may follow a multi-step flow, sometimes using tools and returned context.",
-        "C": "Claude only answers from its original training data.",
-        "D": "Claude can ignore Sandvik policy if a tool is available."
+        "A": "An agent is any answer Claude gives in one message; agentic chat means no tools are used.",
+        "B": "An agent removes the need for Sandvik governance; agentic chat removes the need for review.",
+        "C": "An agent is a built, reusable tool with instructions and data sources; agentic chat is Claude working through steps in a conversation, sometimes with approved tools or connectors.",
+        "D": "There is no difference, so the terms should always be used interchangeably."
       },
-      "answer": "B",
-      "correct": "Correct. Agentic flows can involve multiple steps, tools, and returned context.",
-      "incorrect": "Agentic does not remove user control, policy, or review."
+      "answer": "C",
+      "correct": "Correct. Agent is the built reusable thing; agentic chat is the multi-step behavior inside a conversation.",
+      "incorrect": "Do not use agent and agentic chat interchangeably in this module."
     },
     {
       "id": "chat-q03",
-      "prompt": "What makes a Claude Chat prompt stronger?",
+      "prompt": "What makes a Claude Chat request stronger?",
       "options": {
-        "A": "It only says make this better.",
-        "B": "It includes goal, context, constraints, output format, and checks.",
-        "C": "It asks Claude to decide all policies on its own.",
-        "D": "It hides the audience and purpose."
+        "A": "It includes context, boundaries, output instructions, and review points.",
+        "B": "It only says make this better.",
+        "C": "It asks Claude to decide all Sandvik policies on its own.",
+        "D": "It hides the audience and source material."
+      },
+      "answer": "A",
+      "correct": "Correct. Context, boundaries, output instructions, and review points make the request easier to steer and verify.",
+      "incorrect": "A strong Claude Chat request should not leave audience, source material, output, or review needs implicit."
+    },
+    {
+      "id": "chat-q04",
+      "prompt": "You want to use a connector while preparing a steering-group update. What is the safest approach?",
+      "options": {
+        "A": "Turn on every connector so Claude has as much context as possible.",
+        "B": "Use only an approved connector, keep the request narrow, review what Claude can access or do, and verify the returned source context.",
+        "C": "Assume connector permissions replace Sandvik policy.",
+        "D": "Let Claude create, send, update, or delete records without review."
       },
       "answer": "B",
-      "correct": "Correct. Clear prompts reduce rework and uncertainty.",
-      "incorrect": "A strong prompt includes goal, context, constraints, output format, and checks."
+      "correct": "Correct. Connector use should be approved, narrow, permission-aware, and reviewed.",
+      "incorrect": "Connector availability does not override Sandvik policy or human review."
     },
     {
       "id": "chat-q05",
       "prompt": "What should a Sandvik user do if they hit a Claude usage limit during business work?",
       "options": {
         "A": "Move the work to a private account to continue immediately.",
-        "B": "Wait for the reset or use the intranet form to request a higher monthly spending limit with cost-approver approval.",
+        "B": "Ask a colleague to use their account for the same work.",
         "C": "Paste less accurate information so the task uses fewer tokens.",
-        "D": "Ask a colleague to use their account for the same work."
+        "D": "Wait for the reset, reduce unnecessary context or tool use, or use the intranet form to request a higher monthly usage or spending limit with cost-approver approval."
       },
-      "answer": "B",
-      "correct": "Correct. Follow the approved intranet path or wait for the reset.",
-      "incorrect": "Do not work around limits using private accounts or unapproved access."
+      "answer": "D",
+      "correct": "Correct. Use the approved limit-reset, scope-reduction, or intranet request path.",
+      "incorrect": "Do not work around limits using private accounts, colleague accounts, or unapproved access."
     },
     {
       "id": "chat-q06",
       "prompt": "Which activity can use more of a Claude usage limit?",
       "options": {
-        "A": "Long conversations, large files, tool use, connectors, or higher effort settings.",
+        "A": "Long conversations, large files, project materials, artifacts, tool use, connectors, or higher effort settings.",
         "B": "Only clicking the Send button.",
-        "C": "Only messages that include more than one question mark.",
-        "D": "Only chats that mention Sandvik."
+        "C": "Only chats that mention Sandvik.",
+        "D": "Only messages that include more than one question mark."
       },
       "answer": "A",
-      "correct": "Correct. More context, tools, and effort can consume more usage.",
+      "correct": "Correct. More context, tools, artifacts, and higher effort settings can consume more usage.",
       "incorrect": "Usage is affected by more than just the number of messages."
     },
     {
       "id": "chat-q07",
-      "prompt": "How should users treat connectors in Claude Chat?",
-      "options": {
-        "A": "Use any connector if it appears in the interface.",
-        "B": "Use only approved connectors and review what Claude can access or do.",
-        "C": "Turn on all connectors to improve every answer.",
-        "D": "Assume connector permissions replace Sandvik policy."
-      },
-      "answer": "B",
-      "correct": "Correct. Connectors require approval and careful access review.",
-      "incorrect": "Connector availability does not override Sandvik policy."
-    },
-    {
-      "id": "chat-q08",
       "prompt": "What does it mean that a connector uses the user's permissions?",
       "options": {
-        "A": "Claude should only access what the connected user can already access in that service.",
-        "B": "Claude gets administrator access to all company systems.",
-        "C": "Sensitive data rules no longer apply.",
-        "D": "Every colleague can see the same connector results."
+        "A": "Claude gets administrator access to all company systems.",
+        "B": "Sensitive data rules no longer apply.",
+        "C": "Every colleague can see the same connector results.",
+        "D": "Claude should only access what the connected user can already access in that service."
       },
-      "answer": "A",
-      "correct": "Correct. Connector access is scoped to the connected user's permissions.",
+      "answer": "D",
+      "correct": "Correct. Connector access should be scoped to the connected user's permissions.",
       "incorrect": "Per-user permissions do not grant universal or policy-free access."
     },
     {
-      "id": "chat-q09",
-      "prompt": "What is a Claude skill?",
-      "options": {
-        "A": "A reusable package of instructions, scripts, and resources Claude can load for a task.",
-        "B": "A guarantee that Claude's output is approved and correct.",
-        "C": "Only a saved one-line prompt.",
-        "D": "A way to bypass project and connector permissions."
-      },
-      "answer": "A",
-      "correct": "Correct. Skills help Claude apply repeatable workflows.",
-      "incorrect": "A skill is more than a saved prompt and does not guarantee correctness."
-    },
-    {
-      "id": "chat-q10",
-      "prompt": "What is a Claude project useful for?",
-      "options": {
-        "A": "Creating a focused workspace with related chats, knowledge, and instructions.",
-        "B": "Making any uploaded information safe automatically.",
-        "C": "Removing the need to verify outputs.",
-        "D": "Giving every Sandvik user access to the same files."
-      },
-      "answer": "A",
-      "correct": "Correct. Projects organize related work and context.",
-      "incorrect": "Projects do not make sensitive information automatically safe."
-    },
-    {
-      "id": "chat-q11",
+      "id": "chat-q08",
       "prompt": "You want to upload a file that may contain sensitive personal data. What should you do first?",
       "options": {
-        "A": "Upload it and ask Claude whether it was sensitive.",
-        "B": "Remove the names only and continue.",
-        "C": "Check Sandvik policy and use only approved, minimized information.",
-        "D": "Move it into a project so it becomes safe."
+        "A": "Check Sandvik policy and use only approved, minimized information.",
+        "B": "Upload it and ask Claude whether it was sensitive.",
+        "C": "Move it into a project so it becomes safe.",
+        "D": "Remove names only and continue without further review."
       },
-      "answer": "C",
+      "answer": "A",
       "correct": "Correct. Check policy and minimize data before using Claude.",
       "incorrect": "Sensitive data requires policy review and minimization before use."
     },
     {
-      "id": "chat-q13",
+      "id": "chat-q09",
+      "prompt": "What is a Claude project useful for?",
+      "options": {
+        "A": "Making any uploaded information safe automatically.",
+        "B": "Removing the need to verify outputs.",
+        "C": "Creating a focused workspace with related chats, approved knowledge, and project instructions.",
+        "D": "Giving every Sandvik user access to the same files."
+      },
+      "answer": "C",
+      "correct": "Correct. Projects organize related work, approved knowledge, and instructions.",
+      "incorrect": "Projects do not make sensitive information automatically safe or approved."
+    },
+    {
+      "id": "chat-q10",
+      "prompt": "What is a Claude skill?",
+      "options": {
+        "A": "A guarantee that Claude's output is approved and correct.",
+        "B": "Only a saved one-line prompt.",
+        "C": "A way to bypass project and connector permissions.",
+        "D": "A reusable package of instructions, scripts, and resources Claude can load for a task."
+      },
+      "answer": "D",
+      "correct": "Correct. Skills help Claude apply repeatable workflows.",
+      "incorrect": "A skill is more than a saved prompt and does not guarantee correctness."
+    },
+    {
+      "id": "chat-q11",
       "prompt": "What is a key risk when sharing a Claude artifact?",
       "options": {
-        "A": "Artifacts can never be edited.",
-        "B": "The artifact or related context may expose information that needs review.",
+        "A": "The artifact or related conversation context, attachments, links, or source material may expose information that needs review.",
+        "B": "Artifacts can never be edited.",
         "C": "Artifacts are automatically approved by Brand.",
-        "D": "Artifacts cannot contain code or diagrams."
+        "D": "Artifacts cannot contain tables, diagrams, or code snippets."
       },
-      "answer": "B",
+      "answer": "A",
       "correct": "Correct. Shared outputs can expose content that needs review.",
       "incorrect": "Artifacts are drafts and may contain sensitive or unapproved information."
     },
     {
-      "id": "chat-q14",
+      "id": "chat-q12",
       "prompt": "When should a user consider Claude Code instead of Claude Chat?",
       "options": {
-        "A": "When the task requires repository inspection, code edits, tests, or development tooling.",
-        "B": "When the task is a short email draft.",
-        "C": "When the task is brainstorming meeting topics.",
-        "D": "When the task is translating a paragraph."
+        "A": "When the task is a short email draft.",
+        "B": "When the task requires repository inspection, code edits, tests, or development tooling.",
+        "C": "When the task is translating a paragraph.",
+        "D": "When the task is brainstorming meeting topics."
       },
-      "answer": "A",
+      "answer": "B",
       "correct": "Correct. Codebase work belongs in Claude Code.",
       "incorrect": "Claude Code is for repository and development workflows."
     },
     {
-      "id": "chat-q15",
-      "prompt": "What should you do if Claude's output seems useful but possibly incomplete?",
+      "id": "chat-q13",
+      "prompt": "What should you do if Claude's output seems useful but may be incomplete?",
       "options": {
-        "A": "Ask for assumptions, missing facts, and what should be verified.",
-        "B": "Treat it as final because it saved time.",
-        "C": "Publish it and fix issues later.",
+        "A": "Treat it as final because it saved time.",
+        "B": "Publish it and fix issues later.",
+        "C": "Ask for assumptions, missing facts, uncertainties, and what should be verified against the source.",
         "D": "Ask Claude to make it sound more confident."
       },
-      "answer": "A",
-      "correct": "Correct. Ask for assumptions, gaps, and verification needs.",
-      "incorrect": "Useful output still needs review when context may be incomplete."
+      "answer": "C",
+      "correct": "Correct. Useful output still needs assumptions, gaps, uncertainties, and source checks.",
+      "incorrect": "Do not turn uncertainty into confidence without verification."
     },
     {
-      "id": "chat-q17",
-      "prompt": "Which prompt is closest to a useful specification?",
+      "id": "chat-q14",
+      "prompt": "Which prompt is closest to a useful specification for a steering-group update?",
       "options": {
-        "A": "Write an update.",
-        "B": "Make this sound better.",
-        "C": "Write a one-page steering group update using only the attached notes; include status, decisions, risks, assumptions, and mark missing facts as [CHECK REQUIRED].",
+        "A": "Write a one-page steering-group update using only the attached notes; include progress, decisions, risks, assumptions, and mark missing facts as [CHECK REQUIRED].",
+        "B": "Write an update.",
+        "C": "Make this sound better.",
         "D": "Create something impressive from all available context."
       },
-      "answer": "C",
+      "answer": "A",
       "correct": "Correct. A useful specification defines source boundaries, output, required content, and checks.",
       "incorrect": "Move from a vague request to a clear specification."
     },
     {
-      "id": "chat-q18",
-      "prompt": "When is conditional logic useful in a Claude Chat prompt?",
+      "id": "chat-q15",
+      "prompt": "What is the best final gate before using Claude output in business communication or decisions?",
       "options": {
-        "A": "When the task has different possible cases and Claude should handle each case differently.",
-        "B": "Only when writing software code.",
-        "C": "When you want Claude to ignore source boundaries.",
-        "D": "When you want to avoid human review."
+        "A": "A more confident writing style.",
+        "B": "Human review against the source material, policy requirements, and any subject-matter expertise needed.",
+        "C": "A project workspace, because projects make all outputs approved.",
+        "D": "A connector result, because connector output never needs checking."
       },
-      "answer": "A",
-      "correct": "Correct. If/then instructions help Claude handle real-world variation.",
-      "incorrect": "Conditional logic is useful beyond code when tasks have branches."
+      "answer": "B",
+      "correct": "Correct. Humans remain accountable for business communication and decisions.",
+      "incorrect": "Neither polished wording, projects, nor connectors replace human review."
     }
   ]
 };
