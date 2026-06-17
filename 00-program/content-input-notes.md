@@ -2,7 +2,7 @@
 
 Status: working notes  
 Created: 2026-06-14  
-Updated: 2026-06-16
+Updated: 2026-06-17
 Purpose: capture the initial content direction before drafting or revising modules.
 
 ## Training Purpose
@@ -64,25 +64,49 @@ These items should not be treated as final policy or final product behavior unti
 
 ## Notes From Old Assets
 
-### AI Fluency Journey Map: `old-assets/AI e-learnings.png`
+### AI Fluency Journey Source: `old-assets/Sandvik/AI Fluency Journey.docx`
 
 Useful program context:
 
-- The Claude Chat module appears to sit inside the broader AI Fluency Journey as a tool module, not as one of the foundation courses.
-- The foundation fluency courses already cover general AI introduction, getting started, Copilot basics, building an agent, and continued learning.
-- Separate journeys exist for AI Champions, Developers, and Leaders, with their own foundation courses and tool modules.
-- Claude Code belongs more naturally in the Developer Journey; Claude Cowork and Design may appear in Champion or Leader tool modules depending on the audience.
-- The maturity model shown in the image moves from Unaware, to Use, to Embed, to Normalize.
+- The AI Fluency foundation journey contains five courses: Introduction: Why AI Fluency; Getting Started: Safe & Smart Use; Copilot Basic; Build Your Own Agent; Keep Going.
+- The foundation already teaches why AI fluency matters, safe and responsible AI use, approved-tool thinking, basic prompting habits, everyday Copilot Chat use cases, hallucination/verification, first-agent building, community participation, and how tool modules work.
+- The old course copy describes tool modules as focused introductions that appear based on tool access or license. Each tool module should explain what is different about that tool, when to use it, and how to access it.
+- The "Keep Going" course positions tool modules as going wider, while the AI Champion path goes deeper into building AI tools for others.
+- The AI Champion foundation contains Welcome AI Champion, Building for Others, and Multiplier Mindset. It covers the Champion role, CoE/community support, governance for shared agents, publishing paths, data classification checks, org-wide review, cost responsibility, maintenance, and multiplier behavior.
+
+### AI Journey Map: `old-assets/Sandvik/AI e-learnings.png`
+
+Useful program context:
+
+- The map shows four tracks: AI Fluency Journey, AI Champion Journey, Developer Journey, and Leader Journey.
+- The maturity model moves from Unaware (0), to Use (1), to Embed (2), to Normalize (3).
+- Claude Chat appears as a Tool Module - Fluency item.
+- Claude Code appears as a Tool Modules - Builder item in the Developer Journey.
+- Claude Cowork and Design appear in Champion and Leader tool-module areas, depending on audience and use case.
+- The map labels Fluency and Champion journeys as created, with Developer and Leader journeys to complete with additional material.
 
 Implications for Claude access modules:
 
 - Do not turn the Claude Chat module into a general AI fluency course. Keep it tool-specific, practical, and tied to ordering/provisioning.
-- Avoid over-teaching broad prompt engineering if that is already handled in the AI Fluency Journey foundation courses.
-- Keep the "red thread" for Claude Chat focused on: when to use Chat, why context matters, how agentic tool use works, how connectors bring in approved work context, and how to use Claude-specific features responsibly.
+- Avoid over-teaching broad prompt engineering, responsible AI basics, hallucination basics, or what an AI agent is if those concepts are already handled in the AI Fluency foundation. Include short recaps only where a standalone module requires them.
+- Keep the "red thread" for Claude Chat focused on: what is different about Claude Chat, when to use Chat, why context matters specifically in Claude, how agentic tool use works, how connectors bring in approved work context, and how to use Claude-specific features responsibly.
 - If general concepts are needed, explain them briefly only to support Claude usage.
-- Treat the journey map as planning context, not a final policy or product-availability source.
+- Treat the journey map and Word document as planning context, not final Sandvik-wide policy or product-availability sources.
+- If the Claude module mentions support paths, align with the old-assets pattern but mark final routes as placeholders until confirmed: AI Fluency community, Data & AI SharePoint, Service Portal/IT Service Desk, AI Champions, and Agentic Automation CoE.
 
-### Sandvik Organization Context: `old-assets/Quick Sandvik org levels.png`
+### Module 1 Coherence Implications
+
+The current Claude Chat module has the right ingredients but can become more coherent if it behaves more explicitly like a tool module:
+
+- Open by saying what Claude Chat adds beyond the foundation: a Claude-specific conversational workspace, files, projects, memory, connectors, skills, artifacts, and usage/cost behavior.
+- Keep prompt guidance short and practical. The foundation already teaches context, specificity, iteration, and checking output.
+- Reframe the feature catalog around one idea: "Claude is useful when you give it the right context, and these features are different ways context enters, stays organized, is retrieved, or becomes an output."
+- Place agentic AI as the bridge between context and tools, not as a separate theory lesson.
+- Use one recurring Sandvik work scenario across examples, such as preparing a steering-group update from approved notes and connector context, so the module feels like a guided workflow rather than separate mini-lessons.
+- Move usage/cost awareness near the end under "working efficiently" so it does not interrupt the context/tool story.
+- Keep policy reminders embedded in user decisions: "Can I upload this?", "Can this connector access it?", "Can I share this artifact?", "What do I need to verify?"
+
+### Sandvik Organization Context: `old-assets/Personal/Quick Sandvik org levels.png`
 
 Useful program context:
 
@@ -100,7 +124,7 @@ Implications for examples and scenarios:
 - Avoid implying that one division's workflow, terminology, or approved tools automatically apply to all of Sandvik.
 - Treat the org-level image as orientation for scenario design, not as an authoritative org chart.
 
-### Echandia PPT: `old-assets/Agentic AI usage & Claude.pptx`
+### Echandia PPT: `old-assets/Personal/Agentic AI usage & Claude.pptx`
 
 Useful content patterns:
 
@@ -122,7 +146,7 @@ Reusable ideas for Sandvik:
 - Use connector examples as optional or conditional content until Sandvik confirms the implementation.
 - Include prompt injection guidance for emails, documents, repositories, and connector data: treat retrieved content as data, not as instructions.
 
-### B3 SCORM: `old-assets/index.html`
+### B3 SCORM: `old-assets/Personal/index.html`
 
 Useful content patterns:
 

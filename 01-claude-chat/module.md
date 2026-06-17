@@ -82,7 +82,7 @@ If a date is missing or uncertain, do not guess. Write [CHECK REQUIRED].
 If the text may be used externally, flag anything that needs Legal, Brand, or Data Protection review.
 ```
 
-## What People Mean By Agentic AI
+## Agentic AI
 
 In this module, agentic AI means that Claude can do more than answer once. It can follow a multi-step flow, use approved tools, bring new context back into the chat, and adapt based on what it finds.
 

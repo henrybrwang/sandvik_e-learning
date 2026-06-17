@@ -4,7 +4,7 @@ version: "0.2"
 language: "en"
 recommended_duration_minutes: 40
 passing_score: 80
-question_bank_size: 12
+question_bank_size: 13
 questions_to_serve: 8
 retakes: "unlimited"
 randomize_questions: true
@@ -154,6 +154,18 @@ questions:
         text: "They allow deployment without review."
       - key: "D"
         text: "They make secrets safe to paste."
+  - id: "code-q13"
+    type: "multiple_choice"
+    prompt: "A non-developer has used Claude Code to create a useful local prototype. What should happen before it becomes a shared Sandvik solution?"
+    options:
+      - key: "A"
+        text: "Move from casual experimentation to the normal Sandvik process: define ownership, review data and security risks, test it, and use the approved deployment route such as central deployment through Sandvik Group IT."
+      - key: "B"
+        text: "Deploy it immediately because it worked in a demo."
+      - key: "C"
+        text: "Add production data to make Claude improve it faster."
+      - key: "D"
+        text: "Avoid telling anyone it was built with AI."
 answers:
   code-q01: "A"
   code-q02: "C"
@@ -167,6 +179,7 @@ answers:
   code-q10: "A"
   code-q11: "B"
   code-q12: "A"
+  code-q13: "A"
 feedback:
   code-q01:
     correct: "Correct. Inspect first, then review the plan or specification before implementation."
@@ -204,3 +217,6 @@ feedback:
   code-q12:
     correct: "Correct. Review loops combine AI assistance with independent checks and human accountability."
     incorrect: "Review loops support human accountability; self-review alone is not independent review."
+  code-q13:
+    correct: "Correct. A useful prototype needs ownership, data and security review, testing, approvals, and the approved deployment path before shared use."
+    incorrect: "A working prototype is not automatically ready for shared Sandvik use or deployment."

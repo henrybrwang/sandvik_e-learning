@@ -6,7 +6,10 @@ Use this checklist for every module before publishing.
 
 - Learning objectives match the product being ordered.
 - The module is understandable without completing another module first.
+- The module fits the Sandvik AI Fluency tool-module model: it briefly recaps foundation concepts only when needed and focuses on what is different about the specific tool.
+- The module has a coherent learning spine rather than a disconnected feature catalog.
 - Examples are realistic for Sandvik users.
+- At least one practical example or scenario shows the tool in a realistic Sandvik workflow from request to review.
 - The module avoids unsupported claims about Claude behavior, pricing, or availability.
 - Instructions distinguish product capability from Sandvik policy.
 
@@ -16,6 +19,7 @@ Use this checklist for every module before publishing.
 - Availability statements are dated or marked for recheck.
 - Tool, connector, file, and browser capabilities are described conservatively.
 - Product-specific risks are included.
+- The module clearly distinguishes this product from adjacent tools in the AI Fluency landscape, such as Microsoft 365 Copilot, GitHub Copilot, Copilot Studio, or another Claude product, where relevant.
 
 ## Policy And Risk
 
@@ -24,6 +28,7 @@ Use this checklist for every module before publishing.
 - Human review is required before using outputs for high-impact decisions.
 - External sharing and publication rules are clear.
 - Incident reporting path is present or marked as a placeholder.
+- Support paths such as AI Fluency community, Data & AI SharePoint, Service Portal/IT Service Desk, AI Champions, or Agentic Automation CoE are confirmed or clearly marked as placeholders.
 
 ## Quiz
 

@@ -6,9 +6,25 @@ This program gives Sandvik users the minimum required knowledge to use the Claud
 
 ## Relationship To The AI Fluency Program
 
-The Claude access modules should be treated as tool-specific modules within the broader Sandvik AI Fluency learning landscape. Planning material in `old-assets/AI e-learnings.png` shows that general AI fluency and foundational prompt/context skills are covered elsewhere in the journey. The Claude modules should therefore focus on what each Claude product contains, when to use it, how its tool access works, and what responsibilities apply before provisioning.
+The Claude access modules should be treated as tool-specific modules within the broader Sandvik AI Fluency learning landscape. The current Sandvik old-assets context is:
 
-For Claude Chat specifically, the learning spine should be: when to use Chat, why context matters, how agentic tool use works, how connectors bring in approved work context, and how Claude-specific features such as files, projects, skills, artifacts, usage limits, and verification work.
+- `old-assets/Sandvik/AI Fluency Journey.docx`: current e-learning program source material for the AI Fluency foundation and AI Champion foundation.
+- `old-assets/Sandvik/AI e-learnings.png`: journey map showing how foundation courses, role journeys, and tool modules fit together.
+
+The journey map shows four tracks:
+
+- AI Fluency Journey for everyone, moving from L0 to L2.
+- AI Champion Journey for approved AI Champions, moving from L2 to L3.
+- Developer Journey for AI-assisted development, moving from L2 to L3.
+- Leader Journey for AI decision making, moving from L2 to L3.
+
+The AI Fluency foundation courses already cover the broad concepts: why AI fluency matters, safe and smart use, Copilot basics, building a first agent, and keeping fluency alive through community and additional tool modules. The AI Champion foundation covers building for others, governance, publishing paths, data classification principles, cost responsibility, maintenance, and multiplier behavior.
+
+Tool modules are intended to sit beside those foundations. They should be focused introductions to a specific tool, distributed based on access or license, and should explain what is different about that tool, when to use it, what hands-on workflows it supports, and what responsibilities apply. They should not become general AI awareness courses.
+
+For Claude Chat specifically, the learning spine should be: when to use Chat, what is different from the general AI Fluency foundation and Copilot-style chat, how Claude uses context, how tool-assisted or agentic chat works, how approved connectors bring in work context, how Claude-specific features such as files, projects, memory, skills, artifacts, usage limits, and verification work, and when another Claude product or non-Claude tool is a better fit.
+
+The old-assets material is partly Sandvik Coromant-specific. This repository should adapt reusable program structure to Sandvik-wide Claude Enterprise training and keep final policy, access, and approval claims tied to current Sandvik sources.
 
 ## User Journey
 
@@ -44,20 +60,26 @@ Training should continue to avoid private-account workarounds. If a user reaches
 ## Program Principles
 
 - Keep modules practical, role-specific, and tied to the product being ordered.
+- Keep each module in the tool-module pattern: what this tool is, when to use it, what is different, how to start safely, and what decisions the user must make.
 - Avoid duplicating general AI Fluency foundation courses unless a concept is needed to explain the Claude product.
+- When a foundation concept is necessary, use a short recap and immediately connect it to the Claude-specific behavior.
+- Prefer one coherent scenario thread per module over a catalog of unrelated examples.
 - Make Sandvik policy visible but clearly separated from product facts.
 - Use official Claude and Anthropic sources for product capabilities.
 - Avoid promising availability, cost, or admin behavior beyond confirmed Sandvik communication.
 - Prefer short examples that users can adapt immediately.
 - Make quiz questions test decisions users will actually face.
+- Route users to the AI Fluency community, Data & AI SharePoint, Service Portal/IT Service Desk, AI Champions, or the Agentic Automation CoE only where the final Sandvik support path has been confirmed or clearly marked as a placeholder.
 
 ## Scenario And Organization Context
 
-Planning material in `old-assets/Quick Sandvik org levels.png` shows examples across Group, Business Areas, and Divisions/Brands. Module examples should be written so they work across Sandvik unless a specific scenario requires a named organizational level. When examples involve connectors, access, approvals, or data visibility, they should avoid implying that one Business Area, division, function, or team has the same systems and permissions as another.
+Planning material in `old-assets/Personal/Quick Sandvik org levels.png` shows examples across Group, Business Areas, and Divisions/Brands. Module examples should be written so they work across Sandvik unless a specific scenario requires a named organizational level. When examples involve connectors, access, approvals, or data visibility, they should avoid implying that one Business Area, division, function, or team has the same systems and permissions as another.
 
 ## Module Independence
 
 Each module must stand alone because users order Claude Chat, Claude Cowork, Claude Code, and Claude Design separately. Shared concepts can be referenced from `90-shared/`, but a user should not need to complete another module to understand the one they ordered.
+
+At the same time, the old-assets journey model assumes tool modules build on a foundation. To reconcile those needs, each Claude module should include only a brief foundation recap, then spend most of its time on Claude-specific tool behavior, Sandvik access and policy boundaries, practical examples, and product-choice decisions.
 
 ## Roles And Responsibilities
 

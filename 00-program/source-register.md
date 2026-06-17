@@ -2,13 +2,16 @@
 
 Official Claude/Anthropic sources checked on: 2026-06-16
 
-Sandvik internal source context added on: 2026-06-16
+Sandvik internal source context last added on: 2026-06-17
 
 Use official Claude and Anthropic sources as the baseline for product facts. Recheck sources quarterly and before release.
 
 | ID | Source | Official URL | Used For | Notes |
 | --- | --- | --- | --- | --- |
 | SANDVIK-001 | Sandvik intranet post: "Introducing Claude Enterprise" | Internal Sandvik intranet, published 2026-06-16 | Sandvik launch timing, ordering, product list, license and usage-cost model, cost-center charging, and monthly cap approval context | Internal source. Planned launch is 2026-06-30; licenses are not issued before launch and launch may be delayed. Add the final intranet link when available. |
+| SANDVIK-002 | Course-owner guidance from module editing session | Internal working guidance, 2026-06-17 | Claude Code safe experimentation for non-developers and draft central deployment route through Sandvik Group IT | Draft guidance. Validate against the final Sandvik Group IT deployment process before publication. |
+| SANDVIK-003 | `old-assets/Sandvik/AI Fluency Journey.docx` | Internal Sandvik e-learning planning asset, checked 2026-06-17 | Current AI Fluency foundation and AI Champion course structure, tool-module model, community and CoE handoff, governance principles for shared agents | Treat as program-structure context. Do not use as final Sandvik Group policy without owner confirmation, especially where the asset is Sandvik Coromant-specific. |
+| SANDVIK-004 | `old-assets/Sandvik/AI e-learnings.png` | Internal Sandvik journey map image, checked 2026-06-17 | Journey map for Fluency, Champion, Developer, and Leader tracks; maturity levels; placement of Claude tool modules | Treat as program-structure context. It shows planned and existing modules, not guaranteed tool availability. |
 | AGENT-001 | Anthropic Building effective agents article | https://www.anthropic.com/engineering/building-effective-agents | Agentic AI framing, workflows versus agents, tool-use explanation | Use only for plain-language concepts in end-user modules; avoid developer implementation detail. |
 | ENT-001 | Claude Enterprise plan help article | https://support.claude.com/en/articles/9797531-what-is-the-claude-enterprise-plan | Enterprise security, admin, usage, connectors, and billing context | Recheck before publishing because enterprise packaging and usage terms can change. |
 | CHAT-001 | Claude artifacts help article | https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them | Chat and Design artifact concepts, export, sharing, storage, and MCP considerations | Product capabilities may vary by plan and admin settings. |

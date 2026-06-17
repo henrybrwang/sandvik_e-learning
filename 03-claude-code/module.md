@@ -2,7 +2,7 @@
 
 Estimated duration: 35-45 minutes  
 Completion: scored quiz  
-Audience: Sandvik developers and technical builders ordering Claude Code
+Audience: Sandvik developers, technical builders, and approved users ordering Claude Code, including non-developers exploring simple coding tasks
 
 > Claude can help accelerate work, but users remain responsible for what they enter, approve, share, and publish. Follow Sandvik policy, protect sensitive information, and review outputs before relying on them.
 
@@ -10,7 +10,7 @@ Audience: Sandvik developers and technical builders ordering Claude Code
 
 Claude Code is an agentic coding system for working with software projects. It can inspect codebases, propose plans, edit files, run commands, execute tests, investigate failures, and support development workflows.
 
-This module is for developers, technical builders, and approved users who need Claude to work inside or alongside code repositories.
+This module is for developers, technical builders, and approved users who need Claude to work inside or alongside code repositories. It also supports approved non-developers who want to learn the basics, build small personal helpers, or prototype an idea safely.
 
 At Sandvik, Claude Code is one of the selectable tools under the Claude Enterprise license. It complements GitHub Copilot for development use cases and is intended for agentic coding workflows, advanced debugging, scripting, and complex technical work where repository and terminal access are useful.
 
@@ -21,7 +21,9 @@ The central skill is not "let Claude write code." The central skill is deciding 
 After this module, users should be able to:
 
 - Decide when Claude Code is the right product.
+- Explain how non-developers can safely experiment with Claude Code for learning, simple personal tools, one-time apps, and prototypes.
 - Choose the right level of process for throwaway, experimental, shared, or production-bound work.
+- Recognize why casual "vibe coding" is not appropriate for important systems without ownership, design decisions, tests, and review.
 - Start with safe repository access and a clear goal.
 - Use plan mode or equivalent review steps to create a specification before implementation.
 - Use project instruction files such as `CLAUDE.md` and `AGENTS.md` effectively.
@@ -30,6 +32,7 @@ After this module, users should be able to:
 - Use tests, code review, CI, and independent review loops as verification.
 - Recognize the limits of AI-written tests and AI self-review.
 - Apply Sandvik engineering guardrails before release.
+- Identify when a prototype needs a Sandvik-approved deployment path, including central options through Sandvik Group IT.
 - Understand that longer or more complex Claude Code work can increase pay-as-you-go usage.
 
 ## How To Start Claude Code
@@ -49,6 +52,7 @@ Use your Sandvik-approved Claude Enterprise account. Do not move Sandvik work in
 Use Claude Code when:
 
 - You need help understanding an unfamiliar codebase.
+- You want to explore coding through a small, low-risk local app, helper, or prototype.
 - You need to implement a change across files.
 - You want tests, linting, or build output interpreted and fixed.
 - You need help with refactoring, migration, documentation, or CI failure analysis.
@@ -59,6 +63,18 @@ Use another Claude product when:
 - The task is discussion, writing, or analysis without code edits: use Claude Chat.
 - The task is office-document or desktop workflow delegation: use Claude Cowork.
 - The main task is visual concept, prototype, slide, or design exploration: use Claude Design.
+
+## How To Think About Claude Code
+
+Claude Code is worth trying even if you are not a professional developer. For approved users, it can be a good way to dip your toes into coding, explore how software is built, and create simple personal apps, one-time or few-time helpers, scripts, and prototypes.
+
+The safe boundary is the same as for any other software work: keep experiments low-risk. A local helper is a good experiment when it does not use secrets, production data, customer data, employee data, payment data, restricted company information, or external systems, and when other people will not rely on it without review.
+
+Do not confuse a working demo with a production-ready system. Coding involves many design choices, including data model, error handling, access control, validation, logging, dependency choices, deployment, monitoring, ownership, maintenance, and support. Claude may make those choices implicitly, and it may not maintain a coherent design direction across larger or more important work unless a human owner specifies and reviews it.
+
+That is why casual "vibe coding" is acceptable for learning and low-risk prototypes, but not for important systems. Do not use it as a shortcut for tools that contain important or sensitive company data, handle payment flows, affect identity or permissions, integrate with business systems, or will be relied on by others.
+
+If a prototype should become a shared Sandvik solution, change the process before it changes the risk. Identify an owner, repository, data classification, review route, support model, and deployment path. If you want to deploy a solution for real use, Sandvik has options to deploy centrally through Sandvik Group IT; confirm the correct route and approvals before release.
 
 ## Core Concepts
 
@@ -251,7 +267,7 @@ When work is experimental, keep that visible in the branch name, notes, or pull 
 
 Claude Code work can involve large repositories, long context, command output, tests, debugging loops, and repeated agentic steps. These can consume more usage than a short chat.
 
-Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user's cost center. If a developer needs a higher monthly usage or spending limit for business work, they must use the intranet form and get approval from their cost approver. The monthly spending limit should be visible in the user's Claude account.
+Sandvik users have normal plan usage limits, including five-hour session limits and weekly limits. Further use is pay as you go and charged to the user's cost center. If a user needs a higher monthly usage or spending limit for business work, they must use the intranet form and get approval from their cost approver. The monthly spending limit should be visible in the user's Claude account.
 
 Good cost habits:
 
@@ -271,7 +287,7 @@ The following must be finalized before publishing:
 - `[SECRET PLACEHOLDER]` Secret handling and prohibited data.
 - `[TEST PLACEHOLDER]` Minimum test expectations by project type, including expectations for AI-written tests.
 - `[SECURITY PLACEHOLDER]` Security review triggers.
-- `[DEPLOYMENT PLACEHOLDER]` Rules for release, production access, and deployment.
+- `[DEPLOYMENT PLACEHOLDER]` Rules for release, production access, and Sandvik Group IT central deployment options.
 - `[OPEN SOURCE PLACEHOLDER]` Dependency and license review requirements.
 - `[INSTRUCTION FILE PLACEHOLDER]` Ownership and required content for repository instruction files such as `CLAUDE.md` and `AGENTS.md`.
 - `[COST PLACEHOLDER]` Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.
@@ -311,8 +327,9 @@ Do not edit until I approve the proposed instruction file.
 
 ```text
 Create a local script for my own one-time use.
-Constraints: no production data, no secrets, no external services, no commits unless I ask.
+Constraints: no production data, no secrets, no external services, no deployment, no commits unless I ask.
 Keep it simple and explain how to delete it when done.
+Explain what would need review if anyone else should use it.
 Run only local checks that are needed for this script.
 ```
 
@@ -323,6 +340,7 @@ This change may be used by other Sandvik employees.
 Follow the repository's standard development process.
 Start with a specification and test plan, then wait for approval.
 After implementation, summarize the diff, tests run, risks, and documentation updates needed.
+If this needs deployment, identify the Sandvik Group IT deployment path and approvals before release.
 Do not commit, push, open a PR, or deploy without approval.
 ```
 
@@ -347,6 +365,8 @@ Do not disable checks or delete tests unless there is a reviewed reason.
 ## Common Risks And Mistakes
 
 - Treating every task like a quick prototype when it will actually be used by others.
+- Assuming a working-looking prototype has made coherent design, data, security, ownership, support, and deployment choices.
+- Using casual "vibe coding" for systems that contain important or sensitive data, payment flows, identity or permission changes, or shared business processes.
 - Letting Claude Code edit before it understands the repository.
 - Skipping specification because the request feels obvious.
 - Letting Claude make product, security, or architecture decisions by assumption.
@@ -358,12 +378,13 @@ Do not disable checks or delete tests unless there is a reviewed reason.
 - Treating Claude self-review or auto-accepted edits as independent review.
 - Changing unrelated files during a small task.
 - Treating a green test suite as a complete security review.
+- Self-deploying prototypes for other users instead of moving through the Sandvik-approved deployment route.
 - Allowing commits, pushes, pull requests, or deploys without human approval.
 
 ## Recap
 
-Claude Code is strongest when paired with clear engineering judgment. Decide the intent first, use plan mode or equivalent review to specify the work, give it repository context through concise instruction files, control commands and Git actions, protect secrets, use tests carefully, monitor usage for larger work, and use review loops before shared or production-bound code is released.
+Claude Code is useful for developers and for approved non-developers exploring simple, low-risk coding. It is strongest when paired with clear engineering judgment. Decide the intent first, use plan mode or equivalent review to specify the work, give it repository context through concise instruction files, control commands and Git actions, protect secrets, use tests carefully, monitor usage for larger work, and use review loops before shared or production-bound code is released through the approved Sandvik route.
 
 ## Quiz Handoff
 
-Complete the quiz after reading this module. The quiz checks product choice, task intent, specification, repository instructions, safe prompting, secrets, command execution, tests, AI-written test limitations, Git workflow, review loops, usage awareness, and human accountability.
+Complete the quiz after reading this module. The quiz checks product choice, safe experimentation, task intent, specification, repository instructions, safe prompting, secrets, command execution, tests, AI-written test limitations, Git workflow, review loops, usage awareness, deployment boundaries, and human accountability.
