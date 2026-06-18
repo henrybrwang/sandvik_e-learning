@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Sandvik Sans Headline";src:url("fonts/SandvikSansHeadline-Bold.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Headline";src:url("fonts/SandvikSansHeadline-Regular.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Headline";src:url("fonts/SandvikSansHeadline-LightItalic.otf") format("opentype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Text";src:url("fonts/SandvikSansText-Regular.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Text";src:url("fonts/SandvikSansText-Light.otf") format("opentype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Text";src:url("fonts/SandvikSansText-Bold.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap;}
+body{margin:0;}
+</style>
+</helmet>
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:48px;background:#e7e5df;font-family:'Sandvik Sans Text',sans-serif;color:#101010;">
+
+  <!-- Intro -->
+  <div style="max-width:760px;margin-bottom:40px;">
+    <div style="font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#7e6d4d;margin-bottom:14px;">Reusable SCORM template · Claude Chat</div>
+    <h1 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:52px;line-height:0.96;letter-spacing:-0.02em;margin:0 0 18px;">Two shell <span style="font-style:italic;font-weight:300;">directions</span></h1>
+    <p style="font-weight:300;font-size:19px;line-height:1.5;color:#4a4945;margin:0 0 22px;max-width:60ch;">Both use a top-stepper, one-section-per-screen flow with the active journey in gold. Pick a direction and I'll build out all ten screens of the Claude Chat module — plus the JSON schema and SCORM hooks.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:300px;border:1px solid #d9d7d0;background:#fff;padding:18px 20px;">
+        <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:17px;margin-bottom:6px;">Option A — Editorial column</div>
+        <div style="font-size:14px;line-height:1.5;color:#686660;">A numbered 10-step rail and a single calm reading column. Document-like, foundation-adjacent, maximum readability.</div>
+      </div>
+      <div style="flex:1;min-width:300px;border:1px solid #d9d7d0;background:#fff;padding:18px 20px;">
+        <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:17px;margin-bottom:6px;">Option B — Workspace + context rail</div>
+        <div style="font-size:14px;line-height:1.5;color:#686660;">A slim progress bar and a persistent right rail that always shows journey, assumed knowledge and status. Hands-on, tool-module feel.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ROW 1: COURSE START ============ -->
+  <div style="font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#686660;margin:8px 0 16px;">Screen 1 — Course start</div>
+  <div style="display:flex;gap:40px;align-items:flex-start;margin-bottom:56px;">
+
+    <!-- A · Course start -->
+    <div style="flex:none;width:1140px;">
+      <div style="font-weight:700;font-size:13px;color:#101010;margin-bottom:10px;">Option A — Editorial column</div>
+      <div style="background:#fff;border:1px solid #d9d7d0;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-direction:column;min-height:760px;">
+        <!-- header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 36px;border-bottom:1px solid #d9d7d0;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <img src="assets/sandvik_symbol.svg" alt="" style="width:26px;height:26px;display:block;" />
+            <div style="border-left:1px solid #d9d7d0;padding-left:14px;">
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:15px;line-height:1.1;">Claude Chat</div>
+              <div style="font-size:11px;color:#686660;letter-spacing:0.02em;">Sandvik AI tool module</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="font-size:12px;color:#686660;font-weight:700;">10%</div>
+              <div style="width:140px;height:4px;background:#ecebe6;"><div style="width:10%;height:100%;background:#a08c64;"></div></div>
+            </div>
+            <button style="background:none;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:13px;color:#101010;padding:8px 10px;cursor:pointer;">Save &amp; exit</button>
+          </div>
+        </div>
+        <!-- stepper -->
+        <div style="display:flex;padding:18px 36px;border-bottom:1px solid #ecebe6;gap:4px;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;background:#101010;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 0 0 3px #d6c8a8;">1</div><div style="font-size:10.5px;line-height:1.2;color:#101010;font-weight:700;max-width:80px;">Course start</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">2</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Journey context</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">3</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Tool fit</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">4</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Core workflow</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">5</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Capabilities</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">6</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Rules &amp; governance</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">7</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Scenario</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">8</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Risks</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">9</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Knowledge check</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">10</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Complete</div></div>
+        </div>
+        <!-- content -->
+        <div style="flex:1;padding:48px 36px;">
+          <div style="max-width:680px;margin:0 auto;">
+            <div style="display:flex;align-items:center;gap:9px;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#101010;margin-bottom:20px;"><span style="width:7px;height:7px;border-radius:999px;background:#a08c64;display:inline-block;"></span>AI Fluency Journey · Tool module</div>
+            <h2 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:56px;line-height:0.98;letter-spacing:-0.02em;margin:0 0 20px;">Claude Chat</h2>
+            <p style="font-weight:300;font-size:20px;line-height:1.5;color:#2f2e2b;margin:0 0 32px;">Claude Chat is Sandvik's approved conversational AI assistant. This module shows you how to use it for everyday work — drafting, summarising, analysing and asking questions — <span style="font-style:italic;">within Sandvik's guidelines</span>.</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #d9d7d0;border-bottom:1px solid #d9d7d0;margin-bottom:32px;">
+              <div style="padding:18px 20px 18px 0;border-right:1px solid #ecebe6;"><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">Duration</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;">≈ 25 min</div></div>
+              <div style="padding:18px 20px;border-right:1px solid #ecebe6;"><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">Audience</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;">Fluency-certified</div></div>
+              <div style="padding:18px 0 18px 20px;"><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">To complete</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;">All sections + 80%</div></div>
+            </div>
+            <div style="background:#f5f2ec;padding:22px 24px;margin-bottom:34px;border-left:2px solid #a08c64;">
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:10px;">What this module adds</div>
+              <div style="font-size:15px;line-height:1.55;color:#2f2e2b;">The AI Fluency foundation covered how generative AI works and how to prompt responsibly. Here you apply that inside Claude Chat: what it can do, what stays confidential, and what to check before you trust an answer.</div>
+            </div>
+            <button style="background:#101010;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:15px;padding:15px 28px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;">Start module <span>→</span></button>
+          </div>
+        </div>
+        <!-- footer -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 36px;border-top:1px solid #d9d7d0;">
+          <div style="font-size:13px;color:#686660;">Section 1 of 10 · Course start</div>
+          <div style="display:flex;gap:12px;">
+            <button style="background:none;border:1px solid #d9d7d0;color:#bcbab2;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;cursor:not-allowed;">Back</button>
+            <button style="background:#101010;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">Next <span>→</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B · Course start -->
+    <div style="flex:none;width:1140px;">
+      <div style="font-weight:700;font-size:13px;color:#101010;margin-bottom:10px;">Option B — Workspace + context rail</div>
+      <div style="background:#fff;border:1px solid #d9d7d0;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-direction:column;min-height:760px;">
+        <!-- header block (paper) -->
+        <div style="background:#f5f2ec;padding:22px 40px 0;border-bottom:1px solid #d9d7d0;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:12px;margin-bottom:16px;">
+                <img src="assets/sandvik_symbol.svg" alt="" style="width:20px;height:20px;display:block;" />
+                <span style="color:#7e6d4d;font-weight:700;">AI Fluency Journey</span>
+                <span style="color:#bcbab2;">›</span><span style="color:#686660;">Tool module</span>
+                <span style="color:#bcbab2;">›</span><span style="color:#101010;font-weight:700;">Claude Chat</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+                <h2 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:40px;line-height:1;letter-spacing:-0.01em;margin:0;">Claude Chat</h2>
+                <span style="border:1px solid #d9d7d0;border-radius:999px;padding:5px 14px;font-size:12px;font-weight:700;color:#4a4945;background:#fff;">Conversational AI</span>
+              </div>
+            </div>
+            <div style="text-align:right;padding-top:4px;">
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:26px;line-height:1;">1<span style="color:#bcbab2;font-size:18px;"> / 10</span></div>
+              <div style="font-size:11px;color:#686660;letter-spacing:0.04em;margin-top:4px;">Course start</div>
+            </div>
+          </div>
+          <div style="height:4px;background:#e0ddd4;margin:0 -40px 0;"><div style="width:10%;height:100%;background:#a08c64;"></div></div>
+        </div>
+        <!-- two-pane -->
+        <div style="flex:1;display:grid;grid-template-columns:1fr 312px;gap:0;">
+          <div style="padding:38px 40px;border-right:1px solid #ecebe6;">
+            <p style="font-weight:300;font-size:20px;line-height:1.5;color:#2f2e2b;margin:0 0 28px;max-width:54ch;">Claude Chat is Sandvik's approved conversational AI assistant — for drafting, summarising, analysing and asking questions, <span style="font-style:italic;">within Sandvik's guidelines</span>.</p>
+            <div style="background:#f5f2ec;padding:20px 22px;margin-bottom:26px;border-left:2px solid #a08c64;">
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:10px;">What this module adds</div>
+              <div style="font-size:15px;line-height:1.55;color:#2f2e2b;">Fluency covered how generative AI works and how to prompt responsibly. Here you apply that inside Claude Chat: what it can do, what stays confidential, and what to verify before you trust an answer.</div>
+            </div>
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">In this module</div>
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">01</span><span style="font-size:14px;color:#2f2e2b;">When Claude Chat is the right tool — and when it isn't</span></div>
+              <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">02</span><span style="font-size:14px;color:#2f2e2b;">A five-step workflow you can reuse on any task</span></div>
+              <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">03</span><span style="font-size:14px;color:#2f2e2b;">Sandvik rules: data, sharing, cost and support</span></div>
+              <div style="display:flex;gap:12px;padding:11px 0;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">04</span><span style="font-size:14px;color:#2f2e2b;">A knowledge check to confirm you're ready</span></div>
+            </div>
+          </div>
+          <!-- context rail -->
+          <div style="padding:28px 28px;background:#fbfaf8;display:flex;flex-direction:column;gap:24px;">
+            <div>
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:12px;">Journey placement</div>
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #a08c64;"><span style="font-size:13px;font-weight:700;color:#101010;flex:1;">AI Fluency Journey</span><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7e6d4d;">You are here</span></div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;"><span style="font-size:13px;color:#8e8c84;flex:1;">AI Champion Journey</span></div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;"><span style="font-size:13px;color:#8e8c84;flex:1;">Developer / Builder Journey</span></div>
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;"><span style="font-size:13px;color:#8e8c84;flex:1;">Leader Journey</span></div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #ecebe6;padding-top:22px;">
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:12px;">Assumed knowledge</div>
+              <div style="display:flex;flex-direction:column;gap:9px;">
+                <div style="display:flex;gap:9px;font-size:13px;line-height:1.4;color:#2f2e2b;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>AI Fluency foundation completed</div>
+                <div style="display:flex;gap:9px;font-size:13px;line-height:1.4;color:#2f2e2b;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Basics of effective prompting</div>
+                <div style="display:flex;gap:9px;font-size:13px;line-height:1.4;color:#2f2e2b;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Sandvik responsible-AI principles</div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #ecebe6;padding-top:22px;display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8e8c84;">Duration</span><span style="font-weight:700;">≈ 25 min</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8e8c84;">To complete</span><span style="font-weight:700;">All + 80%</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8e8c84;">Status</span><span style="font-weight:700;color:#7e6d4d;">Not started</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- footer -->
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 40px;border-top:1px solid #d9d7d0;">
+          <div style="font-size:13px;color:#686660;">Section 1 of 10 · Course start</div>
+          <div style="display:flex;gap:12px;">
+            <button style="background:none;border:1px solid #d9d7d0;color:#bcbab2;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;cursor:not-allowed;">Back</button>
+            <button style="background:#101010;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">Begin <span>→</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ROW 2: CORE WORKFLOW ============ -->
+  <div style="font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#686660;margin:8px 0 16px;">Screen 4 — Core workflow</div>
+  <div style="display:flex;gap:40px;align-items:flex-start;">
+
+    <!-- A · Core workflow -->
+    <div style="flex:none;width:1140px;">
+      <div style="font-weight:700;font-size:13px;color:#101010;margin-bottom:10px;">Option A — Editorial column</div>
+      <div style="background:#fff;border:1px solid #d9d7d0;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-direction:column;min-height:760px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 36px;border-bottom:1px solid #d9d7d0;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <img src="assets/sandvik_symbol.svg" alt="" style="width:26px;height:26px;display:block;" />
+            <div style="border-left:1px solid #d9d7d0;padding-left:14px;">
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:15px;line-height:1.1;">Claude Chat</div>
+              <div style="font-size:11px;color:#686660;letter-spacing:0.02em;">Sandvik AI tool module</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="font-size:12px;color:#686660;font-weight:700;">40%</div>
+              <div style="width:140px;height:4px;background:#ecebe6;"><div style="width:40%;height:100%;background:#a08c64;"></div></div>
+            </div>
+            <button style="background:none;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:13px;color:#101010;padding:8px 10px;cursor:pointer;">Save &amp; exit</button>
+          </div>
+        </div>
+        <div style="display:flex;padding:18px 36px;border-bottom:1px solid #ecebe6;gap:4px;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;background:#f7f6f3;border:1px solid #d9d7d0;color:#4a4945;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div style="font-size:10.5px;line-height:1.2;color:#686660;max-width:80px;">Course start</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;background:#f7f6f3;border:1px solid #d9d7d0;color:#4a4945;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div style="font-size:10.5px;line-height:1.2;color:#686660;max-width:80px;">Journey context</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;background:#f7f6f3;border:1px solid #d9d7d0;color:#4a4945;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div style="font-size:10.5px;line-height:1.2;color:#686660;max-width:80px;">Tool fit</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;background:#101010;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 0 0 3px #d6c8a8;">4</div><div style="font-size:10.5px;line-height:1.2;color:#101010;font-weight:700;max-width:80px;">Core workflow</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">5</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Capabilities</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">6</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Rules &amp; governance</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">7</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Scenario</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">8</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Risks</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">9</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Knowledge check</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;"><div style="width:30px;height:30px;border-radius:999px;border:1px solid #d9d7d0;color:#8e8c84;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">10</div><div style="font-size:10.5px;line-height:1.2;color:#8e8c84;max-width:80px;">Complete</div></div>
+        </div>
+        <div style="flex:1;padding:44px 36px;">
+          <div style="max-width:680px;margin:0 auto;">
+            <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Core workflow</div>
+            <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:36px;line-height:1.04;letter-spacing:-0.01em;margin:0 0 12px;">Five steps, <span style="font-style:italic;font-weight:300;">every time</span></h3>
+            <p style="font-weight:300;font-size:17px;line-height:1.5;color:#4a4945;margin:0 0 30px;">The same rhythm works whether you're drafting an email or analysing a report. Reuse it on every task.</p>
+            <div style="display:flex;flex-direction:column;">
+              <div style="display:flex;gap:20px;padding:20px 0;border-top:1px solid #d9d7d0;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;color:#a08c64;min-width:38px;">01</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Prepare context</div><div style="font-size:15px;line-height:1.5;color:#4a4945;">Open a project or new chat. Paste only the source material you're cleared to use.</div></div></div>
+              <div style="display:flex;gap:20px;padding:20px 0;border-top:1px solid #d9d7d0;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;color:#a08c64;min-width:38px;">02</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Set boundaries</div><div style="font-size:15px;line-height:1.5;color:#4a4945;">State the role, format and limits. Say what's confidential and what not to invent.</div></div></div>
+              <div style="display:flex;gap:20px;padding:20px 0;border-top:1px solid #d9d7d0;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;color:#a08c64;min-width:38px;">03</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Use the tool</div><div style="font-size:15px;line-height:1.5;color:#4a4945;">Ask, iterate, refine with follow-ups — not one giant prompt.</div></div></div>
+              <div style="display:flex;gap:20px;padding:20px 0;border-top:1px solid #d9d7d0;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;color:#a08c64;min-width:38px;">04</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Review output</div><div style="font-size:15px;line-height:1.5;color:#4a4945;">Treat every answer as a draft. Verify facts, figures and citations against trusted sources.</div></div></div>
+              <div style="display:flex;gap:20px;padding:20px 0;border-top:1px solid #d9d7d0;border-bottom:1px solid #d9d7d0;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;color:#a08c64;min-width:38px;">05</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Share safely</div><div style="font-size:15px;line-height:1.5;color:#4a4945;">Only paste outputs into approved channels. Remove anything that shouldn't leave Sandvik.</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 36px;border-top:1px solid #d9d7d0;">
+          <div style="font-size:13px;color:#686660;">Section 4 of 10 · Core workflow</div>
+          <div style="display:flex;gap:12px;">
+            <button style="background:none;border:1px solid #101010;color:#101010;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;cursor:pointer;">Back</button>
+            <button style="background:#101010;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">Next <span>→</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B · Core workflow -->
+    <div style="flex:none;width:1140px;">
+      <div style="font-weight:700;font-size:13px;color:#101010;margin-bottom:10px;">Option B — Workspace + context rail</div>
+      <div style="background:#fff;border:1px solid #d9d7d0;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-direction:column;min-height:760px;">
+        <div style="background:#f5f2ec;padding:22px 40px 0;border-bottom:1px solid #d9d7d0;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:12px;margin-bottom:16px;">
+                <img src="assets/sandvik_symbol.svg" alt="" style="width:20px;height:20px;display:block;" />
+                <span style="color:#7e6d4d;font-weight:700;">AI Fluency Journey</span>
+                <span style="color:#bcbab2;">›</span><span style="color:#686660;">Tool module</span>
+                <span style="color:#bcbab2;">›</span><span style="color:#101010;font-weight:700;">Claude Chat</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+                <h2 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:40px;line-height:1;letter-spacing:-0.01em;margin:0;">Core workflow</h2>
+              </div>
+            </div>
+            <div style="text-align:right;padding-top:4px;">
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:26px;line-height:1;">4<span style="color:#bcbab2;font-size:18px;"> / 10</span></div>
+              <div style="font-size:11px;color:#686660;letter-spacing:0.04em;margin-top:4px;">Core workflow</div>
+            </div>
+          </div>
+          <div style="height:4px;background:#e0ddd4;margin:0 -40px 0;"><div style="width:40%;height:100%;background:#a08c64;"></div></div>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:1fr 312px;gap:0;">
+          <div style="padding:34px 40px;border-right:1px solid #ecebe6;">
+            <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 26px;max-width:52ch;">The same rhythm works whether you're drafting an email or analysing a report. Reuse it on <span style="font-style:italic;">every</span> task.</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid #d9d7d0;padding:16px 18px;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;color:#a08c64;min-width:26px;">01</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:16px;margin-bottom:3px;">Prepare context</div><div style="font-size:14px;line-height:1.45;color:#4a4945;">Open a project or new chat. Paste only material you're cleared to use.</div></div></div>
+              <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid #d9d7d0;padding:16px 18px;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;color:#a08c64;min-width:26px;">02</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:16px;margin-bottom:3px;">Set boundaries</div><div style="font-size:14px;line-height:1.45;color:#4a4945;">State the role, format and limits. Say what's confidential and what not to invent.</div></div></div>
+              <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid #d9d7d0;padding:16px 18px;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;color:#a08c64;min-width:26px;">03</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:16px;margin-bottom:3px;">Use the tool</div><div style="font-size:14px;line-height:1.45;color:#4a4945;">Ask, iterate, refine with follow-ups — not one giant prompt.</div></div></div>
+              <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid #d9d7d0;padding:16px 18px;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;color:#a08c64;min-width:26px;">04</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:16px;margin-bottom:3px;">Review output</div><div style="font-size:14px;line-height:1.45;color:#4a4945;">Treat every answer as a draft. Verify facts, figures and citations.</div></div></div>
+              <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid #d9d7d0;padding:16px 18px;"><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;color:#a08c64;min-width:26px;">05</div><div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:16px;margin-bottom:3px;">Share safely</div><div style="font-size:14px;line-height:1.45;color:#4a4945;">Only paste outputs into approved channels. Remove anything that shouldn't leave Sandvik.</div></div></div>
+            </div>
+          </div>
+          <div style="padding:28px 28px;background:#fbfaf8;display:flex;flex-direction:column;gap:24px;">
+            <div>
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:12px;">This module focuses on</div>
+              <div style="font-size:13px;line-height:1.5;color:#2f2e2b;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #a08c64;padding:12px 14px;">Using Claude Chat day to day — not building automations or agents.</div>
+            </div>
+            <div style="border-top:1px solid #ecebe6;padding-top:22px;">
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:12px;">Assumed knowledge</div>
+              <div style="display:flex;flex-direction:column;gap:9px;">
+                <div style="display:flex;gap:9px;font-size:13px;line-height:1.4;color:#2f2e2b;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>AI Fluency foundation completed</div>
+                <div style="display:flex;gap:9px;font-size:13px;line-height:1.4;color:#2f2e2b;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Basics of effective prompting</div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #ecebe6;padding-top:22px;display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8e8c84;">Section</span><span style="font-weight:700;">4 of 10</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#8e8c84;">Status</span><span style="font-weight:700;color:#7e6d4d;">In progress</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 40px;border-top:1px solid #d9d7d0;">
+          <div style="font-size:13px;color:#686660;">Section 4 of 10 · Core workflow</div>
+          <div style="display:flex;gap:12px;">
+            <button style="background:none;border:1px solid #101010;color:#101010;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;cursor:pointer;">Back</button>
+            <button style="background:#101010;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">Next <span>→</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

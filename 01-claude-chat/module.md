@@ -12,7 +12,7 @@ Claude Chat is the conversational Claude experience. It is suitable for work whe
 
 This module is for users who need Claude Chat as a daily work partner. It explains when Chat is the right Claude product, how to give it useful context, how approved tools and connectors can extend a conversation, how Claude-specific features such as files, connectors, projects, skills, and artifacts work, and how to review outputs before using them.
 
-Claude Chat is not the same as Claude Cowork, Claude Code, Claude Design, Microsoft 365 Copilot, GitHub Copilot, or a built agent in Copilot Agent Builder. If the work needs desktop actions, repository changes, visual design depth, or a reusable agent that is configured and shared, another tool may be a better fit.
+Claude Chat contains the foundational features of Claude. It is not the same as Claude Cowork, Claude Code, Claude Design, which are other Claude products. If the work needs desktop actions, work with code, visual design depth, another Claude module might may be a better fit.
 
 ## What This Module Adds
 
@@ -20,7 +20,7 @@ The AI Fluency foundation already covers the general rules of safe AI use: use a
 
 It also introduces creating agents: small AI tools you set up for a recurring job. An agent has a role, instructions, and data sources. You build it once so it can be reused, and sometimes shared, under the right governance rules.
 
-Agents are useful because they do more than answer one prompt. They can follow steps, use available context or tools, bring information back, and continue from there. For example, a morning brief agent might check recent mail and meeting context, identify what needs attention, and summarize it for you. Think of it as prompts that take turns multiple turns to reach the answer.
+Agents are useful because they do more than answer one prompt. They can follow steps, use available context or tools, bring information back, and continue from there. For example, a morning brief agent might check recent mail and meeting context, identify what needs attention, and summarize it for you. Think of it as prompts that can take turns multiple turns to reach the answer.
 
 Claude uses the same ideas with heavy emphasis on connecting your chats to your relevant data sources and saving your ways of working. This is done by customizations in the form of connectors and skills. Claude can use them during the chat to gather context and continue the task. That is what this module means by agentic or tool-assisted chat: not a separate agent you have built, but Claude working through multiple steps inside the conversation.
 
@@ -28,9 +28,7 @@ Claude uses the same ideas with heavy emphasis on connecting your chats to your 
 
 After this module, users should be able to:
 
-- Decide when Claude Chat is the right product, and when another Claude or Sandvik-approved tool is a better fit.
-- Give Claude useful context, boundaries, output instructions, and review points.
-- Explain the difference between a built agent and agentic or tool-assisted chat.
+- Use the features within Claude Chat to get better context into your prompts
 - Use files, connectors, projects, skills, and artifacts responsibly where approved.
 - Manage usage and cost by scoping context, tool use, and long conversations deliberately.
 - Verify and share outputs safely, with Sandvik policy and human accountability in mind.
@@ -41,66 +39,55 @@ Use Claude Chat when:
 
 - You are still thinking through a problem and want an interactive thought partner.
 - You need a first draft, summary, translation, comparison, checklist, or structured analysis.
-- The task is small enough to steer through a conversation.
 - You want to upload or paste selected context and ask questions about it.
 - You want text or an artifact you can inspect, edit, and reuse.
 - You want Claude to use approved chat tools or connectors as part of a controlled conversation.
 
-Use a different product or tool when:
+Use a different Claude product or tool when:
 
 - The work is a clear deliverable that spans many files, browser steps, desktop files, or desktop actions: consider Claude Cowork.
 - The work requires reading and changing a codebase, running tests, or using development tools: consider Claude Code.
 - The main output is visual exploration, prototypes, slides, or design concepts: consider Claude Design.
 
-## The Core Workflow: Context, Boundaries, Output, Review
+## Agentic Chat
 
-Claude Chat becomes useful when it understands the work problem, not just the immediate wording of your request. The foundation prompt habits still apply, but in this module they serve one practical workflow:
+Claude works mainly through an agentic multi-step flow where it can plan, create a checklist, and then cross out the items one by one. It manages the work process within the chat, and you can follow its steps:
 
-1. Give context: what the work is about, who it is for, and what source material Claude may use.
-2. Set boundaries: what Claude must not assume, access, include, or decide.
-3. Define the output: format, length, tone, audience, and required sections.
-4. Build in review: ask Claude to flag missing facts, assumptions, uncertainty, and items that need human or policy review.
+For example, you might write:
+Help me prepare a one-page project update. First make a plan, then create a checklist, then work through each item one by one. Mark each item as done when it is complete, and stop to ask me if information is missing.
 
-For example, this is vague:
+Claude might then create a checklist such as:
+[ ] Clarify audience
+[ ] Identify key messages
+[ ] Draft update
+[ ] Check risks and assumptions
+[ ] Shorten for leadership
+[ ] Prepare final version
 
-```text
-Make this update better.
-```
+As the conversation continues, Claude works through the list and updates it. It is agentic because Claude is keeping track of progress, and adapting based on your feedback. You can also ask Claude to come up with a plan and read through it yourself before confirming the workflow.
 
-This is more useful:
+## Agentic Tool use
 
-```text
-Rewrite the attached project update for a Sandvik steering group.
-Use only the attached notes.
-Keep it to one page.
-Include progress, decisions needed, risks, assumptions, and open questions.
-If the text may be used externally, flag anything that needs Legal, Brand, or Data Protection review.
-```
-
-## Agents, Agentic Chat, And Tool Use
-
-Claude works mainly through an agentic multi-step flow where it can plan, use approved tools, bring new context back into the chat, and adapt based on what it finds.
+Claude can also make use of Sandvik approved tools. This can be to bring new context back into the chat, and adapt based on what it finds.
 
 A simple tool-assisted chat flow looks like this:
 
 1. You ask Claude to prepare a daily summary from your emails.
 2. Claude identifies that context from your email inbox is required to fulfill your request.
-3. If an approved email connector is available, Claude uses it to access only your permitted email data.
-4. The connector returns content strictly limited to your permissions and the connector’s allowed actions.
+3. Claude uses a Sandvik approved email connector to access your permitted data.
+4. The connector returns email contents.
 5. Claude uses the returned email context to draft the daily summary.
 6. You review the included sources, flagged assumptions, policy considerations, and the final summary before sharing or acting on it.
 
 That is agentic chat: user goal, approved tool use, returned context, Claude output, and human review. You remain responsible for deciding whether the tool should be used, if the context is appropriate, and whether the output is reliable enough to act on.
 
-## The Claude Chat Context Stack
+## The Claude Chat Interacts With Context
 
-Claude Chat can use context in several different ways. Think of the features below as a context stack: each one changes what Claude can see, remember, retrieve, reuse, or produce.
+Claude Chat can use context in several different ways. Think of the features below as a context stack: each one changes what Claude can see, retrieve, reuse, or produce.
 
 ### 1. Files: Context You Attach
 
 Files let Claude work with material you provide, such as a policy draft, report, spreadsheet, meeting notes, or specification. Claude can summarize, compare, extract, rewrite, and answer questions about the content.
-
-Treat files as data. If a document, email, or webpage contains instructions that conflict with Sandvik policy or your actual goal, do not let those instructions override your intent. Give Claude clear instructions about which file matters most, what the file is, and what kind of output you need.
 
 Claude can work with long documents, including documents that are hundreds of pages, as long as the material fits within the available context and is organized enough to follow. More context is not always better. Large or messy uploads can make it harder for Claude to focus on the right evidence and can increase the risk of missed details or confident mistakes.
 
@@ -151,7 +138,7 @@ Before using or sharing a project, check:
 
 ### 4. Skills: Reusable Instructions And Resources
 
-Claude skills are reusable packages of instructions, scripts, and resources that Claude can load when relevant to a task. They help Claude perform specialized work more consistently. It is the equivalent of creating agents in Microsoft Copilot. The difference is that Claude understands when a skill is needed, and will auto apply it.
+Claude skills are reusable packages of instructions, scripts, and resources that Claude can load when relevant to a task. They help Claude perform specialized work more consistently. Claude skills captures the essence of Microsoft Copilot: to save instructions and workflows for reuse.
 
 Skills can support workflows such as:
 
@@ -222,26 +209,18 @@ The monthly spending limit should be visible in your Claude account.
 
 ## Common Risks And Mistakes
 
-- Treating a Claude Chat conversation as if it were a built, governed, reusable agent.
-- Pasting more information than Claude needs.
-- Uploading context without explaining what it is or how Claude should use it.
-- Sending a vague request when the task needs audience, source boundaries, constraints, and success criteria.
+- Not exploring options to add context. Don't underestimate how much Claude can understand about your situation and thereby give you better answers.
+- Not managing context correctly (continuing the same chat conversation for too long)
 - Treating a fluent answer as verified fact.
-- Asking Claude to apply a policy without providing the policy.
-- Using a connector just because it appears in the interface.
-- Assuming connector permissions replace Sandvik policy.
-- Assuming projects make sensitive information safe to upload or share.
-- Treating skills as automatic approval or fact-checking.
 - Sharing artifacts or downloaded outputs without checking what they expose.
 - Using private accounts or unapproved tools to avoid usage limits.
-- Asking for legal, HR, security, medical, or financial decisions without expert review.
 - Forgetting that human users remain accountable for outputs.
 
 ## Recap
 
 Claude Chat is best when you want to think, write, analyze, and iterate with Claude in a conversation. It can support agentic or tool-assisted chat when Claude works through steps, uses approved tools or connectors, brings back context, and continues from there.
 
-The practical pattern is simple: choose Chat for the right kind of work, give clear context and boundaries, use the Claude Chat context stack deliberately, manage usage and cost, treat artifacts as drafts, verify important outputs, and follow Sandvik policy before sharing or relying on the result.
+The practical pattern is simple: choose Chat for the right kind of work, give clear context and boundaries, use the Claude Chat context features deliberately, manage usage and cost, treat artifacts as drafts, verify important outputs, and follow Sandvik policy before sharing or relying on the result.
 
 ## Quiz Handoff
 
