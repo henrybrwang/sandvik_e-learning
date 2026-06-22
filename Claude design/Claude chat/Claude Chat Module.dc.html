@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Sandvik Sans Headline";src:url("fonts/SandvikSansHeadline-Bold.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Headline";src:url("fonts/SandvikSansHeadline-Regular.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Headline";src:url("fonts/SandvikSansHeadline-LightItalic.otf") format("opentype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Text";src:url("fonts/SandvikSansText-Regular.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Text";src:url("fonts/SandvikSansText-Light.otf") format("opentype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"Sandvik Sans Text";src:url("fonts/SandvikSansText-Bold.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap;}
+html,body{margin:0;padding:0;background:#fff;}
+@keyframes svfade{from{transform:translateY(6px);}to{transform:none;}}
+@media (max-width:900px){
+  .app-main{grid-template-columns:1fr !important;}
+  .app-rail{position:static !important;order:-1;}
+  .stack-2{grid-template-columns:1fr !important;}
+  .stack-3{grid-template-columns:1fr !important;}
+  .app-headinner{flex-wrap:wrap;gap:8px !important;}
+}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;font-family:'Sandvik Sans Text',sans-serif;color:#000000;background:#fff;">
+
+  <!-- ===================== HEADER ===================== -->
+  <header style="position:sticky;top:0;z-index:30;background:#f5f2ec;border-bottom:1px solid #d9d7d0;">
+    <div class="app-headinner" style="max-width:1340px;margin:0 auto;padding:16px clamp(20px,4vw,48px) 18px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;">
+        <div style="min-width:0;">
+          <div style="display:flex;align-items:center;gap:9px;font-size:12px;margin-bottom:14px;flex-wrap:wrap;">
+            <img src="assets/sandvik_symbol.svg" alt="Sandvik" style="width:20px;height:20px;display:block;" />
+            <span style="color:#7e6d4d;font-weight:700;">{{ journeyName }}</span>
+            <span style="color:#bcbab2;">›</span><span style="color:#686660;">Tool module</span>
+            <span style="color:#bcbab2;">›</span><span style="color:#000000;font-weight:700;">Claude Chat</span>
+          </div>
+          <h1 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1;letter-spacing:-0.01em;margin:0;">{{ sectionTitle }}</h1>
+        </div>
+        <div style="text-align:right;flex:none;padding-top:2px;">
+          <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:26px;line-height:1;">{{ sectionNumber }}<span style="color:#bcbab2;font-size:17px;"> / {{ totalSections }}</span></div>
+          <div style="font-size:11px;color:#686660;letter-spacing:0.04em;margin-top:5px;">{{ progressLabel }}</div>
+        </div>
+      </div>
+    </div>
+    <div style="height:4px;background:#e0ddd4;"><div style="height:100%;background:#a08c64;transition:width 300ms cubic-bezier(0.22,0.61,0.36,1);width:{{ progressWidth }};"></div></div>
+  </header>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="app-main" style="flex:1;width:100%;max-width:1340px;margin:0 auto;padding:clamp(28px,4vw,44px) clamp(20px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:clamp(28px,4vw,52px);align-items:start;">
+
+    <!-- CONTENT COLUMN -->
+    <div style="min-width:0;">
+
+      <!-- ===== SECTION 0 · COURSE START ===== -->
+      <sc-if value="{{ isStart }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Course start" style="animation:svfade 360ms var(--e,cubic-bezier(0.22,0.61,0.36,1));max-width:720px;">
+        <div style="display:flex;align-items:center;gap:9px;font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#000000;margin-bottom:18px;"><span style="width:7px;height:7px;border-radius:999px;background:#a08c64;display:inline-block;"></span>AI Fluency Journey · Tool module</div>
+        <h2 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(40px,5vw,60px);line-height:0.98;letter-spacing:-0.02em;margin:0 0 18px;">Claude Chat</h2>
+        <p style="font-weight:300;font-size:20px;line-height:1.5;color:#2f2e2b;margin:0 0 26px;">Claude Chat is the conversational Claude experience for asking questions, drafting, analysing, summarising, translating and creating reusable outputs. This module shows you when to reach for it, how to give it useful context, and how to use it <span style="font-style:italic;">within Sandvik's guidelines</span>.</p>
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:18px 22px;margin-bottom:30px;">
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#2f2e2b;">Claude can accelerate your work, but you remain responsible for what you enter, approve, share and publish. Follow Sandvik policy, protect sensitive information, and review outputs before relying on them.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #d9d7d0;border-bottom:1px solid #d9d7d0;margin-bottom:30px;">
+          <div style="padding:18px 18px 18px 0;border-right:1px solid #ecebe6;"><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">Duration</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:19px;">35–45 min</div></div>
+          <div style="padding:18px 18px;border-right:1px solid #ecebe6;"><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">Audience</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:19px;">Claude Chat users</div></div>
+          <div style="padding:18px 0 18px 18px;"><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">To complete</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:19px;">All sections + 80% quiz</div></div>
+        </div>
+        <div style="background:#fbfaf8;border:1px solid #ecebe6;padding:22px 24px;margin-bottom:32px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:10px;">What this module adds</div>
+          <div style="font-size:15px;line-height:1.6;color:#2f2e2b;">This module builds on the general rules of safe AI use: approved tools, protecting information, giving useful context, iterating, and checking confident answers. Here you apply that inside Claude Chat: what it does well, how its context features work, what Sandvik allows, and what to verify before you trust an answer.</div>
+        </div>
+        <button onClick="{{ goNext }}" style="background:#000000;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:15px;padding:15px 28px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;">{{ startButtonLabel }} <span>→</span></button>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 1 · JOURNEY CONTEXT ===== -->
+      <sc-if value="{{ isJourney }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Journey context" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Where this module sits</div>
+        <p style="font-weight:300;font-size:19px;line-height:1.5;color:#2f2e2b;margin:0 0 30px;max-width:62ch;">This is a <span style="font-style:italic;">standalone, practical</span> tool module focused on one tool. Several tool modules sit alongside it, and in the near future they will be organised into broader learning journeys.</p>
+
+        <!-- tool module diagram -->
+        <div style="border:1px solid #d9d7d0;padding:24px;margin-bottom:32px;background:#fff;">
+            <div>
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:12px;">Tool modules</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                <span style="background:#000000;color:#fff;border:1px solid #000000;padding:8px 14px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:7px;"><span style="width:6px;height:6px;border-radius:999px;background:#a08c64;"></span>Claude Chat</span>
+                <span style="border:1px solid #d9d7d0;color:#686660;padding:8px 14px;font-size:13px;">Claude Code</span>
+                <span style="border:1px solid #d9d7d0;color:#686660;padding:8px 14px;font-size:13px;">Claude Cowork</span>
+                <span style="border:1px solid #d9d7d0;color:#686660;padding:8px 14px;font-size:13px;">Claude Design</span>
+                <span style="border:1px solid #d9d7d0;color:#686660;padding:8px 14px;font-size:13px;">M365 Copilot</span>
+                <span style="border:1px solid #d9d7d0;color:#686660;padding:8px 14px;font-size:13px;">GitHub Copilot</span>
+                <span style="border:1px dashed #d9d7d0;color:#8e8c84;padding:8px 14px;font-size:13px;">Future tools</span>
+              </div>
+              <div style="font-size:13px;color:#686660;margin-top:14px;line-height:1.5;">You are in the <strong style="color:#000000;">Claude Chat</strong> tool module. Tool modules will become part of broader learning journeys in the near future.</div>
+            </div>
+        </div>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;">
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:22px;">
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:14px;">Assumed knowledge</div>
+            <div style="display:flex;flex-direction:column;gap:11px;">
+              <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>General rules of safe AI use: approved tools, protect information, give context, iterate, verify</div>
+              <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>The concept of agents: a role, instructions and data sources, built once and reused</div>
+            </div>
+          </div>
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #000000;padding:22px;">
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#000000;margin-bottom:14px;">This module focuses on</div>
+            <p style="margin:0 0 12px;font-size:14px;line-height:1.55;color:#2f2e2b;">Using Claude Chat day to day, and on <strong>agentic, tool-assisted chat</strong>. This is not a separate agent you build, but Claude working through multiple steps inside the conversation, using approved context and tools, and continuing from what it finds.</p>
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#686660;">Building and sharing your own agents is covered in the AI Champion Journey.</p>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">After this module you will be able to</div>
+        <div style="display:grid;grid-template-columns:1fr;gap:0;">
+          <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:15px;min-width:22px;">01</span><span style="font-size:15px;line-height:1.45;color:#2f2e2b;">Use Claude Chat's features to get better context into your prompts.</span></div>
+          <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:15px;min-width:22px;">02</span><span style="font-size:15px;line-height:1.45;color:#2f2e2b;">Use files, connectors, projects, skills and artifacts responsibly where approved.</span></div>
+          <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:15px;min-width:22px;">03</span><span style="font-size:15px;line-height:1.45;color:#2f2e2b;">Manage usage and cost by scoping context, tool use and long conversations deliberately.</span></div>
+          <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #ecebe6;border-bottom:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:15px;min-width:22px;">04</span><span style="font-size:15px;line-height:1.45;color:#2f2e2b;">Verify and share outputs safely, with Sandvik policy and human accountability in mind.</span></div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 2 · TOOL FIT ===== -->
+      <sc-if value="{{ isFit }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Tool fit" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Tool fit</div>
+        <p style="font-weight:300;font-size:19px;line-height:1.5;color:#2f2e2b;margin:0 0 30px;max-width:62ch;">Claude Chat holds the foundational features of Claude. It is <span style="font-style:italic;">not</span> Claude Code, Cowork or Design. Choosing the right product is the first decision.</p>
+
+        <!-- Claude alongside Microsoft Copilot -->
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Claude alongside Microsoft Copilot</div>
+        <p style="font-weight:300;font-size:16px;line-height:1.5;color:#4a4945;margin:0 0 18px;max-width:62ch;">At Sandvik these tools work side by side. Match the assistant to the task by weighing cost, the data it needs, and how complex the work is.</p>
+        <div class="stack-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#d9d7d0;border:1px solid #d9d7d0;margin-bottom:34px;">
+          <div style="background:#fff;padding:20px 20px 22px;display:flex;flex-direction:column;">
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:2px;">Microsoft Copilot</div>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;margin-bottom:14px;">Simpler, everyday tasks</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#4a4945;margin:0 0 16px;">Quick drafts, rewrites, summaries and questions where you don't need extra data or deep reasoning.</p>
+            <div style="margin-top:auto;">
+              <div style="font-size:12px;font-weight:700;color:#3f7a3f;background:#f0f6ec;border:1px solid #d6e7cc;padding:7px 11px;display:inline-block;margin-bottom:12px;">Lowest cost, use first</div>
+              <div style="font-size:12.5px;line-height:1.5;color:#686660;">Already available to everyone. It is included in the standard Microsoft package, so there is nothing to request.</div>
+            </div>
+          </div>
+          <div style="background:#fff;padding:20px 20px 22px;display:flex;flex-direction:column;">
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:2px;">Microsoft Copilot Pro</div>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;margin-bottom:14px;">Tasks that need Microsoft 365 data</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#4a4945;margin:0 0 16px;">Work grounded in your own Microsoft content such as Outlook, SharePoint, Teams and other Microsoft 365 sources.</p>
+            <div style="margin-top:auto;">
+              <div style="font-size:12px;font-weight:700;color:#5a4a78;background:#f2eef8;border:1px solid #ddd2ec;padding:7px 11px;display:inline-block;margin-bottom:12px;">Connected to Microsoft 365</div>
+              <div style="font-size:12.5px;line-height:1.5;color:#686660;">Request access through the <a href="https://serviceportal.sandvik.com.mcas.ms/esc?id=sc_cat_item&amp;table=sc_cat_item&amp;sys_id=c21edf7047b48694ac4e7272e36d435c&amp;searchTerm=copilot" target="_blank" rel="noopener" style="color:#2f2e2b;text-decoration:underline;text-decoration-color:#c9a961;text-underline-offset:2px;font-weight:700;">internal service portal&nbsp;&rarr;</a></div>
+            </div>
+          </div>
+          <div style="background:#fff;padding:20px 20px 22px;display:flex;flex-direction:column;border-top:3px solid #a08c64;">
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:2px;">Claude</div>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#7e6d4d;font-weight:700;margin-bottom:14px;">More complex tasks</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#4a4945;margin:0 0 16px;">Deeper reasoning, longer documents, multi-step analysis and work where output quality matters most.</p>
+            <div style="margin-top:auto;">
+              <div style="font-size:12px;font-weight:700;color:#7e6d4d;background:#f5f2ec;border:1px solid #e3dbcc;padding:7px 11px;display:inline-block;margin-bottom:12px;">For the harder problems</div>
+              <div style="font-size:12.5px;line-height:1.5;color:#686660;">Request access through the <a href="https://serviceportal.sandvik.com.mcas.ms/esc?id=sc_cat_item_guide&amp;sys_id=27882eb62b0c83900766f0b16e91bf67&amp;McasTsid=1004&amp;McasCtx=4" target="_blank" rel="noopener" style="color:#2f2e2b;text-decoration:underline;text-decoration-color:#c9a961;text-underline-offset:2px;font-weight:700;">internal service portal&nbsp;&rarr;</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #d9d7d0;border-top:3px solid #7fcc5b;padding:24px 26px;margin-bottom:34px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#3f7a3f;margin-bottom:16px;">Use Claude Chat when</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;">
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>You are thinking through a problem and want an interactive thought partner.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>You need a first draft, summary, translation, comparison, checklist or structured analysis.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>You want to upload or paste selected context and ask questions about it.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>You want text or an artifact you can inspect, edit and reuse.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>You want Claude to use approved tools or connectors inside a controlled conversation.</div>
+          </div>
+        </div>
+
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-bottom:28px;font-size:14px;line-height:1.55;color:#2f2e2b;">Claude Chat is the basis of Claude, so everyone who uses Claude starts here. Cowork, Code and Design are add-ons that sit on top of Chat. Each is requested separately through the service portal and comes with its own tool modules.</div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Reach for another Claude product when</div>
+        <div style="border:1px solid #d9d7d0;">
+          <div style="display:grid;grid-template-columns:1.6fr 1fr;background:#000000;color:#fff;">
+            <div style="padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">If the work is</div>
+            <div style="padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-left:1px solid #2f2e2b;">Use</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.6fr 1fr;border-top:1px solid #ecebe6;"><div style="padding:14px 18px;font-size:14px;line-height:1.4;">A deliverable across many files, the browser, or desktop actions</div><div style="padding:14px 18px;font-size:14px;font-weight:700;border-left:1px solid #ecebe6;color:#000000;">Claude Cowork</div></div>
+          <div style="display:grid;grid-template-columns:1.6fr 1fr;border-top:1px solid #ecebe6;background:#fbfaf8;"><div style="padding:14px 18px;font-size:14px;line-height:1.4;">Reading and changing a codebase, running tests, using dev tools</div><div style="padding:14px 18px;font-size:14px;font-weight:700;border-left:1px solid #ecebe6;color:#000000;">Claude Code</div></div>
+          <div style="display:grid;grid-template-columns:1.6fr 1fr;border-top:1px solid #ecebe6;"><div style="padding:14px 18px;font-size:14px;line-height:1.4;">Visual exploration, prototypes, slides, design concepts</div><div style="padding:14px 18px;font-size:14px;font-weight:700;border-left:1px solid #ecebe6;color:#000000;">Claude Design</div></div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION · GETTING STARTED ===== -->
+      <sc-if value="{{ isGetStarted }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Getting started" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Getting started</div>
+        <p style="font-weight:300;font-size:19px;line-height:1.5;color:#2f2e2b;margin:0 0 30px;max-width:62ch;">There are three ways to use Claude. They share the same account and history, so you can start on one and continue on another.</p>
+
+        <div class="stack-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#d9d7d0;border:1px solid #d9d7d0;margin-bottom:34px;">
+          <div style="background:#fff;padding:22px 20px;display:flex;flex-direction:column;">
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;color:#a08c64;margin-bottom:10px;">01</div>
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:17px;margin-bottom:6px;">Web browser</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#4a4945;margin:0;">Go to <a href="https://www.claude.ai" target="_blank" rel="noopener" style="color:#2f2e2b;text-decoration:underline;text-decoration-color:#c9a961;text-underline-offset:2px;font-weight:700;">www.claude.ai</a> and sign in. Nothing to install.</p>
+          </div>
+          <div style="background:#fff;padding:22px 20px;display:flex;flex-direction:column;">
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;color:#a08c64;margin-bottom:10px;">02</div>
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:17px;margin-bottom:6px;">Desktop app</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#4a4945;margin:0;">Download Claude as a desktop app from the internal <strong>Company portal</strong>. Step-by-step screenshots follow.</p>
+          </div>
+          <div style="background:#fff;padding:22px 20px;display:flex;flex-direction:column;">
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;color:#a08c64;margin-bottom:10px;">03</div>
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:17px;margin-bottom:6px;">Mobile app</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#4a4945;margin:0;">Install the Claude app on your phone for quick access on the move.</p>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">What you'll see</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center;">
+          <figure style="margin:0;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;">
+            <img src="assets/claude-desktop-welcome.png" alt="The Claude desktop app: a left sidebar with Chat, Cowork and Code tabs, New chat, Projects, Artifacts and chat history, and a central welcome screen with a message box" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+            <figcaption style="font-size:11.5px;color:#8e8c84;margin-top:10px;line-height:1.4;">The Claude desktop app once you're signed in.</figcaption>
+          </figure>
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <div>
+              <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin:0 0 6px;">The chat</h4>
+              <p style="font-size:14px;line-height:1.55;color:#4a4945;margin:0;">The large area in the middle is where you work. Type a message in the box to start, and the conversation builds up here as you and Claude exchange turns.</p>
+            </div>
+            <div>
+              <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin:0 0 6px;">Chat history</h4>
+              <p style="font-size:14px;line-height:1.55;color:#4a4945;margin:0;">The left sidebar keeps your past conversations. Start a <strong>New chat</strong> at any time, and reopen earlier ones from <strong>Recents</strong> to pick up where you left off.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin:34px 0 14px;">Choosing a model</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center;">
+          <figure style="margin:0;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;">
+            <img src="assets/claude-model-selection.png" alt="The model picker open in the message box, listing models such as Opus 4.8 and Sonnet 4.6, an Effort submenu from Low to Max, and a Thinking toggle" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+            <figcaption style="font-size:11.5px;color:#8e8c84;margin-top:10px;line-height:1.4;">The model menu, opened from the box at the bottom of the chat.</figcaption>
+          </figure>
+          <div>
+            <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin:0 0 6px;">Model selection</h4>
+            <p style="font-size:14px;line-height:1.55;color:#4a4945;margin:0 0 12px;">The control at the bottom of the message box is where you pick the model and how much effort it puts in. Different models suit different tasks.</p>
+            <p style="font-size:14px;line-height:1.55;color:#2f2e2b;margin:0;border-left:2px solid #a08c64;padding-left:14px;">The <strong>Thinking</strong> toggle turns on multi-step reasoning, where Claude works through a problem in steps. It is on by default, and the next page explains it.</p>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION · MULTI-STEP REASONING ===== -->
+      <sc-if value="{{ isWorkflow }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Multi-step reasoning" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Multi-step reasoning</div>
+        <p style="font-weight:300;font-size:19px;line-height:1.5;color:#2f2e2b;margin:0 0 12px;max-width:62ch;">With multi-step reasoning, Claude works through a problem in steps before answering, rather than replying the moment you press send. The result is a more <span style="font-style:italic;">considered</span> answer.</p>
+        <p style="font-size:15px;line-height:1.6;color:#4a4945;margin:0 0 32px;max-width:62ch;">It is turned on by default, so you usually don't need to do anything. For harder questions you'll see Claude reason for a moment before it answers.</p>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div>
+            <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:19px;margin:0 0 8px;">How it works</h4>
+            <p style="font-size:14px;line-height:1.55;color:#4a4945;margin:0 0 14px;">A direct answer is a single guess. Multi-step reasoning lets Claude break a problem into parts, work through them, and check itself before replying. It is most useful for analysis, comparisons, planning and anything with several moving parts.</p>
+            <div style="display:flex;flex-direction:column;">
+              <div style="display:flex;gap:13px;padding:9px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:13px;min-width:18px;">1</span><span style="font-size:13.5px;line-height:1.4;color:#2f2e2b;">Claude reads your question and understands what it needs to solve.</span></div>
+              <div style="display:flex;gap:13px;padding:9px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:13px;min-width:18px;">2</span><span style="font-size:13.5px;line-height:1.4;color:#2f2e2b;">It breaks the problem into smaller parts.</span></div>
+              <div style="display:flex;gap:13px;padding:9px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:13px;min-width:18px;">3</span><span style="font-size:13.5px;line-height:1.4;color:#2f2e2b;">It works through each part in turn.</span></div>
+              <div style="display:flex;gap:13px;padding:9px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:13px;min-width:18px;">4</span><span style="font-size:13.5px;line-height:1.4;color:#2f2e2b;">It checks the parts fit together.</span></div>
+              <div style="display:flex;gap:13px;padding:9px 0;border-top:1px solid #ecebe6;border-bottom:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#7e6d4d;font-size:13px;min-width:18px;">5</span><span style="font-size:13.5px;line-height:1.4;color:#2f2e2b;font-weight:700;">It delivers a clear, well-reasoned answer.</span></div>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:19px;margin:0 0 8px;">An example</h4>
+            <p style="font-size:14px;line-height:1.55;color:#4a4945;margin:0 0 14px;">Ask Claude to draft a one-page update and it can plan the work first, then move through it step by step, keeping track of progress inside the conversation.</p>
+            <div style="border:1px solid #d9d7d0;background:#fbfaf8;padding:16px 18px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;margin-bottom:10px;">Example checklist for a one-page project update</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:#2f2e2b;">
+                <div style="display:flex;gap:9px;align-items:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3f7a3f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Clarify audience</span></div>
+                <div style="display:flex;gap:9px;align-items:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3f7a3f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Identify key messages</span></div>
+                <div style="display:flex;gap:9px;align-items:center;"><span style="width:15px;height:15px;border:1.5px solid #a08c64;display:inline-block;flex:none;"></span><span style="font-weight:700;">Draft update <span style="color:#7e6d4d;font-weight:400;">· in progress</span></span></div>
+                <div style="display:flex;gap:9px;align-items:center;color:#8e8c84;"><span style="width:15px;height:15px;border:1.5px solid #d9d7d0;display:inline-block;flex:none;"></span><span>Check risks and assumptions</span></div>
+                <div style="display:flex;gap:9px;align-items:center;color:#8e8c84;"><span style="width:15px;height:15px;border:1.5px solid #d9d7d0;display:inline-block;flex:none;"></span><span>Shorten for leadership</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-top:26px;font-size:14px;line-height:1.55;color:#2f2e2b;">You can follow Claude's reasoning as it works, which makes it easier to see how it reached an answer. Treat the result as a draft and check it before you act on it.</div>
+      </section>
+      </sc-if>
+
+      <!-- ===== TOOL CAPABILITIES (one page per feature) ===== -->
+
+      <!-- 1 of 5 · FILES -->
+      <sc-if value="{{ isCapFiles }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Files" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:18px;">Tool capabilities · 1 of 5</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="width:50px;height:50px;border:1px solid #d9d7d0;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+          <div>
+            <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,34px);line-height:1;letter-spacing:-0.01em;margin:0 0 4px;">Files</h3>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;">Context you attach</div>
+          </div>
+        </div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 24px;max-width:62ch;">Files let Claude work with material you provide, such as a policy draft, report, spreadsheet, meeting notes, or specification. Claude can summarise, compare, extract, rewrite, and answer questions about the content.</p>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:center;margin-bottom:28px;">
+          <figure style="margin:0;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;">
+            <img src="assets/claude-add-files-menu.png" alt="The Claude composer with the plus menu open, showing Add files or photos" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+          </figure>
+          <div>
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:12px;">Adding a file</div>
+            <p style="margin:0 0 12px;font-size:15px;line-height:1.6;color:#2f2e2b;">Click the <strong>+</strong> in the composer and choose <strong>Add files or photos</strong>, or simply drag and drop files straight into the chat.</p>
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4945;">Common file types include Word documents, PDFs, and PowerPoint presentations.</p>
+          </div>
+        </div>
+
+        <div style="border:1px solid #d9d7d0;">
+          <div style="display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid #ecebe6;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">Long documents</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">Claude can work with long documents, even hundreds of pages, as long as the material fits within the available context and is organised enough to follow. More context is not always better: large or messy uploads can make it harder for Claude to focus on the right evidence, and can raise the risk of missed details or confident mistakes.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid #ecebe6;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">For large files</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">Tell Claude exactly what to look for, which sections matter most, and what it should ignore.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:200px 1fr;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">Spreadsheets and datasets</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">Treat Claude as a reasoning and explanation assistant rather than a dedicated data-analysis system. It can summarise, inspect, and explain patterns, but important calculations, formulas, row counts, and conclusions need to be checked against the original file or a proper analysis tool.</div>
+          </div>
+        </div>
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-top:22px;font-size:14px;line-height:1.55;color:#2f2e2b;"><strong>Good habit:</strong> more context is not always better. For data, verify the important figures against the source.</div>
+      </section>
+      </sc-if>
+
+      <!-- 2 of 5 · CONNECTORS -->
+      <sc-if value="{{ isCapConnectors }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Connectors" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:18px;">Tool capabilities · 2 of 5</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="width:50px;height:50px;border:1px solid #d9d7d0;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"></path><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"></path></svg></div>
+          <div>
+            <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,34px);line-height:1;letter-spacing:-0.01em;margin:0 0 4px;">Connectors and tool access</h3>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;">Context Claude retrieves</div>
+          </div>
+        </div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">Connectors let Claude connect to approved apps and services. A connector may let Claude retrieve data, search a system, or in some cases take actions in that service.</p>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 28px;max-width:62ch;">The idea is that connectors bring extra context into Claude Chat without you copying everything by hand. Claude uses the connected service through your login and permissions. If you cannot access a file, channel, record, or repository through your own account, the connector cannot give Claude access to it either.</p>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Adding and managing connectors</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:16px;">
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#2f2e2b;">Add a connector from the <strong>Customize</strong> tab: open <strong>Customize &gt; Connectors</strong>, pick a connector, and connect it.</p>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#4a4945;">Each connector lists its <strong>tool permissions</strong>, so you can see exactly what tools it provides and choose when Claude is allowed to use them. You only see tools your organisation has given you access to.</p>
+        </div>
+        <figure style="margin:0 0 24px;border:1px solid #d9d7d0;background:#fbfaf8;padding:16px;">
+          <img src="assets/claude-connectors-customize.png" alt="The Customize tab with Connectors selected, the connector list, and Microsoft 365 showing its tool permissions" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+        </figure>
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:center;margin-bottom:24px;">
+          <div style="order:2;">
+            <p style="margin:0;font-size:15px;line-height:1.6;color:#2f2e2b;">Once connected, the connector appears in the <strong>+</strong> menu under <strong>Connectors</strong>, ready to switch on for a chat. Open <strong>Tool access</strong> there to review its tools at any time.</p>
+          </div>
+          <figure style="margin:0;order:1;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;">
+            <img src="assets/claude-connectors-menu.png" alt="The composer plus menu showing the connected Microsoft 365 connector and a Tool access option" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+          </figure>
+        </div>
+        <div style="border:1px solid #d9d7d0;background:#fbfaf8;padding:14px 18px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <div style="font-size:13.5px;line-height:1.55;color:#2f2e2b;"><strong>About MCP:</strong> connectors run on MCP (Model Context Protocol), the standard that lets tools plug into Claude. In time there will be options to connect your own Sandvik systems this way.</div>
+        </div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Approved connectors today</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+              <span style="font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#000000;">Microsoft 365</span>
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:3px 8px;background:#f0f6ec;border:1px solid #d6e7cc;color:#3f7a3f;">Active</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;">
+              <div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Find or summarise documents from SharePoint.</div>
+              <div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Get the last week's meeting transcripts and summarise action points.</div>
+              <div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Find available time slots for a meeting.</div>
+            </div>
+          </div>
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+              <span style="font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#000000;">GitHub</span>
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:3px 8px;background:#f0f6ec;border:1px solid #d6e7cc;color:#3f7a3f;">Active</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;">
+              <div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Understand a codebase and explain how it works.</div>
+              <div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Summarise recent changes or a pull request.</div>
+              <div style="display:flex;gap:9px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Find where something is implemented across a repository.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-bottom:28px;font-size:14px;line-height:1.55;color:#2f2e2b;">There aren't many Sandvik approved connectors yet, but connectors are an essential way of making data available to Claude, and more are on the way. A future shared site will list the approved connectors (MCPs) as they become available.</div>
+
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:18px 22px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:12px;">Good habits</div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Understand what Claude is trying to access or do through connectors.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Prefer narrow access and specific prompts.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Pause to think before you accept an action that sends, creates, updates, or deletes anything in another system.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Watch for prompt injection in retrieved content, especially emails, documents, web pages, tickets, or repositories.</div>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- 3 of 5 · PROJECTS -->
+      <sc-if value="{{ isCapProjects }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Projects" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:18px;">Tool capabilities · 3 of 5</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="width:50px;height:50px;border:1px solid #d9d7d0;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg></div>
+          <div>
+            <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,34px);line-height:1;letter-spacing:-0.01em;margin:0 0 4px;">Projects</h3>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;">Context you organise</div>
+          </div>
+        </div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">Projects are focused Claude workspaces with their own chats, project knowledge, and project instructions. Use a project when you will return to the same topic or set of approved materials over time.</p>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 22px;">Open <strong>Projects</strong> from the left side panel, then create a new project or pick an existing one.</p>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Creating a project</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center;margin-bottom:24px;">
+          <figure style="margin:0;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;">
+            <img src="assets/claude-create-project.png" alt="The Create a project dialog with name and description fields and a Visibility choice between Sandvik (everyone in the organization) and Private (only invited members)" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+          </figure>
+          <div>
+            <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 14px;">Name the project and describe what you are trying to achieve, then set <strong>Visibility</strong> before you create it.</p>
+            <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 14px;">Choose <strong>Private</strong>. The <strong>Sandvik</strong> option makes the project, its knowledge and its chats visible to the whole Sandvik organisation.</p>
+            <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0;">Once it is private, share it individually with the specific people who should have access.</p>
+          </div>
+        </div>
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-bottom:28px;font-size:14px;line-height:1.55;color:#2f2e2b;">Always set visibility to <strong>Private</strong>, otherwise everyone at Sandvik will have access to your project.</div>
+
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 22px;">Once created, each project looks like this.</p>
+        <figure style="margin:0 0 26px;border:1px solid #d9d7d0;background:#fbfaf8;padding:16px;">
+          <img src="assets/claude-project-view.png" alt="A Claude project named Sandvik e-learning, with a chat composer, the Your chats and Activity tabs, and an Instructions and Files panel on the right" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+        </figure>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">What a project gives you</div>
+        <div style="border:1px solid #d9d7d0;margin-bottom:24px;">
+          <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid #ecebe6;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">Instructions</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">Always on for every chat in the project. Write the learnings, working method, or a description of the task or project you are on, and Claude applies it each time without you repeating yourself.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid #ecebe6;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">Files</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">Project knowledge stays attached as context the whole time, so every chat can draw on it. Add it once instead of re-uploading the same material in each conversation.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid #ecebe6;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">Collaboration</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">A project is shared. People with access work in the same instructions and files, so a team builds on one shared context rather than scattered private chats.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:180px 1fr;">
+            <div style="padding:18px 20px;font-weight:700;font-size:13px;color:#000000;background:#fbfaf8;border-right:1px solid #ecebe6;">Shared chats</div>
+            <div style="padding:18px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;">Your chats stay private until you share them. Once you share a chat you ran in the project, everyone with access to the project can reuse that chat as context for their own work.</div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #d9d7d0;border-top:3px solid #000000;padding:22px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#000000;margin-bottom:14px;">Before using or sharing a project, check</div>
+          <div class="stack-2" style="display:grid;grid-template-columns:0.7fr 1.3fr;gap:12px 32px;">
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Who can access the project?</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Do those people have the right to see the knowledge and chat context?</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Are the project instructions still accurate?</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Should outdated files be removed?</div>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- 4 of 5 · SKILLS -->
+      <sc-if value="{{ isCapSkills }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Skills" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:18px;">Tool capabilities · 4 of 5</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="width:50px;height:50px;border:1px solid #d9d7d0;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"></path></svg></div>
+          <div>
+            <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,34px);line-height:1;letter-spacing:-0.01em;margin:0 0 4px;">Skills</h3>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;">Reusable instructions and resources</div>
+          </div>
+        </div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">Skills are reusable packages of instructions and resources that Claude loads when relevant to a task. A skill can hold things like templates, reference guidelines, and scripts, so Claude performs specialised work the same way every time.</p>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 22px;max-width:62ch;">Find your skills under <strong>Customize &gt; Skills</strong>. They come in two kinds:</p>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:18px 20px;">
+            <div style="font-weight:700;font-size:13px;color:#000000;margin-bottom:6px;">Personal skills</div>
+            <div style="font-size:14px;line-height:1.5;color:#4a4945;">Skills you create or add for your own use, such as the built-in <strong>skill-creator</strong>.</div>
+          </div>
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #000000;padding:18px 20px;">
+            <div style="font-weight:700;font-size:13px;color:#000000;margin-bottom:6px;">Organization skills</div>
+            <div style="font-size:14px;line-height:1.5;color:#4a4945;">Skills your admin makes available to everyone. In this example there are two for creating presentations, <strong>sandvik-pptx</strong> and <strong>sandvik-html</strong>.</div>
+          </div>
+        </div>
+
+        <figure style="margin:0 0 30px;border:1px solid #d9d7d0;background:#fbfaf8;padding:16px;max-width:760px;">
+          <img src="assets/claude-skills-customize.png" alt="The Skills panel with Personal skills (skill-creator) and Organization skills (sandvik-pptx, sandvik-html), with the sandvik-pptx skill open showing its trigger, description and contents" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+        </figure>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">How a skill gets used</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;align-items:start;">
+          <div style="border:1px solid #d9d7d0;padding:20px;">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a08c64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"></path></svg>
+              <div style="font-weight:700;font-size:15px;color:#000000;">Applied automatically</div>
+            </div>
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#2f2e2b;">Claude recognises when a skill fits the task and applies it on its own. Ask for a Sandvik presentation and Claude picks up the presentation skill without you naming it.</p>
+          </div>
+          <div style="border:1px solid #d9d7d0;padding:20px;">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a08c64" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+              <div style="font-weight:700;font-size:15px;color:#000000;">Called directly</div>
+            </div>
+            <p style="margin:0 0 14px;font-size:14px;line-height:1.55;color:#2f2e2b;">You can also invoke a skill on purpose by typing <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#f5f2ec;padding:1px 5px;">/</code> followed by its name in the message box.</p>
+            <figure style="margin:0;border:1px solid #ecebe6;background:#fbfaf8;padding:10px;">
+              <img src="assets/claude-skill-slash.png" alt="The Claude message box with /sandvik-pptx typed to call the skill directly" style="width:100%;height:auto;display:block;" />
+            </figure>
+          </div>
+        </div>
+
+        <div style="background:#000000;color:#fff;padding:20px 24px;margin-bottom:24px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#dad1bf;margin-bottom:10px;">Creating a skill</div>
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:#e8e6e0;">To create a skill in Claude, write <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#2f2e2b;color:#fff;padding:2px 7px;">/skill-creator</code>. Claude builds a skill that you can decide to save for future use. To share a skill with other people, follow the guidance in the AI Champion Journey.</p>
+        </div>
+
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-bottom:24px;font-size:14px;line-height:1.55;color:#2f2e2b;">As with connectors, a future shared site will list the Sandvik-approved skills, so teams can reuse the same trusted skills rather than rebuilding their own.</div>
+
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:18px 22px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:12px;">Good habits</div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Check whether a skill is relevant before relying on it.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Remember that a skill improves the workflow, but it does not make the output automatically correct or approved.</div>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- 5 of 5 · ARTIFACTS -->
+      <sc-if value="{{ isCapArtifacts }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Artifacts" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:18px;">Tool capabilities · 5 of 5</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+          <div style="width:50px;height:50px;border:1px solid #d9d7d0;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div>
+          <div>
+            <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,34px);line-height:1;letter-spacing:-0.01em;margin:0 0 4px;">Artifacts</h3>
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8e8c84;font-weight:700;">Outputs you reuse</div>
+          </div>
+        </div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 24px;max-width:62ch;">Artifacts are standalone outputs Claude produces alongside the conversation. They are useful when the result is something you will inspect, edit, download, reuse, or share.</p>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">An artifact can be</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;">
+          <span style="border:1px solid #d9d7d0;padding:8px 14px;font-size:13px;color:#2f2e2b;">A document</span>
+          <span style="border:1px solid #d9d7d0;padding:8px 14px;font-size:13px;color:#2f2e2b;">A diagram</span>
+          <span style="border:1px solid #d9d7d0;padding:8px 14px;font-size:13px;color:#2f2e2b;">A visualisation</span>
+          <span style="border:1px solid #d9d7d0;padding:8px 14px;font-size:13px;color:#2f2e2b;">A code snippet</span>
+          <span style="border:1px solid #d9d7d0;padding:8px 14px;font-size:13px;color:#2f2e2b;">A simple web page</span>
+          <span style="border:1px solid #d9d7d0;padding:8px 14px;font-size:13px;color:#2f2e2b;">An interactive component</span>
+        </div>
+
+        <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:22px;margin-bottom:24px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:10px;">Example</div>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#2f2e2b;">For a steering-group update, an artifact might be a milestone timeline, a process flow diagram, or a risk heatmap that you can refine and drop into your report.</p>
+        </div>
+
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">Claude can also build a full interactive dashboard from data you provide. A short prompt like this one is enough to get started:</p>
+        <figure style="margin:0 0 16px;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;max-width:600px;">
+          <img src="assets/claude-dashboard-prompt.png" alt="A Claude prompt: create a realistic dashboard using the styling from the skill sandvik-html, make every number plausible but invented, keep it to one screen, add subtle entrance animations and no external dependencies" style="width:100%;height:auto;display:block;" />
+        </figure>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">The example below was generated in Claude as a single HTML artifact.</p>
+        <figure style="margin:0 0 16px;border:1px solid #d9d7d0;background:#fbfaf8;padding:16px;max-width:760px;">
+          <img src="assets/claude-artifact-dashboard.png" alt="An AI Adoption Dashboard artifact generated in Claude, with headline metrics, an adoption-trend chart, a tools-in-use donut, and adoption-by-business-area bars, marked as sample data" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+        </figure>
+        <div style="border-left:2px solid #1441f5;background:#c8dcff;padding:16px 20px;margin-bottom:24px;font-size:14px;line-height:1.55;color:#000000;">A polished artifact looks convincing, so the real test is the data behind it. Before you rely on or share figures like these, make sure you understand exactly where each number came from and can verify it against the source.</div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:10px;">Sharing artifacts</div>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 24px;max-width:62ch;">Artifacts can be shared with other people. You can publish one and send a link, so colleagues can view it without opening your chat. Because sharing makes the artifact visible beyond you, check what it exposes and confirm it is cleared before you send it on.</p>
+
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;font-size:14px;line-height:1.55;color:#2f2e2b;"><strong>Good habit:</strong> treat every artifact as a draft until it has been checked against the source and Sandvik policy, and confirm it is cleared before you share or publish it.</div>
+
+        <div style="font-size:12.5px;color:#8e8c84;margin-top:22px;font-style:italic;">Module authors: add, remove, or reorder capability pages per tool. The same page pattern fits Code repositories, Cowork browser actions, Design assets, and more.</div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 5 · RULES & GOVERNANCE ===== -->
+      <sc-if value="{{ isGovernance }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Rules and governance" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Sandvik rules &amp; governance</div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#4a4945;margin:0 0 26px;max-width:62ch;">What's allowed, what needs care, and where to go for help and discussion.</p>
+
+        <div style="display:flex;flex-direction:column;border:1px solid #d9d7d0;">
+          <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid #ecebe6;">
+            <span style="flex:none;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;background:#e5f4dc;color:#3f7a3f;white-space:nowrap;margin-top:2px;">Approved</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:3px;">Approved use</div><div style="font-size:14px;line-height:1.5;color:#4a4945;">Claude Chat is a Sandvik-approved tool for the conversational work described in this module: thinking, drafting, analysing, summarising and creating reusable outputs.</div></div>
+          </div>
+          <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid #ecebe6;background:#fbfaf8;">
+            <span style="flex:none;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;background:#fff6d6;color:#8a6d1a;white-space:nowrap;margin-top:2px;">Use care</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:3px;">Data classification (SICS)</div><div style="font-size:14px;line-height:1.5;color:#4a4945;">Claude is approved for data classified <strong>i1&ndash;i3</strong> under the Sandvik Information Classification System: <strong>i1 Public</strong>, <strong>i2 Restricted</strong> (the default for most documents) and <strong>i3 Confidential</strong>. Do not use it with <strong>i4 Secret</strong> information. You are responsible for classifying your information correctly. <a href="https://sandvik.sharepoint.com.mcas.ms/teams/CybersecurityAwareness/SitePages/Permission--Information-classification-in-Sandvik.aspx?TeamsCID=545f7420-9042-44cf-9a18-3a878d19f159" target="_blank" rel="noopener" style="color:#2f2e2b;text-decoration:underline;text-decoration-color:#c9a961;text-underline-offset:2px;font-weight:700;">Information classification in Sandvik&nbsp;&rarr;</a></div></div>
+          </div>
+          <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid #ecebe6;">
+            <span style="flex:none;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;background:#fff6d6;color:#8a6d1a;white-space:nowrap;margin-top:2px;">Use care</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:3px;">Connectors &amp; permissions</div><div style="font-size:14px;line-height:1.5;color:#4a4945;">Use only Sandvik-approved connectors; they act through your login and permissions. Pause before any action that sends, creates, updates or deletes in another system.</div></div>
+          </div>
+          <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid #ecebe6;background:#fbfaf8;">
+            <span style="flex:none;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;background:#fff6d6;color:#8a6d1a;white-space:nowrap;margin-top:2px;">Use care</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:3px;">Sharing or publishing</div><div style="font-size:14px;line-height:1.5;color:#4a4945;">Treat outputs as drafts. Before sharing, check what an artifact or download exposes, validate the information, and follow channel rules.</div></div>
+          </div>
+          <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 20px;">
+            <span style="flex:none;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;background:#c8dcff;color:#1441f5;white-space:nowrap;margin-top:2px;">Community</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:3px;">Help &amp; discussion</div><div style="font-size:14px;line-height:1.5;color:#4a4945;">Ask questions, share what works and follow updates in the Claude community on Viva Engage. <a href="https://engage.cloud.microsoft/main/org/sandvik.com/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTA0NzU5Nzc3Njk3NzkyIn0" target="_blank" rel="noopener" style="color:#2f2e2b;text-decoration:underline;text-decoration-color:#c9a961;text-underline-offset:2px;font-weight:700;">Claude on Viva Engage&nbsp;&rarr;</a></div></div>
+          </div>
+        </div>
+
+        <div style="border:1px dashed #bcbab2;background:#fbfaf8;padding:20px 22px;margin-top:24px;display:flex;gap:16px;align-items:flex-start;">
+          <span style="flex:none;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;border:1px dashed #bcbab2;color:#7e6d4d;white-space:nowrap;margin-top:2px;">Pending approval</span>
+          <div>
+            <div style="font-weight:700;font-size:15px;margin-bottom:3px;">Excel &amp; PowerPoint plugins</div>
+            <div style="font-size:14px;line-height:1.5;color:#4a4945;">There are powerful Claude plugins for Excel and PowerPoint that let Claude work directly in those files. They are pending approval at Sandvik and not yet available to use.</div>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 6 · PRACTICAL SCENARIO ===== -->
+      <sc-if value="{{ isScenario }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Practical scenario" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Practical scenario</div>
+        <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(26px,3.2vw,34px);line-height:1.05;letter-spacing:-0.01em;margin:0 0 8px;">Prepare a steering-group update</h3>
+        <p style="font-weight:300;font-size:17px;line-height:1.5;color:#4a4945;margin:0 0 26px;max-width:60ch;">Apply the workflow to a realistic Sandvik task, then run the review checklist before anything leaves your screen.</p>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:20px;">
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:8px;">Source material</div>
+            <div style="font-size:14px;line-height:1.55;color:#2f2e2b;">Approved internal docs: latest status report, the project risk log, and recent meeting notes.</div>
+          </div>
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #000000;padding:20px;">
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#000000;margin-bottom:8px;">Your goal</div>
+            <div style="font-size:14px;line-height:1.55;color:#2f2e2b;">A one-page update plus a simple risk visualisation for next week's steering group.</div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #d9d7d0;padding:22px;margin-bottom:16px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Tool actions</div>
+          <div style="display:flex;flex-direction:column;">
+            <div style="display:flex;gap:14px;padding:11px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">01</span><span style="font-size:14px;line-height:1.45;color:#2f2e2b;">Open a <strong>Project</strong> and attach the approved documents as project knowledge.</span></div>
+            <div style="display:flex;gap:14px;padding:11px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">02</span><span style="font-size:14px;line-height:1.45;color:#2f2e2b;">Ask Claude to <strong>plan and make a checklist</strong>, then draft the update audience-first.</span></div>
+            <div style="display:flex;gap:14px;padding:11px 0;border-top:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">03</span><span style="font-size:14px;line-height:1.45;color:#2f2e2b;">Request a <strong>risk-heatmap artifact</strong> summarising the risk log.</span></div>
+            <div style="display:flex;gap:14px;padding:11px 0;border-top:1px solid #ecebe6;border-bottom:1px solid #ecebe6;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">04</span><span style="font-size:14px;line-height:1.45;color:#2f2e2b;">Optional: use an approved <strong>connector</strong> to pull the latest meeting transcript for action points.</span></div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #d9d7d0;padding:22px;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:4px;">Worked example</div>
+              <div style="font-size:14px;line-height:1.45;color:#2f2e2b;">See the prompt one engineer used and the artifact it produced.</div>
+            </div>
+            <button onClick="{{ toggleScenario }}" style="background:#000000;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;white-space:nowrap;flex:none;">{{ scenarioButtonLabel }} <span>{{ scenarioButtonGlyph }}</span></button>
+          </div>
+
+          <sc-if value="{{ scenarioOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:22px;border-top:1px solid #ecebe6;padding-top:22px;animation:svfade 320ms cubic-bezier(0.22,0.61,0.36,1);">
+            <div style="display:flex;gap:13px;margin-bottom:10px;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">01</span><div style="font-size:14px;line-height:1.5;color:#2f2e2b;">The risk log is attached to the project, then a single clear prompt asks for the visualisation, with the brand and data rules spelled out.</div></div>
+            <figure style="margin:0 0 26px;border:1px solid #d9d7d0;background:#fbfaf8;padding:14px;max-width:600px;">
+              <img src="assets/claude-scenario-prompt.png" alt="A Claude prompt using an attached Sandvik risk log to build a one-screen likelihood by impact heatmap, on-brand with gold accent, severity by shade, marked as sample data" style="width:100%;height:auto;display:block;" />
+            </figure>
+            <div style="display:flex;gap:13px;margin-bottom:10px;"><span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;color:#a08c64;font-size:14px;min-width:20px;">02</span><div style="font-size:14px;line-height:1.5;color:#2f2e2b;">Claude returns a single HTML artifact: a likelihood-by-impact matrix with every open risk plotted, a register, and severity shown by shade rather than traffic-light colours.</div></div>
+            <figure style="margin:0;border:1px solid #d9d7d0;background:#fbfaf8;padding:16px;max-width:760px;">
+              <img src="assets/claude-scenario-heatmap.png" alt="A Project risk heatmap artifact for Project Northstar, with a likelihood-by-impact matrix, summary metrics, a watch-this-week note, and a full risk register, marked as sample data" style="width:100%;height:auto;display:block;border:1px solid #ecebe6;" />
+            </figure>
+            <div style="border-left:2px solid #1441f5;background:#c8dcff;padding:14px 18px;margin-top:18px;font-size:13.5px;line-height:1.55;color:#000000;">This is sample data. Before it goes near a real steering group, every risk, owner and score has to be checked against the actual risk log.</div>
+          </div>
+          </sc-if>
+        </div>
+
+        <div style="border:1px solid #000000;padding:22px;background:#fbfaf8;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#000000;margin-bottom:14px;">Review checklist before you share</div>
+          <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.4;color:#2f2e2b;"><span style="width:16px;height:16px;border:1.5px solid #a08c64;display:inline-block;flex:none;margin-top:2px;"></span>Facts and figures verified against the source documents</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.4;color:#2f2e2b;"><span style="width:16px;height:16px;border:1.5px solid #a08c64;display:inline-block;flex:none;margin-top:2px;"></span>Sensitive information removed or restricted appropriately</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.4;color:#2f2e2b;"><span style="width:16px;height:16px;border:1.5px solid #a08c64;display:inline-block;flex:none;margin-top:2px;"></span>Artifact checked for what it exposes to the recipients</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.4;color:#2f2e2b;"><span style="width:16px;height:16px;border:1.5px solid #a08c64;display:inline-block;flex:none;margin-top:2px;"></span>Assumptions flagged and the output cleared to share</div>
+          </div>
+        </div>
+        <div style="font-size:12.5px;color:#8e8c84;margin-top:16px;font-style:italic;">Reusable template: swap scenario title, source material, goal, tool actions and review checklist for each tool module.</div>
+      </section>
+      </sc-if>
+
+      <!-- ===== TOKEN USAGE AND LIMITS ===== -->
+      <sc-if value="{{ isUsage }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Token usage and limits" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Work efficiently and manage usage</div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">At Sandvik, Claude usage is <span style="font-style:italic;">direct, consumption-based</span>. There are no five-hour session or weekly limits. Every conversation consumes tokens, billed pay-as-you-go to your cost center, so working efficiently keeps both setup time and cost down.</p>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 28px;max-width:62ch;border-left:2px solid #a08c64;padding-left:16px;">Costs for heavy, context-rich work can <strong>rise quickly</strong>, so keep an eye on your usage in Settings &gt; Usage and keep conversations scoped.</p>
+
+        <div style="border:1px solid #d9d7d0;border-top:3px solid #000000;background:#fbfaf8;padding:20px 22px;margin-bottom:30px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#000000;margin-bottom:8px;">For lighter work, reach for Copilot</div>
+          <div style="font-size:14.5px;line-height:1.6;color:#2f2e2b;">Microsoft Copilot is not consumption-based, so you can use it freely without adding cost to your cost center. For simpler, everyday tasks, use Copilot and save Claude for the more complex work where it earns its cost.</div>
+        </div>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px;">
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #a08c64;padding:22px;">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;">Usage (consumption)</div>
+            </div>
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4945;">How much you consume over time. Sandvik usage is billed on a pay-as-you-go basis to your cost center, so the more context Claude works with, the more it costs.</p>
+          </div>
+          <div style="border:1px solid #d9d7d0;border-top:3px solid #8e8c84;padding:22px;">
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;">Length and context</div>
+            </div>
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#4a4945;">How much material Claude can work with in one conversation. Longer chats and larger inputs fill the context and raise the token cost of every following message.</p>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">What drives token usage</div>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 16px;max-width:62ch;">Usage is not just a count of messages. It can be affected by:</p>
+        <div style="border:1px solid #d9d7d0;margin-bottom:34px;">
+          <div style="display:flex;gap:13px;padding:13px 18px;border-bottom:1px solid #ecebe6;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>The length of your conversation.</div>
+          <div style="display:flex;gap:13px;padding:13px 18px;border-bottom:1px solid #ecebe6;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>The size and number of files, project materials, or artifacts Claude uses.</div>
+          <div style="display:flex;gap:13px;padding:13px 18px;border-bottom:1px solid #ecebe6;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>The model, effort, or thinking settings available to you.</div>
+          <div style="display:flex;gap:13px;padding:13px 18px;border-bottom:1px solid #ecebe6;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Tool use, web search, research, connectors, and other context-heavy features.</div>
+          <div style="display:flex;gap:13px;padding:13px 18px;border-bottom:1px solid #ecebe6;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Reusing long chats instead of starting a focused new conversation.</div>
+          <div style="display:flex;gap:13px;padding:13px 18px;font-size:14px;line-height:1.45;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>The amount of reasoning required to reach a conclusion, such as creating scripts or understanding images.</div>
+        </div>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">Practical habits</div>
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-bottom:34px;">
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Start a new focused chat when the topic changes.</div>
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Use projects for approved materials you reference repeatedly instead of re-uploading the same files.</div>
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Use project instructions for stable context such as preferred tone, terminology, or output structure.</div>
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Use approved skills for recurring workflows, formats, or visualisations where Sandvik allows them.</div>
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Reuse and edit an existing artifact instead of regenerating a similar output from scratch.</div>
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Turn off web search, research, or connectors when they are not needed for the task.</div>
+          <div style="display:flex;gap:10px;font-size:14px;line-height:1.45;color:#2f2e2b;border:1px solid #d9d7d0;padding:14px 16px;grid-column:1 / -1;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5c8a3c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Choose simpler model, effort, or thinking settings for routine work where available and appropriate.</div>
+        </div>
+        <p style="font-size:13.5px;line-height:1.55;color:#686660;margin:0 0 34px;max-width:64ch;">These practices save setup time and reduce unnecessary context, but they do not remove Sandvik cost controls or the need to review Claude's outputs.</p>
+
+        <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:14px;">If you need more capacity</div>
+        <div style="border:1px solid #d9d7d0;border-left:3px solid #a08c64;background:#fbfaf8;padding:22px;margin-bottom:18px;">
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.5;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Check your usage in <strong>Settings &gt; Usage</strong> if available.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.5;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>For business work that needs more capacity, use the intranet form to request a higher monthly usage or spending limit.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.5;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Expect the higher monthly spending limit to require approval from your cost approver.</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.5;color:#2f2e2b;"><span style="color:#a08c64;font-weight:700;">›</span>Your monthly spending limit should be visible in your Claude account.</div>
+          </div>
+        </div>
+        <div style="border:1px solid #d9d7d0;border-top:3px solid #c0463f;padding:18px 20px;">
+          <div style="font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#b23a33;margin-bottom:8px;">Not allowed</div>
+          <div style="font-size:14px;line-height:1.55;color:#2f2e2b;">Do not move Sandvik work into private accounts or unapproved tools to avoid limits or cost.</div>
+        </div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 7 · COMMON RISKS ===== -->
+      <sc-if value="{{ isRisks }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Common risks" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Common risks &amp; mistakes</div>
+        <p style="font-weight:300;font-size:18px;line-height:1.5;color:#4a4945;margin:0 0 14px;max-width:62ch;">Most problems fall into five groups. Each card shows the risk; tap it to flip to the habit that avoids it.</p>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+          <!-- card 1 -->
+          <div onClick="{{ rf0Toggle }}" style="perspective:1200px;height:248px;cursor:pointer;">
+            <div style="{{ rf0Inner }}">
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #c0463f;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#c0463f;">Risk</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></div>
+                <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;">Data &amp; confidentiality</div>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#4a4945;">Pasting information you're not cleared to use, giving connectors more access than needed, or trusting retrieved content that carries hidden instructions (prompt injection).</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#a08c64;padding-top:12px;">Tap to see the fix →</div>
+              </div>
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:#f5f2ec;border:1px solid #d9d7d0;border-left:3px solid #5c8a3c;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#3f7a3f;">Do instead</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></div>
+                <p style="margin:0;font-size:14.5px;line-height:1.55;color:#2f2e2b;font-weight:700;">Enter only authorised material, prefer narrow access, and scan retrieved content before acting on it.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#8e8c84;padding-top:12px;">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- card 2 -->
+          <div onClick="{{ rf1Toggle }}" style="perspective:1200px;height:248px;cursor:pointer;">
+            <div style="{{ rf1Inner }}">
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #c0463f;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#c0463f;">Risk</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></div>
+                <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;">Wrong tool choice</div>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#4a4945;">Forcing Claude Chat to do work that belongs in Claude Code, Cowork or Design, and getting weaker results.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#a08c64;padding-top:12px;">Tap to see the fix →</div>
+              </div>
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:#f5f2ec;border:1px solid #d9d7d0;border-left:3px solid #5c8a3c;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#3f7a3f;">Do instead</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></div>
+                <p style="margin:0;font-size:14.5px;line-height:1.55;color:#2f2e2b;font-weight:700;">Match the product to the work before you start.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#8e8c84;padding-top:12px;">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- card 3 -->
+          <div onClick="{{ rf2Toggle }}" style="perspective:1200px;height:248px;cursor:pointer;">
+            <div style="{{ rf2Inner }}">
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #c0463f;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#c0463f;">Risk</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></div>
+                <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;">Over-trusting output</div>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#4a4945;">Treating a fluent answer as verified fact, trusting spreadsheet maths, or letting long, messy chats hide missed details.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#a08c64;padding-top:12px;">Tap to see the fix →</div>
+              </div>
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:#f5f2ec;border:1px solid #d9d7d0;border-left:3px solid #5c8a3c;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#3f7a3f;">Do instead</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></div>
+                <p style="margin:0;font-size:14.5px;line-height:1.55;color:#2f2e2b;font-weight:700;">Treat answers as drafts, verify important figures, and start a fresh focused chat when the topic changes.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#8e8c84;padding-top:12px;">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- card 4 -->
+          <div onClick="{{ rf3Toggle }}" style="perspective:1200px;height:248px;cursor:pointer;">
+            <div style="{{ rf3Inner }}">
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #c0463f;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#c0463f;">Risk</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></div>
+                <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;">Sharing &amp; publishing</div>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#4a4945;">Sharing artifacts or downloads without checking what they expose or validating the information first.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#a08c64;padding-top:12px;">Tap to see the fix →</div>
+              </div>
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:#f5f2ec;border:1px solid #d9d7d0;border-left:3px solid #5c8a3c;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#3f7a3f;">Do instead</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></div>
+                <p style="margin:0;font-size:14.5px;line-height:1.55;color:#2f2e2b;font-weight:700;">Run the review checklist before anything leaves your screen.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#8e8c84;padding-top:12px;">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- card 5 -->
+          <div onClick="{{ rf4Toggle }}" style="perspective:1200px;height:248px;cursor:pointer;">
+            <div style="{{ rf4Inner }}">
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #c0463f;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#c0463f;">Risk</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg></div>
+                <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px;">Cost &amp; usage</div>
+                <p style="margin:0;font-size:14px;line-height:1.5;color:#4a4945;">Long unfocused conversations, re-uploading the same files instead of using a project, or moving work to private accounts to dodge limits.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#a08c64;padding-top:12px;">Tap to see the fix →</div>
+              </div>
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:#f5f2ec;border:1px solid #d9d7d0;border-left:3px solid #5c8a3c;padding:20px;display:flex;flex-direction:column;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span style="font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#3f7a3f;">Do instead</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bcbab2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg></div>
+                <p style="margin:0;font-size:14.5px;line-height:1.55;color:#2f2e2b;font-weight:700;">Scope context, reuse projects and artifacts, and request a higher limit through the proper route.</p>
+                <div style="margin-top:auto;font-size:12px;font-weight:700;color:#8e8c84;padding-top:12px;">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="border-left:2px solid #a08c64;background:#f5f2ec;padding:16px 20px;margin-top:22px;font-size:14px;line-height:1.55;color:#2f2e2b;">Across all of these, one rule holds: <strong>human users remain accountable for outputs.</strong></div>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 8 · KNOWLEDGE CHECK ===== -->
+      <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Knowledge check" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);max-width:760px;">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Knowledge check</div>
+
+        <!-- intro -->
+        <sc-if value="{{ quizIsStart }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,36px);line-height:1.04;letter-spacing:-0.01em;margin:0 0 12px;">Check what you've <span style="font-style:italic;font-weight:300;">learned</span></h3>
+          <p style="font-weight:300;font-size:18px;line-height:1.5;color:#4a4945;margin:0 0 24px;max-width:56ch;">A short set of practical decisions about product choice, context, connectors, files, artifacts, usage and accountability. Pick an answer, check it, and read the feedback before moving on.</p>
+          <div style="display:flex;gap:28px;border-top:1px solid #d9d7d0;border-bottom:1px solid #d9d7d0;padding:18px 0;margin-bottom:26px;">
+            <div><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:6px;">Questions</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:22px;">{{ quizTotal }}</div></div>
+            <div><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:6px;">To pass</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:22px;">{{ passMarkLabel }}</div></div>
+            <div><div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:6px;">Retries</div><div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:22px;">Unlimited</div></div>
+          </div>
+          <button onClick="{{ startQuiz }}" style="background:#000000;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:15px;padding:15px 28px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;">Start the check <span>→</span></button>
+        </div>
+        </sc-if>
+
+        <!-- question -->
+        <sc-if value="{{ quizIsQ }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div style="font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#7e6d4d;">{{ qNumberLabel }}</div>
+          </div>
+          <div style="height:3px;background:#ecebe6;margin-bottom:24px;"><div style="height:100%;background:#a08c64;width:{{ qProgressWidth }};transition:width 240ms;"></div></div>
+          <h3 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;line-height:1.25;margin:0 0 22px;">{{ qPrompt }}</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px;">
+            <sc-for list="{{ quizOptions }}" as="opt" hint-placeholder-count="4">
+              <button onClick="{{ opt.onClick }}" style="{{ opt.rowStyle }}">
+                <span style="{{ opt.markStyle }}">{{ opt.marker }}</span>
+                <span style="flex:1;min-width:0;">
+                  <span style="font-size:14.5px;line-height:1.45;color:#2f2e2b;display:block;">{{ opt.text }}</span>
+                  <sc-if value="{{ opt.showFeedback }}"><span style="{{ opt.fbStyle }}">{{ opt.feedback }}</span></sc-if>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ quizRevealed }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#f5f2ec;border-left:2px solid #a08c64;padding:14px 18px;margin-bottom:22px;font-size:13.5px;line-height:1.55;color:#2f2e2b;"><strong>Why:</strong> {{ qExplanation }}</div>
+          </sc-if>
+          <div style="display:flex;gap:12px;">
+            <sc-if value="{{ quizRevealed }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ nextQuestion }}" style="background:#000000;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">{{ nextQLabel }} <span>→</span></button>
+            </sc-if>
+            <sc-if value="{{ quizNotRevealed }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ checkAnswer }}" style="{{ checkStyle }}">Check answer</button>
+            </sc-if>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- results -->
+        <sc-if value="{{ quizIsResults }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;align-items:center;gap:18px;border:1px solid #d9d7d0;padding:24px;margin-bottom:24px;{{ resultBannerExtra }}">
+            <div style="width:64px;height:64px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;{{ resultBadgeStyle }}">
+              <span style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;">{{ scorePct }}</span>
+            </div>
+            <div>
+              <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:24px;line-height:1.1;margin-bottom:4px;">{{ resultHeadline }}</div>
+              <div style="font-size:14px;line-height:1.5;color:#4a4945;">{{ resultBody }} <strong>{{ scoreFraction }}</strong> correct.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;">
+            <sc-if value="{{ scorePassed }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ goNext }}" style="background:#000000;color:#fff;border:0;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">Continue to completion <span>→</span></button>
+            </sc-if>
+            <button onClick="{{ retryQuiz }}" style="background:none;border:1px solid #000000;color:#000000;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;cursor:pointer;">Retake the check</button>
+          </div>
+        </div>
+        </sc-if>
+      </section>
+      </sc-if>
+
+      <!-- ===== SECTION 9 · COMPLETION ===== -->
+      <sc-if value="{{ isComplete }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Completion" style="animation:svfade 360ms cubic-bezier(0.22,0.61,0.36,1);max-width:760px;">
+        <div style="font-weight:700;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#686660;margin-bottom:14px;">Completion</div>
+
+        <div style="display:flex;align-items:center;gap:18px;border:1px solid #d9d7d0;padding:22px 24px;margin-bottom:28px;{{ completeBannerExtra }}">
+          <div style="width:54px;height:54px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;{{ completeBadgeStyle }}">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:26px;line-height:1.05;margin-bottom:4px;">{{ completionHeadline }}</div>
+            <div style="font-size:14px;line-height:1.5;color:#4a4945;">{{ completionBody }}</div>
+          </div>
+        </div>
+
+        <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;margin:0 0 12px;">Recap</h4>
+        <p style="font-size:15px;line-height:1.6;color:#2f2e2b;margin:0 0 24px;">Choose Chat for the right kind of work, give clear context and boundaries, use the context features deliberately, manage usage and cost, treat artifacts as drafts, verify important outputs, and follow Sandvik policy before sharing or relying on a result.</p>
+
+        <h4 style="font-family:'Sandvik Sans Headline',sans-serif;font-weight:700;font-size:20px;margin:0 0 12px;">You can now</h4>
+        <div style="display:grid;grid-template-columns:1fr;gap:0;margin-bottom:28px;">
+          <div style="display:flex;gap:12px;padding:11px 0;border-top:1px solid #ecebe6;font-size:14.5px;line-height:1.45;color:#2f2e2b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Get better context into your prompts with Claude Chat's features.</div>
+          <div style="display:flex;gap:12px;padding:11px 0;border-top:1px solid #ecebe6;font-size:14.5px;line-height:1.45;color:#2f2e2b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Use files, connectors, projects, skills and artifacts responsibly where approved.</div>
+          <div style="display:flex;gap:12px;padding:11px 0;border-top:1px solid #ecebe6;font-size:14.5px;line-height:1.45;color:#2f2e2b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Manage usage and cost deliberately.</div>
+          <div style="display:flex;gap:12px;padding:11px 0;border-top:1px solid #ecebe6;border-bottom:1px solid #ecebe6;font-size:14.5px;line-height:1.45;color:#2f2e2b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7e6d4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>Verify and share outputs safely, with accountability in mind.</div>
+        </div>
+
+        <div class="stack-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="border:1px solid #d9d7d0;padding:20px;">
+            <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#7e6d4d;margin-bottom:8px;">Next step</div>
+            <div style="font-size:14px;line-height:1.55;color:#2f2e2b;">Apply Claude Chat to a real task this week, or continue with another tool module such as Claude Code, Cowork or Design.</div>
+          </div>
+          <div style="border:1px solid #d9d7d0;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;">
+            <div>
+              <div style="font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;margin-bottom:8px;">Completion status</div>
+              <div style="font-size:14px;line-height:1.5;color:#2f2e2b;{{ statusTextStyle }}">{{ completionStatusText }}</div>
+            </div>
+            <sc-if value="{{ quizNotPassed }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ goToQuiz }}" style="background:none;border:1px solid #000000;color:#000000;font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:13px;padding:10px 18px;cursor:pointer;align-self:flex-start;">Go to knowledge check →</button>
+            </sc-if>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+    </div>
+
+    <!-- ===================== RAIL ===================== -->
+    <aside class="app-rail" style="position:sticky;top:122px;align-self:start;border:1px solid #d9d7d0;background:#fbfaf8;">
+      <div style="padding:18px 20px;border-bottom:1px solid #ecebe6;">
+        <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:1px solid #d9d7d0;border-left:3px solid #a08c64;">
+          <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:#000000;">{{ journeyName }}</div><div style="font-size:11px;color:#686660;">Tool module · Claude Chat</div></div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#7e6d4d;white-space:nowrap;">You are here</span>
+        </div>
+      </div>
+      <nav style="padding:14px 12px;border-bottom:1px solid #ecebe6;">
+        <div style="font-weight:700;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#8e8c84;padding:0 8px 10px;">Sections</div>
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="14">
+          <div>
+            <sc-if value="{{ item.showGroup }}"><div style="font-weight:700;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a08c64;padding:12px 8px 6px;">{{ item.groupLabel }}</div></sc-if>
+            <button onClick="{{ item.onClick }}" style="{{ item.rowStyle }}">
+              <span style="{{ item.dotStyle }}">
+                <sc-if value="{{ item.done }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></sc-if>
+                <sc-if value="{{ item.showNum }}">{{ item.num }}</sc-if>
+              </span>
+              <span style="{{ item.labelStyle }}">{{ item.label }}</span>
+            </button>
+          </div>
+        </sc-for>
+      </nav>
+      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:13px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;"><span style="color:#8e8c84;">Progress</span><span style="font-weight:700;">{{ viewedLabel }}</span></div>
+          <div style="height:4px;background:#ecebe6;"><div style="height:100%;background:#a08c64;width:{{ viewedWidth }};"></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;"><span style="color:#8e8c84;">Quiz score</span><span style="font-weight:700;">{{ quizScoreLabel }}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;align-items:center;"><span style="color:#8e8c84;">Status</span><span style="{{ statusStyle }}">{{ statusLabel }}</span></div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="position:sticky;bottom:0;z-index:30;background:#fff;border-top:1px solid #d9d7d0;">
+    <div style="max-width:1340px;margin:0 auto;padding:13px clamp(20px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;">
+      <div style="font-size:13px;color:#686660;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ footerLabel }}</div>
+      <div style="display:flex;gap:12px;flex:none;">
+        <button onClick="{{ goPrev }}" style="{{ backStyle }}">← Back</button>
+        <button onClick="{{ goNext }}" style="{{ nextStyle }}">{{ nextLabel }} <span>→</span></button>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;journeyVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;AI Fluency Journey&quot;,&quot;AI Champion Journey&quot;,&quot;Developer / Builder Journey&quot;,&quot;Leader Journey&quot;],&quot;default&quot;:&quot;AI Fluency Journey&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;passMark&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:0.8,&quot;min&quot;:0.5,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;},&quot;requireAllSections&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.STORAGE_KEY = "sandvik.scorm.claude-chat";
+    // ---- Section list (drives nav + titles). Reusable: rename/reorder per module. ----
+    // ---- Section list (drives nav + titles). Reusable: rename/reorder per module. ----
+    // Capability pages share a `group` so they nest under one heading in the rail.
+    this.sections = [
+      { id: "start",          title: "Course start" },
+      { id: "journey",        title: "Journey context" },
+      { id: "fit",            title: "Tool fit" },
+      { id: "getstarted",     title: "Getting started" },
+      { id: "workflow",       title: "Multi-step reasoning" },
+      { id: "cap-files",      title: "Files",      group: "Tool capabilities" },
+      { id: "cap-connectors", title: "Connectors", group: "Tool capabilities" },
+      { id: "cap-projects",   title: "Projects",   group: "Tool capabilities" },
+      { id: "cap-skills",     title: "Skills",     group: "Tool capabilities" },
+      { id: "cap-artifacts",  title: "Artifacts",  group: "Tool capabilities" },
+      { id: "governance",     title: "Rules & governance" },
+      { id: "usage",          title: "Token usage and limits" },
+      { id: "risks",          title: "Common risks" },
+      { id: "scenario",       title: "Practical scenario" },
+      { id: "quiz",           title: "Knowledge check" },
+      { id: "complete",       title: "Completion" }
+    ];
+    this.PASS_MARK = (props && typeof props.passMark === "number") ? props.passMark : 0.8;
+    // ---- Quiz data (authored per module) ----
+    this.quizData = [
+      {
+        prompt: "What does \u201Cmulti-step reasoning\u201D mean in this module?",
+        options: [
+          { text: "A separate agent you build once and reuse", correct: false, feedback: "That's a built agent, which is covered in the AI Champion Journey. Multi-step reasoning is different." },
+          { text: "Claude answering instantly with no steps", correct: false, feedback: "Multi-step reasoning is precisely about working through steps." },
+          { text: "Claude working through a problem in steps inside the conversation, breaking it into parts and checking itself before answering", correct: true, feedback: "Correct. Claude reasons through the parts of a problem and checks them before giving a considered answer." },
+          { text: "A connector that runs automatically without you", correct: false, feedback: "That describes a connector, not multi-step reasoning." }
+        ],
+        explanation: "Multi-step reasoning means Claude breaks a problem into parts, works through them, and checks itself before giving a considered answer, all inside the conversation."
+      },
+      {
+        prompt: "You ask Claude, through the Microsoft 365 connector, to summarise a SharePoint site you cannot open with your own account. What should you expect?",
+        options: [
+          { text: "The connector acts through your login and permissions, so it cannot reach anything you can't reach yourself", correct: true, feedback: "Correct. If you can't access it in the source system, the connector can't either." },
+          { text: "Claude reads it anyway, because connectors have elevated access", correct: false, feedback: "Connectors do not bypass your permissions." },
+          { text: "Claude will guess the likely contents", correct: false, feedback: "Claude should not invent content it cannot access." }
+        ],
+        explanation: "Connectors use your own login and permissions, so they only extend reach to what you're already allowed to see."
+      },
+      {
+        prompt: "You attach a 100-page report and ask Claude to summarise it and pull out the key decisions. What should you expect?",
+        options: [
+          { text: "It's too long, so Claude can't work with a document that size", correct: false, feedback: "Claude can work with long documents, even hundreds of pages, as long as they fit the available context." },
+          { text: "Claude can handle a document this long, but you still verify the important points against the source", correct: true, feedback: "Correct. Claude reads and summarises long documents well, but check the points that matter against the original." },
+          { text: "Claude reads it perfectly, so the summary needs no checking", correct: false, feedback: "Treat the summary as a draft. Long or dense documents can still lead to missed or confident-but-wrong details." }
+        ],
+        explanation: "Claude handles long documents, but more context isn't a guarantee. Verify the points that matter against the source."
+      },
+      {
+        prompt: "Claude produces a risk-heatmap artifact for a steering-group update. Before you share it outside your team, you should:",
+        options: [
+          { text: "Share it immediately, since artifacts are finished outputs", correct: false, feedback: "Treat artifacts as drafts until they've been checked." },
+          { text: "Only check that the colours look right", correct: false, feedback: "Appearance isn't the risk. Exposed information and unverified content are." },
+          { text: "Check it doesn't expose sensitive information, validate the content against the source, and treat it as a draft until verified", correct: true, feedback: "Correct. Check exposure, validate the information, and confirm it's cleared to share." }
+        ],
+        explanation: "Before sharing any artifact or download: check what it exposes, validate the information, and follow sharing rules."
+      },
+      {
+        prompt: "You keep hitting session limits doing legitimate business work in Claude. What's the correct action?",
+        options: [
+          { text: "Request a higher monthly usage / spending limit via the intranet form, expecting cost-approver approval", correct: true, feedback: "Correct. Request more capacity through the proper route; overage is billed pay-as-you-go to your cost center." },
+          { text: "Move the work to your private Claude account to avoid limits", correct: false, feedback: "Never move Sandvik work into private or unapproved accounts." },
+          { text: "Create extra accounts to spread the usage", correct: false, feedback: "Using extra or private accounts to dodge limits is not allowed." }
+        ],
+        explanation: "Stay within approved tooling: wait for the reset, or request a higher limit (with cost-approver approval) via the intranet form."
+      }
+    ];
+
+    // ---- SCORM placeholder (maps to a CMI model; persists to localStorage). ----
+    // Swap persist()/init() for real SCORM 1.2 (API.LMSSetValue) or 2004 (API_1484_11) calls on integration.
+    this.scorm = {
+      connected: false,
+      cmi: {
+        "cmi.core.lesson_status": "not attempted", // 1.2  | 2004: cmi.completion_status / cmi.success_status
+        "cmi.core.score.raw": "",                   // quiz score 0-100
+        "cmi.core.score.min": "0",
+        "cmi.core.score.max": "100",
+        "cmi.core.lesson_location": "0",            // resume: section index
+        "cmi.suspend_data": "{}"                    // resume: full state
+      },
+      init() { /* locate LMS API here on integration */ this.connected = false; },
+      set(key, val) { this.cmi[key] = String(val); },
+      get(key) { return this.cmi[key]; },
+      commit(state, saveFn) { saveFn(); },          // -> API.LMSCommit("")
+      finish() { /* -> API.LMSFinish("") */ }
+    };
+
+    const saved = this.load();
+    this.state = {
+      section: saved.section ?? 0,
+      visited: saved.visited ?? [0],
+      quizAnswers: saved.quizAnswers ?? {},  // { qIndex: optionIndex } (locked answers)
+      quizStage: saved.quizStage ?? "start", // start | q | results
+      qIndex: 0,
+      quizSel: null,
+      quizRevealed: false,
+      scenarioOpen: false,
+      risksFlipped: [false, false, false, false, false]
+    };
+    this.scorm.init();
+  }
+
+  load() {
+    try { return JSON.parse(localStorage.getItem(this.STORAGE_KEY) || "{}"); }
+    catch (e) { return {}; }
+  }
+  persist(extra) {
+    const s = Object.assign({
+      section: this.state.section,
+      visited: this.state.visited,
+      quizAnswers: this.state.quizAnswers,
+      quizStage: this.state.quizStage
+    }, extra || {});
+    // mirror into SCORM CMI placeholders
+    this.scorm.set("cmi.core.lesson_location", s.section);
+    this.scorm.set("cmi.suspend_data", JSON.stringify(s));
+    const score = this.scoreInfo();
+    if (score.attempted) {
+      this.scorm.set("cmi.core.score.raw", score.pct);
+      this.scorm.set("cmi.core.lesson_status", this.isComplete() ? "completed" : (score.passed ? "passed" : "incomplete"));
+    }
+    try { localStorage.setItem(this.STORAGE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+
+  // ---- navigation ----
+  goTo(i) {
+    const idx = Math.max(0, Math.min(this.sections.length - 1, i));
+    const visited = this.state.visited.includes(idx) ? this.state.visited : this.state.visited.concat([idx]);
+    this.setState({ section: idx, visited }, () => this.persist());
+    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {}
+  }
+  goNext() { this.goTo(this.state.section + 1); }
+  goPrev() { this.goTo(this.state.section - 1); }
+
+  // ---- quiz ----
+  startQuiz() { this.setState({ quizStage: "q", qIndex: 0, quizSel: null, quizRevealed: false }, () => this.persist()); }
+  selectOption(i) { if (!this.state.quizRevealed) this.setState({ quizSel: i }); }
+  checkAnswer() {
+    if (this.state.quizSel == null) return;
+    const a = Object.assign({}, this.state.quizAnswers);
+    a[this.state.qIndex] = this.state.quizSel;
+    this.setState({ quizRevealed: true, quizAnswers: a }, () => this.persist());
+  }
+  nextQuestion() {
+    if (this.state.qIndex + 1 >= this.quizData.length) {
+      this.setState({ quizStage: "results" }, () => this.persist());
+    } else {
+      this.setState({ qIndex: this.state.qIndex + 1, quizSel: null, quizRevealed: false });
+    }
+  }
+  retryQuiz() { this.setState({ quizStage: "q", qIndex: 0, quizSel: null, quizRevealed: false, quizAnswers: {} }, () => this.persist()); }
+
+  scoreInfo() {
+    const total = this.quizData.length;
+    const answered = Object.keys(this.state.quizAnswers);
+    let correct = 0;
+    answered.forEach(k => { if (this.quizData[k].options[this.state.quizAnswers[k]] && this.quizData[k].options[this.state.quizAnswers[k]].correct) correct++; });
+    const finished = this.state.quizStage === "results" && answered.length === total;
+    const pct = Math.round((correct / total) * 100);
+    return { total, correct, pct, attempted: answered.length > 0, finished, passed: finished && (correct / total) >= this.PASS_MARK };
+  }
+  isComplete() {
+    const requireAll = this.props.requireAllSections !== false;
+    const allViewed = !requireAll || this.sections.every((_, i) => this.state.visited.includes(i));
+    return allViewed && this.scoreInfo().passed;
+  }
+
+  toggleRisk(i) {
+    const f = (this.state.risksFlipped || []).slice();
+    f[i] = !f[i];
+    this.setState({ risksFlipped: f });
+  }
+  riskFlipVals() {
+    const f = this.state.risksFlipped || [];
+    const innerBase = "position:relative;width:100%;height:100%;transition:transform 520ms cubic-bezier(0.22,0.61,0.36,1);transform-style:preserve-3d;";
+    const out = {};
+    for (let i = 0; i < 5; i++) {
+      out["rf" + i + "Inner"] = innerBase + "transform:rotateY(" + (f[i] ? "180deg" : "0deg") + ");";
+      out["rf" + i + "Toggle"] = () => this.toggleRisk(i);
+    }
+    return out;
+  }
+  renderVals() {
+    // keep pass mark live with the Tweaks panel
+    this.PASS_MARK = (typeof this.props.passMark === "number") ? this.props.passMark : 0.8;
+    const journeyName = this.props.journeyVariant || "AI Fluency Journey";
+    const i = this.state.section;
+    const sec = this.sections[i];
+    const score = this.scoreInfo();
+    const complete = this.isComplete();
+    const total = this.sections.length;
+
+    // nav rail items
+    const dotBase = "width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none;";
+    let prevGroup = "";
+    const nav = this.sections.map((s, idx) => {
+      const isCur = idx === i;
+      const done = this.state.visited.includes(idx) && !isCur;
+      let dotStyle, rowBg = "transparent", labelColor = "#4a4945", labelWeight = "400";
+      if (isCur) { dotStyle = dotBase + "background:#000000;color:#fff;box-shadow:0 0 0 3px #dad1bf;"; rowBg = "#fff"; labelColor = "#000000"; labelWeight = "700"; }
+      else if (done) { dotStyle = dotBase + "background:#a08c64;color:#fff;"; labelColor = "#2f2e2b"; }
+      else { dotStyle = dotBase + "background:transparent;border:1px solid #d9d7d0;color:#8e8c84;"; labelColor = "#8e8c84"; }
+      const g = s.group || "";
+      const showGroup = g !== "" && g !== prevGroup;
+      prevGroup = g;
+      const grouped = g !== "";
+      return {
+        label: s.title, num: String(idx + 1), done, showNum: !done,
+        showGroup, groupLabel: g,
+        dotStyle,
+        rowStyle: "display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:0;cursor:pointer;padding:7px 8px;font-family:'Sandvik Sans Text',sans-serif;background:" + rowBg + ";" + (isCur ? "border:1px solid #ecebe6;" : "border:1px solid transparent;") + (grouped ? "margin-left:10px;" : ""),
+        labelStyle: "font-size:12.5px;line-height:1.3;color:" + labelColor + ";font-weight:" + labelWeight + ";",
+        onClick: () => this.goTo(idx)
+      };
+    });
+
+    // footer buttons
+    const onLast = i === total - 1;
+    const btnBack = "font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;cursor:pointer;background:none;";
+    const backStyle = i === 0
+      ? btnBack + "border:1px solid #ecebe6;color:#bcbab2;cursor:not-allowed;"
+      : btnBack + "border:1px solid #000000;color:#000000;";
+    const nextStyle = "font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;cursor:pointer;border:0;display:inline-flex;align-items:center;gap:8px;background:#000000;color:#fff;" + (onLast ? "opacity:0.45;cursor:default;" : "");
+
+    // status chip
+    let statusLabel, statusColor;
+    if (complete) { statusLabel = "Complete"; statusColor = "#3f7a3f"; }
+    else if (score.attempted) { statusLabel = "In progress"; statusColor = "#7e6d4d"; }
+    else { statusLabel = "Not started"; statusColor = "#686660"; }
+
+    // quiz view model
+    const q = this.quizData[this.state.qIndex];
+    // Build the FULL set of style keys on every branch (border-color, background, cursor, opacity)
+    // so a state change always overwrites the previous one — otherwise a stale border-color lingers.
+    const optBase = "display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;border:1px solid #d9d7d0;padding:14px 16px;font-family:'Sandvik Sans Text',sans-serif;";
+    const markBase = "width:24px;height:24px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'Sandvik Sans Headline',sans-serif;";
+    const quizOptions = q.options.map((o, idx) => {
+      const sel = this.state.quizSel === idx;
+      const rev = this.state.quizRevealed;
+      let bc = "#d9d7d0", bg = "#fff", cur = "pointer", op = "1";
+      let mark = markBase + "border:1px solid #d9d7d0;color:#686660;", show = false, fbColor = "#686660";
+      if (!rev) {
+        if (sel) { bc = "#000000"; bg = "#faf9f6"; mark = markBase + "background:#000000;color:#fff;"; }
+      } else if (o.correct) {
+        bc = "#5c8a3c"; bg = "#eef5e3"; cur = "default"; mark = markBase + "background:#5c8a3c;color:#fff;"; show = true; fbColor = "#3f7a3f";
+      } else if (sel) {
+        bc = "#c0463f"; bg = "#fbe9e6"; cur = "default"; mark = markBase + "background:#c0463f;color:#fff;"; show = true; fbColor = "#b23a33";
+      } else {
+        bc = "#ecebe6"; cur = "default"; op = "0.55";
+      }
+      const row = optBase + "border-color:" + bc + ";background:" + bg + ";cursor:" + cur + ";opacity:" + op + ";";
+      return {
+        text: o.text, marker: String.fromCharCode(65 + idx), rowStyle: row, markStyle: mark,
+        feedback: o.feedback, showFeedback: show, fbStyle: "font-size:12.5px;line-height:1.45;margin-top:6px;color:" + fbColor + ";",
+        onClick: rev ? (() => {}) : (() => this.selectOption(idx))
+      };
+    });
+    const checkDisabled = this.state.quizSel == null;
+    const checkStyle = "font-family:'Sandvik Sans Text',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;border:0;display:inline-flex;align-items:center;gap:8px;background:#000000;color:#fff;" + (checkDisabled ? "opacity:0.4;cursor:not-allowed;" : "cursor:pointer;");
+    const onLastQ = this.state.qIndex + 1 >= this.quizData.length;
+
+    return {
+      // header / shell
+      journeyName,
+      sectionTitle: sec.title,
+      sectionNumber: String(i + 1),
+      totalSections: String(total),
+      progressLabel: sec.title,
+      progressWidth: Math.round(((i + 1) / total) * 100) + "%",
+      footerLabel: "Section " + (i + 1) + " of " + total + " · " + sec.title,
+
+      // section switches (id-based so sections can be added or reordered freely)
+      isStart: sec.id === "start",
+      isJourney: sec.id === "journey",
+      isFit: sec.id === "fit",
+      isGetStarted: sec.id === "getstarted",
+      isWorkflow: sec.id === "workflow",
+      isCapFiles: sec.id === "cap-files",
+      isCapConnectors: sec.id === "cap-connectors",
+      isCapProjects: sec.id === "cap-projects",
+      isCapSkills: sec.id === "cap-skills",
+      isCapArtifacts: sec.id === "cap-artifacts",
+      isGovernance: sec.id === "governance",
+      isScenario: sec.id === "scenario",
+      scenarioOpen: this.state.scenarioOpen,
+      scenarioClosed: !this.state.scenarioOpen,
+      scenarioButtonLabel: this.state.scenarioOpen ? "Hide example" : "Press here for example",
+      scenarioButtonGlyph: this.state.scenarioOpen ? "\u2212" : "+",
+      toggleScenario: () => this.setState({ scenarioOpen: !this.state.scenarioOpen }),
+      isRisks: sec.id === "risks",
+      isUsage: sec.id === "usage",
+      ...this.riskFlipVals(),
+      isQuiz: sec.id === "quiz",
+      isComplete: sec.id === "complete",
+
+      // nav + footer
+      nav,
+      goNext: () => this.goNext(),
+      goPrev: () => this.goPrev(),
+      backStyle, nextStyle,
+      nextLabel: onLast ? "Finish" : "Next",
+      startButtonLabel: this.state.visited.length > 1 ? "Resume module" : "Start module",
+
+      // rail status
+      viewedLabel: this.state.visited.length + " / " + total + " viewed",
+      viewedWidth: Math.round((this.state.visited.length / total) * 100) + "%",
+      quizScoreLabel: score.finished ? (score.correct + " / " + score.total) : "Not taken",
+      statusLabel, statusStyle: "font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:" + statusColor + ";",
+
+      // quiz
+      quizStage: this.state.quizStage,
+      quizIsStart: this.state.quizStage === "start",
+      quizIsQ: this.state.quizStage === "q",
+      quizIsResults: this.state.quizStage === "results",
+      startQuiz: () => this.startQuiz(),
+      retryQuiz: () => this.retryQuiz(),
+      quizTotal: String(this.quizData.length),
+      passMarkLabel: Math.round(this.PASS_MARK * 100) + "%",
+      qNumberLabel: "Question " + (this.state.qIndex + 1) + " of " + this.quizData.length,
+      qProgressWidth: Math.round(((this.state.qIndex + 1) / this.quizData.length) * 100) + "%",
+      qPrompt: q.prompt,
+      qExplanation: q.explanation,
+      quizOptions,
+      quizRevealed: this.state.quizRevealed,
+      quizNotRevealed: !this.state.quizRevealed,
+      checkAnswer: () => this.checkAnswer(),
+      nextQuestion: () => this.nextQuestion(),
+      checkStyle, nextQLabel: onLastQ ? "See results" : "Next question",
+
+      // results
+      scoreFraction: score.correct + " / " + score.total,
+      scorePct: score.pct + "%",
+      scorePassed: score.passed,
+      scoreFailed: score.finished && !score.passed,
+      resultHeadline: score.passed ? "Knowledge check passed" : "Not quite there yet",
+      resultBody: score.passed
+        ? "You met the " + Math.round(this.PASS_MARK * 100) + "% threshold."
+        : "You need " + Math.round(this.PASS_MARK * 100) + "% to pass. Review the sections and try again.",
+      resultBadgeStyle: score.passed ? "background:#5c8a3c;color:#fff;" : "background:#c0463f;color:#fff;",
+      resultBannerExtra: score.passed ? "border-left:3px solid #5c8a3c;background:#eef5e3;" : "border-left:3px solid #c0463f;background:#fbe9e6;",
+
+      // completion
+      moduleComplete: complete,
+      completeBadgeStyle: complete ? "background:#5c8a3c;" : "background:#bcbab2;",
+      completeBannerExtra: complete ? "border-left:3px solid #5c8a3c;background:#eef5e3;" : "border-left:3px solid #d9d7d0;background:#fbfaf8;",
+      quizNotPassed: !score.passed,
+      completionStatusText: complete
+        ? "Recorded as complete. All sections viewed and knowledge check passed."
+        : (score.passed
+            ? "Knowledge check passed. View any remaining sections to finish."
+            : "Knowledge check not yet passed."),
+      statusTextStyle: complete ? "font-weight:700;color:#3f7a3f;" : "font-weight:700;color:#7e6d4d;",
+      completionHeadline: complete ? "Module complete" : "Almost there",
+      completionBody: complete
+        ? "You've viewed every section and passed the knowledge check. Your completion has been recorded."
+        : "Finish any remaining sections and pass the knowledge check at " + Math.round(this.PASS_MARK * 100) + "% to complete this module.",
+      goToQuiz: () => this.goTo(this.sections.findIndex(s => s.id === "quiz"))
+    };
+  }
+}
+</script>
+</body>
+</html>
