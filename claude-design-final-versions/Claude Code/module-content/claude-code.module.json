@@ -1,0 +1,337 @@
+{
+  "$schema": "./module.schema.md",
+  "moduleId": "claude-code",
+  "schemaVersion": 2,
+
+  "tool": {
+    "name": "Claude Code",
+    "tagline": "Agentic coding",
+    "summary": "The agentic coding experience for reading and changing a codebase, running commands, working with tests, and supporting development in the terminal and your editor."
+  },
+
+  "journey": {
+    "id": "ai-fluency",
+    "label": "AI Fluency Journey",
+    "type": "foundation",
+    "moduleKind": "tool-module",
+    "variant": "fluency"
+  },
+
+  "meta": {
+    "duration": "35 to 45 min",
+    "audience": "Builders and curious users ordering Claude Code",
+    "completion": {
+      "requireAllSectionsViewed": true,
+      "quizPassMark": 0.8
+    }
+  },
+
+  "responsibilityNote": "Claude can accelerate your work, but you remain responsible for what you enter, approve, run, share and publish. Follow Sandvik policy, protect sensitive information, and review outputs before relying on them.",
+
+  "courseStart": {
+    "overline": "AI Fluency Journey · Tool module",
+    "whatThisModuleAdds": "Claude Code can do a great deal. The harder skill is knowing how much knowledge, design and review a real application actually needs. This module keeps two ideas side by side: smaller work such as one time scripts, throwaway tools, learning and prototypes is genuinely encouraged for everyone, while work that other people will depend on needs the same engineering process you would apply to any Sandvik system."
+  },
+
+  "journeyContext": {
+    "intro": "This is a standalone, practical tool module focused on one tool. It assumes you are already comfortable with Claude Chat, where the foundations of safe Claude use are covered.",
+    "toolModules": ["Claude Chat", "Claude Cowork", "Claude Code", "Claude Design", "M365 Copilot", "GitHub Copilot", "Future tools"],
+    "currentModule": "Claude Code",
+    "assumedKnowledge": [
+      "General rules of safe AI use from the Claude Chat module: approved tools, protect information, give context, iterate, verify",
+      "Comfort with the idea that Claude can work through several steps on your behalf"
+    ],
+    "thisModuleFocusesOn": "Using Claude Code well, and on the judgement around it: deciding what kind of work you are doing, giving Claude enough specification and repository context, staying in control of changes, and verifying before anyone relies on the result. It complements GitHub Copilot rather than replacing it. Building and sharing reusable agents is covered in the AI Champion Journey.",
+    "objectives": [
+      "Decide when Claude Code is the right product, and when smaller experiments are welcome.",
+      "Match the level of process to the kind of work, from throwaway scripts to systems bound for production.",
+      "Use plan mode, instruction files, controlled changes and review loops to keep work safe.",
+      "Protect secrets and production data, and follow the approved route before sharing or deploying."
+    ]
+  },
+
+  "toolFit": {
+    "intro": "Claude Code is for work that lives in a codebase. It reads and changes files, runs commands, works with tests, and uses developer tools. Choosing the right product is the first decision.",
+    "useWhen": [
+      "You want Claude to read a repository and explain how it works.",
+      "You are making changes across files, running tests, or investigating a failure.",
+      "You want a plan or specification before any code is written.",
+      "You are a non developer trying a small script, a learning exercise, or a prototype."
+    ],
+    "reachForAnotherProduct": [
+      { "work": "Thinking, drafting, summarising, or asking questions about material", "use": "Claude Chat" },
+      { "work": "A deliverable across many files, the browser, or desktop actions, without a codebase", "use": "Claude Cowork" },
+      { "work": "Visual exploration, prototypes, slides, design concepts", "use": "Claude Design" }
+    ],
+    "alongsideGitHubCopilot": "Claude Code and GitHub Copilot cover much the same ground. For most coding work they do essentially the same job, so there is no single right answer. It is up to each user or team to decide which one they prefer and want to work in. Treat it as a matter of preference more than anything else."
+  },
+
+  "gettingStarted": {
+    "intro": "Use Claude Code through your Sandvik approved Enterprise account. It runs on several surfaces that share the same account.",
+    "surfaces": [
+      { "title": "Terminal", "body": "After the approved install, start a session with the claude command inside your project folder." },
+      { "title": "Your editor", "body": "Use the approved Claude Code extension in VS Code, Cursor, or a JetBrains IDE, with plan review and diff review built in." },
+      { "title": "Desktop app", "body": "The Code tab in the Claude desktop app, where Sandvik has enabled it." }
+    ],
+    "startSafe": [
+      "Open Claude Code in a repository you are allowed to work in.",
+      "Give it one clear goal rather than a vague wish.",
+      "Begin in a read only or plan first mode so nothing changes before you agree."
+    ],
+    "approvedSetup": "Use the Sandvik Enterprise account and the approved desktop, terminal, or editor setup. Do not move Sandvik work to private accounts, personal API keys, or unapproved tools."
+  },
+
+  "mindset": {
+    "intro": "Claude Code is powerful. It can build something that runs in minutes. The trap is believing that a working demo is the same as a real, dependable application.",
+    "body": "Software that other people rely on carries weight that a demo does not: edge cases, data handling, security, performance, maintenance, and the question of who owns it when it breaks. None of that disappears because Claude wrote the first version quickly.",
+    "encouragedForEveryone": [
+      "Single use scripts and quick helpers.",
+      "Throwaway tools and learning exercises.",
+      "Prototypes that nobody depends on yet."
+    ],
+    "needsRealEngineering": [
+      "Systems other people use without checking.",
+      "Anything touching important or sensitive data, payments, or access.",
+      "Anything that integrates with business systems."
+    ],
+    "centralSkill": "The skill is not letting Claude write code. It is deciding what kind of work this is, giving Claude enough specification and context, and then putting the result through the same quality, security and release process you would apply to code a person wrote. It is common for non developers to underestimate how many design decisions a developer actually makes along the way. When you do not make those decisions yourself in the prompt, Claude will take liberties and decide for you. On a small script that is usually fine, but at a larger scale those quiet assumptions add up and can give the wrong complete picture."
+  },
+
+  "capabilities": {
+    "note": "Each capability is its own section/page, grouped under 'Working with Claude Code' in the nav. Set enabled:false to drop a page, or add new ones with the same shape.",
+    "group": "Working with Claude Code",
+    "pages": [
+      {
+        "id": "cap-intent",
+        "enabled": true,
+        "icon": "layers",
+        "title": "Match effort to intent",
+        "role": "Decide the kind of work",
+        "lead": "Before you start, decide what kind of work this is. That single decision sets how much process, review and care it needs.",
+        "rows": [
+          { "label": "Throwaway", "body": "A quick local helper you will run once or twice. Keep it free of secrets and real data. Casual building is fine." },
+          { "label": "Experimental", "body": "A prototype to learn or test an idea. Still low risk, as long as nobody relies on it and the data is not sensitive." },
+          { "label": "Shared", "body": "Other people will use it. Now it needs an owner, review, tests, and a clear view of the data it touches." },
+          { "label": "Bound for production", "body": "It will run as a real Sandvik system. Apply the full engineering process, security review, and the approved deployment route." }
+        ],
+        "vibeCoding": "Letting Claude run freely while you go on feel is great for throwaway and experimental work. It is not appropriate for systems others depend on, for sensitive data, or for anything bound for production, where ownership, design and review are not optional.",
+        "goodHabit": "Write your intent down by hand in a CLAUDE.md file. Read more about it on the next page."
+      },
+      {
+        "id": "cap-context",
+        "enabled": true,
+        "icon": "file-text",
+        "title": "Instruction files: CLAUDE.md and AGENTS.md",
+        "role": "Repository context",
+        "lead": "Instruction files tell Claude Code how to work in a repository, so you do not repeat the same context in every prompt.",
+        "files": [
+          { "name": "CLAUDE.md", "body": "Claude Code reads this automatically. It is the natural home for how you want Claude to behave in this project." },
+          { "name": "AGENTS.md", "body": "A shared agent guide many repositories already keep. CLAUDE.md can import it, so there is one source of truth across tools." }
+        ],
+        "keepItClean": "An instruction file works best when it is short and intentional. Put your genuine preferences and intent: the conventions you care about, how you want work done, and what to avoid. Do not overdo it. A file stuffed with everything becomes noise that Claude struggles to weigh. A few clear lines steer it far better than pages of rules.",
+        "neverInclude": "No secrets, credentials, tokens, or production data. Instruction files are read every session and are part of the repository, so treat them as visible to everyone who can see the code."
+      },
+      {
+        "id": "cap-plan",
+        "enabled": true,
+        "icon": "list-checks",
+        "title": "Plan and specify first",
+        "role": "Specification before implementation",
+        "lead": "For anything beyond a trivial change, ask Claude Code to inspect the repository and produce a plan or specification you can review before a single line is written.",
+        "whyPlanFirst": "A plan lets you catch a wrong assumption before it becomes code. You see what Claude understood, which files it will touch, and what it intends to change. In the terminal you can start with claude --permission-mode plan. In the editor extensions, plan review does the same thing visually.",
+        "steps": [
+          "State the goal, the inputs, the constraints, and what a good result looks like.",
+          "Read the plan and push back where it misread the task.",
+          "Only approve implementation once the plan matches what you actually want."
+        ],
+        "goodHabit": "The more you invest in a clear specification, the less you spend untangling code that solved the wrong problem."
+      },
+      {
+        "id": "cap-control",
+        "enabled": true,
+        "icon": "shield-check",
+        "title": "Stay in control",
+        "role": "Changes, commands and Git",
+        "lead": "Claude Code can change files, run commands, and use Git. You decide what actually happens. Review before you approve, every time.",
+        "commandApproval": "An unfamiliar command can change files, install dependencies, reach the network, or alter data. Check what it does, what it touches, and which systems it reaches before you approve.",
+        "keepGitControlled": [
+          "Review the diff before any commit.",
+          "Require approval before commit, push, pull request, or release. Do not let it happen automatically.",
+          "Prefer a working branch over changes straight on the main branch."
+        ],
+        "outOfScope": "Secrets and production data do not belong in a Claude Code session. Never paste passwords, API keys, tokens, private keys, certificates, connection strings, or production data."
+      },
+      {
+        "id": "cap-verify",
+        "enabled": true,
+        "icon": "search-check",
+        "title": "Verify, do not just trust",
+        "role": "Evidence, not proof",
+        "lead": "Tests and a green run are evidence, not proof. Claude can write tests that pass while still missing the point, especially when the same model wrote both the code and the tests.",
+        "aiWrittenTests": "Tests from the same model can carry the same wrong assumptions as the code, so they confirm each other rather than the real requirement. Use them as useful scaffolding, then check whether they actually prove the behaviour you intended.",
+        "reviewLoop": [
+          "Review the plan, then the diff.",
+          "Run the tests and the existing suite, not only the new ones.",
+          "Let CI run, and read what it reports.",
+          "Add independent human review, and a security review where it applies."
+        ],
+        "securityNote": "When Claude changes security sensitive code, passing tests are not enough. Human review and any required security review still apply. Self review by the same model is not independent review."
+      },
+      {
+        "id": "cap-ship",
+        "enabled": true,
+        "icon": "rocket",
+        "title": "From prototype to shared solution",
+        "role": "The approved route",
+        "lead": "A useful prototype is a great start. It is not automatically ready for other people to depend on. The jump from your machine to a shared Sandvik solution is a real step, and it has a route.",
+        "steps": [
+          "Find an owner who is responsible for it over time.",
+          "Classify the data it touches, and review the data and security risk.",
+          "Test it properly and put it through normal engineering review.",
+          "Use the approved deployment route, such as central deployment through Sandvik Group IT."
+        ],
+        "note": "A working demo is encouraging, never a release decision. Moving to shared use means moving from casual building to the normal Sandvik process."
+      }
+    ]
+  },
+
+  "governance": {
+    "intro": "Keep two things apart: what Claude can do, and what Sandvik allows. Several policy areas are still being finalised. Where you see a placeholder, the rule has not been set yet, so check the current Sandvik guidance before you rely on it.",
+    "rows": [
+      { "tag": "placeholder", "title": "Repository access", "body": "Placeholder: which repositories Claude Code may access." },
+      { "tag": "placeholder", "title": "Branching and pull requests", "body": "Placeholder: branching, commit, and pull request rules." },
+      { "tag": "placeholder", "title": "Command execution", "body": "Placeholder: approved command execution boundaries." },
+      { "tag": "placeholder", "title": "Secrets and prohibited data", "body": "Placeholder: secret handling and prohibited data rules." },
+      { "tag": "placeholder", "title": "Tests and review", "body": "Placeholder: minimum test expectations by project type, including review of AI written tests." },
+      { "tag": "placeholder", "title": "Security review", "body": "Placeholder: when a security review is required." },
+      { "tag": "placeholder", "title": "Deployment", "body": "Placeholder: release rules and the central deployment route through Sandvik Group IT." },
+      { "tag": "placeholder", "title": "Open source and licences", "body": "Placeholder: dependency, security, and licence review requirements." },
+      { "tag": "placeholder", "title": "Instruction file ownership", "body": "Placeholder: who owns CLAUDE.md and AGENTS.md, and what they must contain." },
+      { "tag": "placeholder", "title": "Cost approval", "body": "Placeholder: intranet form link and cost approver workflow." }
+    ]
+  },
+
+  "usage": {
+    "intro": "Claude Code is included in the Claude Enterprise plan, with normal usage limits. Longer, context heavy work can go beyond those limits and is then billed pay as you go to your cost center. Coding work is often context heavy, so it is worth keeping an eye on usage during long sessions.",
+    "drivers": [
+      "Large repositories and long context held across a session.",
+      "Command output and test runs that feed back into the conversation.",
+      "Repeated debugging loops on a stubborn problem."
+    ],
+    "moreCapacity": [
+      "Request a higher monthly usage or spending limit through the intranet form.",
+      "Expect the higher limit to require approval from your cost approver.",
+      "Your monthly spending limit should be visible in your Claude account."
+    ],
+    "notAllowed": "Do not move Sandvik work into private accounts, personal API keys, or unapproved tools to avoid limits or cost."
+  },
+
+  "scenario": {
+    "title": "A small script that grows up",
+    "intro": "A non developer builds a quick helper, the right way, then learns what changes when a colleague wants to use it too.",
+    "person": "A planner who is not a developer, but is curious and wants to clean up a messy CSV of their own meeting notes.",
+    "intent": "Throwaway. A local helper, run once or twice, with no sensitive data in the file.",
+    "doingItWell": [
+      "Frame it as throwaway, in a local folder, with only their own non sensitive notes.",
+      "Ask Claude Code for a plan first: read the file, tidy the columns, write a clean copy.",
+      "Review the diff, run it, and check the cleaned file looks right."
+    ],
+    "theTwist": "A colleague sees it and asks to use it on their notes too. The moment someone else relies on it, the intent moves from throwaway to shared. The helper has not changed, but the bar has.",
+    "reviewChecklist": [
+      "An owner is named",
+      "Data and security risk reviewed",
+      "Tested beyond the original file",
+      "Approved deployment route used"
+    ]
+  },
+
+  "risks": {
+    "intro": "Most problems fall into five groups. For each, there is a simple habit that avoids it.",
+    "groups": [
+      { "title": "Looks done is not is correct", "risk": "Treating a demo that runs as a finished system, and shipping on the strength of a green result.", "doInstead": "Review the output against the behaviour you intended, and do not treat a passing demo as a release decision." },
+      { "title": "Vibe coding what others rely on", "risk": "Building a system other people will depend on without ownership, design decisions, or review.", "doInstead": "For shared or production work, apply normal process: ownership, design, tests and review." },
+      { "title": "Secrets and production data", "risk": "Pasting credentials or real production data into a session, or storing them in instruction files.", "doInstead": "Keep secrets and production data out of the session entirely. Use safe, non sensitive samples." },
+      { "title": "Uncontrolled Git and deploy", "risk": "Letting commits, pushes, pull requests, or releases happen automatically without a review.", "doInstead": "Review diffs and require approval before commit, push, pull request, or release." },
+      { "title": "Unreviewed dependencies", "risk": "Adding an open source package because it saves time, without security or licence review.", "doInstead": "Follow Sandvik dependency, security and licence review before adding open source packages." }
+    ],
+    "footnote": "Across all of these, one rule holds: human users remain accountable for what the code does."
+  },
+
+  "quiz": {
+    "passMark": 0.8,
+    "questions": [
+      {
+        "prompt": "What should Claude Code usually do before a change that is not trivial?",
+        "options": [
+          { "text": "Rewrite the project immediately so you can see a result fast", "correct": false, "feedback": "Speed first leads to code that may have solved the wrong problem." },
+          { "text": "Inspect the repository and write a plan or specification you can review", "correct": true, "feedback": "Correct. Inspect first, then review the plan before any implementation." },
+          { "text": "Delete the failing tests so the run goes green", "correct": false, "feedback": "Removing tests hides problems rather than solving them." },
+          { "text": "Commit the change before showing you a diff", "correct": false, "feedback": "You should review the diff before anything is committed." }
+        ],
+        "explanation": "For anything beyond a trivial change, Claude Code should understand the repository and produce a reviewable plan before it implements."
+      },
+      {
+        "prompt": "Why decide whether work is throwaway, experimental, shared, or bound for production before you start?",
+        "options": [
+          { "text": "Because the intent sets how much engineering process, review and care the work needs", "correct": true, "feedback": "Correct. Intent decides the level of process. Shared and production work need much more." },
+          { "text": "Because throwaway scripts never need any thought about data", "correct": false, "feedback": "Even small scripts should stay free of secrets and sensitive data." },
+          { "text": "Because Claude Code cannot work on prototypes", "correct": false, "feedback": "Prototypes are exactly the kind of small work that is encouraged." },
+          { "text": "Because the intent only changes the visual theme", "correct": false, "feedback": "Intent changes the process, not the appearance." }
+        ],
+        "explanation": "Naming the intent up front tells you how much process is needed. Throwaway work can be casual; shared or production work needs full engineering rigour."
+      },
+      {
+        "prompt": "Which of these should not be pasted into a Claude Code session?",
+        "options": [
+          { "text": "A public function name", "correct": false, "feedback": "Public names are not sensitive." },
+          { "text": "A test failure message with no sensitive data in it", "correct": false, "feedback": "A non sensitive error message is fine to share." },
+          { "text": "Passwords, API keys, tokens, private keys, certificates, connection strings, or production data", "correct": true, "feedback": "Correct. Secrets and production data must stay out of the session." },
+          { "text": "A plain description of the feature you want", "correct": false, "feedback": "Describing the feature is exactly what helps Claude." }
+        ],
+        "explanation": "Secrets and production data do not belong in a session, and they must never be stored in instruction files either."
+      },
+      {
+        "prompt": "How should you treat tests written by the same model that wrote the code?",
+        "options": [
+          { "text": "As independent proof that the code is correct", "correct": false, "feedback": "They are not independent. The same assumptions can sit in both." },
+          { "text": "As useful scaffolding, while you review whether they prove the behaviour you intended", "correct": true, "feedback": "Correct. Use them, but check that they test the real requirement." },
+          { "text": "As a reason to delete the existing test suite", "correct": false, "feedback": "Keep the existing tests and run them too." },
+          { "text": "As something to remove once the run goes green", "correct": false, "feedback": "Tests are there to keep proving behaviour over time." }
+        ],
+        "explanation": "Tests are evidence, not proof. Tests from the same model can share the code's blind spots, so review them and add independent checks."
+      },
+      {
+        "prompt": "A non developer built a useful local prototype. What should happen before it becomes a shared Sandvik solution?",
+        "options": [
+          { "text": "Deploy it straight away because it worked in a demo", "correct": false, "feedback": "A working demo is not a release decision." },
+          { "text": "Add production data so Claude can improve it faster", "correct": false, "feedback": "Production data must not be added to speed things up." },
+          { "text": "Move to the normal process: name an owner, review data and security risk, test it, and use the approved deployment route", "correct": true, "feedback": "Correct. Shared use means ownership, review, testing, and the approved route such as Sandvik Group IT." },
+          { "text": "Keep quiet about it having been built with AI", "correct": false, "feedback": "How it was built is not the point. The process before shared use is." }
+        ],
+        "explanation": "A useful prototype needs an owner, a data and security review, testing, and the approved deployment route before other people rely on it."
+      }
+    ]
+  },
+
+  "completion": {
+    "recap": "Claude Code is powerful, and the judgement around it is what makes the work safe. Decide the intent, plan and specify before implementing, keep instruction files clean, stay in control of changes, verify rather than trust, protect secrets and production data, and follow the approved route before anything is shared or deployed.",
+    "youCanNow": [
+      "Decide when Claude Code fits, and explore smaller work with confidence.",
+      "Use plan mode, instruction files, controlled changes and review loops.",
+      "Protect secrets and production data throughout.",
+      "Move a prototype to shared use through the approved Sandvik route."
+    ],
+    "nextStep": "Try Claude Code on a small, low risk task this week, or continue with another tool module such as Claude Cowork or Design."
+  },
+
+  "scorm": {
+    "version": "1.2",
+    "storageKey": "sandvik.scorm.claude-code",
+    "cmiMap": {
+      "completion": "cmi.core.lesson_status",
+      "score": "cmi.core.score.raw",
+      "resumeLocation": "cmi.core.lesson_location",
+      "resumeData": "cmi.suspend_data"
+    }
+  }
+}
