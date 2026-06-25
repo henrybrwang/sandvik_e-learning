@@ -1,0 +1,87 @@
+module_id: "claude-chat"
+title: "Claude Chat"
+version: "0.5"
+language: "en"
+recommended_duration_minutes: 45
+passing_score: 80
+question_bank_size: 5
+questions_to_serve: 5
+retakes: "unlimited"
+randomize_questions: false
+policy_review_required: true
+# This bank mirrors the five questions served in the built module (scorm-final-versions/claude-chat/index.html).
+questions:
+  - id: "chat-q01"
+    type: "multiple_choice"
+    prompt: "What does \"multi-step reasoning\" mean in this module?"
+    options:
+      - key: "A"
+        text: "A separate agent you build once and reuse."
+      - key: "B"
+        text: "Claude answering instantly with no steps."
+      - key: "C"
+        text: "Claude working through a problem in steps inside the conversation, breaking it into parts and checking itself before answering."
+      - key: "D"
+        text: "A connector that runs automatically without you."
+  - id: "chat-q02"
+    type: "multiple_choice"
+    prompt: "You ask Claude, through the Microsoft 365 connector, to summarise a SharePoint site you cannot open with your own account. What should you expect?"
+    options:
+      - key: "A"
+        text: "The connector acts through your login and permissions, so it cannot reach anything you can't reach yourself."
+      - key: "B"
+        text: "Claude reads it anyway, because connectors have elevated access."
+      - key: "C"
+        text: "Claude will guess the likely contents."
+  - id: "chat-q03"
+    type: "multiple_choice"
+    prompt: "You attach a 100-page report and ask Claude to summarise it and pull out the key decisions. What should you expect?"
+    options:
+      - key: "A"
+        text: "It's too long, so Claude can't work with a document that size."
+      - key: "B"
+        text: "Claude can handle a document this long, but you still verify the important points against the source."
+      - key: "C"
+        text: "Claude reads it perfectly, so the summary needs no checking."
+  - id: "chat-q04"
+    type: "multiple_choice"
+    prompt: "Claude produces a risk-heatmap artifact for a steering-group update. Before you share it outside your team, you should:"
+    options:
+      - key: "A"
+        text: "Share it immediately, since artifacts are finished outputs."
+      - key: "B"
+        text: "Only check that the colours look right."
+      - key: "C"
+        text: "Check it doesn't expose sensitive information, validate the content against the source, and treat it as a draft until verified."
+  - id: "chat-q05"
+    type: "multiple_choice"
+    prompt: "You keep hitting session limits doing legitimate business work in Claude. What's the correct action?"
+    options:
+      - key: "A"
+        text: "Request a higher monthly usage or spending limit via the intranet form, expecting cost-approver approval."
+      - key: "B"
+        text: "Move the work to your private Claude account to avoid limits."
+      - key: "C"
+        text: "Create extra accounts to spread the usage."
+answers:
+  chat-q01: "C"
+  chat-q02: "A"
+  chat-q03: "B"
+  chat-q04: "C"
+  chat-q05: "A"
+feedback:
+  chat-q01:
+    correct: "Correct. Multi-step reasoning means Claude breaks a problem into parts, works through them, and checks itself before giving a considered answer, all inside the conversation."
+    incorrect: "Multi-step reasoning is Claude working through a problem in steps inside the conversation, not a built agent or a connector."
+  chat-q02:
+    correct: "Correct. Connectors use your own login and permissions, so they only extend reach to what you're already allowed to see."
+    incorrect: "If you can't access it in the source system, the connector can't either; it does not have elevated access."
+  chat-q03:
+    correct: "Correct. Claude reads and summarises long documents well, but check the points that matter against the original."
+    incorrect: "Claude can handle long documents, but the summary is still a draft to verify against the source."
+  chat-q04:
+    correct: "Correct. Before sharing any artifact, check what it exposes, validate the information against the source, and treat it as a draft until verified."
+    incorrect: "Appearance isn't the risk. Check exposure and validate the content before sharing."
+  chat-q05:
+    correct: "Correct. Wait for the reset or request a higher limit (with cost-approver approval) via the intranet form; overage is billed pay-as-you-go to your cost center."
+    incorrect: "Never move Sandvik work into private accounts or create extra accounts to dodge limits."

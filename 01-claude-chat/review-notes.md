@@ -1,0 +1,41 @@
+# Review Notes: Claude Chat
+
+## Status
+
+Draft created: 2026-06-09
+
+## Open Policy Items
+
+- Data classifications approved for Claude Chat.
+- Rules for personal data.
+- Final intranet form link, cost-approver workflow details, monthly spending-limit visibility, and expected response time.
+- Approved connectors, connector permissions, read/write restrictions, and tool access.
+- Enabled skills, organization-provisioned skills, and whether users may add custom skills.
+- Enterprise settings for projects, project visibility, project sharing, project knowledge, and retention.
+- Sharing rules for artifacts and downloaded outputs.
+- Incident reporting path.
+
+## Review Log
+
+| Date | Reviewer | Area | Status | Notes |
+| --- | --- | --- | --- | --- |
+| 2026-06-09 | Program draft | Initial content | Draft | Needs Sandvik policy review. |
+| 2026-06-14 | Program draft | Practical basics refresh | Draft | Expanded agentic AI, limits, projects, connectors, skills, and placeholders. Needs Sandvik confirmation before publishing. |
+| 2026-06-16 | Program draft | Sandvik intranet context | Draft | Added launch, pricing, pay-as-you-go, cost-center, monthly spending-limit, and cost-approver approval context from the intranet announcement. |
+| 2026-06-16 | Program draft | Context learning expansion | Draft | Expanded context handling with working-memory framing, intentional context, specification, conditional logic, and Sandvik-adapted before/after examples. |
+| 2026-06-16 | Program draft | Module 1 cleanup | Draft | Clarified agentic AI as a solution for missing inherent work context and tools, normalized policy decision placeholders, separated usage and context limits, and aligned the quiz bank to 15 questions. |
+| 2026-06-16 | Program draft | Reader flow cleanup | Draft | Reordered Claude Chat concepts into a clearer flow from context sources to tools, limits, verification, examples, risks, and policy placeholders. |
+| 2026-06-17 | Program draft | Tool-module rewrite | Draft | Rewrote Module 1 as a focused Claude Chat tool module, added the agent versus agentic chat distinction, reframed features as the Claude Chat context stack, moved usage after artifacts, and aligned quiz and portal copy. |
+
+## Change Log
+
+| Date | Change | Owner |
+| --- | --- | --- |
+| 2026-06-09 | Initial module, portal copy, and quiz bank created. | Program owner |
+| 2026-06-14 | Reworked module toward practical Claude Chat basics and refreshed policy placeholders. | Program owner |
+| 2026-06-16 | Added Sandvik intranet launch and usage-cost context. | Program owner |
+| 2026-06-16 | Expanded context and specification learning arc and added matching quiz questions. | Program owner |
+| 2026-06-16 | Cleaned up Claude Chat module wording, placeholders, usage guidance, and quiz bank size. | Program owner |
+| 2026-06-16 | Improved Module 1 section order, transitions, and portal-copy wording for a clearer reader journey. | Program owner |
+| 2026-06-17 | Reworked source module, portal copy, and quiz around the Claude Chat tool-module spine and the built-agent versus agentic-chat terminology rule. | Program owner |
+| 2026-06-24 | Aligned quiz.yaml to the five questions served in the built module (bank 5, serve 5, randomize off). Renamed the "Agentic Chat" section to "Multi-Step Reasoning" to match the build's section title and quiz, keeping "agentic" as the descriptive synonym; updated the Quiz Handoff summary to match the five built questions. | Program owner |

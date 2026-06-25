@@ -1,0 +1,96 @@
+module_id: "claude-design"
+title: "Claude Design"
+version: "0.4"
+language: "en"
+recommended_duration_minutes: 30
+passing_score: 80
+question_bank_size: 5
+questions_to_serve: 5
+retakes: "unlimited"
+randomize_questions: false
+policy_review_required: true
+# This bank mirrors the five questions served in the built module (scorm-final-versions/claude-design/index.html
+# and claude-design-final-versions/Claude Design/Claude Design Module.dc.html).
+questions:
+  - id: "design-q01"
+    type: "multiple_choice"
+    prompt: "A draft must follow Sandvik brand, and an approved Sandvik design system is available in Claude Design. What is the best step?"
+    options:
+      - key: "A"
+        text: "Select the approved Sandvik design system before generating, and still run the brand review."
+      - key: "B"
+        text: "Generate with any style first, then recolor it later to look like Sandvik."
+      - key: "C"
+        text: "Ask Claude to invent a Sandvik-style brand so the draft looks finished."
+      - key: "D"
+        text: "Skip the brand review, because a design system guarantees the result is approved."
+  - id: "design-q02"
+    type: "multiple_choice"
+    prompt: "The first draft is close, but one section's hierarchy is wrong. What is the most precise way to fix it in Claude Design?"
+    options:
+      - key: "A"
+        text: "Use Mark up to point at that section, describe the change, then review the result before sharing."
+      - key: "B"
+        text: "Describe the whole layout again from scratch in a new prompt."
+      - key: "C"
+        text: "Accept the draft and fix it manually after it has been shared."
+      - key: "D"
+        text: "Treat the marked-up draft as approved as soon as the change is made."
+  - id: "design-q03"
+    type: "multiple_choice"
+    prompt: "A team makes many similar internal one-pagers and wants consistent structure. Which Claude Design feature best supports this?"
+    options:
+      - key: "A"
+        text: "Start from an approved template so layouts stay consistent, and confirm the template fits the audience."
+      - key: "B"
+        text: "Rebuild the layout from a blank page each time for variety."
+      - key: "C"
+        text: "Copy a public competitor's layout to save time."
+      - key: "D"
+        text: "Use a template and skip review, because the structure is already approved."
+  - id: "design-q04"
+    type: "multiple_choice"
+    prompt: "You need to turn a set of notes into a polished one-page concept to show in a review meeting. Which Claude product fits best?"
+    options:
+      - key: "A"
+        text: "Claude Design, because the main output is a reviewable visual deliverable."
+      - key: "B"
+        text: "Claude Chat, because any product can produce a layout."
+      - key: "C"
+        text: "Claude Cowork, because it is a multi-step deliverable."
+      - key: "D"
+        text: "Claude Code, because it can generate files."
+  - id: "design-q05"
+    type: "multiple_choice"
+    prompt: "A source folder contains useful notes, an old logo, customer screenshots and unrelated files. What is the best preparation step?"
+    options:
+      - key: "A"
+        text: "Keep only approved relevant sources, remove sensitive or unrelated material, and mark missing assets as placeholders."
+      - key: "B"
+        text: "Upload the whole folder so Claude has maximum context."
+      - key: "C"
+        text: "Use the old logo if it makes the draft easier to understand."
+      - key: "D"
+        text: "Blur the customer screenshots and treat them as approved."
+answers:
+  design-q01: "A"
+  design-q02: "A"
+  design-q03: "A"
+  design-q04: "A"
+  design-q05: "A"
+feedback:
+  design-q01:
+    correct: "Correct. A design system keeps generated work on brand, but Brand review still applies."
+    incorrect: "Start from the approved design system so the work is on brand from the beginning, and a design system does not replace Brand approval."
+  design-q02:
+    correct: "Correct. Mark up makes feedback precise, and the marked-up result is still a draft until reviewed."
+    incorrect: "Use Mark up to point at the element instead of re-describing everything, and review before sharing; a marked-up draft is still a draft."
+  design-q03:
+    correct: "Correct. Templates keep structure consistent, and the template still needs to fit the audience and review."
+    incorrect: "Start from an approved template for consistency; do not copy external layouts or skip review."
+  design-q04:
+    correct: "Correct. When the main output is visual and reviewable, Claude Design is the right product."
+    incorrect: "A visual, reviewable deliverable belongs in Claude Design, not Chat, Cowork or Code."
+  design-q05:
+    correct: "Correct. Prepare the smallest approved source set, remove sensitive or unrelated material, and use placeholders for missing assets."
+    incorrect: "More context is not better; remove sensitive or unrelated material and use placeholders rather than outdated or unapproved assets."

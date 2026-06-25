@@ -1,0 +1,274 @@
+{
+  "$schema": "./module.schema.md",
+  "moduleId": "claude-design",
+  "schemaVersion": 2,
+
+  "tool": {
+    "name": "Claude Design",
+    "tagline": "Visual design agent",
+    "summary": "The visual Claude experience for exploring, drafting and refining design directions, prototypes, slides, one-pagers, layouts and graphics through chat, ready for human review."
+  },
+
+  "journey": {
+    "id": "ai-fluency",
+    "label": "AI Fluency Journey",
+    "type": "foundation",
+    "moduleKind": "tool-module",
+    "variant": "fluency"
+  },
+
+  "meta": {
+    "duration": "20-30 min",
+    "audience": "Claude Design users",
+    "completion": {
+      "requireAllSectionsViewed": true,
+      "quizPassMark": 0.8
+    }
+  },
+
+  "responsibilityNote": "Claude can help accelerate work, but users remain responsible for what they enter, approve, share and publish. Follow Sandvik policy, protect sensitive information, and review outputs before relying on them.",
+
+  "courseStart": {
+    "overline": "AI Fluency Journey · Tool module",
+    "whatThisModuleAdds": "This module builds on the general rules of safe AI use and applies them to visual work in Claude Design: when it is the right product, how its capabilities (design systems, templates, editing the output and sharing) work, what Sandvik allows, and what to review before a generated design is shared or relied on."
+  },
+
+  "journeyContext": {
+    "intro": "This is a standalone, practical tool module focused on one tool. Several tool modules sit alongside it, and in the near future they will be organised into broader learning journeys.",
+    "toolModules": ["Claude Chat", "Claude Code", "Claude Cowork", "Claude Design", "Future tools"],
+    "currentModule": "Claude Design",
+    "assumedKnowledge": [
+      "General rules of safe AI use: approved tools, protect information, give context, iterate, verify",
+      "Claude Design is a research preview; at Sandvik you apply for it through the service portal order form, and access is reviewed and approved before it is provisioned"
+    ],
+    "thisModuleFocusesOn": "Using Claude Design day to day for reviewable visual work: choosing the fit, preparing approved sources and assets, writing a visual brief, exploring directions, refining with the product capabilities, reviewing carefully, and exporting, sharing or handing off only through approved Sandvik routes.",
+    "objectives": [
+      "Decide when Claude Design is the right product.",
+      "Prepare approved source material, assets and constraints before designing.",
+      "Write a clear visual brief and use design systems, templates, editing the output and sharing responsibly.",
+      "Explore, compare and refine design directions without treating them as final.",
+      "Review outputs for brand, accessibility, factual accuracy, IP risk, sensitive information and audience fit.",
+      "Export, share, hand off and monitor usage through approved routes."
+    ]
+  },
+
+  "toolFit": {
+    "intro": "Claude Design is for visual work that is meant to be reviewed. Choosing the right product is the first decision: a polished generated design is still a draft until the right owner approves it.",
+    "useWhen": [
+      "You are exploring several visual directions before choosing one.",
+      "You need an internal one-pager, slide concept, layout or visual explanation.",
+      "You want a prototype concept before investing in production implementation.",
+      "You want a draft a designer, Brand, Legal or business owner can review."
+    ],
+    "reachForAnotherProduct": [
+      { "work": "Mainly text, analysis or discussion", "use": "Claude Chat" },
+      { "work": "A multi-step deliverable across files or desktop tools", "use": "Claude Cowork" },
+      { "work": "Production code, repository changes, tests or pull requests", "use": "Claude Code" }
+    ]
+  },
+
+  "coreWorkflow": {
+    "steps": [
+      { "title": "Choose the fit and outcome", "body": "Name the deliverable, audience, intended action, sharing status, approved sources and required reviewers. If unclear, clarify in Claude Chat first." },
+      { "title": "Prepare sources and assets", "body": "Use the smallest approved source set. Start from an approved design system and template where available; mark missing assets as placeholders." },
+      { "title": "Write a visual brief", "body": "Give Claude goal, audience, use case, sources, format, brand constraints, accessibility needs, what not to use, review required and output needed." },
+      { "title": "Explore, then choose", "body": "Ask for a few distinct directions with strengths and risks, then choose one to refine. Do not finalise prematurely." },
+      { "title": "Refine with specific feedback", "body": "Use Mark up and comments to point at elements and name the change. A marked-up draft is still a draft." },
+      { "title": "Review before sharing", "body": "Check purpose, source accuracy, brand, accessibility, data protection, IP and legal, and draft or approval status." },
+      { "title": "Export, share or handoff", "body": "Designs are shareable; review first, then share through approved routes. Hand off to Claude Code or a development team for production work." },
+      { "title": "Monitor usage and cost", "body": "Limit directions, reuse approved templates and design systems, and request a higher limit through the intranet form when justified." }
+    ],
+    "accountabilityNote": "You remain responsible for deciding whether the tool should be used, whether the sources and assets are appropriate, and whether the design is ready to share or rely on."
+  },
+
+  "capabilities": {
+    "note": "Each capability is its own section/page. Set enabled:false to drop a page, or add new ones with the same shape. The runtime renders one screen per enabled capability and lists them under a 'Tool capabilities' group in the nav. These features come from product screenshots and must be verified against an official Claude Design source before publishing.",
+    "pages": [
+      {
+        "id": "cap-design-systems",
+        "enabled": true,
+        "icon": "palette",
+        "title": "Design systems",
+        "role": "Brand you teach Claude",
+        "lead": "A design system teaches Claude your visual language, so generated work follows approved brand instead of an invented one. For Sandvik work, the Sandvik Design System is your default: select it for every new design so the output follows Sandvik's branding from the start.",
+        "rows": [
+          { "label": "How it is created", "body": "By connecting Figma or GitHub, by uploading slides and assets, or by building from existing React components with Claude Code, which gives the highest fidelity." },
+          { "label": "Why it matters", "body": "Select the existing Sandvik Design System so generated work follows Sandvik's branding guidelines. It is the strongest brand-control lever in Claude Design and keeps layout, colour and typography on brand from the start." }
+        ],
+        "goodHabit": "Select the Sandvik Design System at the start, and still run the brand review. A design system improves consistency, but it does not replace Brand approval."
+      },
+      {
+        "id": "cap-templates",
+        "enabled": true,
+        "icon": "layout",
+        "title": "Templates",
+        "role": "Structure you start from",
+        "lead": "A template gives a new design a consistent starting structure and format. Claude Design shows a template selector that defaults to 'None'. Starting from an approved template keeps layouts predictable and reduces rework.",
+        "goodHabit": "Start from an approved template where one exists, instead of a blank page, and confirm the template fits the audience and use."
+      },
+      {
+        "id": "cap-editing",
+        "enabled": true,
+        "icon": "edit",
+        "title": "Editing the output",
+        "role": "Adjust the project",
+        "lead": "Each design Claude generates is a project. The first version is never the finished product; it is a starting point you adjust, and one you can share with other people. Once a design is generated, use the toolbar in the top right to refine it: mark up an element to describe a change, leave comments, edit directly, toggle tweaks, or present it.",
+        "body": "Editing makes refinement precise, but it does not approve anything. A project is still a draft until the right owner signs off.",
+        "toolbar": ["Mark up: point at an element and describe the change", "Comments: leave notes to resolve", "Edit: adjust the content directly", "Show/Hide tweaks: toggle the adjustable controls", "Present: walk through the design full screen", "Share: open the sharing options"],
+        "goodHabit": "Use mark up to make feedback specific, then run the full review before sharing."
+      },
+      {
+        "id": "cap-sharing",
+        "enabled": true,
+        "icon": "share",
+        "title": "Sharing",
+        "role": "Send the project to others",
+        "lead": "A project can be shared with other people once it is ready. Sharing is fast, so review the project first, then share through an approved route. The Share button opens three ways to share.",
+        "methods": ["Share link: invite people by name or email with Can edit or Can comment, or give Anyone at Sandvik with the link access, then copy the link", "Export: download as PDF, PowerPoint (.pptx), a project archive (.zip), or standalone HTML", "Send to: mainly used to send the project to Claude Code to continue the work there, for example to turn a prototype concept into a real implementation"],
+        "body": "Before sharing, review the project for brand, accuracy and sensitive information, set the narrowest permission that works, and use only approved routes. For external or Sandvik-branded material, get Brand and Legal review ([EXTERNAL SHARING PLACEHOLDER], [EXPORT PLACEHOLDER]).",
+        "goodHabit": "Review first, share with the narrowest access that works, and never share a first draft as if it were approved."
+      },
+      {
+        "id": "cap-files",
+        "enabled": false,
+        "icon": "file",
+        "title": "Files",
+        "role": "Context you attach",
+        "lead": "Example of a capability page enabled for the Claude Chat module."
+      }
+    ]
+  },
+
+  "governance": {
+    "intro": "What's allowed, what needs care, and where final policy is still being confirmed. Where you see a placeholder, the local rule has not been finalised. Claude Design is a research preview that you apply for through the Sandvik service portal; confirm your access, settings, and the approved inputs and export routes before relying on it.",
+    "rows": [
+      { "tag": "approved", "title": "Approved use", "body": "Use Claude Design for reviewable visual work: design directions, prototypes, slides, one-pagers, layouts and graphics that a human owner will review. You apply for Claude Design through the Sandvik service portal order form (https://serviceportal.sandvik.com.mcas.ms/esc?id=sc_cat_item_guide&sys_id=27882eb62b0c83900766f0b16e91bf67&McasTsid=1004&McasCtx=4); requests are reviewed and approved before the license is provisioned, with a default limit of $25 per user per month. Confirm approved inputs and export routes before publishing." }
+    ]
+  },
+
+  "usage": {
+    "intro": "Visual exploration can involve many iterations, generated variants, large files, exports and repeated refinement. At Sandvik, Claude Design usage is direct and consumption-based: there are no five-hour session or weekly limits, but every action consumes tokens billed pay as you go to the user's cost center, so costs can rise quickly.",
+    "practicalHabits": [
+      "Start with a clear brief.",
+      "Explore a limited number of directions, then choose before deep refinement.",
+      "Reuse approved templates and design systems, and avoid uploading unnecessary files.",
+      "Refine and reuse an existing project instead of regenerating a new one from scratch.",
+      "Request a higher monthly usage or spending limit through the intranet form when business needs justify it."
+    ],
+    "moreCapacity": [
+      "Higher monthly usage or spending limits require cost-approver approval.",
+      "The monthly spending limit should be visible in your Claude account."
+    ],
+    "notAllowed": "Do not move Sandvik work into private accounts or unapproved tools to avoid limits or cost."
+  },
+
+  "scenario": {
+    "title": "Draft an internal one-pager",
+    "intro": "Apply the workflow to a realistic Sandvik task, using the capabilities, then run the review checklist before anything is shared.",
+    "sourceMaterial": "Only the approved notes for a proposed onboarding workflow, classified up to i3 (Confidential). Do not use i4 (Secret) information.",
+    "goal": "A one-page internal concept sheet a process owner can review before a meeting.",
+    "toolActions": [
+      "Select the approved Sandvik design system and start from an approved template.",
+      "Add only the approved notes as context, classified up to i3 (Confidential) and never i4 (Secret).",
+      "Ask Claude for two or three distinct directions, then choose one to refine.",
+      "Use Mark up to fix hierarchy and wording, and mark unsupported claims as [CHECK REQUIRED].",
+      "Review for brand, accessibility, accuracy and sensitive information, then share the link with the process owner through an approved route."
+    ],
+    "reviewChecklist": [
+      "Facts, numbers and claims verified against the approved notes or marked [CHECK REQUIRED]",
+      "Brand follows the Sandvik Design System",
+      "Accessibility checked: clear headings, readable contrast, no meaning by color alone",
+      "Draft or approval status labeled, and the share route and viewers confirmed before sharing"
+    ]
+  },
+
+  "risks": {
+    "intro": "Most problems fall into five groups. For each, there's a simple habit that avoids it.",
+    "groups": [
+      { "title": "Vague briefs", "risk": "Starting from a 'make it look nice' request, so the design misses the audience, message or required action.", "doInstead": "Write a visual brief with goal, audience, sources, constraints and review needs before generating." },
+      { "title": "Data and assets", "risk": "Uploading too many files or screenshots without checking sensitivity, or letting Claude invent logos, screenshots, customer names, metrics or certification marks.", "doInstead": "Use the smallest approved source set, an approved design system, and placeholders for missing assets." },
+      { "title": "Over-trusting a polished draft", "risk": "Treating generated visual work as approved final material or production-ready software because it looks finished.", "doInstead": "Keep designs visibly draft, verify facts, and hand production work to Claude Code or a development team." },
+      { "title": "Sharing and publishing", "risk": "Sharing or publishing a shareable design before review, or publishing Sandvik-branded material externally without Brand and Legal review.", "doInstead": "Review first, then share through approved routes; get Brand and Legal review for external or branded material." },
+      { "title": "Cost and usage", "risk": "Iterating many variants with large files and repeated exports without monitoring usage.", "doInstead": "Limit directions, reuse approved templates and design systems, and request a higher limit through the proper route." }
+    ],
+    "footnote": "Across all of these, one rule holds: human users remain accountable for outputs."
+  },
+
+  "quiz": {
+    "passMark": 0.8,
+    "questions": [
+      {
+        "prompt": "A draft must follow Sandvik brand, and an approved Sandvik design system is available in Claude Design. What is the best step?",
+        "options": [
+          { "text": "Generate with any style first, then recolor it later to look like Sandvik", "correct": false, "feedback": "Start from the approved design system so the work is on brand from the beginning." },
+          { "text": "Ask Claude to invent a Sandvik-style brand so the draft looks finished", "correct": false, "feedback": "Do not let Claude invent brand. Use the Sandvik Design System." },
+          { "text": "Select the approved Sandvik design system before generating, and still run the brand review", "correct": true, "feedback": "Correct. A design system keeps generated work on brand, but Brand review still applies." },
+          { "text": "Skip the brand review, because a design system guarantees the result is approved", "correct": false, "feedback": "A design system improves consistency but does not replace Brand approval." }
+        ],
+        "explanation": "A design system is the strongest brand-control lever, but a generated design is still a draft until Brand approves it."
+      },
+      {
+        "prompt": "The first draft is close, but one section's hierarchy is wrong. What is the most precise way to fix it in Claude Design?",
+        "options": [
+          { "text": "Use Mark up to point at that section, describe the change, then review the result before sharing", "correct": true, "feedback": "Correct. Mark up makes feedback precise, and the marked-up result is still a draft until reviewed." },
+          { "text": "Describe the whole layout again from scratch in a new prompt", "correct": false, "feedback": "Mark up lets you point at the element instead of re-describing everything." },
+          { "text": "Accept the draft and fix it manually after it has been shared", "correct": false, "feedback": "Review and refine before sharing, not after." },
+          { "text": "Treat the marked-up draft as approved as soon as the change is made", "correct": false, "feedback": "A marked-up draft is still a draft until the right owner signs off." }
+        ],
+        "explanation": "Mark up makes refinement precise, but it does not approve anything; run the full review before sharing."
+      },
+      {
+        "prompt": "A team makes many similar internal one-pagers and wants consistent structure. Which Claude Design feature best supports this?",
+        "options": [
+          { "text": "Rebuild the layout from a blank page each time for variety", "correct": false, "feedback": "A template keeps structure consistent and reduces rework." },
+          { "text": "Copy a public competitor's layout to save time", "correct": false, "feedback": "Use approved Sandvik templates, not copied external layouts." },
+          { "text": "Use a template and skip review, because the structure is already approved", "correct": false, "feedback": "A template helps structure, but the result still needs review." },
+          { "text": "Start from an approved template so layouts stay consistent, and confirm the template fits the audience", "correct": true, "feedback": "Correct. Templates keep structure consistent, and the template still needs to fit the audience and review." }
+        ],
+        "explanation": "Templates give a consistent starting structure; confirm the template fits the audience and still review the result."
+      },
+      {
+        "prompt": "You need to turn a set of notes into a polished one-page concept to show in a review meeting. Which Claude product fits best?",
+        "options": [
+          { "text": "Claude Chat, because any product can produce a layout", "correct": false, "feedback": "Claude Chat is for text, analysis and discussion; a visual deliverable belongs in Claude Design." },
+          { "text": "Claude Design, because the main output is a reviewable visual deliverable", "correct": true, "feedback": "Correct. When the main output is visual and reviewable, Claude Design is the right product." },
+          { "text": "Claude Cowork, because it is a multi-step deliverable", "correct": false, "feedback": "Cowork is for multi-step file and desktop work, not visual design exploration." },
+          { "text": "Claude Code, because it can generate files", "correct": false, "feedback": "Claude Code is for codebases and production code, not visual concepts." }
+        ],
+        "explanation": "Match the product to the work: a visual, reviewable deliverable is Claude Design's core fit, distinct from Chat, Cowork and Code."
+      },
+      {
+        "prompt": "A source folder contains useful notes, an old logo, customer screenshots and unrelated files. What is the best preparation step?",
+        "options": [
+          { "text": "Upload the whole folder so Claude has maximum context", "correct": false, "feedback": "More context is not better; it raises exposure and cost." },
+          { "text": "Use the old logo if it makes the draft easier to understand", "correct": false, "feedback": "Use the Sandvik Design System, not outdated assets." },
+          { "text": "Keep only approved relevant sources, remove sensitive or unrelated material, and mark missing assets as placeholders", "correct": true, "feedback": "Correct. Use the smallest approved source set and mark missing assets as placeholders." },
+          { "text": "Blur the customer screenshots and treat them as approved", "correct": false, "feedback": "Blurring is not approval; use [SCREENSHOT PLACEHOLDER] and approved guidance." }
+        ],
+        "explanation": "Prepare the smallest approved source set, remove sensitive or unrelated material, and use placeholders for missing assets."
+      }
+    ]
+  },
+
+  "completion": {
+    "recap": "Choose Design for the right kind of work, prepare approved sources and assets, write a clear brief, explore a few directions, and refine with the capabilities: an approved design system and template keep work on brand, and you refine each project with mark up before review. Designs are shareable, so review carefully before sharing or handing off through approved Sandvik routes.",
+    "youCanNow": [
+      "Decide when Claude Design is the right product.",
+      "Use design systems, templates, editing the output and sharing responsibly where approved.",
+      "Explore, compare and refine directions without treating them as final.",
+      "Review, share, hand off and monitor usage through approved routes, with accountability in mind."
+    ],
+    "nextStep": "Apply Claude Design to a real internal draft this week, or continue with another tool module such as Claude Chat, Code or Cowork."
+  },
+
+  "scorm": {
+    "version": "1.2",
+    "storageKey": "sandvik.scorm.claude-design",
+    "cmiMap": {
+      "completion": "cmi.core.lesson_status",
+      "score": "cmi.core.score.raw",
+      "resumeLocation": "cmi.core.lesson_location",
+      "resumeData": "cmi.suspend_data"
+    }
+  }
+}

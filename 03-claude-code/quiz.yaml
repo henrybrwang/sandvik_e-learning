@@ -1,0 +1,95 @@
+module_id: "claude-code"
+title: "Claude Code"
+version: "0.3"
+language: "en"
+recommended_duration_minutes: 40
+passing_score: 80
+question_bank_size: 5
+questions_to_serve: 5
+retakes: "unlimited"
+randomize_questions: false
+policy_review_required: true
+# This bank mirrors the five questions served in the built module (scorm-final-versions/claude-code/index.html).
+questions:
+  - id: "code-q01"
+    type: "multiple_choice"
+    prompt: "Claude Code can build something that runs in minutes. How should you think about that at Sandvik?"
+    options:
+      - key: "A"
+        text: "Smaller personal work and prototyping is encouraged for everyone, but anything others will rely on needs the same engineering process as any Sandvik system."
+      - key: "B"
+        text: "A working demo means the software is dependable and ready for other people to use."
+      - key: "C"
+        text: "Claude Code is only for professional developers, so non developers should avoid it."
+      - key: "D"
+        text: "Once it runs, the design and review decisions can be skipped."
+  - id: "code-q02"
+    type: "multiple_choice"
+    prompt: "What should Claude Code usually do before a change that is not trivial?"
+    options:
+      - key: "A"
+        text: "Rewrite the project immediately so you can see a result fast."
+      - key: "B"
+        text: "Inspect the repository and write a plan or specification you can review."
+      - key: "C"
+        text: "Delete the failing tests so the run goes green."
+      - key: "D"
+        text: "Commit the change before showing you a diff."
+  - id: "code-q03"
+    type: "multiple_choice"
+    prompt: "Why decide whether work is throwaway, experimental, shared, or bound for production before you start?"
+    options:
+      - key: "A"
+        text: "Because the intent sets how much engineering process, review and care the work needs."
+      - key: "B"
+        text: "Because throwaway scripts never need any thought about data."
+      - key: "C"
+        text: "Because Claude Code cannot work on prototypes."
+      - key: "D"
+        text: "Because the intent only changes the visual theme."
+  - id: "code-q04"
+    type: "multiple_choice"
+    prompt: "Which of these should not be pasted into a Claude Code session?"
+    options:
+      - key: "A"
+        text: "A public function name."
+      - key: "B"
+        text: "A test failure message with no sensitive data in it."
+      - key: "C"
+        text: "Passwords, API keys, tokens, private keys, certificates, connection strings, or production data."
+      - key: "D"
+        text: "A plain description of the feature you want."
+  - id: "code-q05"
+    type: "multiple_choice"
+    prompt: "How should you treat tests written by the same model that wrote the code?"
+    options:
+      - key: "A"
+        text: "As independent proof that the code is correct."
+      - key: "B"
+        text: "As useful scaffolding, while you review whether they prove the behaviour you intended."
+      - key: "C"
+        text: "As a reason to delete the existing test suite."
+      - key: "D"
+        text: "As something to remove once the run goes green."
+answers:
+  code-q01: "A"
+  code-q02: "B"
+  code-q03: "A"
+  code-q04: "C"
+  code-q05: "B"
+feedback:
+  code-q01:
+    correct: "Correct. Smaller personal work and prototyping is encouraged for everyone. As soon as something matters or others rely on it, the central skill is recognising that and applying the full quality, security and review process."
+    incorrect: "A demo is not a dependable application. Casual building is welcome, but anything others rely on needs full engineering."
+  code-q02:
+    correct: "Correct. For anything beyond a trivial change, Claude Code should understand the repository and produce a reviewable plan before it implements."
+    incorrect: "Inspect first and review the plan before implementation; do not rush to code, delete tests, or commit before you see a diff."
+  code-q03:
+    correct: "Correct. Naming the intent up front tells you how much process is needed. Throwaway work can be casual; shared or production work needs full engineering rigour."
+    incorrect: "Intent sets the level of process and review, not the appearance, and even small scripts must stay free of secrets and sensitive data."
+  code-q04:
+    correct: "Correct. Secrets and production data do not belong in a session, and they must never be stored in instruction files either."
+    incorrect: "Public names, non-sensitive errors and feature descriptions are fine; secrets and production data must stay out."
+  code-q05:
+    correct: "Correct. Tests are evidence, not proof. Tests from the same model can share the code's blind spots, so review them and add independent checks."
+    incorrect: "Tests written by the same model are not independent proof; keep existing tests, and review whether the new tests prove the intended behaviour."
